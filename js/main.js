@@ -200,7 +200,7 @@
 
       const formData = new FormData(form);
 
-      fetch("https://formsubmit.co/ajax/nathandomin44@gmail.com", {
+      fetch("https://formsubmit.co/ajax/turma17079@gmail.com", {
         method: "POST",
         headers: { "Accept": "application/json" },
         body: formData
