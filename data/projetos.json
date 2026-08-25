@@ -71,26 +71,6 @@
       "status": "Realizado"
     },
     {
-      "titulo": "Cronograma de conteúdos e atividades",
-      "setor": "Comunicação",
-      "setorId": "comunicacao",
-      "categoria": "Comunicação",
-      "data": "Em breve",
-      "imagem": "assets/images/projetos/atividades-comunicacao.jpg",
-      "descricao": "Registro e divulgação das atividades da Viva+ nas redes sociais e canais oficiais.",
-      "status": "Em andamento"
-    },
-    {
-      "titulo": "Site Viva+",
-      "setor": "Comercial",
-      "setorId": "comercial",
-      "categoria": "Institucional",
-      "data": "Em breve",
-      "imagem": "assets/images/projetos/site.jpg",
-      "descricao": "Desenvolvimento do site institucional da Viva+.",
-      "status": "Em andamento"
-    },
-    {
       "titulo": "Crachá do colaborador",
       "setor": "Comercial",
       "setorId": "comercial",
