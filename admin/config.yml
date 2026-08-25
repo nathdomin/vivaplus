@@ -17,11 +17,17 @@ backend:
 # está mesmo depois de publicar o site.
 local_backend: true
 
-# Pasta padrão para uploads. Cada campo de imagem abaixo tem
+# Pasta padrão para uploads. Cada campo de imagem abaixo define
 # seu próprio subpasta (colaboradores/ ou projetos/) — veja o
 # "media_folder" dentro de cada campo "widget: image".
-media_folder: "assets/images"
-public_folder: "assets/images"
+#
+# IMPORTANTE: caminhos de media_folder/public_folder DENTRO de um
+# campo são resolvidos a partir da pasta do arquivo da coleção
+# (aqui, "data/"), não a partir da raiz do site — por isso todos
+# os caminhos abaixo começam com "/": isso os torna absolutos,
+# contados a partir da raiz do repositório/site.
+media_folder: "/assets/images"
+public_folder: "/assets/images"
 
 locale: "pt"
 
@@ -68,8 +74,8 @@ collections:
                 name: "foto"
                 widget: "image"
                 required: false
-                media_folder: "colaboradores"
-                public_folder: "colaboradores"
+                media_folder: "/assets/images/colaboradores"
+                public_folder: "/assets/images/colaboradores"
                 hint: "Enviada automaticamente para assets/images/colaboradores/."
 
   - name: "projetos"
@@ -123,8 +129,8 @@ collections:
                 name: "imagem"
                 widget: "image"
                 required: false
-                media_folder: "projetos"
-                public_folder: "projetos"
+                media_folder: "/assets/images/projetos"
+                public_folder: "/assets/images/projetos"
                 hint: "Enviada automaticamente para assets/images/projetos/. Se ficar em branco, o card mostra “Imagem em breve”."
 
               - label: "Descrição"
