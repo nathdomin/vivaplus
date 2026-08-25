@@ -17,10 +17,11 @@ backend:
 # está mesmo depois de publicar o site.
 local_backend: true
 
-# Fotos enviadas pelo painel vão para esta pasta do repositório,
-# e o site referencia esse mesmo caminho ao exibir o colaborador.
-media_folder: "assets/images/colaboradores"
-public_folder: "assets/images/colaboradores"
+# Pasta padrão para uploads. Cada campo de imagem abaixo tem
+# seu próprio subpasta (colaboradores/ ou projetos/) — veja o
+# "media_folder" dentro de cada campo "widget: image".
+media_folder: "assets/images"
+public_folder: "assets/images"
 
 locale: "pt"
 
@@ -67,4 +68,73 @@ collections:
                 name: "foto"
                 widget: "image"
                 required: false
+                media_folder: "colaboradores"
+                public_folder: "colaboradores"
                 hint: "Enviada automaticamente para assets/images/colaboradores/."
+
+  - name: "projetos"
+    label: "Projetos"
+    description: "Projetos e atividades exibidos na seção “Projetos & atividades” do site (cards e timeline)."
+    files:
+      - name: "lista"
+        label: "Lista de projetos"
+        file: "data/projetos.json"
+        format: "json"
+        fields:
+          - label: "Projetos"
+            name: "projetos"
+            widget: "list"
+            label_singular: "Projeto"
+            summary: "{{fields.titulo}} — {{fields.status}}"
+            fields:
+              - label: "Título"
+                name: "titulo"
+                widget: "string"
+
+              - label: "Setor (nome exibido)"
+                name: "setor"
+                widget: "string"
+                hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “Viva+”."
+
+              - label: "Setor (para o filtro)"
+                name: "setorId"
+                widget: "select"
+                hint: "Usado para o botão de filtro. Se você criar um novo setor em js/data.js, adicione a opção correspondente aqui também."
+                options:
+                  - { label: "Diretoria", value: "diretoria" }
+                  - { label: "Recursos Humanos", value: "rh" }
+                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
+                  - { label: "4SMA", value: "4sma" }
+                  - { label: "Comunicação", value: "comunicacao" }
+                  - { label: "Comercial", value: "comercial" }
+
+              - label: "Categoria"
+                name: "categoria"
+                widget: "string"
+                hint: "Ex.: Saúde, Integração, Institucional."
+
+              - label: "Data"
+                name: "data"
+                widget: "string"
+                default: "Em breve"
+                hint: "Texto livre — ex.: “10/2026” ou “Em breve”."
+
+              - label: "Imagem"
+                name: "imagem"
+                widget: "image"
+                required: false
+                media_folder: "projetos"
+                public_folder: "projetos"
+                hint: "Enviada automaticamente para assets/images/projetos/. Se ficar em branco, o card mostra “Imagem em breve”."
+
+              - label: "Descrição"
+                name: "descricao"
+                widget: "text"
+                default: "Descrição em breve."
+
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "Realizado", value: "Realizado" }
+                  - { label: "Em andamento", value: "Em andamento" }
