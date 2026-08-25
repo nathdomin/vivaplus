@@ -1,6 +1,6 @@
 # Viva+ — Site Institucional
 
-Site institucional da Viva+, construído em **HTML5, CSS3 e JavaScript puro** (sem frameworks). Todo o conteúdo dinâmico (setores, colaboradores, projetos e valores) fica centralizado em arquivos de dados dentro de `js/`, então atualizar o site no dia a dia significa editar esses arquivos — não o HTML.
+Site institucional da Viva+, construído em **HTML5, CSS3 e JavaScript puro** (sem frameworks). Colaboradores e projetos ficam em arquivos JSON editáveis pelo painel `/admin` (Decap CMS); setores e valores ficam em `js/data.js`, editados diretamente no código.
 
 ## Estrutura de pastas
 
@@ -11,23 +11,24 @@ viva-plus/
 │   ├── index.html         → carrega o Decap CMS (painel de administração)
 │   └── config.yml         → configuração do painel (coleções, campos, backend)
 ├── data/
-│   └── colaboradores.json → lista de colaboradores, editável pelo painel /admin
+│   ├── colaboradores.json → lista de colaboradores, editável pelo painel /admin
+│   └── projetos.json      → lista de projetos/atividades, editável pelo painel /admin
 ├── css/
 │   ├── style.css        → design system e layout
 │   ├── responsive.css   → breakpoints (320px → 1920px)
 │   └── animations.css   → animações e reveal ao rolar
 ├── js/
-│   ├── data.js           → valores, setores e projetos
+│   ├── data.js           → valores, setores e filtros (Colaboradores/Projetos)
 │   ├── colaboradores.js  → carrega data/colaboradores.json e renderiza o time
 │   ├── setores.js        → organograma, cards de setores e modal
-│   ├── projetos.js       → grid/timeline de projetos e filtros
+│   ├── projetos.js       → carrega data/projetos.json e renderiza grid/timeline
 │   └── main.js           → navbar, menu mobile, reveal, metas, contato
 └── assets/
     ├── images/
     │   ├── logo.png            → logo principal (wordmark)
     │   ├── logo-v.png          → símbolo "V" (usado no favicon e no hero)
     │   ├── colaboradores/      → fotos dos colaboradores (enviadas pelo painel /admin)
-    │   └── projetos/           → fotos dos projetos (a adicionar)
+    │   └── projetos/           → fotos dos projetos (enviadas pelo painel /admin)
     └── icons/
 ```
 
@@ -86,22 +87,33 @@ site de carregar a lista.
 
 ---
 
-## Como adicionar um projeto/atividade
+## Como adicionar, editar ou remover um projeto/atividade
 
-Abra `js/data.js` e adicione um novo objeto dentro do array `projetos`:
+Assim como os colaboradores, a forma recomendada é pelo **painel `/admin`** —
+a coleção **Projetos** já vem com upload de imagem, sem precisar mexer em
+código. Veja ["Painel de administração"](#painel-de-administração-decap-cms).
 
-```javascript
+Se preferir editar direto, os projetos ficam em `data/projetos.json` (não mais
+em `js/data.js`). Para adicionar um novo, inclua um objeto na lista `projetos`:
+
+```json
 {
-  titulo: "Nome do projeto",
-  setor: "Nome do setor (texto livre, para exibição)",
-  setorId: "ted", // usado para os filtros
-  categoria: "Saúde",
-  data: "Em breve", // ou uma data real, ex: "10/2026"
-  imagem: "assets/images/projetos/nome-do-arquivo.jpg",
-  descricao: "Descrição em breve.", // troque por uma descrição real quando disponível
-  status: "Realizado" // ou "Em andamento"
+  "titulo": "Nome do projeto",
+  "setor": "Nome do setor (texto livre, para exibição)",
+  "setorId": "ted",
+  "categoria": "Saúde",
+  "data": "Em breve",
+  "imagem": "assets/images/projetos/nome-do-arquivo.jpg",
+  "descricao": "Descrição em breve.",
+  "status": "Realizado"
 }
 ```
+
+`setorId` precisa ser um dos ids definidos em `js/data.js` (usado para o
+filtro); `setor` é só o texto exibido no card, pode ser diferente (ex.: "Viva+"
+para projetos que envolvem a empresa como um todo). `status` aceita
+`"Realizado"` ou `"Em andamento"`. Se `imagem` ficar em branco ou o arquivo não
+existir, o card mostra automaticamente "Imagem em breve" no lugar.
 
 ## Como adicionar uma atividade a um setor
 
@@ -157,8 +169,9 @@ painel de administração, em `/admin`. Diferente do antigo `admin.html`, ele:
 - não roda nenhum servidor seu: é só HTML/JS estático (`admin/index.html` +
   `admin/config.yml`), como o resto do site.
 
-Hoje ele gerencia apenas os **colaboradores** (`data/colaboradores.json`). Setores,
-projetos e valores continuam em `js/data.js`, editados diretamente no código —
+Hoje ele gerencia os **colaboradores** (`data/colaboradores.json`) e os
+**projetos/atividades** (`data/projetos.json`), incluindo upload das fotos.
+Setores e valores continuam em `js/data.js`, editados diretamente no código —
 dá para estender o mesmo painel para eles depois, seguindo o mesmo padrão.
 
 ### O que precisa ser feito por fora (configuração única)
@@ -210,8 +223,10 @@ de configurar o Netlify.
 
 Como `admin/config.yml` é um arquivo estático, o campo "Setor" do painel não lê
 `js/data.js` automaticamente. Se adicionar um setor novo lá, adicione a opção
-correspondente em `admin/config.yml` (campo `setorId`) e no array
-`filtrosColaboradores`, em `js/colaboradores.js`.
+correspondente em **duas** listas de `admin/config.yml` (a coleção
+"Colaboradores" e a coleção "Projetos" têm cada uma o seu próprio campo
+`setorId`), além dos arrays `filtrosColaboradores` (`js/colaboradores.js`) e
+`filtrosProjetos` (`js/data.js`).
 
 ## Como alterar as metas
 
@@ -221,8 +236,14 @@ Cada setor tem seu próprio array `metas` dentro de `js/data.js`. Edite a lista 
 
 ## Como adicionar imagens (colaboradores e projetos)
 
+**Pelo painel `/admin`** (recomendado): o campo de imagem de cada coleção já
+faz o upload — a foto vai automaticamente para `assets/images/colaboradores/`
+ou `assets/images/projetos/`, e o caminho é preenchido sozinho no JSON.
+
+**Editando os arquivos direto:**
 1. Salve a imagem dentro de `assets/images/colaboradores/` ou `assets/images/projetos/`.
-2. Aponte o campo `foto` (colaborador) ou `imagem` (projeto) para o caminho do arquivo.
+2. Aponte o campo `foto` (colaborador, em `data/colaboradores.json`) ou `imagem`
+   (projeto, em `data/projetos.json`) para o caminho do arquivo.
 3. Enquanto uma foto não existir, o site mostra automaticamente um fallback: iniciais do nome (colaboradores) ou o rótulo "Imagem em breve" (projetos) — nenhum link fica quebrado.
 
 ---
@@ -230,9 +251,9 @@ Cada setor tem seu próprio array `metas` dentro de `js/data.js`. Edite a lista 
 ## Como criar um novo setor
 
 1. Em `js/data.js`, adicione um novo objeto no array `setores`, seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `metas`).
-2. Em `data/colaboradores.json`, use o novo `id` no campo `setorId` dos colaboradores desse setor (ou cadastre-os pelo painel `/admin`, depois de atualizar o passo 4).
+2. Em `data/colaboradores.json` e `data/projetos.json`, use o novo `id` no campo `setorId` dos itens desse setor (ou cadastre-os pelo painel `/admin`, depois de completar o passo 4).
 3. Se quiser incluir o setor nos filtros de Colaboradores e Projetos, adicione uma entrada em `filtrosColaboradores` (`js/colaboradores.js`) e `filtrosProjetos` (`js/data.js`).
-4. Para o novo setor aparecer como opção no painel `/admin`, adicione-o também em `admin/config.yml` (veja "Se você criar um novo setor" na seção do painel).
+4. Para o novo setor aparecer como opção no painel `/admin`, adicione-o também em `admin/config.yml` — o campo `setorId` aparece duas vezes lá (uma na coleção "Colaboradores", outra na "Projetos"), então atualize as duas.
 
 O organograma, os cards de setores e os modais são gerados automaticamente — não é necessário tocar no HTML.
 
