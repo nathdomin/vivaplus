@@ -1,6 +1,9 @@
 /* =========================================================
    VIVA+ — data.js
-   Fonte única de verdade para conteúdo institucional.
+   Fonte de verdade para valores, setores e filtros de projetos.
+   Colaboradores (data/colaboradores.json) e projetos
+   (data/projetos.json) ficam em arquivos separados, editáveis
+   pelo painel /admin (Decap CMS) sem tocar em código.
    Todo o conteúdo aqui reflete exatamente o material
    institucional fornecido. Nada foi inventado — onde a
    informação não estava disponível, usamos "Em breve" /
@@ -184,124 +187,10 @@ const setores = [
 
 /* ---------------------------------------------------------
    PROJETOS & ATIVIDADES
-   Conteúdo inicial extraído da apresentação. Datas e
-   descrições não detalhadas no material original aparecem
-   como "Em breve" / "Descrição em breve.", conforme instruído.
+   Os projetos em si agora vivem em data/projetos.json,
+   editável pelo painel /admin (Decap CMS). Aqui fica só a
+   lista de filtros por setor, usada na seção de Projetos.
    --------------------------------------------------------- */
-const projetos = [
-  {
-    titulo: "Janeiro Branco",
-    setor: "Treinamento & Desenvolvimento",
-    setorId: "ted",
-    categoria: "Saúde",
-    data: "Em breve",
-    imagem: "assets/images/projetos/janeiro-branco.jpg",
-    descricao: "Descrição em breve.",
-    status: "Realizado"
-  },
-  {
-    titulo: "Dinâmica no Orquidário",
-    setor: "Treinamento & Desenvolvimento",
-    setorId: "ted",
-    categoria: "Integração",
-    data: "Em breve",
-    imagem: "assets/images/projetos/dinamica-orquidario.jpg",
-    descricao: "Descrição em breve.",
-    status: "Realizado"
-  },
-  {
-    titulo: "Saúde e Qualidade de Vida no Trabalho",
-    setor: "Treinamento & Desenvolvimento",
-    setorId: "ted",
-    categoria: "Saúde",
-    data: "Em breve",
-    imagem: "assets/images/projetos/saude-qualidade-vida.jpg",
-    descricao: "Dinâmica realizada em parceria com o setor 4SMA.",
-    status: "Realizado"
-  },
-  {
-    titulo: "Fevereiro Roxo e Laranja",
-    setor: "4SMA",
-    setorId: "4sma",
-    categoria: "Conscientização",
-    data: "Em breve",
-    imagem: "assets/images/projetos/fevereiro-roxo-laranja.jpg",
-    descricao: "Descrição em breve.",
-    status: "Realizado"
-  },
-  {
-    titulo: "Saúde no Trabalho",
-    setor: "4SMA",
-    setorId: "4sma",
-    categoria: "Saúde",
-    data: "Em breve",
-    imagem: "assets/images/projetos/saude-no-trabalho.jpg",
-    descricao: "Descrição em breve.",
-    status: "Realizado"
-  },
-  {
-    titulo: "Dia das Mulheres",
-    setor: "Viva+",
-    setorId: "comunicacao",
-    categoria: "Comunidade",
-    data: "Em breve",
-    imagem: "assets/images/projetos/dia-das-mulheres.jpg",
-    descricao: "Descrição em breve.",
-    status: "Realizado"
-  },
-  {
-    titulo: "Inclusão de Pessoas no Trabalho",
-    setor: "Viva+",
-    setorId: "rh",
-    categoria: "Inclusão",
-    data: "Em breve",
-    imagem: "assets/images/projetos/inclusao-pessoas-trabalho.jpg",
-    descricao: "Descrição em breve.",
-    status: "Realizado"
-  },
-  {
-    titulo: "Cronograma de conteúdos e atividades",
-    setor: "Comunicação",
-    setorId: "comunicacao",
-    categoria: "Comunicação",
-    data: "Em breve",
-    imagem: "assets/images/projetos/atividades-comunicacao.jpg",
-    descricao: "Registro e divulgação das atividades da Viva+ nas redes sociais e canais oficiais.",
-    status: "Em andamento"
-  },
-  {
-    titulo: "Site Viva+",
-    setor: "Comercial",
-    setorId: "comercial",
-    categoria: "Institucional",
-    data: "Em breve",
-    imagem: "assets/images/projetos/site.jpg",
-    descricao: "Desenvolvimento do site institucional da Viva+.",
-    status: "Em andamento"
-  },
-  {
-    titulo: "Crachá do colaborador",
-    setor: "Comercial",
-    setorId: "comercial",
-    categoria: "Institucional",
-    data: "Em breve",
-    imagem: "assets/images/projetos/cracha-colaborador.jpg",
-    descricao: "Descrição em breve.",
-    status: "Em andamento"
-  },
-  {
-    titulo: "Carteirinha dos clientes",
-    setor: "Comercial",
-    setorId: "comercial",
-    categoria: "Institucional",
-    data: "Em breve",
-    imagem: "assets/images/projetos/carteirinha-clientes.jpg",
-    descricao: "Descrição em breve.",
-    status: "Em andamento"
-  }
-];
-
-/* Filtros disponíveis para a seção de Projetos */
 const filtrosProjetos = [
   { id: "todos", label: "Todos" },
   { id: "rh", label: "RH" },
