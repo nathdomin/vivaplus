@@ -1,0 +1,75 @@
+/* =========================================================
+   VIVA+ — animations.css
+   ========================================================= */
+
+/* ---------- Reveal ao entrar na viewport (via Intersection Observer) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.02s; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.08s; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.14s; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.2s; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.26s; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.32s; }
+.reveal-stagger.is-visible > *:nth-child(7) { transition-delay: 0.38s; }
+.reveal-stagger.is-visible > *:nth-child(8) { transition-delay: 0.44s; }
+.reveal-stagger.is-visible > *:nth-child(9) { transition-delay: 0.5s; }
+.reveal-stagger.is-visible > *:nth-child(n+10) { transition-delay: 0.56s; }
+
+/* ---------- Hero ---------- */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+.hero-blob-green { animation: floatY 9s ease-in-out infinite; }
+.hero-blob-orange { animation: floatY 11s ease-in-out infinite reverse; }
+.hero-float-1 { animation: floatY 6s ease-in-out infinite; }
+.hero-float-2 { animation: floatY 7s ease-in-out infinite reverse; }
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.hero-ring-1 { animation: spinSlow 60s linear infinite; }
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow { animation: heroFadeUp 0.8s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-title { animation: heroFadeUp 0.8s 0.08s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-sub { animation: heroFadeUp 0.8s 0.16s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-ctas { animation: heroFadeUp 0.8s 0.24s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-stats { animation: heroFadeUp 0.8s 0.32s cubic-bezier(0.22,1,0.36,1) both; }
+.hero-visual { animation: heroFadeUp 1s 0.2s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* ---------- Modal ---------- */
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------- Toast ---------- */
+.toast.show { animation: heroFadeUp 0.4s ease both; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
+}

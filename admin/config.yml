@@ -1,0 +1,70 @@
+# =============================================================
+# Viva+ — Configuração do Decap CMS
+#
+# Painel de administração em /admin, sem servidor próprio e
+# sem banco de dados: cada alteração aqui vira um commit no
+# repositório Git do site. Veja o README (seção "Painel de
+# administração") para o passo a passo de configuração.
+# =============================================================
+
+backend:
+  name: git-gateway   # veja o README para alternativas (ex.: backend "github")
+  branch: main        # troque se a branch principal do seu repositório tiver outro nome
+
+# Permite testar o painel no seu computador antes de publicar,
+# rodando `npx decap-server` (veja o README). Só tem efeito
+# quando o admin é acessado em localhost — pode deixar como
+# está mesmo depois de publicar o site.
+local_backend: true
+
+# Fotos enviadas pelo painel vão para esta pasta do repositório,
+# e o site referencia esse mesmo caminho ao exibir o colaborador.
+media_folder: "assets/images/colaboradores"
+public_folder: "assets/images/colaboradores"
+
+locale: "pt"
+
+collections:
+  - name: "colaboradores"
+    label: "Colaboradores"
+    description: "Time exibido na seção “Colaboradores” do site e nos modais de cada setor."
+    files:
+      - name: "lista"
+        label: "Lista de colaboradores"
+        file: "data/colaboradores.json"
+        format: "json"
+        fields:
+          - label: "Colaboradores"
+            name: "colaboradores"
+            widget: "list"
+            label_singular: "Colaborador"
+            summary: "{{fields.nome}} — {{fields.setorId}}"
+            fields:
+              - label: "Nome completo"
+                name: "nome"
+                widget: "string"
+
+              - label: "Setor"
+                name: "setorId"
+                widget: "select"
+                hint: "Se você criar um novo setor em js/data.js, adicione a opção correspondente aqui também."
+                options:
+                  - { label: "Diretoria", value: "diretoria" }
+                  - { label: "Recursos Humanos", value: "rh" }
+                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
+                  - { label: "4SMA", value: "4sma" }
+                  - { label: "Comunicação", value: "comunicacao" }
+                  - { label: "Comercial", value: "comercial" }
+
+              - label: "Cargo"
+                name: "cargo"
+                widget: "string"
+                required: false
+                default: "Informações em breve"
+                hint: "Deixe em branco para manter \"Informações em breve\"."
+
+              - label: "Foto"
+                name: "foto"
+                widget: "image"
+                required: false
+                hint: "Enviada automaticamente para assets/images/colaboradores/."

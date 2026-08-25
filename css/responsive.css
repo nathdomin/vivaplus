@@ -1,0 +1,106 @@
+/* =========================================================
+   VIVA+ — responsive.css
+   Breakpoints: 1280 / 1024 / 768 / 480 / 375 / 320
+   ========================================================= */
+
+/* ---------- ≤1280px ---------- */
+@media (max-width: 1280px) {
+  .container { padding-inline: 20px; }
+  .sectors-grid,
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .goals-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- ≤1024px ---------- */
+@media (max-width: 1024px) {
+  section { padding-block: 88px; }
+
+  .nav-desktop { display: none; }
+  .menu-toggle { display: flex; }
+
+  .hero-content { grid-template-columns: 1fr; text-align: left; }
+  .hero-visual { max-width: 420px; margin-inline: auto; margin-top: 24px; }
+  .hero-stats { gap: 28px; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .pillars { grid-template-columns: 1fr 1fr; }
+
+  .mission-grid { grid-template-columns: 1fr; }
+
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .org-level { grid-template-columns: repeat(3, 1fr); row-gap: 40px; }
+  .org-item::before { display: none; }
+
+  .team-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+
+/* ---------- ≤768px (tablet / mobile grande) ---------- */
+@media (max-width: 768px) {
+  :root { --header-height: 72px; }
+
+  section { padding-block: 64px; }
+  .section-title { font-size: clamp(1.7rem, 6vw, 2.2rem); }
+
+  .hero-title { font-size: clamp(2rem, 8vw, 2.6rem); }
+  .hero-sub { font-size: 1rem; }
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { justify-content: center; }
+  .hero-visual { display: none; }
+  .hero-stats { justify-content: space-between; }
+
+  .pillars { grid-template-columns: 1fr; }
+
+  .mission-card { padding: 40px 28px; }
+
+  .values-grid { grid-template-columns: 1fr; }
+
+  /* Organograma vira timeline vertical */
+  .org-level { grid-template-columns: 1fr; max-width: 420px; gap: 14px; }
+  .org-branch-line { display: none; }
+  .org-item { text-align: left; padding-left: 20px; }
+
+  .sectors-grid,
+  .projects-grid { grid-template-columns: 1fr; }
+
+  .goals-grid { grid-template-columns: 1fr; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+  .footer-brand { grid-column: 1 / -1; }
+
+  .modal-panel { padding: 32px 24px; }
+}
+
+/* ---------- ≤480px (mobile padrão) ---------- */
+@media (max-width: 480px) {
+  .container { padding-inline: 18px; }
+
+  .brand img { height: 30px; }
+
+  .hero-stats { flex-wrap: wrap; row-gap: 16px; }
+  .hero-stat strong { font-size: 1.5rem; }
+
+  .team-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 14px; }
+  .team-avatar { width: 68px; height: 68px; font-size: 1.1rem; }
+
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+  .closing { padding-block: 100px; }
+}
+
+/* ---------- ≤375px ---------- */
+@media (max-width: 375px) {
+  .btn { padding: 14px 22px; font-size: 0.88rem; }
+  .hero-title { font-size: 1.85rem; }
+  .value-card, .sector-card, .pillar-card { padding: 26px 20px; }
+}
+
+/* ---------- ≤320px ---------- */
+@media (max-width: 320px) {
+  .container { padding-inline: 14px; }
+  .hero-eyebrow { font-size: 0.7rem; padding: 6px 12px; }
+  .hero-title { font-size: 1.65rem; }
+  .section-title { font-size: 1.5rem; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
