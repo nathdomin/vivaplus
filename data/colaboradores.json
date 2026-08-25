@@ -1,45 +1,184 @@
 {
   "colaboradores": [
-    { "nome": "Ana Lia", "setorId": "diretoria", "cargo": "Diretora", "foto": "assets/images/colaboradores/ana-lia.jpg" },
-    { "nome": "JP Resende", "setorId": "diretoria", "cargo": "Diretor Organizacional", "foto": "assets/images/colaboradores/jp-resende.jpg" },
-
-    { "nome": "Aleph Patrick", "setorId": "rh", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/aleph-patrick.jpg" },
-    { "nome": "Allexandre Santos", "setorId": "rh", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/allexandre-santos.jpg" },
-    { "nome": "Fabricio Farias", "setorId": "rh", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/fabricio-farias.jpg" },
-    { "nome": "Kaio Henrique", "setorId": "rh", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/kaio-henrique.jpg" },
-    { "nome": "Gabriel Sales", "setorId": "rh", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/gabriel-sales.jpg" },
-    { "nome": "Christian Oliveira", "setorId": "rh", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/christian-oliveira.jpg" },
-    { "nome": "Thiago Santos", "setorId": "rh", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/thiago-santos.jpg" },
-    { "nome": "Nathan Domingues", "setorId": "rh", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/nathan-domingues.jpg" },
-
-    { "nome": "Ana Oliveira", "setorId": "ted", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/ana-oliveira.jpg" },
-    { "nome": "Julia Santana", "setorId": "ted", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/julia-santana.jpg" },
-    { "nome": "Camilli Victoria", "setorId": "ted", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/camilli-victoria.jpg" },
-    { "nome": "Juliana Mendes", "setorId": "ted", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/juliana-mendes.jpg" },
-
-    { "nome": "Giovanna Fonseca", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/giovanna-fonseca.jpg" },
-    { "nome": "Nayara Santos", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/nayara-santos.jpg" },
-    { "nome": "Ester Rodrigues", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/ester-rodrigues.jpg" },
-    { "nome": "Isabela Merola", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/isabela-merola.jpg" },
-    { "nome": "Maria Freire", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/maria-freire.jpg" },
-    { "nome": "Dauani Novais", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/dauani-novais.jpg" },
-    { "nome": "Maria Alves", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/maria-alves.jpg" },
-    { "nome": "Luisa Gouveia", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/luisa-gouveia.jpg" },
-    { "nome": "Maria Oliveira", "setorId": "4sma", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/maria-oliveira.jpg" },
-
-    { "nome": "Thayná Caldas", "setorId": "comunicacao", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/thayna-caldas.jpg" },
-    { "nome": "Thayná Brandão", "setorId": "comunicacao", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/thayna-brandao.jpg" },
-    { "nome": "Arthur Ribeiro", "setorId": "comunicacao", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/arthur-ribeiro.jpg" },
-    { "nome": "Caroline Lima", "setorId": "comunicacao", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/caroline-lima.jpg" },
-    { "nome": "Geovana Batista", "setorId": "comunicacao", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/geovana-batista.jpg" },
-
-    { "nome": "Cleiton Ribeiro", "setorId": "comercial", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/cleiton-ribeiro.jpg" },
-    { "nome": "João Prates", "setorId": "comercial", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/joao-prates.jpg" },
-    { "nome": "João Vitor", "setorId": "comercial", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/joao-vitor.jpg" },
-    { "nome": "Kauan Quaresma", "setorId": "comercial", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/kauan-quaresma.jpg" },
-    { "nome": "João Pedro", "setorId": "comercial", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/joao-pedro.jpg" },
-    { "nome": "Matheus Gabriel", "setorId": "comercial", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/matheus-gabriel.jpg" },
-    { "nome": "Guilherme Caprio", "setorId": "comercial", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/guilherme-caprio.jpg" },
-    { "nome": "Daniel Monteiro", "setorId": "comercial", "cargo": "Informações em breve", "foto": "assets/images/colaboradores/daniel-monteiro.jpg" }
+    {
+      "nome": "Ana Lia",
+      "setorId": "diretoria",
+      "cargo": "Diretora",
+      "foto": "assets/images/colaboradores/ana-lia.jpg"
+    },
+    {
+      "nome": "JP Resende",
+      "setorId": "diretoria",
+      "cargo": "Diretor Organizacional",
+      "foto": "assets/images/colaboradores/jp-resende.jpg"
+    },
+    {
+      "nome": "Aleph Patrick",
+      "setorId": "rh",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/aleph-patrick.jpg"
+    },
+    {
+      "nome": "Allexandre Santos",
+      "setorId": "rh",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/allexandre-santos.jpg"
+    },
+    {
+      "nome": "Kaio Henrique",
+      "setorId": "rh",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/kaio-henrique.jpg"
+    },
+    {
+      "nome": "Nathan Domingues",
+      "setorId": "rh",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/nathan-domingues.jpg"
+    },
+    {
+      "nome": "Ana Oliveira",
+      "setorId": "ted",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/ana-oliveira.jpg"
+    },
+    {
+      "nome": "Julia Santana",
+      "setorId": "ted",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/julia-santana.jpg"
+    },
+    {
+      "nome": "Camilli Victoria",
+      "setorId": "ted",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/camilli-victoria.jpg"
+    },
+    {
+      "nome": "Juliana Mendes",
+      "setorId": "ted",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/juliana-mendes.jpg"
+    },
+    {
+      "nome": "Giovanna Fonseca",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/giovanna-fonseca.jpg"
+    },
+    {
+      "nome": "Nayara Santos",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/nayara-santos.jpg"
+    },
+    {
+      "nome": "Ester Rodrigues",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/ester-rodrigues.jpg"
+    },
+    {
+      "nome": "Isabela Merola",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/isabela-merola.jpg"
+    },
+    {
+      "nome": "Maria Freire",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/maria-freire.jpg"
+    },
+    {
+      "nome": "Dauani Novais",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/dauani-novais.jpg"
+    },
+    {
+      "nome": "Maria Alves",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/maria-alves.jpg"
+    },
+    {
+      "nome": "Luisa Gouveia",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/luisa-gouveia.jpg"
+    },
+    {
+      "nome": "Maria Oliveira",
+      "setorId": "4sma",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/maria-oliveira.jpg"
+    },
+    {
+      "nome": "Thayná Brandão",
+      "setorId": "comunicacao",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/thayna-brandao.jpg"
+    },
+    {
+      "nome": "Arthur Ribeiro",
+      "setorId": "comunicacao",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/arthur-ribeiro.jpg"
+    },
+    {
+      "nome": "Caroline Lima",
+      "setorId": "comunicacao",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/caroline-lima.jpg"
+    },
+    {
+      "nome": "Geovana Batista",
+      "setorId": "comunicacao",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/geovana-batista.jpg"
+    },
+    {
+      "nome": "Cleiton Ribeiro",
+      "setorId": "comercial",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/cleiton-ribeiro.jpg"
+    },
+    {
+      "nome": "João Prates",
+      "setorId": "comercial",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/joao-prates.jpg"
+    },
+    {
+      "nome": "João Vitor",
+      "setorId": "comercial",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/joao-vitor.jpg"
+    },
+    {
+      "nome": "Kauan Quaresma",
+      "setorId": "comercial",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/kauan-quaresma.jpg"
+    },
+    {
+      "nome": "João Pedro",
+      "setorId": "comercial",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/joao-pedro.jpg"
+    },
+    {
+      "nome": "Matheus Gabriel",
+      "setorId": "comercial",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/matheus-gabriel.jpg"
+    },
+    {
+      "nome": "Guilherme Caprio",
+      "setorId": "comercial",
+      "cargo": "Informações em breve",
+      "foto": "assets/images/colaboradores/guilherme-caprio.jpg"
+    }
   ]
 }
