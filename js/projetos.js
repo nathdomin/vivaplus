@@ -1,12 +1,20 @@
 /* =========================================================
    VIVA+ — projetos.js
    Renderiza cards de projetos, filtros por setor e a
-   visualização em timeline, a partir de js/data.js.
+   visualização em timeline. Os projetos em si vêm de
+   data/projetos.json, editável pelo painel /admin (Decap
+   CMS) — veja o README. Os filtros continuam em js/data.js.
    ========================================================= */
+
+const CAMINHO_DADOS_PROJETOS = "data/projetos.json";
+
+/* Preenchido de forma assíncrona por carregarProjetos(). */
+let projetos = [];
 
 (function () {
   let filtroAtivo = "todos";
   let visualizacao = "grid"; // "grid" | "timeline"
+  let erroAoCarregar = false;
 
   function filtrarProjetos() {
     if (filtroAtivo === "todos") return projetos;
@@ -26,6 +34,10 @@
   function renderGrid(lista) {
     const el = document.getElementById("projectsGrid");
     if (!el) return;
+    if (erroAoCarregar) {
+      el.innerHTML = `<p class="team-empty">Não foi possível carregar os projetos agora. Tente recarregar a página.</p>`;
+      return;
+    }
     if (!lista.length) {
       el.innerHTML = `<p class="team-empty">Nenhum projeto encontrado para este filtro.</p>`;
       return;
@@ -34,9 +46,15 @@
       .map(
         (p) => `
       <article class="project-card reveal" tabindex="0">
-        <div class="project-thumb" role="img" aria-label="Imagem do projeto ${p.titulo} — a ser adicionada">
+        <div class="project-thumb">
           <span class="project-status">${p.status}</span>
-          Imagem em breve
+          ${
+            p.imagem
+              ? `<img class="project-thumb-img" src="${p.imagem}" alt="Imagem do projeto ${p.titulo}" loading="lazy"
+               onload="this.classList.add('is-loaded')" onerror="this.remove()" />`
+              : ""
+          }
+          <span class="project-thumb-placeholder">Imagem em breve</span>
         </div>
         <div class="project-body">
           <div class="project-cat">${p.categoria}</div>
@@ -55,6 +73,10 @@
   function renderTimeline(lista) {
     const el = document.getElementById("projectsTimeline");
     if (!el) return;
+    if (erroAoCarregar) {
+      el.innerHTML = `<p class="team-empty">Não foi possível carregar os projetos agora. Tente recarregar a página.</p>`;
+      return;
+    }
     if (!lista.length) {
       el.innerHTML = `<p class="team-empty">Nenhum projeto encontrado para este filtro.</p>`;
       return;
@@ -84,6 +106,20 @@
     if (window.VivaMain && window.VivaMain.refreshReveal) window.VivaMain.refreshReveal();
   }
 
+  /* ---------- Carregamento do JSON ---------- */
+  async function carregarProjetos() {
+    try {
+      const resposta = await fetch(CAMINHO_DADOS_PROJETOS, { cache: "no-store" });
+      if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+      const dados = await resposta.json();
+      projetos = Array.isArray(dados.projetos) ? dados.projetos : [];
+    } catch (erro) {
+      console.error("Não foi possível carregar data/projetos.json:", erro);
+      erroAoCarregar = true;
+    }
+    renderAll();
+  }
+
   function bindEvents() {
     const filtersEl = document.getElementById("projectFilters");
     if (filtersEl) {
@@ -111,6 +147,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     renderFiltros();
     bindEvents();
-    renderAll();
+    carregarProjetos();
   });
 })();
