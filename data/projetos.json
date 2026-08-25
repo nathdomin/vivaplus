@@ -89,15 +89,6 @@
       "imagem": "assets/images/projetos/carteirinha-clientes.jpg",
       "descricao": "Descrição em breve.",
       "status": "Em andamento"
-    },
-    {
-      "data": "Em breve",
-      "descricao": "Descrição em breve.",
-      "titulo": "test",
-      "setor": "teste",
-      "setorId": "4sma",
-      "categoria": "teste",
-      "status": "Realizado"
     }
   ]
 }
