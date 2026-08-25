@@ -1,12 +1,12 @@
 {
   "projetos": [
     {
-      "titulo": "Janeiro Branco?",
+      "titulo": "Janeiro Branco",
       "setor": "Treinamento & Desenvolvimento",
-      "setorId": "comunicacao",
+      "setorId": "ted",
       "categoria": "Saúde",
       "data": "Em breve",
-      "imagem": "projetos/whatsapp-image-2026-08-25-at-16.08.34.jpeg",
+      "imagem": "",
       "descricao": "Descrição em breve.",
       "status": "Realizado"
     },
@@ -89,6 +89,15 @@
       "imagem": "assets/images/projetos/carteirinha-clientes.jpg",
       "descricao": "Descrição em breve.",
       "status": "Em andamento"
+    },
+    {
+      "data": "Em breve",
+      "descricao": "Descrição em breve.",
+      "titulo": "test",
+      "setor": "teste",
+      "setorId": "4sma",
+      "categoria": "teste",
+      "status": "Realizado"
     }
   ]
 }
