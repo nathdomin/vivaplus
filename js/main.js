@@ -48,11 +48,32 @@
     });
   }
 
-  /* ---------- SCROLL REVEAL (Intersection Observer) ---------- */
+  /* ---------- SCROLL REVEAL (Intersection Observer) ----------
+     Observa .reveal / .reveal-stagger e adiciona .is-visible quando
+     o elemento entra na tela. Um MutationObserver cuida de "pegar"
+     automaticamente os cards que são inseridos depois (colaboradores,
+     projetos, setores etc. vêm de fetch() e renderizam de forma
+     assíncrona) — assim a animação nunca depende da ordem em que os
+     scripts terminam de rodar. */
   let observer;
+  const semObserverIntersecao = !("IntersectionObserver" in window);
+
+  function observarNovosReveals(root) {
+    const alvo = (root || document).querySelectorAll
+      ? root || document
+      : document;
+    const elementos = alvo.querySelectorAll(".reveal:not(.is-visible), .reveal-stagger:not(.is-visible)");
+
+    if (semObserverIntersecao) {
+      elementos.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+    elementos.forEach((el) => observer.observe(el));
+  }
+
   function initReveal() {
-    if (!("IntersectionObserver" in window)) {
-      document.querySelectorAll(".reveal, .reveal-stagger").forEach((el) => el.classList.add("is-visible"));
+    if (semObserverIntersecao) {
+      observarNovosReveals();
       return;
     }
     observer = new IntersectionObserver(
@@ -64,13 +85,17 @@
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
-    document.querySelectorAll(".reveal, .reveal-stagger").forEach((el) => observer.observe(el));
+    observarNovosReveals();
+
+    /* Sempre que algo novo é inserido no DOM (cards vindos de fetch
+       assíncrono), verifica se há .reveal ainda não observado. */
+    const mutationObserver = new MutationObserver(() => observarNovosReveals());
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
   }
   function refreshReveal() {
-    if (!observer) return;
-    document.querySelectorAll(".reveal:not(.is-visible), .reveal-stagger:not(.is-visible)").forEach((el) => observer.observe(el));
+    observarNovosReveals();
   }
 
   /* ---------- PILARES (Sobre a Viva+) ---------- */
@@ -229,7 +254,7 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function initAll() {
     initHeader();
     initMobileMenu();
     renderPilares();
@@ -239,7 +264,14 @@
     setYear();
     initContactForm();
     initReveal();
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAll);
+  } else {
+    initAll();
+  }
 
   window.VivaMain = { refreshReveal };
 })();
+
