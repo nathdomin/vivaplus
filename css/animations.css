@@ -63,6 +63,125 @@
 /* ---------- Toast ---------- */
 .toast.show { animation: heroFadeUp 0.4s ease both; }
 
+/* =========================================================
+   Aprimoramentos exclusivos para desktop (mouse fino)
+   — não afeta a experiência em tablets/celulares
+   ========================================================= */
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+
+  /* ---------- Rolagem: reveal mais elaborado (blur + escala) ---------- */
+  .reveal {
+    transform: translateY(42px) scale(0.96);
+    filter: blur(6px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-visible { filter: blur(0); transform: translateY(0) scale(1); }
+
+  .reveal-stagger > * {
+    transform: translateY(34px) scale(0.95);
+    filter: blur(5px);
+    transition:
+      opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-stagger.is-visible > * { filter: blur(0); transform: translateY(0) scale(1); }
+
+  /* ---------- Cards: tilt 3D + brilho seguindo o cursor ---------- */
+  .pillar-card,
+  .value-card,
+  .sector-card,
+  .team-card,
+  .project-card,
+  .goal-card,
+  .org-item {
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.35s ease;
+  }
+
+  .pillar-card > *,
+  .value-card > *,
+  .sector-card > *,
+  .team-card > *,
+  .project-card > *,
+  .goal-card > *,
+  .org-item > * { position: relative; z-index: 2; }
+
+  .pillar-card::after,
+  .value-card::after,
+  .sector-card::after,
+  .team-card::after,
+  .project-card::after,
+  .goal-card::after,
+  .org-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.4), transparent 65%);
+    transition: opacity 0.4s ease;
+  }
+
+  .tilt-active::after { opacity: 1; }
+  .tilt-active {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-10px) scale(1.02);
+  }
+  .pillar-card.tilt-active,
+  .value-card.tilt-active { box-shadow: var(--shadow-md); }
+  .sector-card.tilt-active,
+  .team-card.tilt-active,
+  .project-card.tilt-active,
+  .goal-card.tilt-active { box-shadow: var(--shadow-lg); }
+  .org-item.tilt-active { box-shadow: var(--shadow-md); }
+
+  /* ---------- Botões: brilho deslizante ao passar o mouse ---------- */
+  .btn { position: relative; overflow: hidden; }
+  .btn::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -60%;
+    width: 40%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  .btn:hover::after { left: 130%; }
+
+  /* ---------- Menu desktop: sublinhado animado ---------- */
+  .nav-desktop a { position: relative; }
+  .nav-desktop a::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px; bottom: 6px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-desktop a:hover::after { transform: scaleX(1); }
+
+  /* ---------- Hero: leve paralaxe 3D ao mover o mouse ---------- */
+  .hero-visual {
+    transition: transform 0.25s ease-out;
+    transform: perspective(1000px) rotateX(var(--hrx, 0deg)) rotateY(var(--hry, 0deg));
+  }
+  .hero-float-1, .hero-float-2 { transition: transform 0.25s ease-out; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -71,5 +190,10 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
+  .reveal, .reveal-stagger > * { opacity: 1; transform: none; filter: none; }
+  .tilt-active { transform: none !important; }
+  .pillar-card::after, .value-card::after, .sector-card::after,
+  .team-card::after, .project-card::after, .goal-card::after,
+  .org-item::after { display: none; }
+  .hero-visual { transform: none !important; }
 }
