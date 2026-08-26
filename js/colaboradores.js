@@ -37,6 +37,16 @@ const filtrosColaboradores = [
   let filtroAtivo = "todos";
   let erroAoCarregar = false;
 
+  /* Considera "gestor" quem tem Gestor(a) ou Diretor(a) no cargo —
+     esses nomes aparecem primeiro quando o time é filtrado por setor. */
+  function ehGestor(cargo) {
+    return /gestor|diretor/i.test(cargo || "");
+  }
+
+  function ordenarComGestorPrimeiro(lista) {
+    return [...lista].sort((a, b) => (ehGestor(a.cargo) ? 0 : 1) - (ehGestor(b.cargo) ? 0 : 1));
+  }
+
   function iniciais(nome) {
     return nome
       .split(" ")
@@ -71,7 +81,10 @@ const filtrosColaboradores = [
       return;
     }
 
-    const lista = filtroAtivo === "todos" ? colaboradores : colaboradores.filter((c) => c.setorId === filtroAtivo);
+    const lista =
+      filtroAtivo === "todos"
+        ? colaboradores
+        : ordenarComGestorPrimeiro(colaboradores.filter((c) => c.setorId === filtroAtivo));
 
     if (!lista.length) {
       el.innerHTML = `<p class="team-empty">Nenhum colaborador encontrado para este filtro.</p>`;

@@ -22,6 +22,16 @@
     return colaboradores.filter((c) => c.setorId === setorId).length;
   }
 
+  /* Mesmo critério usado em colaboradores.js: Gestor(a)/Diretor(a)
+     aparece primeiro na lista de integrantes do setor. */
+  function ehGestor(cargo) {
+    return /gestor|diretor/i.test(cargo || "");
+  }
+
+  function ordenarComGestorPrimeiro(lista) {
+    return [...lista].sort((a, b) => (ehGestor(a.cargo) ? 0 : 1) - (ehGestor(b.cargo) ? 0 : 1));
+  }
+
   /* ---------- Organograma ---------- */
   function renderOrgChart() {
     const el = document.getElementById("orgLevel");
@@ -60,7 +70,7 @@
   /* ---------- Modal ---------- */
   function buildModalContent(setor) {
     const integrantes = typeof colaboradores !== "undefined"
-      ? colaboradores.filter((c) => c.setorId === setor.id)
+      ? ordenarComGestorPrimeiro(colaboradores.filter((c) => c.setorId === setor.id))
       : [];
 
     const integrantesHtml = integrantes.length
