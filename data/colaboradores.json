@@ -2,165 +2,111 @@
   "colaboradores": [
     {
       "nome": "Ana Lia",
-      "setorId": "diretoria",
-      "cargo": "Diretora",
+      "setorId": "rh",
+      "cargo": "Gestora",
       "foto": "/assets/images/colaboradores/screenshot_20260825_172053_whatsapp.jpg"
     },
     {
       "nome": "JP Resende",
-      "setorId": "diretoria",
-      "cargo": "Diretor Organizacional",
-      "foto": "assets/images/colaboradores/jp-resende.jpg"
+      "setorId": "comunicacao",
+      "cargo": "Gestor",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172047_whatsapp.jpg"
     },
     {
       "nome": "Aleph Patrick",
       "setorId": "rh",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/aleph-patrick.jpg"
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172025_whatsapp.jpg"
     },
     {
       "nome": "Allexandre Santos",
-      "setorId": "rh",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/allexandre-santos.jpg"
+      "setorId": "diretoria",
+      "cargo": "Diretor",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172029_whatsapp.jpg"
     },
     {
       "nome": "Kaio Henrique",
       "setorId": "rh",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/kaio-henrique.jpg"
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172045_whatsapp.jpg"
     },
     {
       "nome": "Nathan Domingues",
       "setorId": "rh",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/nathan-domingues.jpg"
-    },
-    {
-      "nome": "Ana Oliveira",
-      "setorId": "ted",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/ana-oliveira.jpg"
+      "cargo": "Gestor",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172049_whatsapp.jpg"
     },
     {
       "nome": "Julia Santana",
-      "setorId": "ted",
-      "cargo": "Informações em breve",
+      "setorId": "comercial",
+      "cargo": "Colaboradora",
       "foto": "assets/images/colaboradores/julia-santana.jpg"
     },
     {
       "nome": "Camilli Victoria",
       "setorId": "comunicacao",
-      "cargo": "Informações em breve",
+      "cargo": "Colaboradora",
       "foto": "/assets/images/colaboradores/screenshot_20260825_172014_whatsapp.jpg"
     },
     {
       "nome": "Juliana Mendes",
-      "setorId": "ted",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/juliana-mendes.jpg"
+      "setorId": "4sma",
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/whatsapp-image-2026-08-25-at-17.12.03.jpeg"
     },
     {
       "nome": "Giovanna Fonseca",
-      "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/giovanna-fonseca.jpg"
-    },
-    {
-      "nome": "Nayara Santos",
-      "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/nayara-santos.jpg"
+      "setorId": "diretoria",
+      "cargo": "Diretora Organizacional",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172016_whatsapp.jpg"
     },
     {
       "nome": "Ester Rodrigues",
-      "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/ester-rodrigues.jpg"
-    },
-    {
-      "nome": "Isabela Merola",
-      "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/isabela-merola.jpg"
-    },
-    {
-      "nome": "Maria Freire",
-      "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/maria-freire.jpg"
-    },
-    {
-      "nome": "Dauani Novais",
-      "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/dauani-novais.jpg"
-    },
-    {
-      "nome": "Maria Alves",
-      "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/maria-alves.jpg"
+      "setorId": "rh",
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172031_whatsapp.jpg"
     },
     {
       "nome": "Luisa Gouveia",
       "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/luisa-gouveia.jpg"
-    },
-    {
-      "nome": "Maria Oliveira",
-      "setorId": "4sma",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/maria-oliveira.jpg"
+      "cargo": "Gestora",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172018_whatsapp.jpg"
     },
     {
       "nome": "Thayná Brandão",
       "setorId": "comunicacao",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/thayna-brandao.jpg"
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172051_whatsapp.jpg"
     },
     {
       "nome": "Arthur Ribeiro",
       "setorId": "comunicacao",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/arthur-ribeiro.jpg"
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172039_whatsapp.jpg"
     },
     {
       "nome": "Caroline Lima",
       "setorId": "comunicacao",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/caroline-lima.jpg"
-    },
-    {
-      "nome": "Geovana Batista",
-      "setorId": "comunicacao",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/geovana-batista.jpg"
+      "cargo": "Gestora",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172041_whatsapp.jpg"
     },
     {
       "nome": "Cleiton Ribeiro",
-      "setorId": "comercial",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/cleiton-ribeiro.jpg"
+      "setorId": "rh",
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172033_whatsapp.jpg"
     },
     {
       "nome": "João Prates",
       "setorId": "comercial",
-      "cargo": "Informações em breve",
+      "cargo": "Gestor",
       "foto": "assets/images/colaboradores/joao-prates.jpg"
     },
     {
       "nome": "João Vitor",
       "setorId": "comercial",
-      "cargo": "Informações em breve",
+      "cargo": "Colaborador",
       "foto": "assets/images/colaboradores/joao-vitor.jpg"
-    },
-    {
-      "nome": "Kauan Quaresma",
-      "setorId": "comercial",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/kauan-quaresma.jpg"
     },
     {
       "nome": "João Pedro",
@@ -171,14 +117,35 @@
     {
       "nome": "Matheus Gabriel",
       "setorId": "comercial",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/matheus-gabriel.jpg"
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172021_whatsapp.jpg"
     },
     {
       "nome": "Guilherme Caprio",
       "setorId": "comercial",
-      "cargo": "Informações em breve",
-      "foto": "assets/images/colaboradores/guilherme-caprio.jpg"
+      "cargo": "Gestor",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172027_whatsapp.jpg"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Sophia Gabrielly",
+      "setorId": "4sma"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Catharina de Jesus",
+      "setorId": "rh"
+    },
+    {
+      "cargo": "Colaborador",
+      "nome": "Felipe Rodrigues",
+      "setorId": "4sma"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Maria Eduarda",
+      "setorId": "comunicacao",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172043_whatsapp.jpg"
     }
   ]
 }
