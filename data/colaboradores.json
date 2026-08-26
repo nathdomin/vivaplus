@@ -100,22 +100,22 @@
       "nome": "João Prates",
       "setorId": "comercial",
       "cargo": "Gestor",
-      "foto": "assets/images/colaboradores/joao-prates.jpg"
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172020_whatsapp.jpg"
     },
     {
       "nome": "João Vitor",
       "setorId": "comercial",
       "cargo": "Colaborador",
-      "foto": "assets/images/colaboradores/joao-vitor.jpg"
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172024_whatsapp.jpg"
     },
     {
-      "nome": "João Pedro",
+      "nome": "Kamylla",
       "setorId": "comercial",
-      "cargo": "Informações em breve",
+      "cargo": "Colaboradora",
       "foto": "assets/images/colaboradores/joao-pedro.jpg"
     },
     {
-      "nome": "Matheus Gabriel",
+      "nome": "Mattheus Gabriel",
       "setorId": "comercial",
       "cargo": "Colaborador",
       "foto": "/assets/images/colaboradores/screenshot_20260825_172021_whatsapp.jpg"
@@ -138,14 +138,69 @@
     },
     {
       "cargo": "Colaborador",
-      "nome": "Felipe Rodrigues",
+      "nome": "Felipe",
       "setorId": "4sma"
     },
     {
       "cargo": "Colaboradora",
-      "nome": "Maria Eduarda",
+      "nome": "Maria Freire",
       "setorId": "comunicacao",
       "foto": "/assets/images/colaboradores/screenshot_20260825_172043_whatsapp.jpg"
+    },
+    {
+      "cargo": "Colaborador",
+      "nome": "Ygor",
+      "setorId": "rh"
+    },
+    {
+      "cargo": "Colaborador",
+      "nome": "Iago",
+      "setorId": "rh"
+    },
+    {
+      "cargo": "Colaboradora",
+      "setorId": "comercial",
+      "nome": "Isabella"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Sophia M.",
+      "setorId": "comercial"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Stella",
+      "setorId": "comunicacao"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Larissa",
+      "setorId": "ted"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Sofia",
+      "setorId": "ted"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Mariana",
+      "setorId": "ted"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Ana B.",
+      "setorId": "ted"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Gabrielly",
+      "setorId": "ted"
+    },
+    {
+      "cargo": "Colaboradora",
+      "nome": "Nayara Santos",
+      "setorId": "4sma"
     }
   ]
 }
