@@ -90,7 +90,9 @@ const setores = [
       "Fortalecer a cultura organizacional.",
       "Garantir alinhamento com os valores da empresa."
     ],
-    atividades: [],
+    atividades: [
+      "Inclusão de Pessoas no Trabalho"
+    ],
     metas: [
       "Promover integração entre colaboradores.",
       "Definir e alinhar melhor as funções.",
