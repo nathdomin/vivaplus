@@ -201,6 +201,11 @@
       "cargo": "Colaboradora",
       "nome": "Nayara Santos",
       "setorId": "4sma"
+    },
+    {
+      "cargo": "Informações em breve",
+      "nome": "TESTE",
+      "setorId": "diretoria"
     }
   ]
 }
