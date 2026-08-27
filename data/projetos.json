@@ -89,6 +89,15 @@
       "imagem": "assets/images/projetos/carteirinha-clientes.jpg",
       "descricao": "Descrição em breve.",
       "status": "Em andamento"
+    },
+    {
+      "data": "27/08/2026",
+      "descricao": "Descrição em breve.",
+      "titulo": "Agosto Lilás",
+      "setor": "Comercial",
+      "setorId": "comercial",
+      "categoria": "Direitos Humanos",
+      "status": "Realizado"
     }
   ]
 }
