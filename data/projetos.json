@@ -92,12 +92,13 @@
     },
     {
       "data": "27/08/2026",
-      "descricao": "Descrição em breve.",
+      "descricao": "Informação que salva vidas. A violência contra a mulher vai além da física; inclui abusos psicológicos, sexuais, patrimoniais e morais, ocorrendo frequentemente dentro de casa. Identificar esses sinais é o primeiro passo para quebrar o ciclo do silêncio e oferecer apoio. Não se cale e ajude quem precisa",
       "titulo": "Agosto Lilás",
       "setor": "Comercial",
       "setorId": "comercial",
       "categoria": "Direitos Humanos",
-      "status": "Realizado"
+      "status": "Realizado",
+      "imagem": "/assets/images/projetos/100377.jpg"
     }
   ]
 }
