@@ -8,7 +8,7 @@
 (function () {
   var DESKTOP_QUERY = "(min-width: 1025px) and (hover: hover) and (pointer: fine)";
   var CARD_SELECTOR =
-    ".pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .org-item";
+    ".pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item";
 
   function isDesktop() {
     return window.matchMedia(DESKTOP_QUERY).matches;
