@@ -144,3 +144,81 @@ collections:
                 options:
                   - { label: "Realizado", value: "Realizado" }
                   - { label: "Em andamento", value: "Em andamento" }
+
+  - name: "orientacoes"
+    label: "Orientações"
+    description: "Conteúdo da seção “Orientações” do site: o significado de cada mês (destaque automático do mês atual) e as dicas rápidas de bem-estar (hidratação, sono, postura etc.)."
+    files:
+      - name: "conteudo"
+        label: "Orientações"
+        file: "data/orientacoes.json"
+        format: "json"
+        fields:
+          - label: "Significado de cada mês"
+            name: "meses"
+            widget: "list"
+            label_singular: "Mês"
+            summary: "{{fields.nome}} — {{fields.tema}}"
+            hint: "O site mostra automaticamente, em destaque, o item cujo campo “Mês (número)” corresponder ao mês atual do calendário. Mantenha só um item por número de mês."
+            fields:
+              - label: "Mês (número)"
+                name: "mes"
+                widget: "select"
+                options:
+                  - { label: "01 — Janeiro", value: 1 }
+                  - { label: "02 — Fevereiro", value: 2 }
+                  - { label: "03 — Março", value: 3 }
+                  - { label: "04 — Abril", value: 4 }
+                  - { label: "05 — Maio", value: 5 }
+                  - { label: "06 — Junho", value: 6 }
+                  - { label: "07 — Julho", value: 7 }
+                  - { label: "08 — Agosto", value: 8 }
+                  - { label: "09 — Setembro", value: 9 }
+                  - { label: "10 — Outubro", value: 10 }
+                  - { label: "11 — Novembro", value: 11 }
+                  - { label: "12 — Dezembro", value: 12 }
+
+              - label: "Nome do mês"
+                name: "nome"
+                widget: "string"
+                hint: "Ex.: “Janeiro”. Usado como texto de apoio no card."
+
+              - label: "Tema / campanha do mês"
+                name: "tema"
+                widget: "string"
+                hint: "Ex.: “Janeiro Branco”, “Outubro Rosa”. Aparece em destaque no card."
+
+              - label: "Texto explicativo"
+                name: "texto"
+                widget: "text"
+                hint: "Um parágrafo curto explicando o significado do mês para quem visita o site."
+
+          - label: "Dicas rápidas"
+            name: "dicas"
+            widget: "list"
+            label_singular: "Dica"
+            summary: "{{fields.titulo}}"
+            hint: "Cards de orientações gerais de bem-estar (beber água, sono, postura etc.), exibidos em grade e filtráveis por categoria."
+            fields:
+              - label: "Título"
+                name: "titulo"
+                widget: "string"
+                hint: "Ex.: “Beba água ao longo do dia”."
+
+              - label: "Categoria"
+                name: "categoria"
+                widget: "select"
+                hint: "Define o ícone do card e o filtro em que ele aparece."
+                options:
+                  - { label: "Hidratação", value: "hidratacao" }
+                  - { label: "Alimentação", value: "alimentacao" }
+                  - { label: "Atividade física", value: "atividade-fisica" }
+                  - { label: "Sono", value: "sono" }
+                  - { label: "Postura", value: "postura" }
+                  - { label: "Saúde mental", value: "saude-mental" }
+                  - { label: "Outros", value: "outro" }
+
+              - label: "Texto"
+                name: "texto"
+                widget: "text"
+                hint: "Um parágrafo curto com a orientação completa."
