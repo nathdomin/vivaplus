@@ -847,6 +847,103 @@ section { padding-block: 120px; position: relative; }
 .goal-list li { font-size: 0.9rem; padding-left: 20px; position: relative; margin-bottom: 8px; color: var(--color-text); }
 .goal-list li::before { content: "→"; position: absolute; left: 0; color: var(--color-orange); font-weight: 700; }
 
+/* ---------- ORIENTAÇÕES ---------- */
+.guidance { background: var(--color-background); }
+
+.month-spotlight {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 36px;
+  background: linear-gradient(135deg, var(--color-blue), var(--color-blue-dark));
+  color: var(--color-white);
+  border-radius: var(--radius-xl);
+  padding: 44px 48px;
+  margin-bottom: 40px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.month-spotlight-glow {
+  position: absolute;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-green) 0%, transparent 70%);
+  opacity: 0.22;
+  top: -140px; right: -100px;
+  z-index: -1;
+  animation: spotlightPulse 6s ease-in-out infinite;
+}
+.month-spotlight-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 128px; height: 128px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+}
+.month-spotlight-number {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.month-spotlight-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin-top: 6px;
+}
+.month-spotlight-eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-orange);
+  margin-bottom: 12px;
+}
+.month-spotlight-body h3 { font-size: 1.5rem; margin-bottom: 12px; }
+.month-spotlight-body p { color: rgba(255, 255, 255, 0.82); font-size: 1rem; line-height: 1.7; }
+
+.guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.guidance-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  border: 1px solid var(--color-border);
+  transition: transform var(--transition-fast) var(--ease), box-shadow var(--transition-fast) var(--ease);
+}
+.guidance-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.guidance-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: var(--color-background);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  color: var(--color-blue);
+}
+.guidance-tag {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-orange);
+  margin-bottom: 8px;
+}
+.guidance-card h3 { font-size: 1.08rem; color: var(--color-blue); margin-bottom: 8px; }
+.guidance-card p { font-size: 0.92rem; color: var(--color-muted); }
+
 /* ---------- CITAÇÃO ---------- */
 .closing {
   background: var(--color-blue);

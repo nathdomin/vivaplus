@@ -9,6 +9,7 @@
   .sectors-grid,
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
   .goals-grid { grid-template-columns: 1fr; }
+  .guidance-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ---------- ≤1024px ---------- */
@@ -33,6 +34,9 @@
   .org-item::before { display: none; }
 
   .team-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+
+  .month-spotlight { grid-template-columns: 1fr; text-align: center; padding: 36px 28px; }
+  .month-spotlight-badge { margin-inline: auto; }
 }
 
 /* ---------- ≤768px (tablet / mobile grande) ---------- */
@@ -64,6 +68,9 @@
   .projects-grid { grid-template-columns: 1fr; }
 
   .goals-grid { grid-template-columns: 1fr; }
+  .guidance-grid { grid-template-columns: 1fr; }
+  .month-spotlight-badge { width: 104px; height: 104px; }
+  .month-spotlight-number { font-size: 1.7rem; }
 
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
   .footer-brand { grid-column: 1 / -1; }
@@ -93,7 +100,8 @@
 @media (max-width: 375px) {
   .btn { padding: 14px 22px; font-size: 0.88rem; }
   .hero-title { font-size: 1.85rem; }
-  .value-card, .sector-card, .pillar-card { padding: 26px 20px; }
+  .value-card, .sector-card, .pillar-card, .guidance-card { padding: 26px 20px; }
+  .month-spotlight { padding: 28px 20px; }
 }
 
 /* ---------- ≤320px ---------- */

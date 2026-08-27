@@ -46,6 +46,7 @@
 .team-card,
 .project-card,
 .goal-card,
+.guidance-card,
 .org-item {
   box-shadow: var(--float-shadow-rest);
 }
@@ -64,6 +65,7 @@
 .team-card.is-visible,
 .project-card.is-visible,
 .goal-card.is-visible,
+.guidance-card.is-visible,
 .org-item {
   animation: cardFloat 5.2s ease-in-out infinite;
   animation-delay: 0.9s;
@@ -74,6 +76,7 @@
 .team-card.is-visible:nth-child(even),
 .project-card.is-visible:nth-child(even),
 .goal-card.is-visible:nth-child(even),
+.guidance-card.is-visible:nth-child(even),
 .org-item:nth-child(even) {
   animation-delay: 1.5s;
   animation-duration: 6.1s;
@@ -84,6 +87,7 @@
 .team-card.is-visible:nth-child(3n),
 .project-card.is-visible:nth-child(3n),
 .goal-card.is-visible:nth-child(3n),
+.guidance-card.is-visible:nth-child(3n),
 .org-item:nth-child(3n) {
   animation-delay: 0.4s;
   animation-duration: 4.6s;
@@ -97,6 +101,7 @@
 .team-card:hover,
 .project-card:hover,
 .goal-card:hover,
+.guidance-card:hover,
 .org-item:hover,
 .pillar-card.tilt-active,
 .value-card.tilt-active,
@@ -104,6 +109,7 @@
 .team-card.tilt-active,
 .project-card.tilt-active,
 .goal-card.tilt-active,
+.guidance-card.tilt-active,
 .org-item.tilt-active {
   animation: none;
   box-shadow: var(--float-shadow-lift);
@@ -136,6 +142,12 @@
 .hero-ctas { animation: heroFadeUp 0.8s 0.24s cubic-bezier(0.22,1,0.36,1) both; }
 .hero-stats { animation: heroFadeUp 0.8s 0.32s cubic-bezier(0.22,1,0.36,1) both; }
 .hero-visual { animation: heroFadeUp 1s 0.2s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* ---------- Destaque do mês (Orientações) ---------- */
+@keyframes spotlightPulse {
+  0%, 100% { transform: scale(1); opacity: 0.22; }
+  50% { transform: scale(1.12); opacity: 0.32; }
+}
 
 /* ---------- Modal ---------- */
 @keyframes modalIn {
@@ -180,6 +192,7 @@
   .team-card,
   .project-card,
   .goal-card,
+  .guidance-card,
   .org-item {
     position: relative;
     transform-style: preserve-3d;
@@ -196,6 +209,7 @@
   .team-card > *,
   .project-card > *,
   .goal-card > *,
+  .guidance-card > *,
   .org-item > * { position: relative; z-index: 2; }
 
   .pillar-card::after,
@@ -204,6 +218,7 @@
   .team-card::after,
   .project-card::after,
   .goal-card::after,
+  .guidance-card::after,
   .org-item::after {
     content: "";
     position: absolute;
@@ -221,7 +236,8 @@
     transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-10px) scale(1.02);
   }
   .pillar-card.tilt-active,
-  .value-card.tilt-active { box-shadow: var(--shadow-md); }
+  .value-card.tilt-active,
+  .guidance-card.tilt-active { box-shadow: var(--shadow-md); }
   .sector-card.tilt-active,
   .team-card.tilt-active,
   .project-card.tilt-active,
@@ -277,6 +293,8 @@
   .tilt-active { transform: none !important; }
   .pillar-card::after, .value-card::after, .sector-card::after,
   .team-card::after, .project-card::after, .goal-card::after,
+  .guidance-card::after,
   .org-item::after { display: none; }
   .hero-visual { transform: none !important; }
+  .month-spotlight-glow { animation: none !important; }
 }
