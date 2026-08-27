@@ -1,6 +1,6 @@
 # Viva+ — Site Institucional
 
-Site institucional da Viva+, construído em **HTML5, CSS3 e JavaScript puro** (sem frameworks). Colaboradores e projetos ficam em arquivos JSON editáveis pelo painel `/admin` (Decap CMS); setores e valores ficam em `js/data.js`, editados diretamente no código.
+Site institucional da Viva+, construído em **HTML5, CSS3 e JavaScript puro** (sem frameworks). Colaboradores, projetos e orientações ficam em arquivos JSON editáveis pelo painel `/admin` (Decap CMS); setores e valores ficam em `js/data.js`, editados diretamente no código.
 
 ## Estrutura de pastas
 
@@ -12,7 +12,8 @@ viva-plus/
 │   └── config.yml         → configuração do painel (coleções, campos, backend)
 ├── data/
 │   ├── colaboradores.json → lista de colaboradores, editável pelo painel /admin
-│   └── projetos.json      → lista de projetos/atividades, editável pelo painel /admin
+│   ├── projetos.json      → lista de projetos/atividades, editável pelo painel /admin
+│   └── orientacoes.json   → significado dos meses + dicas de bem-estar, editável pelo painel /admin
 ├── css/
 │   ├── style.css        → design system e layout
 │   ├── responsive.css   → breakpoints (320px → 1920px)
@@ -22,6 +23,7 @@ viva-plus/
 │   ├── colaboradores.js  → carrega data/colaboradores.json e renderiza o time
 │   ├── setores.js        → organograma, cards de setores e modal
 │   ├── projetos.js       → carrega data/projetos.json e renderiza grid/timeline
+│   ├── orientacoes.js    → carrega data/orientacoes.json e renderiza a seção Orientações
 │   └── main.js           → navbar, menu mobile, reveal, metas, contato
 └── assets/
     ├── images/
@@ -115,6 +117,34 @@ para projetos que envolvem a empresa como um todo). `status` aceita
 `"Realizado"` ou `"Em andamento"`. Se `imagem` ficar em branco ou o arquivo não
 existir, o card mostra automaticamente "Imagem em breve" no lugar.
 
+---
+
+## Como adicionar, editar ou remover uma orientação (dica de bem-estar / significado do mês)
+
+A forma recomendada também é pelo **painel `/admin`** — a coleção **Orientações**
+tem duas listas: "Significado de cada mês" e "Dicas rápidas". Veja
+["Painel de administração"](#painel-de-administração-decap-cms).
+
+Se preferir editar direto, tudo fica em `data/orientacoes.json`:
+
+```json
+{
+  "meses": [
+    { "mes": 1, "nome": "Janeiro", "tema": "Janeiro Branco", "texto": "Texto explicando o mês..." }
+  ],
+  "dicas": [
+    { "titulo": "Beba água ao longo do dia", "categoria": "hidratacao", "texto": "Texto da dica..." }
+  ]
+}
+```
+
+O site mostra automaticamente, em destaque na seção **Orientações**, o item de
+`meses` cujo campo `mes` (1 a 12) corresponder ao mês atual do calendário do
+visitante — mantenha só um item por número de mês. As `dicas` aparecem em
+grade, filtráveis por `categoria` (`hidratacao`, `alimentacao`,
+`atividade-fisica`, `sono`, `postura`, `saude-mental` ou `outro` — cada uma já
+tem um ícone definido em `js/orientacoes.js`, em `ICONES_CATEGORIA`).
+
 ## Como adicionar uma atividade a um setor
 
 Ainda em `js/data.js`, localize o setor dentro do array `setores` e adicione um item no array `atividades` desse setor:
@@ -169,8 +199,10 @@ painel de administração, em `/admin`. Diferente do antigo `admin.html`, ele:
 - não roda nenhum servidor seu: é só HTML/JS estático (`admin/index.html` +
   `admin/config.yml`), como o resto do site.
 
-Hoje ele gerencia os **colaboradores** (`data/colaboradores.json`) e os
-**projetos/atividades** (`data/projetos.json`), incluindo upload das fotos.
+Hoje ele gerencia os **colaboradores** (`data/colaboradores.json`), os
+**projetos/atividades** (`data/projetos.json`) — incluindo upload das fotos —
+e as **orientações** (`data/orientacoes.json`): o significado de cada mês e as
+dicas rápidas de bem-estar exibidas na seção "Orientações" do site.
 Setores e valores continuam em `js/data.js`, editados diretamente no código —
 dá para estender o mesmo painel para eles depois, seguindo o mesmo padrão.
 
