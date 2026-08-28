@@ -1,10 +1,28 @@
 {
   "progresso": [
-    { "setor": "diretoria", "percentual": 35 },
-    { "setor": "rh", "percentual": 55 },
-    { "setor": "ted", "percentual": 45 },
-    { "setor": "4sma", "percentual": 60 },
-    { "setor": "comunicacao", "percentual": 40 },
-    { "setor": "comercial", "percentual": 50 }
+    {
+      "setor": "diretoria",
+      "percentual": 100
+    },
+    {
+      "setor": "rh",
+      "percentual": 55
+    },
+    {
+      "setor": "ted",
+      "percentual": 45
+    },
+    {
+      "setor": "4sma",
+      "percentual": 60
+    },
+    {
+      "setor": "comunicacao",
+      "percentual": 40
+    },
+    {
+      "setor": "comercial",
+      "percentual": 50
+    }
   ]
 }
