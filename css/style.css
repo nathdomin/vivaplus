@@ -842,8 +842,9 @@ section { padding-block: 120px; position: relative; }
 }
 .goal-card h3 { color: var(--color-blue); font-size: 1.15rem; margin-bottom: 6px; }
 .goal-card .goal-objective { font-size: 0.88rem; color: var(--color-muted); margin-bottom: 20px; }
-.goal-progress { height: 6px; border-radius: 999px; background: var(--color-background); overflow: hidden; margin-bottom: 20px; }
+.goal-progress { height: 6px; border-radius: 999px; background: var(--color-background); overflow: hidden; margin-bottom: 8px; }
 .goal-progress-bar { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--color-green), var(--color-blue)); width: 0%; transition: width 1.2s var(--ease); }
+.goal-progress-label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-blue); margin-bottom: 20px; }
 .goal-list li { font-size: 0.9rem; padding-left: 20px; position: relative; margin-bottom: 8px; color: var(--color-text); }
 .goal-list li::before { content: "→"; position: absolute; left: 0; color: var(--color-orange); font-weight: 700; }
 
