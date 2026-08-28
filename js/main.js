@@ -148,20 +148,44 @@
   }
 
   /* ---------- METAS POR SETOR ---------- */
-  function renderMetas() {
+  const CAMINHO_METAS = "data/metas.json";
+  const PERCENTUAL_PADRAO = 30; // usado se o setor ainda não tiver percentual cadastrado
+
+  async function carregarProgressoMetas() {
+    try {
+      const resposta = await fetch(CAMINHO_METAS, { cache: "no-store" });
+      if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+      const dados = await resposta.json();
+      const lista = Array.isArray(dados.progresso) ? dados.progresso : [];
+      const mapa = {};
+      lista.forEach((item) => {
+        const valor = Math.min(100, Math.max(0, Number(item.percentual) || 0));
+        mapa[item.setor] = valor;
+      });
+      return mapa;
+    } catch (erro) {
+      console.error("Não foi possível carregar data/metas.json:", erro);
+      return {};
+    }
+  }
+
+  async function renderMetas() {
     const el = document.getElementById("goalsGrid");
     if (!el || typeof setores === "undefined") return;
+
+    const progresso = await carregarProgressoMetas();
+
     el.innerHTML = setores
-      .map((s, i) => {
-        // Representação conceitual de progresso (não é percentual real de conclusão)
-        const largura = [35, 55, 45, 60, 40, 50][i % 6];
+      .map((s) => {
+        const percentual = progresso[s.id] !== undefined ? progresso[s.id] : PERCENTUAL_PADRAO;
         return `
       <div class="goal-card reveal" style="--accent:${s.corAccent}">
         <h3>${s.nome}</h3>
         <p class="goal-objective">${s.resumo}</p>
-        <div class="goal-progress" role="img" aria-label="Representação conceitual do caminho de evolução do setor">
-          <div class="goal-progress-bar" data-width="${largura}"></div>
+        <div class="goal-progress" role="img" aria-label="Progresso da meta de ${s.nome}: ${percentual}%">
+          <div class="goal-progress-bar" data-width="${percentual}"></div>
         </div>
+        <span class="goal-progress-label">${percentual}% concluído</span>
         <ul class="goal-list">
           ${s.metas.length ? s.metas.map((m) => `<li>${m}</li>`).join("") : `<li>Informações em breve.</li>`}
         </ul>
@@ -194,6 +218,8 @@
     } else {
       bars.forEach((b) => (b.style.width = b.getAttribute("data-width") + "%"));
     }
+
+    refreshReveal();
   }
 
   /* Cor da barra lateral esquerda dos cards de metas via CSS custom prop */
