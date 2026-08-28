@@ -222,3 +222,38 @@ collections:
                 name: "texto"
                 widget: "text"
                 hint: "Um parágrafo curto com a orientação completa."
+
+  - name: "metas"
+    label: "Metas (progresso por setor)"
+    description: "Percentual de progresso exibido na barra da seção “Metas” do site, um por setor. Edite o número e a barra é atualizada automaticamente no site."
+    files:
+      - name: "conteudo"
+        label: "Progresso das metas"
+        file: "data/metas.json"
+        format: "json"
+        fields:
+          - label: "Progresso por setor"
+            name: "progresso"
+            widget: "list"
+            label_singular: "Setor"
+            summary: "{{fields.setor}} — {{fields.percentual}}%"
+            hint: "Mantenha só um item por setor. Se um setor não tiver item aqui, o site mostra 30% como valor padrão."
+            fields:
+              - label: "Setor"
+                name: "setor"
+                widget: "select"
+                options:
+                  - { label: "Diretoria", value: "diretoria" }
+                  - { label: "Recursos Humanos", value: "rh" }
+                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
+                  - { label: "4SMA", value: "4sma" }
+                  - { label: "Comunicação", value: "comunicacao" }
+                  - { label: "Comercial", value: "comercial" }
+
+              - label: "Percentual concluído"
+                name: "percentual"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                hint: "Um número de 0 a 100. Ex.: 55 para 55%."
