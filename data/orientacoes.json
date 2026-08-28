@@ -1,17 +1,77 @@
 {
   "meses": [
-    { "mes": 1, "nome": "Janeiro", "tema": "Janeiro Branco", "texto": "Mês dedicado à atenção com a saúde mental e emocional. Um convite para olhar para dentro, cuidar da mente com o mesmo carinho que cuidamos do corpo e buscar apoio quando for preciso." },
-    { "mes": 2, "nome": "Fevereiro", "tema": "Fevereiro Laranja e Roxo", "texto": "Mês de conscientização sobre o combate à leucemia, ao lúpus e à fibromialgia — reforçando a importância do diagnóstico precoce e do acolhimento a quem convive com essas condições." },
-    { "mes": 3, "nome": "Março", "tema": "Março Azul-marinho e Lilás", "texto": "Mês de atenção à saúde do cólon e reto e de combate à violência contra a mulher. Prevenção, exames em dia e respeito são os melhores cuidados." },
-    { "mes": 4, "nome": "Abril", "tema": "Abril Azul", "texto": "Mês da conscientização sobre o autismo, com foco em acolhimento, inclusão e informação para famílias, escolas e ambientes de trabalho mais abertos à diversidade." },
-    { "mes": 5, "nome": "Maio", "tema": "Maio Amarelo", "texto": "Mês voltado à conscientização no trânsito. Um lembrete de que cuidar da própria vida e da vida dos outros começa em pequenas atitudes, todos os dias." },
-    { "mes": 6, "nome": "Junho", "tema": "Junho Vermelho", "texto": "Mês da doação de sangue e medula óssea. Um gesto simples que pode ser o início de uma segunda chance para quem mais precisa." },
-    { "mes": 7, "nome": "Julho", "tema": "Julho Amarelo", "texto": "Mês de conscientização sobre as hepatites virais — prevenção, testagem e cuidado são os melhores caminhos para proteger a sua saúde e a de quem está ao seu redor." },
-    { "mes": 8, "nome": "Agosto", "tema": "Agosto Dourado", "texto": "Mês de incentivo ao aleitamento materno, celebrando o vínculo entre mãe e bebê e reforçando o apoio necessário nesse momento tão importante." },
-    { "mes": 9, "nome": "Setembro", "tema": "Setembro Amarelo", "texto": "Mês de valorização da vida e prevenção ao suicídio. Falar sobre saúde mental salva vidas — se você ou alguém próximo estiver precisando de apoio, buscar ajuda é sempre o caminho certo." },
-    { "mes": 10, "nome": "Outubro", "tema": "Outubro Rosa", "texto": "Mês de conscientização sobre a prevenção e o diagnóstico precoce do câncer de mama. Informação e exames regulares continuam sendo as melhores formas de cuidado." },
-    { "mes": 11, "nome": "Novembro", "tema": "Novembro Azul", "texto": "Mês de atenção à saúde do homem, com foco na prevenção do câncer de próstata e no incentivo aos cuidados médicos regulares, muitas vezes deixados de lado." },
-    { "mes": 12, "nome": "Dezembro", "tema": "Dezembro Vermelho", "texto": "Mês de conscientização sobre a prevenção ao HIV/Aids. Também um convite para fechar o ano com gratidão, leveza e cuidado com quem caminhou ao seu lado." }
+    {
+      "mes": 1,
+      "nome": "Janeiro",
+      "tema": "Janeiro Branco",
+      "texto": "Mês dedicado à atenção com a saúde mental e emocional. Um convite para olhar para dentro, cuidar da mente com o mesmo carinho que cuidamos do corpo e buscar apoio quando for preciso."
+    },
+    {
+      "mes": 2,
+      "nome": "Fevereiro",
+      "tema": "Fevereiro Laranja e Roxo",
+      "texto": "Mês de conscientização sobre o combate à leucemia, ao lúpus e à fibromialgia — reforçando a importância do diagnóstico precoce e do acolhimento a quem convive com essas condições."
+    },
+    {
+      "mes": 3,
+      "nome": "Março",
+      "tema": "Março Azul-marinho e Lilás",
+      "texto": "Mês de atenção à saúde do cólon e reto e de combate à violência contra a mulher. Prevenção, exames em dia e respeito são os melhores cuidados."
+    },
+    {
+      "mes": 4,
+      "nome": "Abril",
+      "tema": "Abril Azul",
+      "texto": "Mês da conscientização sobre o autismo, com foco em acolhimento, inclusão e informação para famílias, escolas e ambientes de trabalho mais abertos à diversidade."
+    },
+    {
+      "mes": 5,
+      "nome": "Maio",
+      "tema": "Maio Amarelo",
+      "texto": "Mês voltado à conscientização no trânsito. Um lembrete de que cuidar da própria vida e da vida dos outros começa em pequenas atitudes, todos os dias."
+    },
+    {
+      "mes": 6,
+      "nome": "Junho",
+      "tema": "Junho Vermelho",
+      "texto": "Mês da doação de sangue e medula óssea. Um gesto simples que pode ser o início de uma segunda chance para quem mais precisa."
+    },
+    {
+      "mes": 7,
+      "nome": "Julho",
+      "tema": "Julho Amarelo",
+      "texto": "Mês de conscientização sobre as hepatites virais — prevenção, testagem e cuidado são os melhores caminhos para proteger a sua saúde e a de quem está ao seu redor."
+    },
+    {
+      "mes": 8,
+      "nome": "Agosto",
+      "tema": "Agosto Lilás",
+      "texto": "Mês de conscientização e combate à violência contra a mulher, em alusão à Lei Maria da Penha (sancionada em agosto de 2006)."
+    },
+    {
+      "mes": 9,
+      "nome": "Setembro",
+      "tema": "Setembro Amarelo",
+      "texto": "Mês de valorização da vida e prevenção ao suicídio. Falar sobre saúde mental salva vidas — se você ou alguém próximo estiver precisando de apoio, buscar ajuda é sempre o caminho certo."
+    },
+    {
+      "mes": 10,
+      "nome": "Outubro",
+      "tema": "Outubro Rosa",
+      "texto": "Mês de conscientização sobre a prevenção e o diagnóstico precoce do câncer de mama. Informação e exames regulares continuam sendo as melhores formas de cuidado."
+    },
+    {
+      "mes": 11,
+      "nome": "Novembro",
+      "tema": "Novembro Azul",
+      "texto": "Mês de atenção à saúde do homem, com foco na prevenção do câncer de próstata e no incentivo aos cuidados médicos regulares, muitas vezes deixados de lado."
+    },
+    {
+      "mes": 12,
+      "nome": "Dezembro",
+      "tema": "Dezembro Vermelho",
+      "texto": "Mês de conscientização sobre a prevenção ao HIV/Aids. Também um convite para fechar o ano com gratidão, leveza e cuidado com quem caminhou ao seu lado."
+    }
   ],
   "dicas": [
     {
