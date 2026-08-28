@@ -19,6 +19,15 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
     "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
   ];
 
+  const FORMATADOR_DATA = new Intl.DateTimeFormat("pt-BR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+  let ultimoMesRenderizado = null;
+
   const CATEGORIAS = [
     { id: "todas", label: "Todas" },
     { id: "hidratacao", label: "Hidratação" },
@@ -55,11 +64,15 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
       return;
     }
 
-    const numeroMesAtual = new Date().getMonth() + 1;
+    const agora = new Date();
+    const numeroMesAtual = agora.getMonth() + 1;
+    ultimoMesRenderizado = numeroMesAtual;
+
     const mesAtual =
       meses.find((m) => Number(m.mes) === numeroMesAtual) || null;
 
     const nomeFallback = NOMES_MES[numeroMesAtual - 1];
+    const dataFormatada = FORMATADOR_DATA.format(agora);
 
     el.innerHTML = `
       <div class="month-spotlight-glow" aria-hidden="true"></div>
@@ -71,6 +84,7 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
         <span class="month-spotlight-eyebrow">O significado deste mês</span>
         <h3>${(mesAtual && mesAtual.tema) || "Informações em breve"}</h3>
         <p>${(mesAtual && mesAtual.texto) || "Ainda não cadastramos o significado deste mês — em breve traremos essa informação por aqui."}</p>
+        <span class="month-spotlight-date">${dataFormatada}</span>
       </div>`;
   }
 
@@ -128,6 +142,15 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
     if (window.VivaMain && window.VivaMain.refreshReveal) window.VivaMain.refreshReveal();
   }
 
+  function iniciarVigiaDeMes() {
+    setInterval(() => {
+      const mesAgora = new Date().getMonth() + 1;
+      if (mesAgora !== ultimoMesRenderizado) {
+        renderMonthSpotlight();
+      }
+    }, 60 * 1000); // checa a cada minuto
+  }
+
   function renderAll() {
     renderMonthSpotlight();
     renderFiltros();
@@ -160,6 +183,7 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
     }
     renderAll();
     bindEvents();
+    iniciarVigiaDeMes();
   }
 
   document.addEventListener("DOMContentLoaded", carregarOrientacoes);
