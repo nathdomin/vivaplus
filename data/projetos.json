@@ -15,9 +15,9 @@
       "setor": "Treinamento & Desenvolvimento",
       "setorId": "ted",
       "categoria": "Saúde",
-      "data": "Em breve",
-      "imagem": "assets/images/projetos/saude-qualidade-vida.jpg",
-      "descricao": "Dinâmica realizada em parceria com o setor 4SMA.",
+      "data": "05/03/2026",
+      "imagem": "/assets/images/projetos/screenshot-2026-08-29-173253.png",
+      "descricao": "tivemos uma apresentação dinâmica sobre saúde individual no trabalho feito pelos setores de treinamento e desenvolvimento junto com o setor 4SMA, onde os alunos participaram de uma atividade interativa utilizando cards coloridos 🟥🟩🟨\nDurante a dinâmica, cada um levantava o card da cor correspondente quando se identificava com as situações apresentadas, promovendo reflexão, participação e diálogo sobre a importância do cuidado com a saúde individual do colaborador. Foi um momento de aprendizado leve, participativo e muito enriquecedor.",
       "status": "Realizado"
     },
     {
@@ -25,9 +25,9 @@
       "setor": "4SMA",
       "setorId": "4sma",
       "categoria": "Conscientização",
-      "data": "Em breve",
-      "imagem": "assets/images/projetos/fevereiro-roxo-laranja.jpg",
-      "descricao": "Descrição em breve.",
+      "data": "19/02/2026",
+      "imagem": "/assets/images/projetos/screenshot-2026-08-29-173407.png",
+      "descricao": "Nosso setor 4SMA fizeram uma apresentação sobre o Fevereiro Roxo e Laranja, destacando a importância da informação, do diagnóstico precoce e da solidariedade. Durante a atividade, foram abordadas doenças como lúpus, fibromialgia, Alzheimer e leucemia, reforçando a importância do cuidado com a saúde e da doação de medula óssea.",
       "status": "Realizado"
     },
     {
@@ -108,6 +108,16 @@
       "setorId": "diretoria",
       "categoria": "Ambiente",
       "imagem": "/assets/images/projetos/screenshot-2026-08-29-172829.png",
+      "status": "Realizado"
+    },
+    {
+      "data": "18/06/2026",
+      "descricao": "Projeto da Espro aonde nosso colega de turma, João Prates trouxe sua gestora, Ysa Lorrany para um bate papo sobre sua Jornada de vida, construção de carreira, desafios.",
+      "titulo": "De olho no futuro",
+      "setor": "Viva+",
+      "setorId": "diretoria",
+      "categoria": "Visão",
+      "imagem": "/assets/images/projetos/screenshot-2026-08-29-173620.png",
       "status": "Realizado"
     }
   ]
