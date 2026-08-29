@@ -42,12 +42,12 @@
     },
     {
       "titulo": "Dia das Mulheres",
-      "setor": "Viva+",
-      "setorId": "comunicacao",
+      "setor": "Recursos Humanos",
+      "setorId": "rh",
       "categoria": "Comunidade",
-      "data": "Em breve",
-      "imagem": "assets/images/projetos/dia-das-mulheres.jpg",
-      "descricao": "Descrição em breve.",
+      "data": "12/03/2026",
+      "imagem": "/assets/images/projetos/dias-da-mulhers.jpg",
+      "descricao": "(12/03/2026)\nTivemos uma apresentação especial da nossa equipe de RH em celebração ao Dia das Mulheres. Um momento simples, mas cheio de significado, com chocolates e mensagens carinhosas para cada mulher da equipe",
       "status": "Realizado"
     },
     {
