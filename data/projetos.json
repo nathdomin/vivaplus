@@ -99,6 +99,16 @@
       "imagem": "/assets/images/projetos/vivacsat.jpg",
       "status": "Realizado",
       "setorId": "diretoria"
+    },
+    {
+      "data": "26/03/2026",
+      "descricao": "Realizamos a atividade sobre a Espro que eu vejo, um momento importante de aprendizado e troca de experiências. Durante a atividade, construímos uma árvore com a profissão dos sonhos de cada colaborador e do outro lado decidimos criar uma parede em construção e em seu centro uma porta aberta, que representa a abertura de uma nova oportunidade em nossas vidas dada pelo Espro. tivemos a oportunidade de desenvolver novas habilidades, trabalhar em equipe e refletir sobre temas relevantes para o nosso crescimento pessoal e profissional. Foi uma experiência enriquecedora, que contribuiu para ampliar nosso conhecimento e fortalecer a união da turma.",
+      "titulo": "Espro que eu vejo",
+      "setor": "Viva+",
+      "setorId": "diretoria",
+      "categoria": "Ambiente",
+      "imagem": "/assets/images/projetos/screenshot-2026-08-29-172829.png",
+      "status": "Realizado"
     }
   ]
 }
