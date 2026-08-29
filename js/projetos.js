@@ -16,9 +16,42 @@ let projetos = [];
   let visualizacao = "grid"; // "grid" | "timeline"
   let erroAoCarregar = false;
 
+  /* ---------- Ordenação por data de realização ----------
+     O campo "data" no CMS é texto livre (ex.: "29/01/2026",
+     "10/2026", "2026" ou "Em breve"). Aqui a gente tenta
+     interpretar esses formatos para poder ordenar; o que não
+     for reconhecido (como "Em breve") fica sempre por último,
+     já que ainda não tem uma data de realização definida. */
+  function parseDataProjeto(str) {
+    if (!str || typeof str !== "string") return null;
+    const s = str.trim();
+
+    let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/); // DD/MM/YYYY
+    if (m) return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1])).getTime();
+
+    m = s.match(/^(\d{1,2})\/(\d{4})$/); // MM/YYYY
+    if (m) return new Date(Number(m[2]), Number(m[1]) - 1, 1).getTime();
+
+    m = s.match(/^(\d{4})$/); // YYYY
+    if (m) return new Date(Number(m[1]), 0, 1).getTime();
+
+    return null; // "Em breve" ou qualquer outro texto livre
+  }
+
+  function ordenarPorData(lista) {
+    return [...lista].sort((a, b) => {
+      const da = parseDataProjeto(a.data);
+      const db = parseDataProjeto(b.data);
+      if (da === null && db === null) return 0;
+      if (da === null) return 1; // sem data reconhecida vai para o final
+      if (db === null) return -1;
+      return db - da; // mais recente primeiro
+    });
+  }
+
   function filtrarProjetos() {
-    if (filtroAtivo === "todos") return projetos;
-    return projetos.filter((p) => p.setorId === filtroAtivo);
+    const base = filtroAtivo === "todos" ? projetos : projetos.filter((p) => p.setorId === filtroAtivo);
+    return ordenarPorData(base);
   }
 
   function renderFiltros() {
