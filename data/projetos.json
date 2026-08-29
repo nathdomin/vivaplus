@@ -1,23 +1,13 @@
 {
   "projetos": [
     {
-      "titulo": "Janeiro Branco",
+      "titulo": "Janeiro Branco - Dinâmica no Orquidário",
       "setor": "Treinamento & Desenvolvimento",
       "setorId": "ted",
       "categoria": "Saúde",
-      "data": "Em breve",
-      "imagem": "",
-      "descricao": "Descrição em breve.",
-      "status": "Realizado"
-    },
-    {
-      "titulo": "Dinâmica no Orquidário",
-      "setor": "Treinamento & Desenvolvimento",
-      "setorId": "ted",
-      "categoria": "Integração",
-      "data": "Em breve",
-      "imagem": "assets/images/projetos/dinamica-orquidario.jpg",
-      "descricao": "Descrição em breve.",
+      "data": "29/01/2026",
+      "imagem": "/assets/images/projetos/untitled.jpg",
+      "descricao": "Na quinta-feira (29/01), vivemos um dia totalmente fora da rotina, focado em lazer, movimento e conexão. Rolou atividade física, dinâmicas em grupo e aquele momento de curtir a paisagem incrível da praia.\n\nMais do que um passeio, foi uma experiência que reforça como pausar, respirar e cuidar do bem-estar faz toda a diferença para o equilíbrio de todos.",
       "status": "Realizado"
     },
     {
