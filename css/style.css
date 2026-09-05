@@ -265,12 +265,14 @@ section { padding-block: 120px; position: relative; }
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   background: var(--color-blue);
   color: var(--color-white);
   overflow: hidden;
   padding-top: var(--header-height);
+  padding-bottom: clamp(24px, 6vh, 64px);
 }
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
 .hero-bg span { position: absolute; border-radius: 50%; opacity: 0.5; }
@@ -314,25 +316,25 @@ section { padding-block: 120px; position: relative; }
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  margin-bottom: 28px;
+  margin-bottom: clamp(14px, 3vh, 28px);
 }
 .hero-eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-green); }
 
 .hero-title {
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-size: clamp(2.2rem, 3vw + 1.4vh, 4.2rem);
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: clamp(12px, 3vh, 24px);
 }
 .hero-title .accent { color: var(--color-green); }
 
 .hero-sub {
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 0.85rem + 0.4vh, 1.15rem);
   color: rgba(255,255,255,0.82);
   max-width: 520px;
-  margin-bottom: 40px;
+  margin-bottom: clamp(18px, 4vh, 40px);
 }
 
-.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: clamp(20px, 5vh, 56px); }
 
 .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
 .hero-stat strong { font-family: var(--font-display); font-size: 1.9rem; display: block; color: var(--color-white); }
@@ -344,6 +346,9 @@ section { padding-block: 120px; position: relative; }
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: min(100%, 56vh);
+  margin-inline: auto;
 }
 .hero-visual-core {
   width: 78%;

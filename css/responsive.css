@@ -3,6 +3,16 @@
    Breakpoints: 1280 / 1024 / 768 / 480 / 375 / 320
    ========================================================= */
 
+/* ---------- telas com pouca altura (janelas pequenas, notebooks 768px) ---------- */
+@media (max-height: 820px) and (min-width: 1025px) {
+  .hero-eyebrow { margin-bottom: 12px; }
+  .hero-title { margin-bottom: 10px; }
+  .hero-sub { margin-bottom: 16px; }
+  .hero-ctas { margin-bottom: 18px; }
+  .hero-visual { max-width: 42vh; }
+  .hero-scroll { display: none; }
+}
+
 /* ---------- ≤1280px ---------- */
 @media (max-width: 1280px) {
   .container { padding-inline: 20px; }
