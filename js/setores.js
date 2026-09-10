@@ -88,7 +88,9 @@
       : `<p class="modal-empty">Informações em breve.</p>`;
 
     const metasHtml = setor.metas.length
-      ? `<ul class="modal-list">${setor.metas.map((m) => `<li>${m}</li>`).join("")}</ul>`
+      ? `<ul class="modal-list">${setor.metas
+          .map((m) => `<li class="${m.concluida ? "is-done" : ""}">${m.texto}</li>`)
+          .join("")}</ul>`
       : `<p class="modal-empty">Informações em breve.</p>`;
 
     return `

@@ -160,7 +160,12 @@
       const mapa = {};
       lista.forEach((item) => {
         const valor = Math.min(100, Math.max(0, Number(item.percentual) || 0));
-        mapa[item.setor] = valor;
+        const metas = Array.isArray(item.metas)
+          ? item.metas
+              .filter((m) => m && typeof m.texto === "string" && m.texto.trim())
+              .map((m) => ({ texto: m.texto.trim(), concluida: !!m.concluida }))
+          : [];
+        mapa[item.setor] = { percentual: valor, metas };
       });
       return mapa;
     } catch (erro) {
@@ -175,9 +180,19 @@
 
     const progresso = await carregarProgressoMetas();
 
+    // Atualiza s.metas com a lista vinda de data/metas.json (editável em
+    // /admin), com o texto de cada meta e se já foi concluída. setores.js
+    // lê esse mesmo array no modal do organograma, então a mudança já
+    // aparece nos dois lugares.
+    setores.forEach((s) => {
+      const dados = progresso[s.id];
+      if (dados && dados.metas.length) s.metas = dados.metas;
+    });
+
     el.innerHTML = setores
       .map((s) => {
-        const percentual = progresso[s.id] !== undefined ? progresso[s.id] : PERCENTUAL_PADRAO;
+        const dados = progresso[s.id];
+        const percentual = dados !== undefined ? dados.percentual : PERCENTUAL_PADRAO;
         return `
       <div class="goal-card reveal" style="--accent:${s.corAccent}">
         <h3>${s.nome}</h3>
@@ -187,7 +202,7 @@
         </div>
         <span class="goal-progress-label">${percentual}% concluído</span>
         <ul class="goal-list">
-          ${s.metas.length ? s.metas.map((m) => `<li>${m}</li>`).join("") : `<li>Informações em breve.</li>`}
+          ${s.metas.length ? s.metas.map((m) => `<li class="${m.concluida ? "is-done" : ""}">${m.texto}</li>`).join("") : `<li>Informações em breve.</li>`}
         </ul>
       </div>`;
       })

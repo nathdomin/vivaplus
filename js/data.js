@@ -72,11 +72,7 @@ const setores = [
       "Gestão de pessoas, riscos e crises."
     ],
     atividades: [],
-    metas: [
-      "Expandir os espaços físicos.",
-      "Aumentar o número de clientes e parceiros.",
-      "Tornar-se referência no mercado internacional."
-    ]
+    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
   },
   {
     id: "rh",
@@ -93,12 +89,7 @@ const setores = [
     atividades: [
       "Inclusão de Pessoas no Trabalho"
     ],
-    metas: [
-      "Promover integração entre colaboradores.",
-      "Definir e alinhar melhor as funções.",
-      "Implementar melhorias nos setores.",
-      "Estruturar a integração de novos colaboradores."
-    ]
+    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
   },
   {
     id: "ted",
@@ -115,12 +106,7 @@ const setores = [
       "Apresentação dos dados do formulário",
       "Dinâmica sobre Saúde e Qualidade de Vida no Trabalho, em parceria com o 4SMA"
     ],
-    metas: [
-      "Fortalecer a colaboração entre setores.",
-      "Aprimorar a comunicação.",
-      "Tornar a integração mais acolhedora.",
-      "Aplicar treinamentos sobre a cultura Viva+."
-    ]
+    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
   },
   {
     id: "4sma",
@@ -135,12 +121,7 @@ const setores = [
       "Fevereiro Roxo e Laranja",
       "Saúde no Trabalho"
     ],
-    metas: [
-      "Campanhas de consciência ambiental.",
-      "Treinamentos de segurança.",
-      "Rodas de conversa sobre saúde mental.",
-      "Calendários de saúde preventiva."
-    ]
+    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
   },
   {
     id: "comunicacao",
@@ -157,12 +138,7 @@ const setores = [
       "Registro das atividades",
       "Cronograma das aulas"
     ],
-    metas: [
-      "Atrair mais clientes e audiência.",
-      "Crescer a presença nas redes sociais.",
-      "Fortalecer o trabalho em equipe.",
-      "Aumentar a qualidade e a criatividade dos conteúdos."
-    ]
+    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
   },
   {
     id: "comercial",
@@ -178,12 +154,7 @@ const setores = [
       "Crachá do colaborador",
       "Carteirinha dos clientes"
     ],
-    metas: [
-      "Consolidar serviços.",
-      "Flexibilidade de atendimento.",
-      "Conquistar clientes e parceiros.",
-      "Ser referência em bem-estar."
-    ]
+    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
   }
 ];
 
