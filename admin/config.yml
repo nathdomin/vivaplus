@@ -257,3 +257,20 @@ collections:
                 min: 0
                 max: 100
                 hint: "Um número de 0 a 100. Ex.: 55 para 55%."
+
+              - label: "Metas do setor"
+                name: "metas"
+                widget: "list"
+                label_singular: "Meta"
+                summary: "{{fields.texto}}"
+                hint: "As metas exibidas no card do setor (seção “Metas”) e no modal do organograma. Marque “Concluída” para a meta aparecer riscada no site."
+                fields:
+                  - label: "Texto da meta"
+                    name: "texto"
+                    widget: "string"
+
+                  - label: "Concluída"
+                    name: "concluida"
+                    widget: "boolean"
+                    default: false
+                    hint: "Marque quando a meta já tiver sido alcançada — ela aparece riscada no site, sem ser removida da lista."
