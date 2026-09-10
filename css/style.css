@@ -677,6 +677,11 @@ section { padding-block: 120px; position: relative; }
   border-radius: 2px;
   background: var(--color-green);
 }
+.modal-list li.is-done {
+  text-decoration: line-through;
+  color: var(--color-muted);
+}
+.modal-list li.is-done::before { background: var(--color-muted); }
 .modal-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .modal-tag {
   background: var(--color-background);
@@ -852,6 +857,8 @@ section { padding-block: 120px; position: relative; }
 .goal-progress-label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-blue); margin-bottom: 20px; }
 .goal-list li { font-size: 0.9rem; padding-left: 20px; position: relative; margin-bottom: 8px; color: var(--color-text); }
 .goal-list li::before { content: "→"; position: absolute; left: 0; color: var(--color-orange); font-weight: 700; }
+.goal-list li.is-done { text-decoration: line-through; color: var(--color-muted); }
+.goal-list li.is-done::before { content: "✓"; color: var(--color-green); }
 
 /* ---------- ORIENTAÇÕES ---------- */
 .guidance { background: var(--color-background); }
