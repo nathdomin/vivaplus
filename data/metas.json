@@ -15,6 +15,10 @@
         {
           "texto": "Tornar-se referência no mercado internacional.",
           "concluida": false
+        },
+        {
+          "concluida": false,
+          "texto": "teste"
         }
       ]
     },
