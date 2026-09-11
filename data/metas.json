@@ -4,59 +4,128 @@
       "setor": "diretoria",
       "percentual": 48,
       "metas": [
-        { "texto": "Expandir os espaços físicos.", "concluida": false },
-        { "texto": "Aumentar o número de clientes e parceiros.", "concluida": false },
-        { "texto": "Tornar-se referência no mercado internacional.", "concluida": false }
+        {
+          "texto": "Expandir os espaços físicos.",
+          "concluida": true
+        },
+        {
+          "texto": "Aumentar o número de clientes e parceiros.",
+          "concluida": false
+        },
+        {
+          "texto": "Tornar-se referência no mercado internacional.",
+          "concluida": false
+        }
       ]
     },
     {
       "setor": "rh",
       "percentual": 55,
       "metas": [
-        { "texto": "Promover integração entre colaboradores.", "concluida": false },
-        { "texto": "Definir e alinhar melhor as funções.", "concluida": false },
-        { "texto": "Implementar melhorias nos setores.", "concluida": false },
-        { "texto": "Estruturar a integração de novos colaboradores.", "concluida": false }
+        {
+          "texto": "Promover integração entre colaboradores.",
+          "concluida": false
+        },
+        {
+          "texto": "Definir e alinhar melhor as funções.",
+          "concluida": false
+        },
+        {
+          "texto": "Implementar melhorias nos setores.",
+          "concluida": false
+        },
+        {
+          "texto": "Estruturar a integração de novos colaboradores.",
+          "concluida": false
+        }
       ]
     },
     {
       "setor": "ted",
       "percentual": 45,
       "metas": [
-        { "texto": "Fortalecer a colaboração entre setores.", "concluida": false },
-        { "texto": "Aprimorar a comunicação.", "concluida": false },
-        { "texto": "Tornar a integração mais acolhedora.", "concluida": false },
-        { "texto": "Aplicar treinamentos sobre a cultura Viva+.", "concluida": false }
+        {
+          "texto": "Fortalecer a colaboração entre setores.",
+          "concluida": false
+        },
+        {
+          "texto": "Aprimorar a comunicação.",
+          "concluida": false
+        },
+        {
+          "texto": "Tornar a integração mais acolhedora.",
+          "concluida": false
+        },
+        {
+          "texto": "Aplicar treinamentos sobre a cultura Viva+.",
+          "concluida": false
+        }
       ]
     },
     {
       "setor": "4sma",
       "percentual": 60,
       "metas": [
-        { "texto": "Campanhas de consciência ambiental.", "concluida": false },
-        { "texto": "Treinamentos de segurança.", "concluida": false },
-        { "texto": "Rodas de conversa sobre saúde mental.", "concluida": false },
-        { "texto": "Calendários de saúde preventiva.", "concluida": false }
+        {
+          "texto": "Campanhas de consciência ambiental.",
+          "concluida": false
+        },
+        {
+          "texto": "Treinamentos de segurança.",
+          "concluida": false
+        },
+        {
+          "texto": "Rodas de conversa sobre saúde mental.",
+          "concluida": false
+        },
+        {
+          "texto": "Calendários de saúde preventiva.",
+          "concluida": false
+        }
       ]
     },
     {
       "setor": "comunicacao",
       "percentual": 40,
       "metas": [
-        { "texto": "Atrair mais clientes e audiência.", "concluida": false },
-        { "texto": "Crescer a presença nas redes sociais.", "concluida": false },
-        { "texto": "Fortalecer o trabalho em equipe.", "concluida": false },
-        { "texto": "Aumentar a qualidade e a criatividade dos conteúdos.", "concluida": false }
+        {
+          "texto": "Atrair mais clientes e audiência.",
+          "concluida": false
+        },
+        {
+          "texto": "Crescer a presença nas redes sociais.",
+          "concluida": false
+        },
+        {
+          "texto": "Fortalecer o trabalho em equipe.",
+          "concluida": false
+        },
+        {
+          "texto": "Aumentar a qualidade e a criatividade dos conteúdos.",
+          "concluida": false
+        }
       ]
     },
     {
       "setor": "comercial",
       "percentual": 50,
       "metas": [
-        { "texto": "Consolidar serviços.", "concluida": false },
-        { "texto": "Flexibilidade de atendimento.", "concluida": false },
-        { "texto": "Conquistar clientes e parceiros.", "concluida": false },
-        { "texto": "Ser referência em bem-estar.", "concluida": false }
+        {
+          "texto": "Consolidar serviços.",
+          "concluida": false
+        },
+        {
+          "texto": "Flexibilidade de atendimento.",
+          "concluida": false
+        },
+        {
+          "texto": "Conquistar clientes e parceiros.",
+          "concluida": false
+        },
+        {
+          "texto": "Ser referência em bem-estar.",
+          "concluida": false
+        }
       ]
     }
   ]
