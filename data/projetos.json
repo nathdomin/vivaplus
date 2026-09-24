@@ -61,24 +61,24 @@
       "status": "Realizado"
     },
     {
-      "titulo": "Crachá do colaborador",
+      "titulo": "Crachá do Colaborador",
       "setor": "Comercial",
       "setorId": "comercial",
       "categoria": "Institucional",
-      "data": "Em breve",
-      "imagem": "assets/images/projetos/cracha-colaborador.jpg",
-      "descricao": "Descrição em breve.",
-      "status": "Em andamento"
+      "data": "17/09/2026",
+      "imagem": "/assets/images/projetos/cracha-colaborador.jpeg",
+      "descricao": "Crachá de identificação funcional Viva+, projetado para garantir o pronto e fácil reconhecimento do colaborador junto aos clientes.",
+      "status": "Realizado"
     },
     {
-      "titulo": "Carteirinha dos clientes",
+      "titulo": "Carteirinha dos Clientes",
       "setor": "Comercial",
       "setorId": "comercial",
       "categoria": "Institucional",
-      "data": "Em breve",
-      "imagem": "assets/images/projetos/carteirinha-clientes.jpg",
-      "descricao": "Descrição em breve.",
-      "status": "Em andamento"
+      "data": "17/09/2026",
+      "imagem": "/assets/images/projetos/cracha-cliente.jpeg",
+      "descricao": "Crachá de identificação funcional Viva+, projetado para garantir o pronto e fácil reconhecimento do colaborador junto aos clientes.",
+      "status": "Realizado"
     },
     {
       "data": "27/08/2026",
