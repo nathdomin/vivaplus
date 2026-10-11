@@ -965,6 +965,146 @@ section { padding-block: 120px; position: relative; }
 .guidance-card h3 { font-size: 1.08rem; color: var(--color-blue); margin-bottom: 8px; }
 .guidance-card p { font-size: 0.92rem; color: var(--color-muted); }
 
+/* ---------- CARREIRA (AGENTE DE IA) ---------- */
+.career { background: var(--color-white); overflow: hidden; }
+.career::before {
+  content: "";
+  position: absolute;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-green-soft) 0%, transparent 70%);
+  opacity: 0.6;
+  bottom: -160px; left: -160px;
+  pointer-events: none;
+}
+.career-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+.career-copy .section-lead { margin-bottom: 36px; }
+
+.career-steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+.career-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  transition: transform var(--transition-fast) var(--ease), box-shadow var(--transition-fast) var(--ease);
+}
+.career-steps li:hover { transform: translateX(6px); box-shadow: var(--shadow-sm); }
+.career-step-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-white);
+  background: var(--color-blue);
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.career-steps li:nth-child(2) .career-step-num { background: var(--color-orange); }
+.career-steps li:nth-child(3) .career-step-num { background: var(--color-green); color: var(--color-blue-dark); }
+.career-steps strong { display: block; color: var(--color-blue); font-size: 0.98rem; margin-bottom: 2px; }
+.career-steps span:not(.career-step-num) { font-size: 0.88rem; color: var(--color-muted); }
+
+.career-privacy {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(192, 210, 31, 0.14);
+  color: var(--color-blue);
+  margin-bottom: 28px;
+}
+.career-privacy svg { flex-shrink: 0; margin-top: 2px; }
+.career-privacy p { font-size: 0.86rem; color: var(--color-text); }
+.career-privacy strong { color: var(--color-blue); }
+
+/* Moldura do agente */
+.career-frame {
+  background: var(--color-blue);
+  border-radius: var(--radius-xl);
+  padding: 10px;
+  box-shadow: var(--shadow-lg);
+}
+.career-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 14px 14px;
+  color: var(--color-white);
+}
+.career-frame-dots { display: flex; gap: 6px; }
+.career-frame-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.25); }
+.career-frame-dots i:nth-child(1) { background: var(--color-orange); }
+.career-frame-dots i:nth-child(2) { background: var(--color-green); }
+.career-frame-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.career-frame-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-green); }
+.career-frame-body {
+  position: relative;
+  background: var(--color-white);
+  border-radius: calc(var(--radius-xl) - 10px);
+  overflow: hidden;
+  height: 760px;
+}
+.career-frame-body iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity var(--transition-normal) var(--ease);
+}
+.career-frame.is-loaded iframe { opacity: 1; }
+
+.career-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px;
+  text-align: center;
+  background: var(--color-background);
+  z-index: 1;
+  transition: opacity var(--transition-normal) var(--ease), visibility var(--transition-normal);
+}
+.career-frame.is-loaded .career-loader { opacity: 0; visibility: hidden; }
+.career-spinner {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-orange);
+  border-right-color: var(--color-green);
+  animation: careerSpin 0.9s linear infinite;
+}
+.career-loader-text { color: var(--color-muted); font-size: 0.92rem; max-width: 320px; }
+.career-loader-link { font-weight: 700; font-size: 0.88rem; color: var(--color-orange); }
+.career-loader-link:hover { text-decoration: underline; }
+@keyframes careerSpin { to { transform: rotate(360deg); } }
+
 /* ---------- CITAÇÃO ---------- */
 .closing {
   background: var(--color-blue);

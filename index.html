@@ -37,6 +37,7 @@
         <a href="#projetos">Projetos</a>
         <a href="#metas">Metas</a>
         <a href="#orientacoes">Orientações</a>
+        <a href="#carreira">Carreira</a>
         <a href="#contato">Contato</a>
       </nav>
 
@@ -59,6 +60,7 @@
     <a href="#projetos">Projetos</a>
     <a href="#metas">Metas</a>
     <a href="#orientacoes">Orientações</a>
+    <a href="#carreira">Carreira</a>
     <a href="#contato">Contato</a>
     <a href="#contato" class="btn btn-primary">Fale conosco</a>
   </nav>
@@ -280,6 +282,58 @@
       </div>
     </section>
 
+    <!-- ============ CARREIRA (AGENTE DE IA) ============ -->
+    <section class="career" id="carreira">
+      <div class="container career-grid">
+        <div class="career-copy reveal">
+          <div class="section-eyebrow">Orientação de carreira</div>
+          <h2 class="section-title">Vamos encontrar o seu lugar na Viva+?</h2>
+          <p class="section-lead">Envie seu currículo para o nosso agente de IA: ele analisa o seu perfil e sugere as áreas administrativas que mais combinam com você.</p>
+
+          <ol class="career-steps">
+            <li>
+              <span class="career-step-num">01</span>
+              <div><strong>Preencha seus dados</strong><span>Nome, e-mail e as áreas que despertam seu interesse.</span></div>
+            </li>
+            <li>
+              <span class="career-step-num">02</span>
+              <div><strong>Anexe o currículo</strong><span>Arquivo em PDF ou DOCX, com até 5 MB.</span></div>
+            </li>
+            <li>
+              <span class="career-step-num">03</span>
+              <div><strong>Receba a análise</strong><span>O agente indica as áreas com maior afinidade ao seu perfil.</span></div>
+            </li>
+          </ol>
+
+          <div class="career-privacy">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <p><strong>Privacidade e LGPD:</strong> seus dados e arquivos ficam em ambiente privado e seguro e são usados apenas para a orientação de carreira.</p>
+          </div>
+
+          <a href="https://agenteia-vivaplus.onrender.com" target="_blank" rel="noopener" class="btn btn-outline career-open">
+            Abrir em nova aba
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+          </a>
+        </div>
+
+        <div class="career-frame reveal" id="careerFrame" data-agent-url="https://agenteia-vivaplus.onrender.com">
+          <div class="career-frame-bar" aria-hidden="true">
+            <span class="career-frame-dots"><i></i><i></i><i></i></span>
+            <span class="career-frame-title"><span class="dot"></span> Agente de carreira Viva+</span>
+          </div>
+          <div class="career-frame-body">
+            <div class="career-loader" id="careerLoader" role="status" aria-live="polite">
+              <span class="career-spinner" aria-hidden="true"></span>
+              <p class="career-loader-text" id="careerLoaderText">Carregando o agente…</p>
+              <a href="https://agenteia-vivaplus.onrender.com" target="_blank" rel="noopener" class="career-loader-link" id="careerLoaderLink" hidden>Abrir em nova aba →</a>
+            </div>
+            <!-- o src é definido por js/carreira.js quando a seção se aproxima da tela -->
+            <iframe id="careerIframe" title="Agente de orientação de carreira da Viva+" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ CITAÇÃO / ENCERRAMENTO ============ -->
     <section class="closing" aria-label="Citação de encerramento">
       <div class="container">
@@ -343,6 +397,7 @@
           <a href="#colaboradores">Colaboradores</a>
           <a href="#metas">Metas futuras</a>
           <a href="#orientacoes">Orientações</a>
+          <a href="#carreira">Carreira</a>
           <a href="#contato">Contato</a>
         </div>
         <div class="footer-col">
@@ -376,6 +431,7 @@
   <script src="js/setores.js"></script>
   <script src="js/projetos.js"></script>
   <script src="js/orientacoes.js"></script>
+  <script src="js/carreira.js"></script>
   <script src="js/main.js"></script>
   <script src="js/tilt.js"></script>
 

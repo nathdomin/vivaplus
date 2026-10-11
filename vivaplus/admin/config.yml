@@ -1,0 +1,276 @@
+# =============================================================
+# Viva+ — Configuração do Decap CMS
+#
+# Painel de administração em /admin, sem servidor próprio e
+# sem banco de dados: cada alteração aqui vira um commit no
+# repositório Git do site. Veja o README (seção "Painel de
+# administração") para o passo a passo de configuração.
+# =============================================================
+
+backend:
+  name: git-gateway   # veja o README para alternativas (ex.: backend "github")
+  branch: main        # troque se a branch principal do seu repositório tiver outro nome
+
+# Permite testar o painel no seu computador antes de publicar,
+# rodando `npx decap-server` (veja o README). Só tem efeito
+# quando o admin é acessado em localhost — pode deixar como
+# está mesmo depois de publicar o site.
+local_backend: true
+
+# Pasta padrão para uploads. Cada campo de imagem abaixo define
+# seu próprio subpasta (colaboradores/ ou projetos/) — veja o
+# "media_folder" dentro de cada campo "widget: image".
+#
+# IMPORTANTE: caminhos de media_folder/public_folder DENTRO de um
+# campo são resolvidos a partir da pasta do arquivo da coleção
+# (aqui, "data/"), não a partir da raiz do site — por isso todos
+# os caminhos abaixo começam com "/": isso os torna absolutos,
+# contados a partir da raiz do repositório/site.
+media_folder: "/assets/images"
+public_folder: "/assets/images"
+
+locale: "pt"
+
+collections:
+  - name: "colaboradores"
+    label: "Colaboradores"
+    description: "Time exibido na seção “Colaboradores” do site e nos modais de cada setor."
+    files:
+      - name: "lista"
+        label: "Lista de colaboradores"
+        file: "data/colaboradores.json"
+        format: "json"
+        fields:
+          - label: "Colaboradores"
+            name: "colaboradores"
+            widget: "list"
+            label_singular: "Colaborador"
+            summary: "{{fields.nome}} — {{fields.setorId}}"
+            fields:
+              - label: "Nome completo"
+                name: "nome"
+                widget: "string"
+
+              - label: "Setor"
+                name: "setorId"
+                widget: "select"
+                hint: "Se você criar um novo setor em js/data.js, adicione a opção correspondente aqui também."
+                options:
+                  - { label: "Diretoria", value: "diretoria" }
+                  - { label: "Recursos Humanos", value: "rh" }
+                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
+                  - { label: "4SMA", value: "4sma" }
+                  - { label: "Comunicação", value: "comunicacao" }
+                  - { label: "Comercial", value: "comercial" }
+
+              - label: "Cargo"
+                name: "cargo"
+                widget: "string"
+                required: false
+                default: "Informações em breve"
+                hint: "Deixe em branco para manter \"Informações em breve\"."
+
+              - label: "Foto"
+                name: "foto"
+                widget: "image"
+                required: false
+                media_folder: "/assets/images/colaboradores"
+                public_folder: "/assets/images/colaboradores"
+                hint: "Enviada automaticamente para assets/images/colaboradores/."
+
+  - name: "projetos"
+    label: "Projetos"
+    description: "Projetos e atividades exibidos na seção “Projetos & atividades” do site (cards e timeline)."
+    files:
+      - name: "lista"
+        label: "Lista de projetos"
+        file: "data/projetos.json"
+        format: "json"
+        fields:
+          - label: "Projetos"
+            name: "projetos"
+            widget: "list"
+            label_singular: "Projeto"
+            summary: "{{fields.titulo}} — {{fields.status}}"
+            fields:
+              - label: "Título"
+                name: "titulo"
+                widget: "string"
+
+              - label: "Setor (nome exibido)"
+                name: "setor"
+                widget: "string"
+                hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “Viva+”."
+
+              - label: "Setor (para o filtro)"
+                name: "setorId"
+                widget: "select"
+                hint: "Usado para o botão de filtro. Se você criar um novo setor em js/data.js, adicione a opção correspondente aqui também."
+                options:
+                  - { label: "Diretoria", value: "diretoria" }
+                  - { label: "Recursos Humanos", value: "rh" }
+                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
+                  - { label: "4SMA", value: "4sma" }
+                  - { label: "Comunicação", value: "comunicacao" }
+                  - { label: "Comercial", value: "comercial" }
+
+              - label: "Categoria"
+                name: "categoria"
+                widget: "string"
+                hint: "Ex.: Saúde, Integração, Institucional."
+
+              - label: "Data"
+                name: "data"
+                widget: "string"
+                default: "Em breve"
+                hint: "Texto livre — ex.: “10/2026” ou “Em breve”."
+
+              - label: "Imagem"
+                name: "imagem"
+                widget: "image"
+                required: false
+                media_folder: "/assets/images/projetos"
+                public_folder: "/assets/images/projetos"
+                hint: "Enviada automaticamente para assets/images/projetos/. Se ficar em branco, o card mostra “Imagem em breve”."
+
+              - label: "Descrição"
+                name: "descricao"
+                widget: "text"
+                default: "Descrição em breve."
+
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "Realizado", value: "Realizado" }
+                  - { label: "Em andamento", value: "Em andamento" }
+
+  - name: "orientacoes"
+    label: "Orientações"
+    description: "Conteúdo da seção “Orientações” do site: o significado de cada mês (destaque automático do mês atual) e as dicas rápidas de bem-estar (hidratação, sono, postura etc.)."
+    files:
+      - name: "conteudo"
+        label: "Orientações"
+        file: "data/orientacoes.json"
+        format: "json"
+        fields:
+          - label: "Significado de cada mês"
+            name: "meses"
+            widget: "list"
+            label_singular: "Mês"
+            summary: "{{fields.nome}} — {{fields.tema}}"
+            hint: "O site mostra automaticamente, em destaque, o item cujo campo “Mês (número)” corresponder ao mês atual do calendário. Mantenha só um item por número de mês."
+            fields:
+              - label: "Mês (número)"
+                name: "mes"
+                widget: "select"
+                options:
+                  - { label: "01 — Janeiro", value: 1 }
+                  - { label: "02 — Fevereiro", value: 2 }
+                  - { label: "03 — Março", value: 3 }
+                  - { label: "04 — Abril", value: 4 }
+                  - { label: "05 — Maio", value: 5 }
+                  - { label: "06 — Junho", value: 6 }
+                  - { label: "07 — Julho", value: 7 }
+                  - { label: "08 — Agosto", value: 8 }
+                  - { label: "09 — Setembro", value: 9 }
+                  - { label: "10 — Outubro", value: 10 }
+                  - { label: "11 — Novembro", value: 11 }
+                  - { label: "12 — Dezembro", value: 12 }
+
+              - label: "Nome do mês"
+                name: "nome"
+                widget: "string"
+                hint: "Ex.: “Janeiro”. Usado como texto de apoio no card."
+
+              - label: "Tema / campanha do mês"
+                name: "tema"
+                widget: "string"
+                hint: "Ex.: “Janeiro Branco”, “Outubro Rosa”. Aparece em destaque no card."
+
+              - label: "Texto explicativo"
+                name: "texto"
+                widget: "text"
+                hint: "Um parágrafo curto explicando o significado do mês para quem visita o site."
+
+          - label: "Dicas rápidas"
+            name: "dicas"
+            widget: "list"
+            label_singular: "Dica"
+            summary: "{{fields.titulo}}"
+            hint: "Cards de orientações gerais de bem-estar (beber água, sono, postura etc.), exibidos em grade e filtráveis por categoria."
+            fields:
+              - label: "Título"
+                name: "titulo"
+                widget: "string"
+                hint: "Ex.: “Beba água ao longo do dia”."
+
+              - label: "Categoria"
+                name: "categoria"
+                widget: "select"
+                hint: "Define o ícone do card e o filtro em que ele aparece."
+                options:
+                  - { label: "Hidratação", value: "hidratacao" }
+                  - { label: "Alimentação", value: "alimentacao" }
+                  - { label: "Atividade física", value: "atividade-fisica" }
+                  - { label: "Sono", value: "sono" }
+                  - { label: "Postura", value: "postura" }
+                  - { label: "Saúde mental", value: "saude-mental" }
+                  - { label: "Outros", value: "outro" }
+
+              - label: "Texto"
+                name: "texto"
+                widget: "text"
+                hint: "Um parágrafo curto com a orientação completa."
+
+  - name: "metas"
+    label: "Metas (progresso por setor)"
+    description: "Percentual de progresso exibido na barra da seção “Metas” do site, um por setor. Edite o número e a barra é atualizada automaticamente no site."
+    files:
+      - name: "conteudo"
+        label: "Progresso das metas"
+        file: "data/metas.json"
+        format: "json"
+        fields:
+          - label: "Progresso por setor"
+            name: "progresso"
+            widget: "list"
+            label_singular: "Setor"
+            summary: "{{fields.setor}} — {{fields.percentual}}%"
+            hint: "Mantenha só um item por setor. Se um setor não tiver item aqui, o site mostra 30% como valor padrão."
+            fields:
+              - label: "Setor"
+                name: "setor"
+                widget: "select"
+                options:
+                  - { label: "Diretoria", value: "diretoria" }
+                  - { label: "Recursos Humanos", value: "rh" }
+                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
+                  - { label: "4SMA", value: "4sma" }
+                  - { label: "Comunicação", value: "comunicacao" }
+                  - { label: "Comercial", value: "comercial" }
+
+              - label: "Percentual concluído"
+                name: "percentual"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                hint: "Um número de 0 a 100. Ex.: 55 para 55%."
+
+              - label: "Metas do setor"
+                name: "metas"
+                widget: "list"
+                label_singular: "Meta"
+                summary: "{{fields.texto}}"
+                hint: "As metas exibidas no card do setor (seção “Metas”) e no modal do organograma. Marque “Concluída” para a meta aparecer riscada no site."
+                fields:
+                  - label: "Texto da meta"
+                    name: "texto"
+                    widget: "string"
+
+                  - label: "Concluída"
+                    name: "concluida"
+                    widget: "boolean"
+                    default: false
+                    hint: "Marque quando a meta já tiver sido alcançada — ela aparece riscada no site, sem ser removida da lista."

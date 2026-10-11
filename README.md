@@ -24,6 +24,7 @@ viva-plus/
 │   ├── setores.js        → organograma, cards de setores e modal
 │   ├── projetos.js       → carrega data/projetos.json e renderiza grid/timeline
 │   ├── orientacoes.js    → carrega data/orientacoes.json e renderiza a seção Orientações
+│   ├── carreira.js       → seção Carreira: incorpora o agente de IA (iframe com carregamento sob demanda)
 │   └── main.js           → navbar, menu mobile, reveal, metas, contato
 └── assets/
     ├── images/
@@ -144,6 +145,22 @@ visitante — mantenha só um item por número de mês. As `dicas` aparecem em
 grade, filtráveis por `categoria` (`hidratacao`, `alimentacao`,
 `atividade-fisica`, `sono`, `postura`, `saude-mental` ou `outro` — cada uma já
 tem um ícone definido em `js/orientacoes.js`, em `ICONES_CATEGORIA`).
+
+## Seção Carreira (agente de IA)
+
+A seção **Carreira** (`#carreira` no `index.html`) incorpora o agente de
+orientação de carreira hospedado em `https://agenteia-vivaplus.onrender.com`
+dentro de uma moldura no estilo do site.
+
+- **Trocar a URL do agente:** edite o atributo `data-agent-url` de
+  `#careerFrame` e os dois links "Abrir em nova aba" no `index.html`.
+- O iframe só é carregado quando o visitante se aproxima da seção
+  (`js/carreira.js`), para não pesar na abertura do site.
+- O plano gratuito do Render hiberna o serviço: o primeiro acesso pode levar
+  até ~1 minuto. O loader avisa isso e, após 25 s, oferece abrir em nova aba.
+- Se o agente bloquear incorporação (cabeçalho `X-Frame-Options` ou CSP
+  `frame-ancestors`), libere o domínio do site nele, por exemplo
+  `Content-Security-Policy: frame-ancestors 'self' https://vivaplus.netlify.app`.
 
 ## Como adicionar uma atividade a um setor
 

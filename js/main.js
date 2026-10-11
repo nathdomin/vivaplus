@@ -68,6 +68,8 @@
       elementos.forEach((el) => el.classList.add("is-visible"));
       return;
     }
+    // initReveal() ainda não rodou: ele mesmo vai observar estes elementos.
+    if (!observer) return;
     elementos.forEach((el) => observer.observe(el));
   }
 
