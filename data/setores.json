@@ -1,0 +1,108 @@
+{
+  "setores": [
+    {
+      "id": "diretoria",
+      "numero": "01",
+      "nome": "Diretoria",
+      "corAccent": "var(--color-blue)",
+      "resumo": "Direção estratégica, alinhamento de valores e representação da Viva+.",
+      "objetivo": [
+        "Alinhamento e supervisão da equipe de acordo com os valores e a missão da Viva+.",
+        "Gestão do cronograma e cumprimento das tarefas.",
+        "Filtragem das demandas.",
+        "Representação externa da empresa.",
+        "Gestão de pessoas, riscos e crises."
+      ],
+      "atividades": [],
+      "competencias": [],
+      "requisitos": []
+    },
+    {
+      "id": "rh",
+      "numero": "02",
+      "nome": "Recursos Humanos",
+      "corAccent": "var(--color-green)",
+      "resumo": "Cuidado com as pessoas, cultura organizacional e ambiente de trabalho saudável.",
+      "objetivo": [
+        "Capacitar e desenvolver continuamente os colaboradores.",
+        "Promover um ambiente de trabalho saudável, seguro e motivador.",
+        "Fortalecer a cultura organizacional.",
+        "Garantir alinhamento com os valores da empresa."
+      ],
+      "atividades": [
+        "Inclusão de Pessoas no Trabalho"
+      ],
+      "competencias": [],
+      "requisitos": []
+    },
+    {
+      "id": "ted",
+      "numero": "03",
+      "nome": "Treinamento & Desenvolvimento",
+      "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
+      "resumo": "Aprendizado contínuo, colaboração e crescimento das equipes.",
+      "objetivo": [
+        "Desenvolver competências e desempenho dos colaboradores por meio de aprendizado contínuo, colaboração e inovação, fortalecendo equipes, cultura organizacional e marca empregadora."
+      ],
+      "atividades": [
+        "Dinâmica no Orquidário",
+        "Janeiro Branco",
+        "Apresentação dos dados do formulário",
+        "Dinâmica sobre Saúde e Qualidade de Vida no Trabalho, em parceria com o 4SMA"
+      ],
+      "competencias": [],
+      "requisitos": []
+    },
+    {
+      "id": "4sma",
+      "numero": "04",
+      "nome": "4SMA",
+      "corAccent": "var(--color-green)",
+      "resumo": "Segurança, saúde e sustentabilidade como responsabilidades compartilhadas.",
+      "objetivo": [
+        "Cuidar de pessoas e promover um ambiente de trabalho seguro e sustentável por meio de palestras e iniciativas de conscientização, enfatizando prevenção e respeito ao meio ambiente como responsabilidades compartilhadas."
+      ],
+      "atividades": [
+        "Fevereiro Roxo e Laranja",
+        "Saúde no Trabalho"
+      ],
+      "competencias": [],
+      "requisitos": []
+    },
+    {
+      "id": "comunicacao",
+      "numero": "05",
+      "nome": "Comunicação",
+      "corAccent": "var(--color-orange)",
+      "resumo": "A voz da Viva+ — clara, criativa e próxima das pessoas.",
+      "objetivo": [
+        "Divulgar de forma clara e atrativa os serviços e benefícios oferecidos e incentivar os colaboradores a participarem das atividades e cuidarem da saúde física e mental."
+      ],
+      "atividades": [
+        "Gerenciamento de redes sociais",
+        "Identidade visual da marca",
+        "Registro das atividades",
+        "Cronograma das aulas"
+      ],
+      "competencias": [],
+      "requisitos": []
+    },
+    {
+      "id": "comercial",
+      "numero": "06",
+      "nome": "Comercial",
+      "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-orange))",
+      "resumo": "A ponte entre a Viva+ e cada cliente.",
+      "objetivo": [
+        "Atuar como ponte entre cliente e empresa, orientando sobre a empresa, seus objetivos e os valores dos serviços prestados."
+      ],
+      "atividades": [
+        "Site",
+        "Crachá do colaborador",
+        "Carteirinha dos clientes"
+      ],
+      "competencias": [],
+      "requisitos": []
+    }
+  ]
+}

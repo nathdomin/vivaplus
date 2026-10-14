@@ -1,7 +1,14 @@
 /* =========================================================
    VIVA+ — setores.js
    Renderiza organograma, cards de setores e o modal com
-   detalhes de cada setor, a partir de js/data.js.
+   detalhes de cada setor, a partir de data/setores.json
+   (carregado em js/data.js).
+
+   O modal também pode ser aberto de fora:
+   - pelo link ?setor=<id>#setores (usado pelo agente de
+     carreira quando aberto em nova aba);
+   - por uma mensagem do agente dentro do iframe da seção
+     Carreira: { type: "vivaplus:abrir-setor", setorId }.
    ========================================================= */
 
 (function () {
@@ -150,9 +157,46 @@
     });
   }
 
+  /* ---------- Abertura vinda do agente de carreira ---------- */
+  async function abrirSetorDoLink() {
+    const setorId = new URLSearchParams(window.location.search).get("setor");
+    if (!setorId) return;
+    // Integrantes e metas do modal vêm de outros JSONs; espera os dois.
+    await Promise.all([
+      typeof colaboradoresProntos !== "undefined" ? colaboradoresProntos : null,
+      window.metasProntas
+    ]);
+    openSectorModal(setorId);
+  }
+
+  function origemDoAgente() {
+    const frame = document.getElementById("careerFrame");
+    try {
+      return frame ? new URL(frame.dataset.agentUrl).origin : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function bindMensagensDoAgente() {
+    const origemPermitida = origemDoAgente();
+    if (!origemPermitida) return;
+    window.addEventListener("message", (e) => {
+      if (e.origin !== origemPermitida) return;
+      const dados = e.data;
+      if (dados && dados.type === "vivaplus:abrir-setor" && typeof dados.setorId === "string") {
+        openSectorModal(dados.setorId);
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
-    renderOrgChart();
-    renderSectorCards();
     bindSectorInteractions();
+    bindMensagensDoAgente();
+    setoresProntos.then(() => {
+      renderOrgChart();
+      renderSectorCards();
+      abrirSetorDoLink();
+    });
   });
 })();

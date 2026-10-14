@@ -17,6 +17,11 @@ const CAMINHO_DADOS_COLABORADORES = "data/colaboradores.json";
    JSON terminar de carregar. */
 let colaboradores = [];
 
+/* Resolvida quando o JSON termina de carregar (com ou sem erro) —
+   setores.js espera por ela antes de abrir um modal pelo link
+   ?setor=<id>, para a lista de integrantes já vir preenchida. */
+let colaboradoresProntos = Promise.resolve();
+
 /* Considera "gestor" quem tem Gestor(a) ou Diretor(a) no cargo —
    esses nomes aparecem primeiro quando o time é filtrado por setor
    e na lista de integrantes do modal (setores.js usa esta função). */
@@ -112,6 +117,8 @@ function ordenarComGestorPrimeiro(lista) {
       console.error("Não foi possível carregar data/colaboradores.json:", erro);
       erroAoCarregar = true;
     }
+    // O nome do setor exibido em cada card vem de data/setores.json.
+    await setoresProntos;
     renderGrid();
   }
 
@@ -130,6 +137,6 @@ function ordenarComGestorPrimeiro(lista) {
   document.addEventListener("DOMContentLoaded", () => {
     renderFiltros();
     bindEvents();
-    carregarColaboradores();
+    colaboradoresProntos = carregarColaboradores();
   });
 })();

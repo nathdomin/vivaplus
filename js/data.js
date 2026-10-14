@@ -1,7 +1,8 @@
 /* =========================================================
    VIVA+ — data.js
-   Fonte de verdade para valores, setores e filtros
-   (Colaboradores e Projetos).
+   Fonte de verdade para valores e filtros (Colaboradores
+   e Projetos). Os setores são carregados de
+   data/setores.json (veja abaixo).
    Colaboradores (data/colaboradores.json) e projetos
    (data/projetos.json) ficam em arquivos separados, editáveis
    pelo painel /admin (Decap CMS) sem tocar em código.
@@ -55,109 +56,50 @@ const valores = [
 
 /* ---------------------------------------------------------
    SETORES
-   id: usado para filtros, âncoras e vínculo com colaboradores
-   cor: variável CSS que define o acento de identidade do setor
+   Os setores vivem em data/setores.json, editável pelo painel
+   /admin (Decap CMS). O mesmo arquivo é lido pelo agente de
+   carreira (VivAIplus), então o site e a recomendação da IA
+   usam sempre os mesmos ids e textos.
+
+   id: usado para filtros, âncoras, vínculo com colaboradores
+       e na recomendação do agente — não renomeie um id existente
+   corAccent: valor CSS que define o acento de identidade do setor
+   competencias / requisitos: usados só pelo agente de carreira
+
+   `setores` começa vazio e é preenchido quando o JSON carrega;
+   quem precisa dos setores espera `setoresProntos`.
    --------------------------------------------------------- */
-const setores = [
-  {
-    id: "diretoria",
-    numero: "01",
-    nome: "Diretoria",
-    corAccent: "var(--color-blue)",
-    resumo: "Direção estratégica, alinhamento de valores e representação da Viva+.",
-    objetivo: [
-      "Alinhamento e supervisão da equipe de acordo com os valores e a missão da Viva+.",
-      "Gestão do cronograma e cumprimento das tarefas.",
-      "Filtragem das demandas.",
-      "Representação externa da empresa.",
-      "Gestão de pessoas, riscos e crises."
-    ],
-    atividades: [],
-    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
-  },
-  {
-    id: "rh",
-    numero: "02",
-    nome: "Recursos Humanos",
-    corAccent: "var(--color-green)",
-    resumo: "Cuidado com as pessoas, cultura organizacional e ambiente de trabalho saudável.",
-    objetivo: [
-      "Capacitar e desenvolver continuamente os colaboradores.",
-      "Promover um ambiente de trabalho saudável, seguro e motivador.",
-      "Fortalecer a cultura organizacional.",
-      "Garantir alinhamento com os valores da empresa."
-    ],
-    atividades: [
-      "Inclusão de Pessoas no Trabalho"
-    ],
-    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
-  },
-  {
-    id: "ted",
-    numero: "03",
-    nome: "Treinamento & Desenvolvimento",
-    corAccent: "linear-gradient(135deg, var(--color-blue), var(--color-green))",
-    resumo: "Aprendizado contínuo, colaboração e crescimento das equipes.",
-    objetivo: [
-      "Desenvolver competências e desempenho dos colaboradores por meio de aprendizado contínuo, colaboração e inovação, fortalecendo equipes, cultura organizacional e marca empregadora."
-    ],
-    atividades: [
-      "Dinâmica no Orquidário",
-      "Janeiro Branco",
-      "Apresentação dos dados do formulário",
-      "Dinâmica sobre Saúde e Qualidade de Vida no Trabalho, em parceria com o 4SMA"
-    ],
-    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
-  },
-  {
-    id: "4sma",
-    numero: "04",
-    nome: "4SMA",
-    corAccent: "var(--color-green)",
-    resumo: "Segurança, saúde e sustentabilidade como responsabilidades compartilhadas.",
-    objetivo: [
-      "Cuidar de pessoas e promover um ambiente de trabalho seguro e sustentável por meio de palestras e iniciativas de conscientização, enfatizando prevenção e respeito ao meio ambiente como responsabilidades compartilhadas."
-    ],
-    atividades: [
-      "Fevereiro Roxo e Laranja",
-      "Saúde no Trabalho"
-    ],
-    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
-  },
-  {
-    id: "comunicacao",
-    numero: "05",
-    nome: "Comunicação",
-    corAccent: "var(--color-orange)",
-    resumo: "A voz da Viva+ — clara, criativa e próxima das pessoas.",
-    objetivo: [
-      "Divulgar de forma clara e atrativa os serviços e benefícios oferecidos e incentivar os colaboradores a participarem das atividades e cuidarem da saúde física e mental."
-    ],
-    atividades: [
-      "Gerenciamento de redes sociais",
-      "Identidade visual da marca",
-      "Registro das atividades",
-      "Cronograma das aulas"
-    ],
-    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
-  },
-  {
-    id: "comercial",
-    numero: "06",
-    nome: "Comercial",
-    corAccent: "linear-gradient(135deg, var(--color-blue), var(--color-orange))",
-    resumo: "A ponte entre a Viva+ e cada cliente.",
-    objetivo: [
-      "Atuar como ponte entre cliente e empresa, orientando sobre a empresa, seus objetivos e os valores dos serviços prestados."
-    ],
-    atividades: [
-      "Site",
-      "Crachá do colaborador",
-      "Carteirinha dos clientes"
-    ],
-    metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
-  }
-];
+const CAMINHO_DADOS_SETORES = "data/setores.json";
+
+const setores = [];
+
+const setoresProntos = fetch(CAMINHO_DADOS_SETORES, { cache: "no-store" })
+  .then((resposta) => {
+    if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+    return resposta.json();
+  })
+  .then((dados) => {
+    const lista = Array.isArray(dados.setores) ? dados.setores : [];
+    lista
+      .filter((s) => s && s.id && s.nome)
+      .forEach((s) => {
+        setores.push({
+          id: s.id,
+          numero: s.numero || "",
+          nome: s.nome,
+          corAccent: s.corAccent || "var(--color-blue)",
+          resumo: s.resumo || "Informações em breve.",
+          objetivo: Array.isArray(s.objetivo) ? s.objetivo : [],
+          atividades: Array.isArray(s.atividades) ? s.atividades : [],
+          metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
+        });
+      });
+    return setores;
+  })
+  .catch((erro) => {
+    console.error("Não foi possível carregar data/setores.json:", erro);
+    return setores;
+  });
 
 /* ---------------------------------------------------------
    FILTROS

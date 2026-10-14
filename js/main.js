@@ -164,20 +164,25 @@
     }
   }
 
-  async function renderMetas() {
-    const el = document.getElementById("goalsGrid");
-    if (!el || typeof setores === "undefined") return;
-
-    const progresso = await carregarProgressoMetas();
-
-    // Atualiza s.metas com a lista vinda de data/metas.json (editável em
-    // /admin), com o texto de cada meta e se já foi concluída. setores.js
-    // lê esse mesmo array no modal do organograma, então a mudança já
-    // aparece nos dois lugares.
+  // Atualiza s.metas com a lista vinda de data/metas.json (editável em
+  // /admin), com o texto de cada meta e se já foi concluída. setores.js
+  // lê esse mesmo array no modal do organograma, então a mudança já
+  // aparece nos dois lugares. Começa a carregar já na leitura do script
+  // (não espera o DOMContentLoaded) para setores.js poder esperar por
+  // window.metasProntas antes de abrir um modal pelo link ?setor=<id>.
+  window.metasProntas = Promise.all([carregarProgressoMetas(), setoresProntos]).then(([progresso]) => {
     setores.forEach((s) => {
       const dados = progresso[s.id];
       if (dados && dados.metas.length) s.metas = dados.metas;
     });
+    return progresso;
+  });
+
+  async function renderMetas() {
+    const el = document.getElementById("goalsGrid");
+    if (!el || typeof setores === "undefined") return;
+
+    const progresso = await window.metasProntas;
 
     el.innerHTML = setores
       .map((s) => {

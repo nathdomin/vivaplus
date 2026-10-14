@@ -1,6 +1,6 @@
 # Viva+ — Site Institucional
 
-Site institucional da Viva+, construído em **HTML5, CSS3 e JavaScript puro** (sem frameworks). Colaboradores, projetos e orientações ficam em arquivos JSON editáveis pelo painel `/admin` (Decap CMS); setores e valores ficam em `js/data.js`, editados diretamente no código.
+Site institucional da Viva+, construído em **HTML5, CSS3 e JavaScript puro** (sem frameworks). Colaboradores, projetos, orientações, metas e setores ficam em arquivos JSON editáveis pelo painel `/admin` (Decap CMS); valores ficam em `js/data.js`, editados diretamente no código.
 
 ## Estrutura de pastas
 
@@ -14,13 +14,14 @@ viva-plus/
 │   ├── colaboradores.json → lista de colaboradores, editável pelo painel /admin
 │   ├── projetos.json      → lista de projetos/atividades, editável pelo painel /admin
 │   ├── metas.json         → percentual e metas de cada setor, editável pelo painel /admin
+│   ├── setores.json       → setores (organograma, cards, modais) + perfil usado pelo agente de carreira
 │   └── orientacoes.json   → significado dos meses + dicas de bem-estar, editável pelo painel /admin
 ├── css/
 │   ├── style.css        → design system e layout
 │   ├── responsive.css   → breakpoints (320px → 1920px)
 │   └── animations.css   → animações e reveal ao rolar
 ├── js/
-│   ├── data.js           → valores, setores e filtros (Colaboradores/Projetos)
+│   ├── data.js           → valores, filtros e carregamento de data/setores.json
 │   ├── colaboradores.js  → carrega data/colaboradores.json e renderiza o time
 │   ├── setores.js        → organograma, cards de setores e modal
 │   ├── projetos.js       → carrega data/projetos.json e renderiza grid/timeline
@@ -82,7 +83,7 @@ lista `colaboradores`:
 }
 ```
 
-`setorId` precisa ser um dos ids definidos em `js/data.js` (`diretoria`, `rh`,
+`setorId` precisa ser um dos ids definidos em `data/setores.json` (`diretoria`, `rh`,
 `ted`, `4sma`, `comunicacao`, `comercial`). O card é gerado automaticamente na
 seção **Colaboradores** e também aparece no modal do setor correspondente.
 
@@ -114,7 +115,7 @@ em `js/data.js`). Para adicionar um novo, inclua um objeto na lista `projetos`:
 }
 ```
 
-`setorId` precisa ser um dos ids definidos em `js/data.js` (usado para o
+`setorId` precisa ser um dos ids definidos em `data/setores.json` (usado para o
 filtro); `setor` é só o texto exibido no card, pode ser diferente (ex.: "Viva+"
 para projetos que envolvem a empresa como um todo). `status` aceita
 `"Realizado"` ou `"Em andamento"`. Se `imagem` ficar em branco ou o arquivo não
@@ -160,20 +161,24 @@ dentro de uma moldura no estilo do site.
   (`js/carreira.js`), para não pesar na abertura do site.
 - O plano gratuito do Render hiberna o serviço: o primeiro acesso pode levar
   até ~1 minuto. O loader avisa isso e, após 25 s, oferece abrir em nova aba.
+- **Setores compartilhados:** o agente lê `data/setores.json` deste site
+  (variável `SITE_URL` no agente). Os campos `competencias` e `requisitos`
+  de cada setor não aparecem no site — servem só para a IA comparar com o
+  currículo. Quanto mais preenchidos (pelo `/admin`), melhor a recomendação.
+- **Link de volta:** o resultado do agente traz um botão "Conhecer o setor".
+  Dentro do iframe, ele envia `{ type: "vivaplus:abrir-setor", setorId }`
+  via `postMessage` e o site abre o modal do setor (só aceita mensagens da
+  origem de `data-agent-url`). Fora do iframe, o link é
+  `https://vivaplus.netlify.app/?setor=<id>#setores`, que abre o mesmo modal.
 - Se o agente bloquear incorporação (cabeçalho `X-Frame-Options` ou CSP
   `frame-ancestors`), libere o domínio do site nele, por exemplo
   `Content-Security-Policy: frame-ancestors 'self' https://vivaplus.netlify.app`.
 
 ## Como adicionar uma atividade a um setor
 
-Ainda em `js/data.js`, localize o setor dentro do array `setores` e adicione um item no array `atividades` desse setor:
-
-```javascript
-atividades: [
-  "Atividade já existente",
-  "Nova atividade aqui"
-]
-```
+Pelo painel `/admin`, coleção **Setores**: abra o setor e adicione um item em
+"Atividades". Editando direto, inclua o texto no array `atividades` do setor
+em `data/setores.json`.
 
 ---
 
@@ -222,8 +227,9 @@ Hoje ele gerencia os **colaboradores** (`data/colaboradores.json`), os
 **projetos/atividades** (`data/projetos.json`) — incluindo upload das fotos —
 e as **orientações** (`data/orientacoes.json`): o significado de cada mês e as
 dicas rápidas de bem-estar exibidas na seção "Orientações" do site.
-Setores e valores continuam em `js/data.js`, editados diretamente no código —
-dá para estender o mesmo painel para eles depois, seguindo o mesmo padrão.
+Também gerencia os **setores** (`data/setores.json`), incluindo os campos de
+perfil usados pelo agente de carreira. Os valores continuam em `js/data.js`,
+editados diretamente no código.
 
 ### O que precisa ser feito por fora (configuração única)
 
@@ -272,11 +278,11 @@ de configurar o Netlify.
 
 ### Se você criar um novo setor
 
-Como `admin/config.yml` é um arquivo estático, o campo "Setor" do painel não lê
-`js/data.js` automaticamente. Se adicionar um setor novo lá, adicione a opção
-correspondente em **duas** listas de `admin/config.yml` (a coleção
-"Colaboradores" e a coleção "Projetos" têm cada uma o seu próprio campo
-`setorId`), além dos arrays `filtrosColaboradores` e `filtrosProjetos`
+Como `admin/config.yml` é um arquivo estático, o campo "Setor" das outras
+coleções não lê `data/setores.json` automaticamente. Se adicionar um setor novo lá, adicione a opção
+correspondente nas listas de `admin/config.yml` (as coleções
+"Colaboradores", "Projetos" e "Metas" têm cada uma o seu próprio campo
+de setor), além dos arrays `filtrosColaboradores` e `filtrosProjetos`
 (ambos em `js/data.js`).
 
 ## Como alterar as metas
@@ -304,10 +310,10 @@ ou `assets/images/projetos/`, e o caminho é preenchido sozinho no JSON.
 
 ## Como criar um novo setor
 
-1. Em `js/data.js`, adicione um novo objeto no array `setores`, seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `metas`).
+1. Pelo painel `/admin` (coleção **Setores**) ou direto em `data/setores.json`, adicione um novo setor seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `competencias`, `requisitos`). O agente de carreira passa a considerá-lo automaticamente.
 2. Em `data/colaboradores.json` e `data/projetos.json`, use o novo `id` no campo `setorId` dos itens desse setor (ou cadastre-os pelo painel `/admin`, depois de completar o passo 4).
 3. Se quiser incluir o setor nos filtros de Colaboradores e Projetos, adicione uma entrada em `filtrosColaboradores` e `filtrosProjetos` (ambos em `js/data.js`).
-4. Para o novo setor aparecer como opção no painel `/admin`, adicione-o também em `admin/config.yml` — o campo `setorId` aparece duas vezes lá (uma na coleção "Colaboradores", outra na "Projetos"), então atualize as duas.
+4. Para o novo setor aparecer como opção nas outras coleções do painel `/admin`, adicione-o também em `admin/config.yml` — o campo de setor aparece nas coleções "Colaboradores", "Projetos" e "Metas", então atualize as três.
 
 O organograma, os cards de setores e os modais são gerados automaticamente — não é necessário tocar no HTML.
 
