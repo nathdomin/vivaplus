@@ -7,8 +7,10 @@
    - O iframe só recebe o src quando a seção se aproxima da
      tela (não pesa no carregamento inicial da página).
    - O plano gratuito do Render "hiberna" o serviço; a primeira
-     visita pode levar ~1 min. Por isso o loader troca a mensagem
-     depois de alguns segundos e oferece abrir em nova aba.
+     visita pode levar ~1 min. Por isso, assim que a página termina
+     de carregar, o site chama /health do agente para "acordá-lo"
+     antes de o visitante chegar à seção. Se mesmo assim demorar,
+     o loader troca a mensagem e oferece abrir em nova aba.
 
    Para trocar a URL do agente, edite o atributo
    data-agent-url de #careerFrame no index.html.
@@ -50,6 +52,23 @@
     }, FALLBACK_AFTER_MS));
 
     iframe.src = url;
+  }
+
+  /* Acorda o agente em segundo plano. "no-cors" porque só importa a
+     requisição chegar ao servidor — a resposta não é lida. */
+  function acordarAgente() {
+    if (!url) return;
+    try {
+      fetch(new URL("/health", url), { mode: "no-cors", cache: "no-store" }).catch(() => {});
+    } catch (e) {
+      /* URL inválida: o iframe também não carregaria, nada a fazer aqui */
+    }
+  }
+
+  if (document.readyState === "complete") {
+    acordarAgente();
+  } else {
+    window.addEventListener("load", acordarAgente, { once: true });
   }
 
   if ("IntersectionObserver" in window) {

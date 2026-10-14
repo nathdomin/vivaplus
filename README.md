@@ -160,7 +160,10 @@ dentro de uma moldura no estilo do site.
 - O iframe só é carregado quando o visitante se aproxima da seção
   (`js/carreira.js`), para não pesar na abertura do site.
 - O plano gratuito do Render hiberna o serviço: o primeiro acesso pode levar
-  até ~1 minuto. O loader avisa isso e, após 25 s, oferece abrir em nova aba.
+  até ~1 minuto. Para esconder essa espera, assim que a página termina de
+  carregar o site chama `/health` do agente em segundo plano, "acordando" o
+  serviço antes de o visitante rolar até a Carreira. Se ainda assim demorar,
+  o loader avisa e, após 25 s, oferece abrir em nova aba.
 - **Setores compartilhados:** o agente lê `data/setores.json` deste site
   (variável `SITE_URL` no agente). Os campos `competencias` e `requisitos`
   de cada setor não aparecem no site — servem só para a IA comparar com o
@@ -170,9 +173,13 @@ dentro de uma moldura no estilo do site.
   via `postMessage` e o site abre o modal do setor (só aceita mensagens da
   origem de `data-agent-url`). Fora do iframe, o link é
   `https://vivaplus.netlify.app/?setor=<id>#setores`, que abre o mesmo modal.
-- Se o agente bloquear incorporação (cabeçalho `X-Frame-Options` ou CSP
-  `frame-ancestors`), libere o domínio do site nele, por exemplo
-  `Content-Security-Policy: frame-ancestors 'self' https://vivaplus.netlify.app`.
+- O agente só aceita ser exibido em iframe pelo próprio domínio e pelo site
+  (`Content-Security-Policy: frame-ancestors 'self' https://vivaplus.netlify.app`,
+  derivado da variável `SITE_URL` do agente). Para testar o site em outro
+  endereço (ex.: `http://localhost:5501`), adicione-o na variável
+  `FRAME_ANCESTORS` do agente.
+- Dentro do iframe, o agente usa um layout compacto e esconde a própria
+  introdução (o site já mostra esse texto ao lado da moldura).
 
 ## Como adicionar uma atividade a um setor
 
