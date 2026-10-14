@@ -55,30 +55,18 @@
      projetos, setores etc. vêm de fetch() e renderizam de forma
      assíncrona) — assim a animação nunca depende da ordem em que os
      scripts terminam de rodar. */
-  let observer;
-  const semObserverIntersecao = !("IntersectionObserver" in window);
-
-  function observarNovosReveals(root) {
-    const alvo = (root || document).querySelectorAll
-      ? root || document
-      : document;
-    const elementos = alvo.querySelectorAll(".reveal:not(.is-visible), .reveal-stagger:not(.is-visible)");
-
-    if (semObserverIntersecao) {
-      elementos.forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-    // initReveal() ainda não rodou: ele mesmo vai observar estes elementos.
-    if (!observer) return;
-    elementos.forEach((el) => observer.observe(el));
-  }
-
   function initReveal() {
-    if (semObserverIntersecao) {
-      observarNovosReveals();
+    const seletor = ".reveal:not(.is-visible), .reveal-stagger:not(.is-visible)";
+
+    if (!("IntersectionObserver" in window)) {
+      const mostrarTodos = () =>
+        document.querySelectorAll(seletor).forEach((el) => el.classList.add("is-visible"));
+      mostrarTodos();
+      new MutationObserver(mostrarTodos).observe(document.body, { childList: true, subtree: true });
       return;
     }
-    observer = new IntersectionObserver(
+
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -89,15 +77,15 @@
       },
       { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
-    observarNovosReveals();
+    // observe() no mesmo elemento mais de uma vez não tem efeito, então
+    // dá para reobservar todos os pendentes a cada mudança no DOM.
+    const observarPendentes = () =>
+      document.querySelectorAll(seletor).forEach((el) => observer.observe(el));
+    observarPendentes();
 
     /* Sempre que algo novo é inserido no DOM (cards vindos de fetch
        assíncrono), verifica se há .reveal ainda não observado. */
-    const mutationObserver = new MutationObserver(() => observarNovosReveals());
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
-  }
-  function refreshReveal() {
-    observarNovosReveals();
+    new MutationObserver(observarPendentes).observe(document.body, { childList: true, subtree: true });
   }
 
   /* ---------- PILARES (Sobre a Viva+) ---------- */
@@ -210,12 +198,6 @@
       })
       .join("");
 
-    // Aplica cor de destaque na barra lateral do card
-    el.querySelectorAll(".goal-card").forEach((card) => {
-      const accent = card.style.getPropertyValue("--accent");
-      card.style.setProperty("--accent-bg", accent);
-    });
-
     // Anima a barra de progresso quando entra na tela
     const bars = el.querySelectorAll(".goal-progress-bar");
     if ("IntersectionObserver" in window) {
@@ -235,15 +217,6 @@
     } else {
       bars.forEach((b) => (b.style.width = b.getAttribute("data-width") + "%"));
     }
-
-    refreshReveal();
-  }
-
-  /* Cor da barra lateral esquerda dos cards de metas via CSS custom prop */
-  function injectGoalAccentStyle() {
-    const style = document.createElement("style");
-    style.textContent = `.goal-card::before { background: var(--accent-bg, var(--color-orange)); }`;
-    document.head.appendChild(style);
   }
 
   /* ---------- ANO ATUAL NO FOOTER ---------- */
@@ -302,7 +275,6 @@
     initMobileMenu();
     renderPilares();
     renderValores();
-    injectGoalAccentStyle();
     renderMetas();
     setYear();
     initContactForm();
@@ -314,7 +286,5 @@
   } else {
     initAll();
   }
-
-  window.VivaMain = { refreshReveal };
 })();
 

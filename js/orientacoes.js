@@ -138,8 +138,6 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
       </div>`
       )
       .join("");
-
-    if (window.VivaMain && window.VivaMain.refreshReveal) window.VivaMain.refreshReveal();
   }
 
   function iniciarVigiaDeMes() {

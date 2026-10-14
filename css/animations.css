@@ -40,14 +40,7 @@
   --float-shadow-lift: 0 10px 16px rgba(15, 23, 42, 0.08), 0 28px 44px -16px rgba(15, 23, 42, 0.3);
 }
 
-.pillar-card,
-.value-card,
-.sector-card,
-.team-card,
-.project-card,
-.goal-card,
-.guidance-card,
-.org-item {
+:is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item) {
   box-shadow: var(--float-shadow-rest);
 }
 
@@ -58,63 +51,28 @@
 
 /* Só começa a flutuar depois que o card já revelou na tela (evita
    brigar com a transição de entrada) e escalona o ritmo pra não
-   flutuarem todos em sincronia perfeita. */
-.pillar-card.is-visible,
-.value-card.is-visible,
-.sector-card.is-visible,
-.team-card.is-visible,
-.project-card.is-visible,
-.goal-card.is-visible,
-.guidance-card.is-visible,
-.org-item {
+   flutuarem todos em sincronia perfeita. O organograma (.org-item)
+   fica de fora: se flutuasse, os conectores se soltariam da linha. */
+:is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card).is-visible {
   animation: cardFloat 5.2s ease-in-out infinite;
   animation-delay: 0.9s;
 }
-.pillar-card.is-visible:nth-child(even),
-.value-card.is-visible:nth-child(even),
-.sector-card.is-visible:nth-child(even),
-.team-card.is-visible:nth-child(even),
-.project-card.is-visible:nth-child(even),
-.goal-card.is-visible:nth-child(even),
-.guidance-card.is-visible:nth-child(even),
-.org-item:nth-child(even) {
+:is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card).is-visible:nth-child(even) {
   animation-delay: 1.5s;
   animation-duration: 6.1s;
 }
-.pillar-card.is-visible:nth-child(3n),
-.value-card.is-visible:nth-child(3n),
-.sector-card.is-visible:nth-child(3n),
-.team-card.is-visible:nth-child(3n),
-.project-card.is-visible:nth-child(3n),
-.goal-card.is-visible:nth-child(3n),
-.guidance-card.is-visible:nth-child(3n),
-.org-item:nth-child(3n) {
+:is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card).is-visible:nth-child(3n) {
   animation-delay: 0.4s;
   animation-duration: 4.6s;
 }
 
 /* Ao passar o mouse (ou durante o tilt 3D do cursor), a flutuação
    para para não competir com o transform do hover/tilt. */
-.pillar-card:hover,
-.value-card:hover,
-.sector-card:hover,
-.team-card:hover,
-.project-card:hover,
-.goal-card:hover,
-.guidance-card:hover,
-.org-item:hover,
-.pillar-card.tilt-active,
-.value-card.tilt-active,
-.sector-card.tilt-active,
-.team-card.tilt-active,
-.project-card.tilt-active,
-.goal-card.tilt-active,
-.guidance-card.tilt-active,
-.org-item.tilt-active {
+:is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item):hover,
+:is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item).tilt-active {
   animation: none;
   box-shadow: var(--float-shadow-lift);
 }
-
 
 /* ---------- Hero ---------- */
 @keyframes floatY {
@@ -149,12 +107,6 @@
   50% { transform: scale(1.12); opacity: 0.32; }
 }
 
-/* ---------- Modal ---------- */
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(20px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
 /* ---------- Toast ---------- */
 .toast.show { animation: heroFadeUp 0.4s ease both; }
 
@@ -186,14 +138,7 @@
   .reveal-stagger.is-visible > * { filter: blur(0); transform: translateY(0) scale(1); }
 
   /* ---------- Cards: tilt 3D + brilho seguindo o cursor ---------- */
-  .pillar-card,
-  .value-card,
-  .sector-card,
-  .team-card,
-  .project-card,
-  .goal-card,
-  .guidance-card,
-  .org-item {
+  :is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item) {
     position: relative;
     transform-style: preserve-3d;
     will-change: transform;
@@ -203,23 +148,9 @@
       border-color 0.35s ease;
   }
 
-  .pillar-card > *,
-  .value-card > *,
-  .sector-card > *,
-  .team-card > *,
-  .project-card > *,
-  .goal-card > *,
-  .guidance-card > *,
-  .org-item > * { position: relative; z-index: 2; }
+  :is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item) > * { position: relative; z-index: 2; }
 
-  .pillar-card::after,
-  .value-card::after,
-  .sector-card::after,
-  .team-card::after,
-  .project-card::after,
-  .goal-card::after,
-  .guidance-card::after,
-  .org-item::after {
+  :is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item)::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -263,7 +194,7 @@
   .nav-desktop a::after {
     content: "";
     position: absolute;
-    left: 14px; right: 14px; bottom: 6px;
+    left: 11px; right: 11px; bottom: 6px;
     height: 2px;
     background: currentColor;
     border-radius: 2px;
@@ -291,10 +222,7 @@
   }
   .reveal, .reveal-stagger > * { opacity: 1; transform: none; filter: none; }
   .tilt-active { transform: none !important; }
-  .pillar-card::after, .value-card::after, .sector-card::after,
-  .team-card::after, .project-card::after, .goal-card::after,
-  .guidance-card::after,
-  .org-item::after { display: none; }
+  :is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item)::after { display: none; }
   .hero-visual { transform: none !important; }
   .month-spotlight-glow { animation: none !important; }
 }

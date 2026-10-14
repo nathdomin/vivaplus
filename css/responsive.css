@@ -1,6 +1,6 @@
 /* =========================================================
    VIVA+ — responsive.css
-   Breakpoints: 1280 / 1024 / 768 / 480 / 375 / 320
+   Breakpoints: 1280 / 1200 / 1024 / 768 / 480 / 375 / 320
    ========================================================= */
 
 /* ---------- telas com pouca altura (janelas pequenas, notebooks 768px) ---------- */
@@ -13,11 +13,12 @@
   .hero-scroll { display: none; }
 }
 
-/* ---------- ≤1440px: 10 links no menu — compacta para não encostar no botão ---------- */
-@media (max-width: 1440px) {
-  .site-header .container { gap: 20px; }
-  .nav-desktop { gap: 0; }
-  .nav-desktop a { padding: 10px 11px; font-size: 0.88rem; }
+/* ---------- 1025–1200px: sem espaço para os 10 links + botão ----------
+   O botão "Fale conosco" do header some (o link "Contato" do menu
+   leva ao mesmo lugar) para os links não quebrarem linha. */
+@media (max-width: 1200px) and (min-width: 1025px) {
+  .header-actions .btn-outline { display: none; }
+  .nav-desktop a { padding: 10px 9px; }
 }
 
 /* ---------- ≤1280px ---------- */
@@ -49,8 +50,9 @@
 
   .values-grid { grid-template-columns: repeat(2, 1fr); }
 
-  .org-level { grid-template-columns: repeat(3, 1fr); row-gap: 40px; }
-  .org-item::before { display: none; }
+  /* 3 colunas: a linha liga a 1ª fileira; a 2ª fileira fica solta abaixo */
+  .org-level { --org-cols: 3; row-gap: 24px; }
+  .org-item:nth-child(n+4)::before { display: none; }
 
   .team-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
 
@@ -81,8 +83,9 @@
   .values-grid { grid-template-columns: 1fr; }
 
   /* Organograma vira timeline vertical */
-  .org-level { grid-template-columns: 1fr; max-width: 420px; gap: 14px; }
-  .org-branch-line { display: none; }
+  .org-level { --org-cols: 1; max-width: 420px; gap: 14px; margin-top: 0; }
+  .org-level::before,
+  .org-item::before { display: none; }
   .org-item { text-align: left; padding-left: 20px; }
 
   .sectors-grid,
@@ -137,5 +140,8 @@
   .hero-eyebrow { font-size: 0.7rem; padding: 6px 12px; }
   .hero-title { font-size: 1.65rem; }
   .section-title { font-size: 1.5rem; }
-  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  /* minmax(0, …) impede que nomes/setores longos alarguem as colunas além da tela */
+  .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .team-card { padding: 16px 10px; }
+  .team-card .dept-tag { font-size: 0.62rem; letter-spacing: 0.03em; }
 }

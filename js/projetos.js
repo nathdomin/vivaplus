@@ -92,7 +92,8 @@ let projetos = [];
         <div class="project-body">
           <div class="project-cat">${p.categoria}</div>
           <h3>${p.titulo}</h3>
-          <p>${p.descricao}</p>
+          <p class="project-desc">${p.descricao}</p>
+          <button type="button" class="project-more" aria-expanded="false" hidden>Ler mais</button>
           <div class="project-meta">
             <span>${p.setor}</span>
             <span>${p.data}</span>
@@ -101,6 +102,18 @@ let projetos = [];
       </article>`
       )
       .join("");
+  }
+
+  /* ---------- "Ler mais" nas descrições ----------
+     O CSS corta a descrição em 4 linhas para os cards ficarem com
+     altura parecida; o botão só aparece quando o texto foi cortado. */
+  function atualizarBotoesLerMais() {
+    document.querySelectorAll("#projectsGrid .project-card").forEach((card) => {
+      const desc = card.querySelector(".project-desc");
+      const btn = card.querySelector(".project-more");
+      if (!desc || !btn || card.classList.contains("is-expanded")) return;
+      btn.hidden = desc.scrollHeight <= desc.clientHeight + 1;
+    });
   }
 
   function renderTimeline(lista) {
@@ -136,7 +149,8 @@ let projetos = [];
       grid.classList.toggle("hidden-view", visualizacao !== "grid");
       timeline.classList.toggle("active", visualizacao === "timeline");
     }
-    if (window.VivaMain && window.VivaMain.refreshReveal) window.VivaMain.refreshReveal();
+    // Medido depois de mostrar o grid: escondido, as alturas dão 0.
+    atualizarBotoesLerMais();
   }
 
   /* ---------- Carregamento do JSON ---------- */
@@ -164,6 +178,24 @@ let projetos = [];
         renderAll();
       });
     }
+
+    const gridEl = document.getElementById("projectsGrid");
+    if (gridEl) {
+      gridEl.addEventListener("click", (e) => {
+        const btn = e.target.closest(".project-more");
+        if (!btn) return;
+        const card = btn.closest(".project-card");
+        const aberto = card.classList.toggle("is-expanded");
+        btn.textContent = aberto ? "Ler menos" : "Ler mais";
+        btn.setAttribute("aria-expanded", String(aberto));
+      });
+    }
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(atualizarBotoesLerMais, 150);
+    });
 
     const toggleEl = document.getElementById("projectViewToggle");
     if (toggleEl) {

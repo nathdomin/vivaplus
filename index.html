@@ -127,7 +127,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div class="section-eyebrow">Propósito</div>
-          <h2 class="section-title" style="color:var(--color-white)">Missão e visão</h2>
+          <h2 class="section-title">Missão e visão</h2>
         </div>
 
         <div class="mission-grid reveal">
@@ -172,9 +172,8 @@
         <div class="org-chart reveal">
           <div class="org-node">Espro</div>
           <div class="org-connector"></div>
-          <div class="org-node" style="background:var(--color-orange)">Viva+</div>
+          <div class="org-node org-node-accent">Viva+</div>
           <div class="org-connector"></div>
-          <div class="org-branch-line"></div>
           <div class="org-level" id="orgLevel" aria-label="Setores da Viva+">
             <!-- gerado via setores.js -->
           </div>
@@ -225,8 +224,8 @@
           <p class="section-lead">Um portfólio vivo das ações da Viva+ — em constante crescimento.</p>
         </div>
 
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom: 12px;">
-          <div class="filter-bar" id="projectFilters" role="group" aria-label="Filtrar projetos por setor" style="margin-bottom:0;">
+        <div class="projects-toolbar">
+          <div class="filter-bar" id="projectFilters" role="group" aria-label="Filtrar projetos por setor">
             <!-- gerado via projetos.js -->
           </div>
           <div class="view-toggle" id="projectViewToggle" role="group" aria-label="Alternar visualização de projetos">
@@ -343,35 +342,32 @@
     </section>
 
     <!-- ============ CONTATO ============ -->
-    <section class="about" id="contato" style="padding-block: 100px;">
+    <section class="about contact" id="contato">
       <div class="container about-grid">
         <div class="about-text reveal">
           <div class="section-eyebrow">Contato</div>
           <h2 class="section-title">Vamos conversar sobre bem-estar?</h2>
           <p>Preencha o formulário e nossa equipe entrará em contato para apresentar a Viva+.</p>
-          <p style="margin-top:28px;">
+          <p class="contact-info">
             <strong>Site:</strong> vivaplus.netlify.app<br />
             <strong>Instagram:</strong> @vivamaiis_
           </p>
         </div>
 
-        <form class="reveal" id="contactForm" style="background:var(--color-background); border-radius:var(--radius-lg); padding:36px; display:flex; flex-direction:column; gap:16px; border:1px solid var(--color-border);">
+        <form class="contact-form reveal" id="contactForm">
           <div>
-            <label for="contactName" style="display:block; font-size:0.85rem; font-weight:600; color:var(--color-blue); margin-bottom:6px;">Nome</label>
-            <input id="contactName" name="nome" type="text" required
-              style="width:100%; padding:14px 16px; border-radius:var(--radius-sm); border:1.5px solid var(--color-border); background:var(--color-white);" />
+            <label for="contactName">Nome</label>
+            <input id="contactName" name="nome" type="text" required />
           </div>
           <div>
-            <label for="contactEmail" style="display:block; font-size:0.85rem; font-weight:600; color:var(--color-blue); margin-bottom:6px;">E-mail</label>
-            <input id="contactEmail" name="email" type="email" required
-              style="width:100%; padding:14px 16px; border-radius:var(--radius-sm); border:1.5px solid var(--color-border); background:var(--color-white);" />
+            <label for="contactEmail">E-mail</label>
+            <input id="contactEmail" name="email" type="email" required />
           </div>
           <div>
-            <label for="contactMessage" style="display:block; font-size:0.85rem; font-weight:600; color:var(--color-blue); margin-bottom:6px;">Mensagem</label>
-            <textarea id="contactMessage" name="mensagem" rows="4" required
-              style="width:100%; padding:14px 16px; border-radius:var(--radius-sm); border:1.5px solid var(--color-border); background:var(--color-white); resize:vertical;"></textarea>
+            <label for="contactMessage">Mensagem</label>
+            <textarea id="contactMessage" name="mensagem" rows="4" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Enviar mensagem</button>
+          <button type="submit" class="btn btn-primary">Enviar mensagem</button>
         </form>
       </div>
     </section>

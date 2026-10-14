@@ -17,18 +17,16 @@ const CAMINHO_DADOS_COLABORADORES = "data/colaboradores.json";
    JSON terminar de carregar. */
 let colaboradores = [];
 
-/* Rótulos amigáveis para os botões de filtro do time.
-   Se você criar um novo setor em js/data.js, adicione o
-   filtro correspondente aqui também. */
-const filtrosColaboradores = [
-  { id: "todos", label: "Todos" },
-  { id: "diretoria", label: "Diretoria" },
-  { id: "rh", label: "RH" },
-  { id: "ted", label: "T&D" },
-  { id: "4sma", label: "4SMA" },
-  { id: "comunicacao", label: "Comunicação" },
-  { id: "comercial", label: "Comercial" }
-];
+/* Considera "gestor" quem tem Gestor(a) ou Diretor(a) no cargo —
+   esses nomes aparecem primeiro quando o time é filtrado por setor
+   e na lista de integrantes do modal (setores.js usa esta função). */
+function ehGestor(cargo) {
+  return /gestor|diretor/i.test(cargo || "");
+}
+
+function ordenarComGestorPrimeiro(lista) {
+  return [...lista].sort((a, b) => (ehGestor(a.cargo) ? 0 : 1) - (ehGestor(b.cargo) ? 0 : 1));
+}
 
 /* =========================================================
    RENDERIZAÇÃO — cards de colaboradores, filtro e modal
@@ -36,16 +34,6 @@ const filtrosColaboradores = [
 (function () {
   let filtroAtivo = "todos";
   let erroAoCarregar = false;
-
-  /* Considera "gestor" quem tem Gestor(a) ou Diretor(a) no cargo —
-     esses nomes aparecem primeiro quando o time é filtrado por setor. */
-  function ehGestor(cargo) {
-    return /gestor|diretor/i.test(cargo || "");
-  }
-
-  function ordenarComGestorPrimeiro(lista) {
-    return [...lista].sort((a, b) => (ehGestor(a.cargo) ? 0 : 1) - (ehGestor(b.cargo) ? 0 : 1));
-  }
 
   function iniciais(nome) {
     return nome
@@ -106,8 +94,6 @@ const filtrosColaboradores = [
       </article>`
       )
       .join("");
-
-    if (window.VivaMain && window.VivaMain.refreshReveal) window.VivaMain.refreshReveal();
   }
 
   /* ---------- Carregamento do JSON ---------- */

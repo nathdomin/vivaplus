@@ -17,21 +17,6 @@
 
   const arrowIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
 
-  function contarColaboradores(setorId) {
-    if (typeof colaboradores === "undefined") return 0;
-    return colaboradores.filter((c) => c.setorId === setorId).length;
-  }
-
-  /* Mesmo critério usado em colaboradores.js: Gestor(a)/Diretor(a)
-     aparece primeiro na lista de integrantes do setor. */
-  function ehGestor(cargo) {
-    return /gestor|diretor/i.test(cargo || "");
-  }
-
-  function ordenarComGestorPrimeiro(lista) {
-    return [...lista].sort((a, b) => (ehGestor(a.cargo) ? 0 : 1) - (ehGestor(b.cargo) ? 0 : 1));
-  }
-
   /* ---------- Organograma ---------- */
   function renderOrgChart() {
     const el = document.getElementById("orgLevel");
@@ -170,7 +155,4 @@
     renderSectorCards();
     bindSectorInteractions();
   });
-
-  /* Exposto globalmente caso outros scripts precisem contar colaboradores por setor */
-  window.VivaSetores = { contarColaboradores };
 })();

@@ -13,6 +13,7 @@ viva-plus/
 ├── data/
 │   ├── colaboradores.json → lista de colaboradores, editável pelo painel /admin
 │   ├── projetos.json      → lista de projetos/atividades, editável pelo painel /admin
+│   ├── metas.json         → percentual e metas de cada setor, editável pelo painel /admin
 │   └── orientacoes.json   → significado dos meses + dicas de bem-estar, editável pelo painel /admin
 ├── css/
 │   ├── style.css        → design system e layout
@@ -25,14 +26,15 @@ viva-plus/
 │   ├── projetos.js       → carrega data/projetos.json e renderiza grid/timeline
 │   ├── orientacoes.js    → carrega data/orientacoes.json e renderiza a seção Orientações
 │   ├── carreira.js       → seção Carreira: incorpora o agente de IA (iframe com carregamento sob demanda)
-│   └── main.js           → navbar, menu mobile, reveal, metas, contato
+│   ├── main.js           → navbar, menu mobile, reveal, pilares, valores, metas, contato
+│   └── tilt.js           → efeito 3D dos cards e paralaxe do hero (só desktop com mouse)
 └── assets/
-    ├── images/
-    │   ├── logo.png            → logo principal (wordmark)
-    │   ├── logo-v.png          → símbolo "V" (usado no favicon e no hero)
-    │   ├── colaboradores/      → fotos dos colaboradores (enviadas pelo painel /admin)
-    │   └── projetos/           → fotos dos projetos (enviadas pelo painel /admin)
-    └── icons/
+    └── images/
+        ├── logoviva.png        → símbolo usado no header, no hero, no favicon e no Open Graph
+        ├── logo.png            → logo completo (rodapé)
+        ├── logo-v.png          → favicon do painel /admin
+        ├── colaboradores/      → fotos dos colaboradores (enviadas pelo painel /admin)
+        └── projetos/           → fotos dos projetos (enviadas pelo painel /admin)
 ```
 
 ---
@@ -55,7 +57,7 @@ Todo o site usa essas variáveis — não há cores "soltas" no meio do CSS, ent
 
 ## Como trocar o logo
 
-1. Substitua os arquivos `assets/images/logo.png` (logo completo) e `assets/images/logo-v.png` (símbolo).
+1. Substitua os arquivos `assets/images/logoviva.png` (símbolo do header, hero e favicon), `assets/images/logo.png` (logo completo do rodapé) e, se quiser, `assets/images/logo-v.png` (favicon do painel `/admin`).
 2. Mantenha os mesmos nomes de arquivo — assim você não precisa editar o HTML.
 3. Se quiser usar nomes diferentes, atualize as tags `<img src="...">` no `index.html` (aparecem no header, no hero e no footer).
 
@@ -274,12 +276,15 @@ Como `admin/config.yml` é um arquivo estático, o campo "Setor" do painel não 
 `js/data.js` automaticamente. Se adicionar um setor novo lá, adicione a opção
 correspondente em **duas** listas de `admin/config.yml` (a coleção
 "Colaboradores" e a coleção "Projetos" têm cada uma o seu próprio campo
-`setorId`), além dos arrays `filtrosColaboradores` (`js/colaboradores.js`) e
-`filtrosProjetos` (`js/data.js`).
+`setorId`), além dos arrays `filtrosColaboradores` e `filtrosProjetos`
+(ambos em `js/data.js`).
 
 ## Como alterar as metas
 
-Cada setor tem seu próprio array `metas` dentro de `js/data.js`. Edite a lista de metas do setor desejado — a seção "Onde queremos chegar" e o modal do setor são atualizados automaticamente.
+Pelo painel `/admin`, coleção **Metas** (arquivo `data/metas.json`): cada setor tem
+um percentual de progresso e uma lista de metas, cada uma com a opção "Concluída"
+(aparece riscada no site). A seção "Onde queremos chegar" e o modal do setor no
+organograma usam essa mesma lista. Setor sem percentual cadastrado mostra 30%.
 
 ---
 
@@ -301,7 +306,7 @@ ou `assets/images/projetos/`, e o caminho é preenchido sozinho no JSON.
 
 1. Em `js/data.js`, adicione um novo objeto no array `setores`, seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `metas`).
 2. Em `data/colaboradores.json` e `data/projetos.json`, use o novo `id` no campo `setorId` dos itens desse setor (ou cadastre-os pelo painel `/admin`, depois de completar o passo 4).
-3. Se quiser incluir o setor nos filtros de Colaboradores e Projetos, adicione uma entrada em `filtrosColaboradores` (`js/colaboradores.js`) e `filtrosProjetos` (`js/data.js`).
+3. Se quiser incluir o setor nos filtros de Colaboradores e Projetos, adicione uma entrada em `filtrosColaboradores` e `filtrosProjetos` (ambos em `js/data.js`).
 4. Para o novo setor aparecer como opção no painel `/admin`, adicione-o também em `admin/config.yml` — o campo `setorId` aparece duas vezes lá (uma na coleção "Colaboradores", outra na "Projetos"), então atualize as duas.
 
 O organograma, os cards de setores e os modais são gerados automaticamente — não é necessário tocar no HTML.

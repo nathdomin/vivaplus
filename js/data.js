@@ -1,6 +1,7 @@
 /* =========================================================
    VIVA+ — data.js
-   Fonte de verdade para valores, setores e filtros de projetos.
+   Fonte de verdade para valores, setores e filtros
+   (Colaboradores e Projetos).
    Colaboradores (data/colaboradores.json) e projetos
    (data/projetos.json) ficam em arquivos separados, editáveis
    pelo painel /admin (Decap CMS) sem tocar em código.
@@ -156,6 +157,21 @@ const setores = [
     ],
     metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
   }
+];
+
+/* ---------------------------------------------------------
+   FILTROS
+   Rótulos curtos dos botões de filtro. Ao criar um setor
+   novo acima, adicione-o aqui também.
+   --------------------------------------------------------- */
+const filtrosColaboradores = [
+  { id: "todos", label: "Todos" },
+  { id: "diretoria", label: "Diretoria" },
+  { id: "rh", label: "RH" },
+  { id: "ted", label: "T&D" },
+  { id: "4sma", label: "4SMA" },
+  { id: "comunicacao", label: "Comunicação" },
+  { id: "comercial", label: "Comercial" }
 ];
 
 /* ---------------------------------------------------------

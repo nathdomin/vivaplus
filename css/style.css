@@ -81,6 +81,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.1; letter-spac
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
+textarea:focus-visible,
 [tabindex]:focus-visible {
   outline: 3px solid var(--color-orange);
   outline-offset: 3px;
@@ -187,7 +188,7 @@ section { padding-block: 120px; position: relative; }
   align-items: center;
   transition: background var(--transition-normal) var(--ease), box-shadow var(--transition-normal) var(--ease), padding var(--transition-normal) var(--ease);
 }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; }
 
 .site-header.scrolled {
   background: rgba(247, 248, 242, 0.86);
@@ -202,19 +203,27 @@ section { padding-block: 120px; position: relative; }
 .nav-desktop {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0;
 }
+/* 10 links num container de 1200px: espaçamento compacto e sem quebra de linha */
 .nav-desktop a {
-  padding: 10px 16px;
+  padding: 10px 11px;
   border-radius: 999px;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 600;
+  white-space: nowrap;
   color: var(--color-blue);
   transition: background var(--transition-fast) var(--ease), color var(--transition-fast) var(--ease);
   position: relative;
 }
-.site-header:not(.scrolled) .nav-desktop a { color: var(--color-blue); }
 .nav-desktop a:hover { background: rgba(47, 50, 131, 0.08); }
+
+/* Header transparente sobre o hero azul: itens em branco até a página rolar */
+.site-header:not(.scrolled) .nav-desktop a { color: var(--color-white); }
+.site-header:not(.scrolled) .nav-desktop a:hover { background: rgba(255, 255, 255, 0.12); }
+.site-header:not(.scrolled) .header-actions .btn-outline { color: var(--color-white); border-color: rgba(255, 255, 255, 0.6); }
+.site-header:not(.scrolled) .header-actions .btn-outline:hover { background: var(--color-white); border-color: var(--color-white); color: var(--color-blue); }
+.site-header:not(.scrolled) .menu-toggle span { background: var(--color-white); }
 
 .header-actions { display: flex; align-items: center; gap: 12px; }
 
@@ -246,7 +255,11 @@ section { padding-block: 120px; position: relative; }
   z-index: 480;
   display: flex;
   flex-direction: column;
-  padding: 32px 24px;
+  padding: 32px 24px 48px;
+  /* 10 links + botão não cabem em telas baixas: o menu rola por conta própria */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   transform: translateX(100%);
   transition: transform var(--transition-normal) var(--ease);
 }
@@ -258,6 +271,7 @@ section { padding-block: 120px; position: relative; }
   font-weight: 600;
   padding: 14px 4px;
   border-bottom: 1px solid rgba(255,255,255,0.12);
+  flex-shrink: 0;
 }
 .nav-mobile .btn { margin-top: 24px; align-self: flex-start; }
 
@@ -461,6 +475,7 @@ section { padding-block: 120px; position: relative; }
   position: relative;
   z-index: 1;
 }
+.mission .section-title { color: var(--color-white); }
 .mission-card { background: var(--color-blue-dark); padding: 56px 48px; }
 .mission-card .mv-label {
   display: inline-block;
@@ -525,21 +540,31 @@ section { padding-block: 120px; position: relative; }
   font-size: 1.1rem;
   box-shadow: var(--shadow-md);
 }
+.org-node-accent { background: var(--color-orange); }
 .org-connector { width: 2px; height: 40px; background: var(--color-border); }
-.org-branch-line {
-  width: 100%;
-  max-width: 900px;
-  height: 2px;
-  background: var(--color-border);
-  position: relative;
-  margin-bottom: 40px;
-}
+/* A linha horizontal é desenhada pelo próprio .org-level (::before), indo
+   do centro do primeiro setor ao centro do último; cada .org-item::before
+   desce dela até o card. --org-cols / --org-gap mantêm a conta certa. */
 .org-level {
+  --org-cols: 6;
+  --org-gap: 16px;
+  --org-drop: 18px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(var(--org-cols), minmax(0, 1fr));
+  gap: var(--org-gap);
   width: 100%;
   max-width: 1000px;
+  position: relative;
+  margin-top: var(--org-drop);
+}
+.org-level::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--org-drop));
+  left: calc((100% - (var(--org-cols) - 1) * var(--org-gap)) / (var(--org-cols) * 2));
+  right: calc((100% - (var(--org-cols) - 1) * var(--org-gap)) / (var(--org-cols) * 2));
+  height: 2px;
+  background: var(--color-border);
 }
 .org-item {
   background: var(--color-background);
@@ -557,8 +582,8 @@ section { padding-block: 120px; position: relative; }
 .org-item::before {
   content: "";
   position: absolute;
-  top: -18px; left: 50%;
-  width: 2px; height: 18px;
+  top: calc(-1 * var(--org-drop)); left: calc(50% - 1px);
+  width: 2px; height: var(--org-drop);
   background: var(--color-border);
 }
 .org-item:hover, .org-item:focus-visible {
@@ -742,7 +767,8 @@ section { padding-block: 120px; position: relative; }
   position: relative;
 }
 .team-avatar img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.team-card h3 { font-size: 0.98rem; color: var(--color-blue); margin-bottom: 4px; }
+.team-card { min-width: 0; }
+.team-card h3 { font-size: 0.98rem; color: var(--color-blue); margin-bottom: 4px; overflow-wrap: anywhere; }
 .team-card .role { font-size: 0.78rem; color: var(--color-muted); margin-bottom: 6px; }
 .team-card .dept-tag {
   display: inline-block;
@@ -756,7 +782,16 @@ section { padding-block: 120px; position: relative; }
 
 /* ---------- PROJETOS ---------- */
 .projects { background: var(--color-background); }
-.view-toggle { display: flex; gap: 8px; margin-bottom: 32px; }
+.projects-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 44px;
+}
+.projects-toolbar .filter-bar { margin-bottom: 0; }
+.view-toggle { display: flex; gap: 8px; }
 .view-toggle button {
   padding: 8px 18px;
   border-radius: 999px;
@@ -811,10 +846,31 @@ section { padding-block: 120px; position: relative; }
   padding: 5px 12px;
   border-radius: 999px;
 }
-.project-body { padding: 22px; }
+.project-card { display: flex; flex-direction: column; }
+.project-body { padding: 22px; display: flex; flex-direction: column; flex-grow: 1; }
+.project-desc {
+  font-size: 0.92rem;
+  color: var(--color-muted);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+}
+.project-card.is-expanded .project-desc { display: block; -webkit-line-clamp: unset; line-clamp: unset; }
+.project-more {
+  align-self: flex-start;
+  margin-top: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-orange);
+}
+.project-more:hover { text-decoration: underline; }
+.project-more[hidden] { display: none; }
+.project-meta { margin-top: auto; padding-top: 14px; }
 .project-cat { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-orange); margin-bottom: 8px; }
 .project-body h3 { font-size: 1.08rem; color: var(--color-blue); margin-bottom: 8px; }
-.project-meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--color-muted); margin-top: 14px; }
+.project-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 0.78rem; color: var(--color-muted); }
 
 /* Timeline de projetos */
 .timeline { display: none; position: relative; padding-left: 28px; }
@@ -849,6 +905,7 @@ section { padding-block: 120px; position: relative; }
   content: "";
   position: absolute;
   top: 0; left: 0; width: 5px; height: 100%;
+  background: var(--accent, var(--color-orange)); /* --accent vem de data.js (corAccent) */
 }
 .goal-card h3 { color: var(--color-blue); font-size: 1.15rem; margin-bottom: 6px; }
 .goal-card .goal-objective { font-size: 0.88rem; color: var(--color-muted); margin-bottom: 20px; }
@@ -1143,6 +1200,36 @@ section { padding-block: 120px; position: relative; }
   position: relative;
   z-index: 1;
 }
+
+/* ---------- CONTATO ---------- */
+.contact { padding-block: 100px; }
+.contact-info { margin-top: 28px; }
+.contact-form {
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid var(--color-border);
+}
+.contact-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-blue);
+  margin-bottom: 6px;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+}
+.contact-form textarea { resize: vertical; }
+.contact-form .btn { align-self: flex-start; }
 
 /* ---------- FOOTER ---------- */
 .site-footer { background: var(--color-blue-dark); color: rgba(255,255,255,0.75); padding-block: 80px 32px; }
