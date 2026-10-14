@@ -83,8 +83,9 @@ let projetos = [];
           <span class="project-status">${p.status}</span>
           ${
             p.imagem
-              ? `<img class="project-thumb-img" src="${p.imagem}" alt="Imagem do projeto ${p.titulo}" loading="lazy"
-               onload="this.classList.add('is-loaded')" onerror="this.remove()" />`
+              ? `<img class="project-thumb-img" src="${urlImagem(p.imagem, 800, 500)}" data-original="${p.imagem}"
+               alt="Imagem do projeto ${p.titulo}" loading="lazy"
+               onload="this.classList.add('is-loaded')" onerror="imagemComFallback(this, (img) => img.remove())" />`
               : ""
           }
           <span class="project-thumb-placeholder">Imagem em breve</span>

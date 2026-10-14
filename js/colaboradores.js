@@ -85,8 +85,13 @@ function ordenarComGestorPrimeiro(lista) {
       <article class="team-card reveal" tabindex="0" aria-label="${c.nome}, ${nomeSetor(c.setorId)}">
         <div class="team-avatar">
           <span>${iniciais(c.nome)}</span>
-          <img src="${c.foto}" alt="Foto de ${c.nome}" loading="lazy"
-               onerror="this.style.display='none'" />
+          ${
+            c.foto
+              ? `<img src="${urlImagem(c.foto, 176, 176)}" data-original="${c.foto}" alt="Foto de ${c.nome}"
+               width="88" height="88" loading="lazy"
+               onerror="imagemComFallback(this, (img) => img.remove())" />`
+              : ""
+          }
         </div>
         <h3>${c.nome}</h3>
         <p class="role">${c.cargo}</p>

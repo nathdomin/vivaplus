@@ -39,8 +39,7 @@
     {
       "nome": "Julia Santana",
       "setorId": "comercial",
-      "cargo": "Colaboradora",
-      "foto": "assets/images/colaboradores/julia-santana.jpg"
+      "cargo": "Colaboradora"
     },
     {
       "nome": "Camilli Victoria",
@@ -111,8 +110,7 @@
     {
       "nome": "Kamylla Fernandes",
       "setorId": "comercial",
-      "cargo": "Colaboradora",
-      "foto": "assets/images/colaboradores/joao-pedro.jpg"
+      "cargo": "Colaboradora"
     },
     {
       "nome": "Mattheus Gabriel",
