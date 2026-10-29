@@ -5,16 +5,20 @@
       "percentual": 48,
       "metas": [
         {
-          "texto": "Expandir os espaços físicos.",
+          "texto": "Concluir o planejamento e viabilidade para a expansão dos espaços físicos da instituição em até 20%.",
           "concluida": false
         },
         {
-          "texto": "Aumentar o número de clientes e parceiros.",
+          "texto": "Ampliar a rede de clientes e parceiros corporativos estratégicos em até 30%.",
           "concluida": false
         },
         {
-          "texto": "Tornar-se referência no mercado nacional.",
+          "texto": "Posicionar e consolidar a marca como referência no mercado nacional em qualidade de vida e bem-estar.",
           "concluida": false
+        },
+        {
+          "concluida": false,
+          "texto": "Implementar reuniões quinzenais de alinhamento executivo entre Gestão e Tecnologia para garantir a eficiência dos projetos."
         }
       ]
     },
