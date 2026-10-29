@@ -163,12 +163,14 @@
     {
       "cargo": "Colaboradora",
       "nome": "Sofia",
-      "setorId": "ted"
+      "setorId": "ted",
+      "foto": "/assets/images/colaboradores/sofia.png"
     },
     {
       "cargo": "Co-Gestora",
       "nome": "Mariana Briano",
-      "setorId": "4sma"
+      "setorId": "4sma",
+      "foto": "/assets/images/colaboradores/mariana.png"
     },
     {
       "cargo": "Colaboradora",
