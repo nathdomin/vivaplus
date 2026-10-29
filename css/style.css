@@ -893,11 +893,13 @@ section { padding-block: 120px; position: relative; }
 
 /* ---------- METAS ---------- */
 .goals { background: var(--color-white); }
-.goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+/* Blocos compactos: 2 colunas (1 no celular, em responsive.css), com
+   espaçamentos e fontes menores para os cards não ficarem gigantes. */
+.goals-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .goal-card {
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 32px;
+  border-radius: var(--radius-md);
+  padding: 22px 22px 18px 28px;
   position: relative;
   overflow: hidden;
 }
@@ -907,12 +909,23 @@ section { padding-block: 120px; position: relative; }
   top: 0; left: 0; width: 5px; height: 100%;
   background: var(--accent, var(--color-orange)); /* --accent vem de data.js (corAccent) */
 }
-.goal-card h3 { color: var(--color-blue); font-size: 1.15rem; margin-bottom: 6px; }
-.goal-card .goal-objective { font-size: 0.88rem; color: var(--color-muted); margin-bottom: 20px; }
-.goal-progress { height: 6px; border-radius: 999px; background: var(--color-background); overflow: hidden; margin-bottom: 8px; }
+.goal-card h3 { color: var(--color-blue); font-size: 1.05rem; margin-bottom: 4px; }
+.goal-card .goal-objective {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--color-muted);
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.goal-progress { height: 5px; border-radius: 999px; background: var(--color-background); overflow: hidden; margin-bottom: 6px; }
 .goal-progress-bar { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--color-green), var(--color-blue)); width: 0%; transition: width 1.2s var(--ease); }
-.goal-progress-label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--color-blue); margin-bottom: 20px; }
-.goal-list li { font-size: 0.9rem; padding-left: 20px; position: relative; margin-bottom: 8px; color: var(--color-text); }
+.goal-progress-label { display: block; font-size: 0.74rem; font-weight: 700; color: var(--color-blue); margin-bottom: 14px; }
+.goal-list li { font-size: 0.85rem; line-height: 1.45; padding-left: 18px; position: relative; margin-bottom: 6px; color: var(--color-text); }
+.goal-list li:last-child { margin-bottom: 0; }
 .goal-list li::before { content: "→"; position: absolute; left: 0; color: var(--color-orange); font-weight: 700; }
 .goal-list li.is-done { text-decoration: line-through; color: var(--color-muted); }
 .goal-list li.is-done::before { content: "✓"; color: var(--color-green); }

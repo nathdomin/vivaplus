@@ -26,7 +26,6 @@
   .container { padding-inline: 20px; }
   .sectors-grid,
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
-  .goals-grid { grid-template-columns: 1fr; }
   .guidance-grid { grid-template-columns: repeat(2, 1fr); }
 
   .career-grid { gap: 48px; }
