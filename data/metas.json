@@ -45,28 +45,6 @@
       ]
     },
     {
-      "setor": "ted",
-      "percentual": 45,
-      "metas": [
-        {
-          "texto": "Fortalecer a colaboração entre setores.",
-          "concluida": false
-        },
-        {
-          "texto": "Aprimorar a comunicação.",
-          "concluida": false
-        },
-        {
-          "texto": "Tornar a integração mais acolhedora.",
-          "concluida": false
-        },
-        {
-          "texto": "Aplicar treinamentos sobre a cultura Viva+.",
-          "concluida": false
-        }
-      ]
-    },
-    {
       "setor": "4sma",
       "percentual": 60,
       "metas": [

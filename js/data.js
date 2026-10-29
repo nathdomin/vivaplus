@@ -63,6 +63,8 @@ const valores = [
 
    id: usado para filtros, âncoras, vínculo com colaboradores
        e na recomendação do agente — não renomeie um id existente
+   nomeCurto: rótulo dos botões de filtro (ex.: "RH"); sem ele, vale o nome
+   icone: nome de um ícone de js/setores.js; sem ele, usa o ícone genérico
    corAccent: valor CSS que define o acento de identidade do setor
    competencias / requisitos: usados só pelo agente de carreira
 
@@ -87,6 +89,8 @@ const setoresProntos = fetch(CAMINHO_DADOS_SETORES, { cache: "no-store" })
           id: s.id,
           numero: s.numero || "",
           nome: s.nome,
+          nomeCurto: s.nomeCurto || s.nome,
+          icone: s.icone || "geral",
           corAccent: s.corAccent || "var(--color-blue)",
           resumo: s.resumo || "Informações em breve.",
           objetivo: Array.isArray(s.objetivo) ? s.objetivo : [],
@@ -103,30 +107,25 @@ const setoresProntos = fetch(CAMINHO_DADOS_SETORES, { cache: "no-store" })
 
 /* ---------------------------------------------------------
    FILTROS
-   Rótulos curtos dos botões de filtro. Ao criar um setor
-   novo acima, adicione-o aqui também.
+   Os botões de filtro são montados a partir de `setores`
+   (data/setores.json), então criar ou apagar um setor no
+   painel /admin atualiza os filtros sozinho. Chame estas
+   funções só depois de `setoresProntos`.
    --------------------------------------------------------- */
-const filtrosColaboradores = [
-  { id: "todos", label: "Todos" },
-  { id: "diretoria", label: "Diretoria" },
-  { id: "rh", label: "RH" },
-  { id: "ted", label: "T&D" },
-  { id: "4sma", label: "4SMA" },
-  { id: "comunicacao", label: "Comunicação" },
-  { id: "comercial", label: "Comercial" }
-];
+function filtrosColaboradores() {
+  return [{ id: "todos", label: "Todos" }, ...setores.map((s) => ({ id: s.id, label: s.nomeCurto }))];
+}
 
 /* ---------------------------------------------------------
    PROJETOS & ATIVIDADES
-   Os projetos em si agora vivem em data/projetos.json,
-   editável pelo painel /admin (Decap CMS). Aqui fica só a
-   lista de filtros por setor, usada na seção de Projetos.
+   Os projetos em si vivem em data/projetos.json, editável
+   pelo painel /admin (Decap CMS). O filtro só lista setores
+   que têm ao menos um projeto, para não abrir uma lista vazia.
    --------------------------------------------------------- */
-const filtrosProjetos = [
-  { id: "todos", label: "Todos" },
-  { id: "rh", label: "RH" },
-  { id: "ted", label: "T&D" },
-  { id: "4sma", label: "4SMA" },
-  { id: "comunicacao", label: "Comunicação" },
-  { id: "comercial", label: "Comercial" }
-];
+function filtrosProjetos(listaProjetos) {
+  const comProjeto = new Set(listaProjetos.map((p) => p.setorId));
+  return [
+    { id: "todos", label: "Todos" },
+    ...setores.filter((s) => comProjeto.has(s.id)).map((s) => ({ id: s.id, label: s.nomeCurto }))
+  ];
+}

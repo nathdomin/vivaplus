@@ -45,7 +45,8 @@ collections:
             name: "colaboradores"
             widget: "list"
             label_singular: "Colaborador"
-            summary: "{{fields.nome}} — {{fields.setorId}}"
+            summary: "{{fields.setorId}} · {{fields.nome}}"
+            hint: "Mantenha as pessoas agrupadas por setor: o início de cada item mostra o setor. Ao adicionar alguém, arraste o item para junto do restante do setor (a ordem aqui é a ordem em que aparecem no site, em “Todos”)."
             fields:
               - label: "Nome completo"
                 name: "nome"
@@ -53,15 +54,13 @@ collections:
 
               - label: "Setor"
                 name: "setorId"
-                widget: "select"
-                hint: "Se você criar um novo setor em js/data.js, adicione a opção correspondente aqui também."
-                options:
-                  - { label: "Diretoria", value: "diretoria" }
-                  - { label: "Recursos Humanos", value: "rh" }
-                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
-                  - { label: "4SMA", value: "4sma" }
-                  - { label: "Comunicação", value: "comunicacao" }
-                  - { label: "Comercial", value: "comercial" }
+                widget: "relation"
+                collection: "setores"
+                file: "lista"
+                search_fields: ["setores.*.nome"]
+                value_field: "setores.*.id"
+                display_fields: ["setores.*.nome"]
+                hint: "A lista mostra os setores cadastrados na coleção “Setores”. Se o setor de uma pessoa foi apagado, escolha o novo setor aqui."
 
               - label: "Cargo"
                 name: "cargo"
@@ -100,19 +99,18 @@ collections:
               - label: "Setor (nome exibido)"
                 name: "setor"
                 widget: "string"
-                hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “Viva+”."
+                hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “Viva+”, “Geral”."
 
               - label: "Setor (para o filtro)"
                 name: "setorId"
-                widget: "select"
-                hint: "Usado para o botão de filtro. Se você criar um novo setor em js/data.js, adicione a opção correspondente aqui também."
-                options:
-                  - { label: "Diretoria", value: "diretoria" }
-                  - { label: "Recursos Humanos", value: "rh" }
-                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
-                  - { label: "4SMA", value: "4sma" }
-                  - { label: "Comunicação", value: "comunicacao" }
-                  - { label: "Comercial", value: "comercial" }
+                widget: "relation"
+                collection: "setores"
+                file: "lista"
+                search_fields: ["setores.*.nome"]
+                value_field: "setores.*.id"
+                display_fields: ["setores.*.nome"]
+                required: false
+                hint: "Usado para o botão de filtro. Deixe em branco para um projeto geral (sem setor): ele aparece só em “Todos”. A lista mostra os setores cadastrados na coleção “Setores”."
 
               - label: "Categoria"
                 name: "categoria"
@@ -242,7 +240,7 @@ collections:
                 name: "id"
                 widget: "string"
                 pattern: ["^[a-z0-9-]+$", "Use só letras minúsculas, números e hífen."]
-                hint: "Identificador interno (ex.: rh). Não altere o id de um setor existente: colaboradores, projetos, metas e o agente de carreira dependem dele. Ao criar um setor novo, adicione o id também nas opções de “Setor” das outras coleções."
+                hint: "Identificador interno (ex.: rh). Não altere o id de um setor existente: colaboradores, projetos, metas e o agente de carreira dependem dele."
 
               - label: "Número"
                 name: "numero"
@@ -252,6 +250,28 @@ collections:
               - label: "Nome"
                 name: "nome"
                 widget: "string"
+
+              - label: "Nome curto (filtros)"
+                name: "nomeCurto"
+                widget: "string"
+                required: false
+                hint: "Rótulo dos botões de filtro de Colaboradores e Projetos (ex.: RH, T&D). Em branco, usa o nome completo."
+
+              - label: "Ícone"
+                name: "icone"
+                widget: "select"
+                required: false
+                default: "geral"
+                hint: "Ícone exibido no card e no modal do setor."
+                options:
+                  - { label: "Genérico (quadrados)", value: "geral" }
+                  - { label: "Estrela", value: "estrela" }
+                  - { label: "Pessoas", value: "pessoas" }
+                  - { label: "Capelo (formação)", value: "capelo" }
+                  - { label: "Escudo (segurança)", value: "escudo" }
+                  - { label: "Balão de conversa", value: "balao" }
+                  - { label: "Aperto de mão", value: "aperto" }
+                  - { label: "Monitor (tecnologia)", value: "monitor" }
 
               - label: "Cor de destaque"
                 name: "corAccent"
@@ -312,14 +332,13 @@ collections:
             fields:
               - label: "Setor"
                 name: "setor"
-                widget: "select"
-                options:
-                  - { label: "Diretoria", value: "diretoria" }
-                  - { label: "Recursos Humanos", value: "rh" }
-                  - { label: "Treinamento & Desenvolvimento", value: "ted" }
-                  - { label: "4SMA", value: "4sma" }
-                  - { label: "Comunicação", value: "comunicacao" }
-                  - { label: "Comercial", value: "comercial" }
+                widget: "relation"
+                collection: "setores"
+                file: "lista"
+                search_fields: ["setores.*.nome"]
+                value_field: "setores.*.id"
+                display_fields: ["setores.*.nome"]
+                hint: "A lista mostra os setores cadastrados na coleção “Setores”."
 
               - label: "Percentual concluído"
                 name: "percentual"

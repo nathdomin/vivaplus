@@ -83,8 +83,7 @@ lista `colaboradores`:
 }
 ```
 
-`setorId` precisa ser um dos ids definidos em `data/setores.json` (`diretoria`, `rh`,
-`ted`, `4sma`, `comunicacao`, `comercial`). O card é gerado automaticamente na
+`setorId` precisa ser um dos ids definidos em `data/setores.json`. O card é gerado automaticamente na
 seção **Colaboradores** e também aparece no modal do setor correspondente.
 
 Para remover alguém, apague o objeto correspondente dentro do array. Como é um
@@ -283,14 +282,12 @@ o painel detecta o ambiente local e grava as alterações direto nos arquivos do
 seu computador, sem precisar de login nem de internet. Ótimo para testar antes
 de configurar o Netlify.
 
-### Se você criar um novo setor
+### Se você criar ou apagar um setor
 
-Como `admin/config.yml` é um arquivo estático, o campo "Setor" das outras
-coleções não lê `data/setores.json` automaticamente. Se adicionar um setor novo lá, adicione a opção
-correspondente nas listas de `admin/config.yml` (as coleções
-"Colaboradores", "Projetos" e "Metas" têm cada uma o seu próprio campo
-de setor), além dos arrays `filtrosColaboradores` e `filtrosProjetos`
-(ambos em `js/data.js`).
+Nada precisa ser editado à mão: o campo "Setor" das coleções "Colaboradores",
+"Projetos" e "Metas" lê a lista da coleção **Setores**, e os botões de filtro do
+site também são montados a partir de `data/setores.json`. Ao apagar um setor,
+reatribua as pessoas dele em **Colaboradores** (até lá o card mostra "Sem setor").
 
 ## Como alterar as metas
 
@@ -317,12 +314,10 @@ ou `assets/images/projetos/`, e o caminho é preenchido sozinho no JSON.
 
 ## Como criar um novo setor
 
-1. Pelo painel `/admin` (coleção **Setores**) ou direto em `data/setores.json`, adicione um novo setor seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `competencias`, `requisitos`). O agente de carreira passa a considerá-lo automaticamente.
-2. Em `data/colaboradores.json` e `data/projetos.json`, use o novo `id` no campo `setorId` dos itens desse setor (ou cadastre-os pelo painel `/admin`, depois de completar o passo 4).
-3. Se quiser incluir o setor nos filtros de Colaboradores e Projetos, adicione uma entrada em `filtrosColaboradores` e `filtrosProjetos` (ambos em `js/data.js`).
-4. Para o novo setor aparecer como opção nas outras coleções do painel `/admin`, adicione-o também em `admin/config.yml` — o campo de setor aparece nas coleções "Colaboradores", "Projetos" e "Metas", então atualize as três.
+1. Pelo painel `/admin` (coleção **Setores**) ou direto em `data/setores.json`, adicione um novo setor seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `competencias`, `requisitos`). O agente de carreira passa a considerá-lo automaticamente. Campos opcionais: `nomeCurto` (rótulo dos filtros, ex.: "RH") e `icone` (`geral`, `estrela`, `pessoas`, `capelo`, `escudo`, `balao` ou `aperto`; sem ele vale o genérico).
+2. Em **Colaboradores**, **Projetos** e **Metas**, escolha o novo setor no campo "Setor". Os botões de filtro aparecem sozinhos (em Projetos, só para setores que têm ao menos um projeto).
 
-O organograma, os cards de setores e os modais são gerados automaticamente — não é necessário tocar no HTML.
+O organograma, os cards de setores, os filtros e os modais são gerados automaticamente — não é necessário tocar no HTML nem em `admin/config.yml`.
 
 ---
 

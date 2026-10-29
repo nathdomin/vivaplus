@@ -2,8 +2,7 @@
   "projetos": [
     {
       "titulo": "Janeiro Branco - Dinâmica no Orquidário",
-      "setor": "Treinamento & Desenvolvimento",
-      "setorId": "ted",
+      "setor": "Geral",
       "categoria": "Saúde",
       "data": "29/01/2026",
       "imagem": "/assets/images/projetos/untitled.jpg",
@@ -12,8 +11,7 @@
     },
     {
       "titulo": "Saúde e Qualidade de Vida no Trabalho",
-      "setor": "Treinamento & Desenvolvimento",
-      "setorId": "ted",
+      "setor": "Geral",
       "categoria": "Saúde",
       "data": "05/03/2026",
       "imagem": "/assets/images/projetos/screenshot-2026-08-29-173253.png",

@@ -57,7 +57,7 @@ let projetos = [];
   function renderFiltros() {
     const el = document.getElementById("projectFilters");
     if (!el) return;
-    el.innerHTML = filtrosProjetos
+    el.innerHTML = filtrosProjetos(projetos)
       .map(
         (f) => `<button class="filter-btn${f.id === filtroAtivo ? " active" : ""}" data-filter="${f.id}">${f.label}</button>`
       )
@@ -165,6 +165,9 @@ let projetos = [];
       console.error("Não foi possível carregar data/projetos.json:", erro);
       erroAoCarregar = true;
     }
+    // Os botões de filtro dependem de data/setores.json.
+    await setoresProntos;
+    renderFiltros();
     renderAll();
   }
 
@@ -211,7 +214,6 @@ let projetos = [];
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    renderFiltros();
     bindEvents();
     carregarProjetos();
   });

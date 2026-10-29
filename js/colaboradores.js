@@ -52,13 +52,14 @@ function ordenarComGestorPrimeiro(lista) {
 
   function nomeSetor(setorId) {
     const s = typeof setores !== "undefined" ? setores.find((s) => s.id === setorId) : null;
-    return s ? s.nome : setorId;
+    // Setor apagado no painel: o colaborador continua na lista até ser reatribuído.
+    return s ? s.nome : "Sem setor";
   }
 
   function renderFiltros() {
     const el = document.getElementById("teamFilters");
     if (!el) return;
-    el.innerHTML = filtrosColaboradores
+    el.innerHTML = filtrosColaboradores()
       .map(
         (f) => `<button class="filter-btn${f.id === filtroAtivo ? " active" : ""}" data-filter="${f.id}">${f.label}</button>`
       )
@@ -117,8 +118,9 @@ function ordenarComGestorPrimeiro(lista) {
       console.error("Não foi possível carregar data/colaboradores.json:", erro);
       erroAoCarregar = true;
     }
-    // O nome do setor exibido em cada card vem de data/setores.json.
+    // Os botões de filtro e o nome do setor em cada card vêm de data/setores.json.
     await setoresProntos;
+    renderFiltros();
     renderGrid();
   }
 
@@ -135,7 +137,6 @@ function ordenarComGestorPrimeiro(lista) {
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    renderFiltros();
     bindEvents();
     colaboradoresProntos = carregarColaboradores();
   });
