@@ -109,6 +109,10 @@
           "concluida": false
         }
       ]
+    },
+    {
+      "setor": "ti",
+      "percentual": 1
     }
   ]
 }
