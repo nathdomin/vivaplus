@@ -6,14 +6,14 @@
       "metas": [
         {
           "texto": "Expandir os espaços físicos.",
-          "concluida": true
+          "concluida": false
         },
         {
           "texto": "Aumentar o número de clientes e parceiros.",
           "concluida": false
         },
         {
-          "texto": "Tornar-se referência no mercado internacional.",
+          "texto": "Tornar-se referência no mercado nacional.",
           "concluida": false
         }
       ]
