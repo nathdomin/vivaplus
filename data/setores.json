@@ -36,6 +36,13 @@
       "competencias": []
     },
     {
+      "id": "ti",
+      "numero": "03",
+      "nome": "Tecnologia da Informação",
+      "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
+      "resumo": "Conectividade, inovação e suporte contínuo para o crescimento da empresa."
+    },
+    {
       "atividades": [
         "Fevereiro Roxo e Laranja",
         "Saúde no Trabalho"
@@ -85,13 +92,6 @@
         "Atuar como ponte entre cliente e empresa, orientando sobre a empresa, seus objetivos e os valores dos serviços prestados."
       ],
       "competencias": []
-    },
-    {
-      "id": "ti",
-      "numero": "03",
-      "nome": "Tecnologia da Informação",
-      "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
-      "resumo": "Conectividade, inovação e suporte contínuo para o crescimento da empresa."
     }
   ]
 }
