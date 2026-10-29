@@ -4,6 +4,7 @@
       "id": "diretoria",
       "numero": "01",
       "nome": "Diretoria",
+      "icone": "estrela",
       "corAccent": "var(--color-blue)",
       "resumo": "Direção estratégica, alinhamento de valores e representação da Viva+.",
       "objetivo": [
@@ -21,6 +22,8 @@
       "id": "rh",
       "numero": "02",
       "nome": "Recursos Humanos",
+      "nomeCurto": "RH",
+      "icone": "pessoas",
       "corAccent": "var(--color-green)",
       "resumo": "Cuidado com as pessoas, cultura organizacional e ambiente de trabalho saudável.",
       "objetivo": [
@@ -36,20 +39,15 @@
       "requisitos": []
     },
     {
-      "id": "ted",
+      "id": "ti",
       "numero": "03",
-      "nome": "Treinamento & Desenvolvimento",
+      "nome": "Tecnologia da Informação",
+      "nomeCurto": "TI",
+      "icone": "monitor",
       "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
-      "resumo": "Aprendizado contínuo, colaboração e crescimento das equipes.",
-      "objetivo": [
-        "Desenvolver competências e desempenho dos colaboradores por meio de aprendizado contínuo, colaboração e inovação, fortalecendo equipes, cultura organizacional e marca empregadora."
-      ],
-      "atividades": [
-        "Dinâmica no Orquidário",
-        "Janeiro Branco",
-        "Apresentação dos dados do formulário",
-        "Dinâmica sobre Saúde e Qualidade de Vida no Trabalho, em parceria com o 4SMA"
-      ],
+      "resumo": "Informações em breve.",
+      "objetivo": [],
+      "atividades": [],
       "competencias": [],
       "requisitos": []
     },
@@ -57,6 +55,7 @@
       "id": "4sma",
       "numero": "04",
       "nome": "4SMA",
+      "icone": "escudo",
       "corAccent": "var(--color-green)",
       "resumo": "Segurança, saúde e sustentabilidade como responsabilidades compartilhadas.",
       "objetivo": [
@@ -73,6 +72,7 @@
       "id": "comunicacao",
       "numero": "05",
       "nome": "Comunicação",
+      "icone": "balao",
       "corAccent": "var(--color-orange)",
       "resumo": "A voz da Viva+ — clara, criativa e próxima das pessoas.",
       "objetivo": [
@@ -91,6 +91,7 @@
       "id": "comercial",
       "numero": "06",
       "nome": "Comercial",
+      "icone": "aperto",
       "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-orange))",
       "resumo": "A ponte entre a Viva+ e cada cliente.",
       "objetivo": [
