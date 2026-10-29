@@ -1,0 +1,121 @@
+{
+  "projetos": [
+    {
+      "titulo": "Agosto Lilás",
+      "setor": "Comercial",
+      "setorId": "comercial",
+      "categoria": "Direitos Humanos",
+      "data": "27/08/2026",
+      "imagem": "/assets/images/projetos/100377.jpg",
+      "descricao": "Informação que salva vidas. A violência contra a mulher vai além da física; inclui abusos psicológicos, sexuais, patrimoniais e morais, ocorrendo frequentemente dentro de casa. Identificar esses sinais é o primeiro passo para quebrar o ciclo do silêncio e oferecer apoio. Não se cale e ajude quem precisa",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Área do trabalho: Injustiça, preconceito e discriminação.",
+      "setor": "Recursos Humanos",
+      "setorId": "rh",
+      "categoria": "Inclusão",
+      "data": "05/02/2026",
+      "imagem": "/assets/images/projetos/captura-de-tela-2026-09-05-132710.png",
+      "descricao": "A apresentação abordou o tema “Injustiça, Preconceito e Discriminação na Área do Trabalho”, destacando a importância do respeito, da igualdade e da valorização da diversidade no ambiente profissional. Foram discutidas situações de preconceito e discriminação, seus impactos nas relações de trabalho e a importância de promover um ambiente mais inclusivo, ético e respeitoso para todos.\n",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Carteirinha dos Clientes",
+      "setor": "Comercial",
+      "setorId": "comercial",
+      "categoria": "Institucional",
+      "data": "17/09/2026",
+      "imagem": "/assets/images/projetos/cracha-cliente.jpeg",
+      "descricao": "Crachá de identificação funcional Viva+, projetado para garantir o pronto e fácil reconhecimento do colaborador junto aos clientes.",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Crachá do Colaborador",
+      "setor": "Comercial",
+      "setorId": "comercial",
+      "categoria": "Institucional",
+      "data": "17/09/2026",
+      "imagem": "/assets/images/projetos/cracha-colaborador.jpeg",
+      "descricao": "Crachá de identificação funcional Viva+, projetado para garantir o pronto e fácil reconhecimento do colaborador junto aos clientes.",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "De olho no futuro",
+      "setor": "Viva+",
+      "setorId": "diretoria",
+      "categoria": "Visão",
+      "data": "18/06/2026",
+      "imagem": "/assets/images/projetos/screenshot-2026-08-29-173620.png",
+      "descricao": "Projeto da Espro aonde nosso colega de turma, João Prates trouxe sua gestora, Ysa Lorrany para um bate papo sobre sua Jornada de vida, construção de carreira, desafios.",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Dia das Mulheres",
+      "setor": "Recursos Humanos",
+      "setorId": "rh",
+      "categoria": "Comunidade",
+      "data": "12/03/2026",
+      "imagem": "/assets/images/projetos/dias-da-mulhers.jpg",
+      "descricao": "Tivemos uma apresentação especial da nossa equipe de RH em celebração ao Dia das Mulheres. Um momento simples, mas cheio de significado, com chocolates e mensagens carinhosas para cada mulher da equipe",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Espro que eu vejo",
+      "setor": "Viva+",
+      "setorId": "diretoria",
+      "categoria": "Ambiente",
+      "data": "26/03/2026",
+      "imagem": "/assets/images/projetos/screenshot-2026-08-29-172829.png",
+      "descricao": "Realizamos a atividade sobre a Espro que eu vejo, um momento importante de aprendizado e troca de experiências. Durante a atividade, construímos uma árvore com a profissão dos sonhos de cada colaborador e do outro lado decidimos criar uma parede em construção e em seu centro uma porta aberta, que representa a abertura de uma nova oportunidade em nossas vidas dada pelo Espro. tivemos a oportunidade de desenvolver novas habilidades, trabalhar em equipe e refletir sobre temas relevantes para o nosso crescimento pessoal e profissional. Foi uma experiência enriquecedora, que contribuiu para ampliar nosso conhecimento e fortalecer a união da turma.",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Fevereiro Roxo e Laranja",
+      "setor": "4SMA",
+      "setorId": "4sma",
+      "categoria": "Conscientização",
+      "data": "19/02/2026",
+      "imagem": "/assets/images/projetos/screenshot-2026-08-29-173407.png",
+      "descricao": "Nosso setor 4SMA fizeram uma apresentação sobre o Fevereiro Roxo e Laranja, destacando a importância da informação, do diagnóstico precoce e da solidariedade. Durante a atividade, foram abordadas doenças como lúpus, fibromialgia, Alzheimer e leucemia, reforçando a importância do cuidado com a saúde e da doação de medula óssea.",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Janeiro Branco - Dinâmica no Orquidário",
+      "setor": "Geral",
+      "categoria": "Saúde",
+      "data": "29/01/2026",
+      "imagem": "/assets/images/projetos/untitled.jpg",
+      "descricao": "Vivemos um dia totalmente fora da rotina, focado em lazer, movimento e conexão. Rolou atividade física, dinâmicas em grupo e aquele momento de curtir a paisagem incrível da praia.\nMais do que um passeio, foi uma experiência que reforça como pausar, respirar e cuidar do bem-estar faz toda a diferença para o equilíbrio de todos.",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Saúde e Qualidade de Vida no Trabalho",
+      "setor": "Geral",
+      "categoria": "Saúde",
+      "data": "05/03/2026",
+      "imagem": "/assets/images/projetos/screenshot-2026-08-29-173253.png",
+      "descricao": "tivemos uma apresentação dinâmica sobre saúde individual no trabalho feito pelos setores de treinamento e desenvolvimento junto com o setor 4SMA, onde os alunos participaram de uma atividade interativa utilizando cards coloridos 🟥🟩🟨\nDurante a dinâmica, cada um levantava o card da cor correspondente quando se identificava com as situações apresentadas, promovendo reflexão, participação e diálogo sobre a importância do cuidado com a saúde individual do colaborador. Foi um momento de aprendizado leve, participativo e muito enriquecedor.",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "Saúde no Trabalho",
+      "setor": "4SMA",
+      "setorId": "4sma",
+      "categoria": "Saúde",
+      "data": "Em breve",
+      "descricao": "Descrição em breve.",
+      "status": "Realizado"
+    },
+    {
+      "titulo": "VivaCast+",
+      "setor": "Viva+",
+      "setorId": "diretoria",
+      "categoria": "Direitos Humanos",
+      "data": "21/05/2026",
+      "imagem": "/assets/images/projetos/vivacsat.jpg",
+      "descricao": "A equipe da Viva+ esteve reunida ao lado do Promotor de Justiça Carlos Cabral Cabrera para mais um momento especial da entrevista sobre o Maio Laranja 💛\nAlém da conversa enriquecedora, os bastidores também renderam registros especiais, incluindo uma foto com toda a equipe envolvida nessa produção feita com muito cuidado, responsabilidade e dedicação.",
+      "status": "Realizado"
+    }
+  ]
+}

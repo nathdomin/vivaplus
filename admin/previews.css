@@ -71,3 +71,8 @@ body {
 .prev .project-card {
   cursor: default;
 }
+
+/* Card único (colaborador ou projeto), com a largura de um card do site. */
+.prev-uma {
+  max-width: 280px;
+}

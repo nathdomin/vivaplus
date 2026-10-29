@@ -1,15 +1,15 @@
 /* =========================================================
    VIVA+ — colaboradores.js
-   Os colaboradores agora vivem em data/colaboradores.json —
-   não mais neste arquivo. Isso permite editar a lista pelo
-   painel de administração (Decap CMS, em /admin) sem tocar
-   em código. Veja o README para o passo a passo completo.
+   Os colaboradores vivem em data/colaboradores/ (um arquivo
+   por pessoa, editado pelo painel /admin — Decap CMS). O script
+   scripts/gerar-dados.js junta tudo em data/gerado/colaboradores.json
+   a cada publicação. Veja o README para o passo a passo completo.
 
    Este arquivo só cuida de CARREGAR esse JSON e RENDERIZAR
    os cards, o filtro e os dados usados no modal de setor.
    ========================================================= */
 
-const CAMINHO_DADOS_COLABORADORES = "data/colaboradores.json";
+const CAMINHO_DADOS_COLABORADORES = "data/gerado/colaboradores.json";
 
 /* Preenchido de forma assíncrona por carregarColaboradores().
    Outros arquivos (ex.: setores.js) leem esta mesma variável
@@ -115,7 +115,7 @@ function ordenarComGestorPrimeiro(lista) {
       const dados = await resposta.json();
       colaboradores = Array.isArray(dados.colaboradores) ? dados.colaboradores : [];
     } catch (erro) {
-      console.error("Não foi possível carregar data/colaboradores.json:", erro);
+      console.error("Não foi possível carregar data/gerado/colaboradores.json:", erro);
       erroAoCarregar = true;
     }
     // Os botões de filtro e o nome do setor em cada card vêm de data/setores.json.

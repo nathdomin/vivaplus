@@ -1,0 +1,12 @@
+# =============================================================
+# Viva+ — configuração de publicação no Netlify
+#
+# A cada publicação, o script abaixo junta os arquivos individuais
+# de colaboradores e projetos (editados no painel /admin) nos JSONs
+# que o site lê, em data/gerado/. Veja scripts/gerar-dados.js e a
+# seção "Painel de administração" do README.
+# =============================================================
+
+[build]
+  command = "node scripts/gerar-dados.js"
+  publish = "."

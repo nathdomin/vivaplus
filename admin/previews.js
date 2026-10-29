@@ -4,9 +4,9 @@
    usa o mesmo css/style.css e os mesmos ícones de setor, então
    o card que você vê aqui é o card que aparece publicado.
 
-   Cada modelo é registrado pelo "name" do arquivo em
-   admin/config.yml (colaboradores, projetos, setores, metas,
-   orientacoes). A pré-visualização é só leitura: nada daqui
+   Cada modelo é registrado pelo "name" da coleção (colaboradores e
+   projetos, que são uma pasta com um arquivo por item) ou do arquivo
+   (setores, metas, orientacoes) em admin/config.yml. A pré-visualização é só leitura: nada daqui
    é gravado no repositório.
    ========================================================= */
 
@@ -62,73 +62,57 @@
     );
   }
 
-  /* ---------- Colaboradores: agrupados por setor ---------- */
-  function ColaboradoresPreview(props) {
-    const itens = lista(props.entry, "colaboradores");
-    const grupos = setores.map((s) => ({ nome: s.nome, itens: itens.filter((c) => c.setorId === s.id) }));
-    grupos.push({ nome: "Sem setor", itens: itens.filter((c) => !setorPorId(c.setorId)) });
-
+  /* ---------- Colaborador (um arquivo por pessoa) ---------- */
+  function ColaboradorPreview(props) {
+    const c = props.entry.get("data").toJS();
     return moldura(
-      "Pré-visualização agrupada por setor. No site, o filtro “Todos” segue a ordem da lista.",
-      grupos
-        .filter((g) => g.itens.length)
-        .map((g) =>
+      "Pré-visualização do card deste colaborador.",
+      h(
+        "div",
+        { className: "prev-uma" },
+        h(
+          "article",
+          { className: "team-card" },
           h(
-            "section",
-            { key: g.nome, className: "prev-grupo" },
-            h("h3", { className: "prev-titulo" }, g.nome, h("span", null, g.itens.length)),
-            h(
-              "div",
-              { className: "team-grid" },
-              g.itens.map((c, i) =>
-                h(
-                  "article",
-                  { key: i, className: "team-card" },
-                  h(
-                    "div",
-                    { className: "team-avatar" },
-                    h("span", null, iniciais(c.nome)),
-                    c.foto ? h("img", { src: urlImagem(props, c.foto), alt: "" }) : null
-                  ),
-                  h("h3", null, c.nome || "Novo colaborador"),
-                  h("p", { className: "role" }, c.cargo || "Informações em breve"),
-                  h("span", { className: "dept-tag" }, nomeSetor(c.setorId))
-                )
-              )
-            )
-          )
+            "div",
+            { className: "team-avatar" },
+            h("span", null, iniciais(c.nome)),
+            c.foto ? h("img", { src: urlImagem(props, c.foto), alt: "" }) : null
+          ),
+          h("h3", null, c.nome || "Novo colaborador"),
+          h("p", { className: "role" }, c.cargo || "Informações em breve"),
+          h("span", { className: "dept-tag" }, nomeSetor(c.setorId))
         )
+      )
     );
   }
 
-  /* ---------- Projetos ---------- */
-  function ProjetosPreview(props) {
-    const itens = lista(props.entry, "projetos");
+  /* ---------- Projeto (um arquivo por projeto) ---------- */
+  function ProjetoPreview(props) {
+    const p = props.entry.get("data").toJS();
     return moldura(
-      "Pré-visualização dos cards da seção “Projetos & atividades”.",
+      "Pré-visualização do card deste projeto na seção “Projetos & atividades”.",
       h(
         "div",
-        { className: "prev-grid" },
-        itens.map((p, i) =>
+        { className: "prev-uma" },
+        h(
+          "article",
+          { className: "project-card" },
           h(
-            "article",
-            { key: i, className: "project-card" },
-            h(
-              "div",
-              { className: "project-thumb" },
-              h("span", { className: "project-status" }, p.status || ""),
-              p.imagem
-                ? h("img", { className: "project-thumb-img is-loaded", src: urlImagem(props, p.imagem), alt: "" })
-                : h("span", { className: "project-thumb-placeholder" }, "Imagem em breve")
-            ),
-            h(
-              "div",
-              { className: "project-body" },
-              h("div", { className: "project-cat" }, p.categoria || ""),
-              h("h3", null, p.titulo || "Novo projeto"),
-              h("p", { className: "project-desc" }, p.descricao || ""),
-              h("div", { className: "project-meta" }, h("span", null, p.setor || ""), h("span", null, p.data || ""))
-            )
+            "div",
+            { className: "project-thumb" },
+            h("span", { className: "project-status" }, p.status || ""),
+            p.imagem
+              ? h("img", { className: "project-thumb-img is-loaded", src: urlImagem(props, p.imagem), alt: "" })
+              : h("span", { className: "project-thumb-placeholder" }, "Imagem em breve")
+          ),
+          h(
+            "div",
+            { className: "project-body" },
+            h("div", { className: "project-cat" }, p.categoria || ""),
+            h("h3", null, p.titulo || "Novo projeto"),
+            h("p", { className: "project-desc" }, p.descricao || ""),
+            h("div", { className: "project-meta" }, h("span", null, p.setor || ""), h("span", null, p.data || ""))
           )
         )
       )
@@ -241,8 +225,8 @@
   CMS.registerPreviewStyle("/css/style.css");
   CMS.registerPreviewStyle("/admin/previews.css");
 
-  CMS.registerPreviewTemplate("colaboradores", ColaboradoresPreview);
-  CMS.registerPreviewTemplate("projetos", ProjetosPreview);
+  CMS.registerPreviewTemplate("colaboradores", ColaboradorPreview);
+  CMS.registerPreviewTemplate("projetos", ProjetoPreview);
   CMS.registerPreviewTemplate("setores", SetoresPreview);
   CMS.registerPreviewTemplate("metas", MetasPreview);
   CMS.registerPreviewTemplate("orientacoes", OrientacoesPreview);

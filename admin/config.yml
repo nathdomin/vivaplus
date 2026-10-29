@@ -39,6 +39,12 @@ public_folder: "/assets/images"
 
 locale: "pt"
 
+# Nomes de arquivo dos novos colaboradores/projetos: sem acento e sem
+# espaços (ex.: "Thayná Brandão" vira thayna-brandao.json).
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
 collections:
   - name: "setores"
     label: "Setores"
@@ -144,114 +150,114 @@ collections:
 
   - name: "colaboradores"
     label: "Colaboradores"
-    description: "Time exibido na seção “Colaboradores” do site e nos modais de cada setor."
-    files:
-      - name: "colaboradores"
-        label: "Lista de colaboradores"
-        file: "data/colaboradores.json"
-        format: "json"
-        fields:
-          - label: "Colaboradores"
-            name: "colaboradores"
-            widget: "list"
-            label_singular: "Colaborador"
-            summary: "{{fields.setorId}} · {{fields.nome}} — {{fields.cargo}}"
-            hint: "Cada item começa pelo setor. Ao adicionar alguém, arraste o item para junto do restante do setor: a ordem desta lista é a ordem do filtro “Todos” no site."
-            fields:
-              - label: "Nome completo"
-                name: "nome"
-                widget: "string"
+    label_singular: "Colaborador"
+    description: "Time exibido na seção “Colaboradores” do site e nos modais de cada setor. Um arquivo por pessoa: use a busca, ordene e agrupe por setor nos botões acima da lista."
+    folder: "data/colaboradores"
+    extension: "json"
+    format: "json"
+    create: true
+    identifier_field: "nome"
+    slug: "{{nome}}"
+    summary: "{{setorId}} · {{nome}} — {{cargo}}"
+    sortable_fields: ["nome", "setorId", "cargo"]
+    view_groups:
+      - { label: "Setor", field: "setorId" }
+    fields:
+      - label: "Nome completo"
+        name: "nome"
+        widget: "string"
 
-              - label: "Setor"
-                name: "setorId"
-                widget: "relation"
-                collection: "setores"
-                file: "setores"
-                search_fields: ["setores.*.nome"]
-                value_field: "setores.*.id"
-                display_fields: ["setores.*.nome"]
-                hint: "A lista mostra os setores cadastrados na coleção “Setores”. Se o setor de uma pessoa foi apagado, escolha o novo setor aqui."
+      - label: "Setor"
+        name: "setorId"
+        widget: "relation"
+        collection: "setores"
+        file: "setores"
+        search_fields: ["setores.*.nome"]
+        value_field: "setores.*.id"
+        display_fields: ["setores.*.nome"]
+        hint: "A lista mostra os setores cadastrados na coleção “Setores”. No site, a pessoa aparece no setor escolhido, com os gestores primeiro."
 
-              - label: "Cargo"
-                name: "cargo"
-                widget: "string"
-                required: false
-                default: "Informações em breve"
-                hint: "Deixe em branco para manter \"Informações em breve\"."
+      - label: "Cargo"
+        name: "cargo"
+        widget: "string"
+        required: false
+        default: "Informações em breve"
+        hint: "Deixe em branco para manter \"Informações em breve\". Quem tem Gestor(a) ou Diretor(a) no cargo aparece primeiro no setor."
 
-              - label: "Foto"
-                name: "foto"
-                widget: "image"
-                required: false
-                media_folder: "/assets/images/colaboradores"
-                public_folder: "/assets/images/colaboradores"
-                hint: "Enviada automaticamente para assets/images/colaboradores/."
+      - label: "Foto"
+        name: "foto"
+        widget: "image"
+        required: false
+        media_folder: "/assets/images/colaboradores"
+        public_folder: "/assets/images/colaboradores"
+        hint: "Enviada automaticamente para assets/images/colaboradores/."
 
   - name: "projetos"
     label: "Projetos e atividades"
-    description: "Cards e timeline da seção “Projetos & atividades” do site."
-    files:
-      - name: "projetos"
-        label: "Lista de projetos"
-        file: "data/projetos.json"
-        format: "json"
-        fields:
-          - label: "Projetos"
-            name: "projetos"
-            widget: "list"
-            label_singular: "Projeto"
-            summary: "{{fields.titulo}} — {{fields.status}}"
-            fields:
-              - label: "Título"
-                name: "titulo"
-                widget: "string"
+    label_singular: "Projeto"
+    description: "Cards e timeline da seção “Projetos & atividades” do site. Um arquivo por projeto: use a busca, ordene e agrupe por setor nos botões acima da lista."
+    folder: "data/projetos"
+    extension: "json"
+    format: "json"
+    create: true
+    identifier_field: "titulo"
+    slug: "{{titulo}}"
+    summary: "{{titulo}} — {{status}}"
+    sortable_fields: ["titulo", "setorId", "status", "data"]
+    view_groups:
+      - { label: "Setor", field: "setorId" }
+      - { label: "Status", field: "status" }
+    fields:
+      - label: "Título"
+        name: "titulo"
+        widget: "string"
 
-              - label: "Setor exibido no card"
-                name: "setor"
-                widget: "string"
-                hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “Viva+”, “Geral”."
+      - label: "Setor exibido no card"
+        name: "setor"
+        widget: "string"
+        hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “Viva+”, “Geral”."
 
-              - label: "Setor (filtro)"
-                name: "setorId"
-                widget: "relation"
-                collection: "setores"
-                file: "setores"
-                search_fields: ["setores.*.nome"]
-                value_field: "setores.*.id"
-                display_fields: ["setores.*.nome"]
-                required: false
-                hint: "Usado para o botão de filtro. Deixe em branco para um projeto geral (sem setor): ele aparece só em “Todos”. A lista mostra os setores cadastrados na coleção “Setores”."
+      - label: "Setor (filtro)"
+        name: "setorId"
+        widget: "relation"
+        collection: "setores"
+        file: "setores"
+        search_fields: ["setores.*.nome"]
+        value_field: "setores.*.id"
+        display_fields: ["setores.*.nome"]
+        required: false
+        hint: "Usado para o botão de filtro. Deixe em branco para um projeto geral (sem setor): ele aparece só em “Todos”. A lista mostra os setores cadastrados na coleção “Setores”."
 
-              - label: "Categoria"
-                name: "categoria"
-                widget: "string"
-                hint: "Ex.: Saúde, Integração, Institucional."
+      - label: "Categoria"
+        name: "categoria"
+        widget: "string"
+        hint: "Ex.: Saúde, Integração, Institucional."
 
-              - label: "Data"
-                name: "data"
-                widget: "string"
-                default: "Em breve"
-                hint: "Texto livre — ex.: “10/2026” ou “Em breve”."
+      - label: "Data"
+        name: "data"
+        widget: "string"
+        default: "Em breve"
+        hint: "Texto livre — ex.: “10/2026” ou “Em breve”."
 
-              - label: "Imagem"
-                name: "imagem"
-                widget: "image"
-                required: false
-                media_folder: "/assets/images/projetos"
-                public_folder: "/assets/images/projetos"
-                hint: "Enviada automaticamente para assets/images/projetos/. Se ficar em branco, o card mostra “Imagem em breve”."
+      - label: "Imagem"
+        name: "imagem"
+        widget: "image"
+        required: false
+        media_folder: "/assets/images/projetos"
+        public_folder: "/assets/images/projetos"
+        hint: "Enviada automaticamente para assets/images/projetos/. Se ficar em branco, o card mostra “Imagem em breve”."
 
-              - label: "Descrição"
-                name: "descricao"
-                widget: "text"
-                default: "Descrição em breve."
+      - label: "Descrição"
+        name: "descricao"
+        widget: "text"
+        default: "Descrição em breve."
 
-              - label: "Status"
-                name: "status"
-                widget: "select"
-                options:
-                  - { label: "Realizado", value: "Realizado" }
-                  - { label: "Em andamento", value: "Em andamento" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Realizado", value: "Realizado" }
+          - { label: "Em andamento", value: "Em andamento" }
 
   - name: "metas"
     label: "Metas por setor"

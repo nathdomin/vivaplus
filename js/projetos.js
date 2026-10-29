@@ -1,12 +1,14 @@
 /* =========================================================
    VIVA+ — projetos.js
    Renderiza cards de projetos, filtros por setor e a
-   visualização em timeline. Os projetos em si vêm de
-   data/projetos.json, editável pelo painel /admin (Decap
-   CMS) — veja o README. Os filtros continuam em js/data.js.
+   visualização em timeline. Os projetos vivem em data/projetos/
+   (um arquivo por projeto, editado pelo painel /admin — Decap
+   CMS) e são juntados em data/gerado/projetos.json por
+   scripts/gerar-dados.js — veja o README. Os botões de filtro
+   vêm de js/data.js.
    ========================================================= */
 
-const CAMINHO_DADOS_PROJETOS = "data/projetos.json";
+const CAMINHO_DADOS_PROJETOS = "data/gerado/projetos.json";
 
 /* Preenchido de forma assíncrona por carregarProjetos(). */
 let projetos = [];
@@ -162,7 +164,7 @@ let projetos = [];
       const dados = await resposta.json();
       projetos = Array.isArray(dados.projetos) ? dados.projetos : [];
     } catch (erro) {
-      console.error("Não foi possível carregar data/projetos.json:", erro);
+      console.error("Não foi possível carregar data/gerado/projetos.json:", erro);
       erroAoCarregar = true;
     }
     // Os botões de filtro dependem de data/setores.json.

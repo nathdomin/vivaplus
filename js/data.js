@@ -3,8 +3,8 @@
    Fonte de verdade para valores e filtros (Colaboradores
    e Projetos). Os setores são carregados de
    data/setores.json (veja abaixo).
-   Colaboradores (data/colaboradores.json) e projetos
-   (data/projetos.json) ficam em arquivos separados, editáveis
+   Colaboradores (data/colaboradores/) e projetos
+   (data/projetos/) ficam em arquivos separados, editáveis
    pelo painel /admin (Decap CMS) sem tocar em código.
    Todo o conteúdo aqui reflete exatamente o material
    institucional fornecido. Nada foi inventado — onde a
@@ -118,7 +118,7 @@ function filtrosColaboradores() {
 
 /* ---------------------------------------------------------
    PROJETOS & ATIVIDADES
-   Os projetos em si vivem em data/projetos.json, editável
+   Os projetos em si vivem em data/projetos/ (um arquivo por projeto), editável
    pelo painel /admin (Decap CMS). O filtro só lista setores
    que têm ao menos um projeto, para não abrir uma lista vazia.
    --------------------------------------------------------- */

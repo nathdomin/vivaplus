@@ -13,20 +13,24 @@ viva-plus/
 │   ├── previews.js / .css → pré-visualização com o visual real do site
 │   └── config.yml         → configuração do painel (coleções, campos, backend)
 ├── data/
-│   ├── colaboradores.json → lista de colaboradores, editável pelo painel /admin
-│   ├── projetos.json      → lista de projetos/atividades, editável pelo painel /admin
+│   ├── colaboradores/     → um arquivo por colaborador (ana-lia.json...), editado pelo painel /admin
+│   ├── projetos/          → um arquivo por projeto/atividade, editado pelo painel /admin
+│   ├── gerado/            → colaboradores.json e projetos.json montados pelo script (não edite à mão)
 │   ├── metas.json         → percentual e metas de cada setor, editável pelo painel /admin
 │   ├── setores.json       → setores (organograma, cards, modais) + perfil usado pelo agente de carreira
 │   └── orientacoes.json   → significado dos meses + dicas de bem-estar, editável pelo painel /admin
+├── scripts/
+│   └── gerar-dados.js     → junta data/colaboradores/ e data/projetos/ em data/gerado/
+├── netlify.toml           → manda o Netlify rodar o script a cada publicação
 ├── css/
 │   ├── style.css        → design system e layout
 │   ├── responsive.css   → breakpoints (320px → 1920px)
 │   └── animations.css   → animações e reveal ao rolar
 ├── js/
 │   ├── data.js           → valores, filtros e carregamento de data/setores.json
-│   ├── colaboradores.js  → carrega data/colaboradores.json e renderiza o time
+│   ├── colaboradores.js  → carrega data/gerado/colaboradores.json e renderiza o time
 │   ├── setores.js        → organograma, cards de setores e modal
-│   ├── projetos.js       → carrega data/projetos.json e renderiza grid/timeline
+│   ├── projetos.js       → carrega data/gerado/projetos.json e renderiza grid/timeline
 │   ├── orientacoes.js    → carrega data/orientacoes.json e renderiza a seção Orientações
 │   ├── carreira.js       → seção Carreira: incorpora o agente de IA (iframe com carregamento sob demanda)
 │   ├── main.js           → navbar, menu mobile, reveal, pilares, valores, metas, contato
@@ -72,25 +76,27 @@ A forma recomendada é pelo **painel de administração em `/admin`** — veja a
 ["Painel de administração"](#painel-de-administração-decap-cms) mais abaixo. Ele
 não exige mexer em código nem em JSON na mão.
 
-Se preferir editar diretamente, os colaboradores ficam em `data/colaboradores.json`
-(não mais em `js/colaboradores.js`). Para adicionar um novo, inclua um objeto na
-lista `colaboradores`:
+Cada colaborador é **um arquivo** em `data/colaboradores/` (ex.:
+`data/colaboradores/ana-lia.json`). No painel, a coleção **Colaboradores** tem busca,
+**Ordenar por** e **Agrupar por → Setor**. Se preferir criar o arquivo à mão:
 
 ```json
 {
   "nome": "Nome Completo",
   "setorId": "rh",
   "cargo": "Cargo do colaborador",
-  "foto": "assets/images/colaboradores/nome-do-arquivo.jpg"
+  "foto": "/assets/images/colaboradores/nome-do-arquivo.jpg"
 }
 ```
 
-`setorId` precisa ser um dos ids definidos em `data/setores.json`. O card é gerado automaticamente na
-seção **Colaboradores** e também aparece no modal do setor correspondente.
+`setorId` precisa ser um dos ids definidos em `data/setores.json`. O card é gerado
+automaticamente na seção **Colaboradores** e também aparece no modal do setor.
+Para remover alguém, apague o arquivo (ou use "Excluir entrada" no painel).
 
-Para remover alguém, apague o objeto correspondente dentro do array. Como é um
-arquivo JSON, tome cuidado com vírgulas e chaves — um erro de sintaxe impede o
-site de carregar a lista.
+**Ordem no site:** não precisa arrastar nada. O filtro "Todos" mostra as pessoas por
+setor (na ordem de `data/setores.json`), com gestores/diretores primeiro e depois
+por nome. Isso é feito pelo script `scripts/gerar-dados.js` — veja
+["Como os dados chegam ao site"](#como-os-dados-chegam-ao-site).
 
 ---
 
@@ -100,17 +106,17 @@ Assim como os colaboradores, a forma recomendada é pelo **painel `/admin`** —
 a coleção **Projetos** já vem com upload de imagem, sem precisar mexer em
 código. Veja ["Painel de administração"](#painel-de-administração-decap-cms).
 
-Se preferir editar direto, os projetos ficam em `data/projetos.json` (não mais
-em `js/data.js`). Para adicionar um novo, inclua um objeto na lista `projetos`:
+Se preferir criar o arquivo à mão, cada projeto é **um arquivo** em `data/projetos/`
+(ex.: `data/projetos/dia-das-mulheres.json`):
 
 ```json
 {
   "titulo": "Nome do projeto",
   "setor": "Nome do setor (texto livre, para exibição)",
-  "setorId": "ted",
+  "setorId": "rh",
   "categoria": "Saúde",
   "data": "Em breve",
-  "imagem": "assets/images/projetos/nome-do-arquivo.jpg",
+  "imagem": "/assets/images/projetos/nome-do-arquivo.jpg",
   "descricao": "Descrição em breve.",
   "status": "Realizado"
 }
@@ -226,18 +232,37 @@ painel de administração, em `/admin`. Diferente do antigo `admin.html`, ele:
 
 - não pede para baixar e reenviar nenhum arquivo manualmente;
 - salva as alterações direto no repositório Git, como um commit normal;
-- não usa banco de dados — o "banco de dados" é o próprio `data/colaboradores.json`
-  versionado no Git;
+- não usa banco de dados — o "banco de dados" são os próprios arquivos em `data/`
+  versionados no Git;
 - não roda nenhum servidor seu: é só HTML/JS estático (`admin/index.html` +
   `admin/config.yml`), como o resto do site.
 
-Hoje ele gerencia os **colaboradores** (`data/colaboradores.json`), os
-**projetos/atividades** (`data/projetos.json`) — incluindo upload das fotos —
+Hoje ele gerencia os **colaboradores** (`data/colaboradores/`), os
+**projetos/atividades** (`data/projetos/`) — incluindo upload das fotos —
 e as **orientações** (`data/orientacoes.json`): o significado de cada mês e as
 dicas rápidas de bem-estar exibidas na seção "Orientações" do site.
 Também gerencia os **setores** (`data/setores.json`), incluindo os campos de
 perfil usados pelo agente de carreira. Os valores continuam em `js/data.js`,
 editados diretamente no código.
+
+### Como os dados chegam ao site
+
+Colaboradores e projetos são editados **um arquivo por item**, mas o site lê um JSON
+único de cada. O script `scripts/gerar-dados.js` (só Node, sem instalar nada) faz a
+junção:
+
+```
+data/colaboradores/*.json → data/gerado/colaboradores.json
+data/projetos/*.json      → data/gerado/projetos.json
+```
+
+- **No Netlify** ele roda sozinho a cada publicação (`netlify.toml`, comando de build).
+  Ou seja: editou no painel → commit → o Netlify regenera e publica.
+- **No seu computador**, rode `node scripts/gerar-dados.js` depois de editar, ou
+  `node scripts/gerar-dados.js --watch` para regenerar sozinho enquanto você usa o
+  painel local (`npx decap-server`).
+- Os arquivos de `data/gerado/` ficam no repositório de propósito: se o build falhar, o
+  site continua com a última versão (entre um build e outro, a cópia do repositório pode ficar um passo atrás: vale sempre a que o build gera). Não os edite à mão: são sobrescritos.
 
 ### O que precisa ser feito por fora (configuração única)
 
@@ -314,8 +339,8 @@ ou `assets/images/projetos/`, e o caminho é preenchido sozinho no JSON.
 
 **Editando os arquivos direto:**
 1. Salve a imagem dentro de `assets/images/colaboradores/` ou `assets/images/projetos/`.
-2. Aponte o campo `foto` (colaborador, em `data/colaboradores.json`) ou `imagem`
-   (projeto, em `data/projetos.json`) para o caminho do arquivo.
+2. Aponte o campo `foto` (colaborador, em `data/colaboradores/<nome>.json`) ou `imagem`
+   (projeto, em `data/projetos/<titulo>.json`) para o caminho do arquivo.
 3. Enquanto uma foto não existir, o site mostra automaticamente um fallback: iniciais do nome (colaboradores) ou o rótulo "Imagem em breve" (projetos) — nenhum link fica quebrado.
 
 ---
