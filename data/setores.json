@@ -37,24 +37,6 @@
     },
     {
       "atividades": [
-        "Dinâmica no Orquidário",
-        "Janeiro Branco",
-        "Apresentação dos dados do formulário",
-        "Dinâmica sobre Saúde e Qualidade de Vida no Trabalho, em parceria com o 4SMA"
-      ],
-      "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
-      "requisitos": [],
-      "resumo": "Conectividade, inovação e suporte contínuo para o crescimento da empresa.",
-      "nome": "Tecnologia da Informação",
-      "id": "ti",
-      "numero": "03",
-      "objetivo": [
-        "Desenvolver competências e desempenho dos colaboradores por meio de aprendizado contínuo, colaboração e inovação, fortalecendo equipes, cultura organizacional e marca empregadora."
-      ],
-      "competencias": []
-    },
-    {
-      "atividades": [
         "Fevereiro Roxo e Laranja",
         "Saúde no Trabalho"
       ],
@@ -103,6 +85,13 @@
         "Atuar como ponte entre cliente e empresa, orientando sobre a empresa, seus objetivos e os valores dos serviços prestados."
       ],
       "competencias": []
+    },
+    {
+      "id": "ti",
+      "numero": "03",
+      "nome": "Tecnologia da Informação",
+      "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
+      "resumo": "Conectividade, inovação e suporte contínuo para o crescimento da empresa."
     }
   ]
 }
