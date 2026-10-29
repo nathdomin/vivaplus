@@ -59,9 +59,13 @@ function escrever(nome, chave, lista) {
   console.log(`data/gerado/${nome}: ${lista.length} itens`);
 }
 
-/* Mesma regra do site (js/colaboradores.js): quem tem Gestor(a) ou
-   Diretor(a) no cargo aparece primeiro dentro do setor. */
-const ehGestor = (cargo) => /gestor|diretor/i.test(cargo || "");
+/* Mesma regra do site (js/colaboradores.js): dentro do setor, primeiro
+   Gestor(a)/Diretor(a), depois Co-Gestor(a), depois os demais. */
+function pesoCargo(cargo) {
+  const c = cargo || "";
+  if (/co-?\s*(gestor|diretor)/i.test(c)) return 1;
+  return /gestor|diretor/i.test(c) ? 0 : 2;
+}
 const porNome = (a, b) => String(a.nome || "").localeCompare(String(b.nome || ""), "pt-BR");
 
 function gerar() {
@@ -77,11 +81,11 @@ function gerar() {
   };
 
   // Colaboradores: por setor (na ordem de data/setores.json), gestores
-  // primeiro e depois por nome — sem precisar arrastar nada no painel.
+  // e co-gestores primeiro, depois por nome — sem precisar arrastar nada no painel.
   const colaboradores = lerPasta("colaboradores").sort(
     (a, b) =>
       posicao(a.setorId) - posicao(b.setorId) ||
-      (ehGestor(a.cargo) ? 0 : 1) - (ehGestor(b.cargo) ? 0 : 1) ||
+      pesoCargo(a.cargo) - pesoCargo(b.cargo) ||
       porNome(a, b)
   );
   escrever("colaboradores.json", "colaboradores", colaboradores);

@@ -22,15 +22,18 @@ let colaboradores = [];
    ?setor=<id>, para a lista de integrantes já vir preenchida. */
 let colaboradoresProntos = Promise.resolve();
 
-/* Considera "gestor" quem tem Gestor(a) ou Diretor(a) no cargo —
-   esses nomes aparecem primeiro quando o time é filtrado por setor
-   e na lista de integrantes do modal (setores.js usa esta função). */
-function ehGestor(cargo) {
-  return /gestor|diretor/i.test(cargo || "");
+/* Ordem dentro do setor: primeiro quem tem Gestor(a) ou Diretor(a) no
+   cargo, depois os Co-Gestor(a)/Co-Diretor(a), depois os demais. Vale
+   quando o time é filtrado por setor e na lista de integrantes do modal
+   (setores.js usa esta função). Mantenha igual a scripts/gerar-dados.js. */
+function pesoCargo(cargo) {
+  const c = cargo || "";
+  if (/co-?\s*(gestor|diretor)/i.test(c)) return 1;
+  return /gestor|diretor/i.test(c) ? 0 : 2;
 }
 
 function ordenarComGestorPrimeiro(lista) {
-  return [...lista].sort((a, b) => (ehGestor(a.cargo) ? 0 : 1) - (ehGestor(b.cargo) ? 0 : 1));
+  return [...lista].sort((a, b) => pesoCargo(a.cargo) - pesoCargo(b.cargo));
 }
 
 /* =========================================================
