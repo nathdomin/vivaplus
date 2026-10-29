@@ -9,6 +9,8 @@ viva-plus/
 ├── index.html
 ├── admin/
 │   ├── index.html         → carrega o Decap CMS (painel de administração)
+│   ├── tema.css           → cores e fontes da Viva+ no painel
+│   ├── previews.js / .css → pré-visualização com o visual real do site
 │   └── config.yml         → configuração do painel (coleções, campos, backend)
 ├── data/
 │   ├── colaboradores.json → lista de colaboradores, editável pelo painel /admin
@@ -282,6 +284,12 @@ o painel detecta o ambiente local e grava as alterações direto nos arquivos do
 seu computador, sem precisar de login nem de internet. Ótimo para testar antes
 de configurar o Netlify.
 
+### Visual do painel e pré-visualização
+
+- `admin/tema.css`: cores e fontes da Viva+ no painel. O Decap gera classes com o nome do componente, então o tema usa seletores como `[class*="AppHeader"]`. Por isso a versão do Decap está **fixa** em `admin/index.html` (hoje `3.17.3`): para atualizar, troque o número, abra o `/admin` e confira o visual.
+- `admin/previews.js` e `admin/previews.css`: a pré-visualização à direita mostra os cards reais do site (usa `css/style.css` e `js/icones-setores.js`). Cada modelo é ligado ao `name` do arquivo em `admin/config.yml`; se você renomear um arquivo lá, renomeie também o modelo em `previews.js`.
+- Se o navegador mostrar o painel antigo depois de uma mudança, recarregue sem cache (Ctrl+Shift+R).
+
 ### Se você criar ou apagar um setor
 
 Nada precisa ser editado à mão: o campo "Setor" das coleções "Colaboradores",
@@ -314,7 +322,7 @@ ou `assets/images/projetos/`, e o caminho é preenchido sozinho no JSON.
 
 ## Como criar um novo setor
 
-1. Pelo painel `/admin` (coleção **Setores**) ou direto em `data/setores.json`, adicione um novo setor seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `competencias`, `requisitos`). O agente de carreira passa a considerá-lo automaticamente. Campos opcionais: `nomeCurto` (rótulo dos filtros, ex.: "RH") e `icone` (`geral`, `estrela`, `pessoas`, `capelo`, `escudo`, `balao` ou `aperto`; sem ele vale o genérico).
+1. Pelo painel `/admin` (coleção **Setores**) ou direto em `data/setores.json`, adicione um novo setor seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `competencias`, `requisitos`). O agente de carreira passa a considerá-lo automaticamente. Campos opcionais: `nomeCurto` (rótulo dos filtros, ex.: "RH") e `icone` (`geral`, `estrela`, `pessoas`, `capelo`, `escudo`, `balao`, `monitor` ou `aperto`; sem ele vale o genérico). Para criar um ícone novo, adicione o SVG em `js/icones-setores.js` e a opção em `admin/config.yml`.
 2. Em **Colaboradores**, **Projetos** e **Metas**, escolha o novo setor no campo "Setor". Os botões de filtro aparecem sozinhos (em Projetos, só para setores que têm ao menos um projeto).
 
 O organograma, os cards de setores, os filtros e os modais são gerados automaticamente — não é necessário tocar no HTML nem em `admin/config.yml`.

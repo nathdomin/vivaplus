@@ -17,26 +17,136 @@ backend:
 # está mesmo depois de publicar o site.
 local_backend: true
 
-# Pasta padrão para uploads. Cada campo de imagem abaixo define
-# seu próprio subpasta (colaboradores/ ou projetos/) — veja o
-# "media_folder" dentro de cada campo "widget: image".
+# Identidade do painel: logo na tela de login e link "Ver site"
+# no topo. O visual do painel em si fica em admin/tema.css, e as
+# pré-visualizações (com o visual do site) em admin/previews.js.
+logo_url: "/assets/images/logoviva.png"
+site_url: "https://vivaplus.netlify.app"
+display_url: "https://vivaplus.netlify.app"
+
+# Pasta padrão para uploads (aba "Mídia"). Cada campo de imagem
+# abaixo define a sua própria subpasta (colaboradores/ ou projetos/)
+# — veja o "media_folder" dentro de cada campo "widget: image".
 #
 # IMPORTANTE: caminhos de media_folder/public_folder DENTRO de um
 # campo são resolvidos a partir da pasta do arquivo da coleção
-# (aqui, "data/"), não a partir da raiz do site — por isso todos
-# os caminhos abaixo começam com "/": isso os torna absolutos,
-# contados a partir da raiz do repositório/site.
-media_folder: "/assets/images"
+# (aqui, "data/"), não a partir da raiz do site — por isso começam
+# com "/": isso os torna absolutos, contados a partir da raiz do
+# repositório/site. Já o media_folder global (abaixo) é contado a
+# partir da raiz do repositório e não leva a barra inicial.
+media_folder: "assets/images"
 public_folder: "/assets/images"
 
 locale: "pt"
 
 collections:
+  - name: "setores"
+    label: "Setores"
+    description: "Setores exibidos no organograma, nos cards e nos modais do site. O agente de carreira (VivAIplus) lê este mesmo arquivo para recomendar setores aos candidatos."
+    files:
+      - name: "setores"
+        label: "Lista de setores"
+        file: "data/setores.json"
+        format: "json"
+        fields:
+          - label: "Setores"
+            name: "setores"
+            widget: "list"
+            label_singular: "Setor"
+            summary: "{{fields.numero}} — {{fields.nome}}"
+            fields:
+              - label: "Id"
+                name: "id"
+                widget: "string"
+                pattern: ["^[a-z0-9-]+$", "Use só letras minúsculas, números e hífen."]
+                hint: "Identificador interno (ex.: rh). Não altere o id de um setor existente: colaboradores, projetos, metas e o agente de carreira dependem dele."
+
+              - label: "Número"
+                name: "numero"
+                widget: "string"
+                hint: "Ex.: 07. Exibido no organograma e nos cards."
+
+              - label: "Nome"
+                name: "nome"
+                widget: "string"
+
+              - label: "Nome curto (filtros)"
+                name: "nomeCurto"
+                widget: "string"
+                required: false
+                hint: "Rótulo dos botões de filtro de Colaboradores e Projetos (ex.: RH, T&D). Em branco, usa o nome completo."
+
+              - label: "Ícone"
+                name: "icone"
+                widget: "select"
+                required: false
+                default: "geral"
+                hint: "Ícone exibido no card e no modal do setor."
+                options:
+                  - { label: "Genérico (quadrados)", value: "geral" }
+                  - { label: "Estrela", value: "estrela" }
+                  - { label: "Pessoas", value: "pessoas" }
+                  - { label: "Capelo (formação)", value: "capelo" }
+                  - { label: "Escudo (segurança)", value: "escudo" }
+                  - { label: "Balão de conversa", value: "balao" }
+                  - { label: "Aperto de mão", value: "aperto" }
+                  - { label: "Monitor (tecnologia)", value: "monitor" }
+
+              - label: "Cor de destaque"
+                name: "corAccent"
+                widget: "select"
+                hint: "Cor do ícone do setor e da faixa lateral do card de metas."
+                options:
+                  - { label: "Azul", value: "var(--color-blue)" }
+                  - { label: "Verde", value: "var(--color-green)" }
+                  - { label: "Laranja", value: "var(--color-orange)" }
+                  - { label: "Gradiente azul → verde", value: "linear-gradient(135deg, var(--color-blue), var(--color-green))" }
+                  - { label: "Gradiente azul → laranja", value: "linear-gradient(135deg, var(--color-blue), var(--color-orange))" }
+
+              - label: "Resumo"
+                name: "resumo"
+                widget: "string"
+                hint: "Uma frase curta, exibida no card do setor."
+
+              - label: "Função / Objetivo"
+                name: "objetivo"
+                widget: "list"
+                required: false
+                minimize_collapsed: true
+                label_singular: "Item"
+                field: { label: "Item", name: "item", widget: "string" }
+
+              - label: "Atividades"
+                name: "atividades"
+                widget: "list"
+                required: false
+                minimize_collapsed: true
+                label_singular: "Atividade"
+                field: { label: "Atividade", name: "atividade", widget: "string" }
+
+              - label: "Competências desejáveis (só para o agente)"
+                name: "competencias"
+                widget: "list"
+                required: false
+                minimize_collapsed: true
+                label_singular: "Competência"
+                hint: "Não aparece no site. O agente de carreira compara com o currículo. Ex.: “Comunicação escrita”, “Excel intermediário”."
+                field: { label: "Competência", name: "competencia", widget: "string" }
+
+              - label: "Requisitos essenciais (só para o agente)"
+                name: "requisitos"
+                widget: "list"
+                required: false
+                minimize_collapsed: true
+                label_singular: "Requisito"
+                hint: "Não aparece no site. Requisitos técnicos obrigatórios para o agente recomendar o setor."
+                field: { label: "Requisito", name: "requisito", widget: "string" }
+
   - name: "colaboradores"
     label: "Colaboradores"
     description: "Time exibido na seção “Colaboradores” do site e nos modais de cada setor."
     files:
-      - name: "lista"
+      - name: "colaboradores"
         label: "Lista de colaboradores"
         file: "data/colaboradores.json"
         format: "json"
@@ -45,8 +155,8 @@ collections:
             name: "colaboradores"
             widget: "list"
             label_singular: "Colaborador"
-            summary: "{{fields.setorId}} · {{fields.nome}}"
-            hint: "Mantenha as pessoas agrupadas por setor: o início de cada item mostra o setor. Ao adicionar alguém, arraste o item para junto do restante do setor (a ordem aqui é a ordem em que aparecem no site, em “Todos”)."
+            summary: "{{fields.setorId}} · {{fields.nome}} — {{fields.cargo}}"
+            hint: "Cada item começa pelo setor. Ao adicionar alguém, arraste o item para junto do restante do setor: a ordem desta lista é a ordem do filtro “Todos” no site."
             fields:
               - label: "Nome completo"
                 name: "nome"
@@ -56,7 +166,7 @@ collections:
                 name: "setorId"
                 widget: "relation"
                 collection: "setores"
-                file: "lista"
+                file: "setores"
                 search_fields: ["setores.*.nome"]
                 value_field: "setores.*.id"
                 display_fields: ["setores.*.nome"]
@@ -78,10 +188,10 @@ collections:
                 hint: "Enviada automaticamente para assets/images/colaboradores/."
 
   - name: "projetos"
-    label: "Projetos"
-    description: "Projetos e atividades exibidos na seção “Projetos & atividades” do site (cards e timeline)."
+    label: "Projetos e atividades"
+    description: "Cards e timeline da seção “Projetos & atividades” do site."
     files:
-      - name: "lista"
+      - name: "projetos"
         label: "Lista de projetos"
         file: "data/projetos.json"
         format: "json"
@@ -96,16 +206,16 @@ collections:
                 name: "titulo"
                 widget: "string"
 
-              - label: "Setor (nome exibido)"
+              - label: "Setor exibido no card"
                 name: "setor"
                 widget: "string"
                 hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “Viva+”, “Geral”."
 
-              - label: "Setor (para o filtro)"
+              - label: "Setor (filtro)"
                 name: "setorId"
                 widget: "relation"
                 collection: "setores"
-                file: "lista"
+                file: "setores"
                 search_fields: ["setores.*.nome"]
                 value_field: "setores.*.id"
                 display_fields: ["setores.*.nome"]
@@ -143,11 +253,62 @@ collections:
                   - { label: "Realizado", value: "Realizado" }
                   - { label: "Em andamento", value: "Em andamento" }
 
+  - name: "metas"
+    label: "Metas por setor"
+    description: "Percentual e lista de metas de cada setor, na seção “Metas” do site e no modal do organograma."
+    files:
+      - name: "metas"
+        label: "Progresso das metas"
+        file: "data/metas.json"
+        format: "json"
+        fields:
+          - label: "Progresso por setor"
+            name: "progresso"
+            widget: "list"
+            label_singular: "Setor"
+            summary: "{{fields.setor}} — {{fields.percentual}}%"
+            hint: "Mantenha só um item por setor. Se um setor não tiver item aqui, o site mostra 30% como valor padrão."
+            fields:
+              - label: "Setor"
+                name: "setor"
+                widget: "relation"
+                collection: "setores"
+                file: "setores"
+                search_fields: ["setores.*.nome"]
+                value_field: "setores.*.id"
+                display_fields: ["setores.*.nome"]
+                hint: "A lista mostra os setores cadastrados na coleção “Setores”."
+
+              - label: "Percentual concluído"
+                name: "percentual"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                max: 100
+                hint: "Um número de 0 a 100. Ex.: 55 para 55%."
+
+              - label: "Metas do setor"
+                name: "metas"
+                widget: "list"
+                label_singular: "Meta"
+                summary: "{{fields.texto}}"
+                hint: "As metas exibidas no card do setor (seção “Metas”) e no modal do organograma. Marque “Concluída” para a meta aparecer riscada no site."
+                fields:
+                  - label: "Texto da meta"
+                    name: "texto"
+                    widget: "string"
+
+                  - label: "Concluída"
+                    name: "concluida"
+                    widget: "boolean"
+                    default: false
+                    hint: "Marque quando a meta já tiver sido alcançada — ela aparece riscada no site, sem ser removida da lista."
+
   - name: "orientacoes"
     label: "Orientações"
     description: "Conteúdo da seção “Orientações” do site: o significado de cada mês (destaque automático do mês atual) e as dicas rápidas de bem-estar (hidratação, sono, postura etc.)."
     files:
-      - name: "conteudo"
+      - name: "orientacoes"
         label: "Orientações"
         file: "data/orientacoes.json"
         format: "json"
@@ -220,147 +381,3 @@ collections:
                 name: "texto"
                 widget: "text"
                 hint: "Um parágrafo curto com a orientação completa."
-
-  - name: "setores"
-    label: "Setores"
-    description: "Setores exibidos no organograma, nos cards e nos modais do site. O agente de carreira (VivAIplus) lê este mesmo arquivo para recomendar setores aos candidatos."
-    files:
-      - name: "lista"
-        label: "Lista de setores"
-        file: "data/setores.json"
-        format: "json"
-        fields:
-          - label: "Setores"
-            name: "setores"
-            widget: "list"
-            label_singular: "Setor"
-            summary: "{{fields.numero}} — {{fields.nome}}"
-            fields:
-              - label: "Id"
-                name: "id"
-                widget: "string"
-                pattern: ["^[a-z0-9-]+$", "Use só letras minúsculas, números e hífen."]
-                hint: "Identificador interno (ex.: rh). Não altere o id de um setor existente: colaboradores, projetos, metas e o agente de carreira dependem dele."
-
-              - label: "Número"
-                name: "numero"
-                widget: "string"
-                hint: "Ex.: 07. Exibido no organograma e nos cards."
-
-              - label: "Nome"
-                name: "nome"
-                widget: "string"
-
-              - label: "Nome curto (filtros)"
-                name: "nomeCurto"
-                widget: "string"
-                required: false
-                hint: "Rótulo dos botões de filtro de Colaboradores e Projetos (ex.: RH, T&D). Em branco, usa o nome completo."
-
-              - label: "Ícone"
-                name: "icone"
-                widget: "select"
-                required: false
-                default: "geral"
-                hint: "Ícone exibido no card e no modal do setor."
-                options:
-                  - { label: "Genérico (quadrados)", value: "geral" }
-                  - { label: "Estrela", value: "estrela" }
-                  - { label: "Pessoas", value: "pessoas" }
-                  - { label: "Capelo (formação)", value: "capelo" }
-                  - { label: "Escudo (segurança)", value: "escudo" }
-                  - { label: "Balão de conversa", value: "balao" }
-                  - { label: "Aperto de mão", value: "aperto" }
-                  - { label: "Monitor (tecnologia)", value: "monitor" }
-
-              - label: "Cor de destaque"
-                name: "corAccent"
-                widget: "select"
-                options:
-                  - { label: "Azul", value: "var(--color-blue)" }
-                  - { label: "Verde", value: "var(--color-green)" }
-                  - { label: "Laranja", value: "var(--color-orange)" }
-                  - { label: "Gradiente azul → verde", value: "linear-gradient(135deg, var(--color-blue), var(--color-green))" }
-                  - { label: "Gradiente azul → laranja", value: "linear-gradient(135deg, var(--color-blue), var(--color-orange))" }
-
-              - label: "Resumo"
-                name: "resumo"
-                widget: "string"
-                hint: "Uma frase curta, exibida no card do setor."
-
-              - label: "Função / Objetivo"
-                name: "objetivo"
-                widget: "list"
-                required: false
-                field: { label: "Item", name: "item", widget: "string" }
-
-              - label: "Atividades"
-                name: "atividades"
-                widget: "list"
-                required: false
-                field: { label: "Atividade", name: "atividade", widget: "string" }
-
-              - label: "Competências desejáveis (agente de carreira)"
-                name: "competencias"
-                widget: "list"
-                required: false
-                hint: "Não aparece no site. Usado pelo agente de IA para comparar com o currículo. Ex.: “Comunicação escrita”, “Excel intermediário”."
-                field: { label: "Competência", name: "competencia", widget: "string" }
-
-              - label: "Requisitos essenciais (agente de carreira)"
-                name: "requisitos"
-                widget: "list"
-                required: false
-                hint: "Não aparece no site. Requisitos técnicos que o agente considera obrigatórios para recomendar o setor."
-                field: { label: "Requisito", name: "requisito", widget: "string" }
-
-  - name: "metas"
-    label: "Metas (progresso por setor)"
-    description: "Percentual de progresso exibido na barra da seção “Metas” do site, um por setor. Edite o número e a barra é atualizada automaticamente no site."
-    files:
-      - name: "conteudo"
-        label: "Progresso das metas"
-        file: "data/metas.json"
-        format: "json"
-        fields:
-          - label: "Progresso por setor"
-            name: "progresso"
-            widget: "list"
-            label_singular: "Setor"
-            summary: "{{fields.setor}} — {{fields.percentual}}%"
-            hint: "Mantenha só um item por setor. Se um setor não tiver item aqui, o site mostra 30% como valor padrão."
-            fields:
-              - label: "Setor"
-                name: "setor"
-                widget: "relation"
-                collection: "setores"
-                file: "lista"
-                search_fields: ["setores.*.nome"]
-                value_field: "setores.*.id"
-                display_fields: ["setores.*.nome"]
-                hint: "A lista mostra os setores cadastrados na coleção “Setores”."
-
-              - label: "Percentual concluído"
-                name: "percentual"
-                widget: "number"
-                value_type: "int"
-                min: 0
-                max: 100
-                hint: "Um número de 0 a 100. Ex.: 55 para 55%."
-
-              - label: "Metas do setor"
-                name: "metas"
-                widget: "list"
-                label_singular: "Meta"
-                summary: "{{fields.texto}}"
-                hint: "As metas exibidas no card do setor (seção “Metas”) e no modal do organograma. Marque “Concluída” para a meta aparecer riscada no site."
-                fields:
-                  - label: "Texto da meta"
-                    name: "texto"
-                    widget: "string"
-
-                  - label: "Concluída"
-                    name: "concluida"
-                    widget: "boolean"
-                    default: false
-                    hint: "Marque quando a meta já tiver sido alcançada — ela aparece riscada no site, sem ser removida da lista."

@@ -1,0 +1,231 @@
+/* =========================================================
+   VIVA+ — tema.css
+   Tema do painel /admin (Decap CMS) com as cores e fontes do
+   site. O Decap gera classes com o nome do componente
+   (ex.: "css-xxxx-AppHeader"), então os seletores abaixo usam
+   [class*="NomeDoComponente"]. Como isso depende da estrutura
+   interna do Decap, a versão dele é fixa em admin/index.html.
+   ========================================================= */
+
+:root {
+  --v-green: #c0d21f;
+  --v-orange: #ea713b;
+  --v-blue: #2f3283;
+  --v-blue-dark: #21244f;
+  --v-blue-soft: #4347a8;
+  --v-blue-tint: #eceefb;
+  --v-green-soft: #e4eda6;
+  --v-bg: #f7f8f2;
+  --v-surface: #ffffff;
+  --v-text: #1b1d2a;
+  --v-muted: #666b76;
+  --v-border: #e4e4db;
+  --v-radius: 12px;
+  --v-shadow: 0 2px 12px rgba(33, 36, 79, 0.07);
+}
+
+body,
+body button,
+body input,
+body textarea,
+body select {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  background: var(--v-bg);
+  color: var(--v-text);
+}
+
+/* ---------- Topo ---------- */
+body header {
+  background: linear-gradient(90deg, var(--v-blue-dark), var(--v-blue));
+  box-shadow: 0 2px 10px rgba(33, 36, 79, 0.25);
+  border-bottom: 3px solid var(--v-orange);
+}
+
+/* !important: o Decap define a cor dos links do topo com mais especificidade. */
+body header a,
+body header button {
+  color: rgba(255, 255, 255, 0.78) !important;
+  font-weight: 600;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+body header a:hover,
+body header button:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+body header .header-link-active {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+}
+
+body header svg {
+  fill: currentColor;
+}
+
+/* Fundo da área de conteúdo */
+[class*="AppMainContainer"] {
+  background: var(--v-bg);
+}
+
+/* ---------- Barra lateral de coleções ---------- */
+[class*="SidebarContainer"] {
+  background: var(--v-surface);
+  border: 1px solid var(--v-border);
+  border-radius: var(--v-radius);
+  box-shadow: var(--v-shadow);
+}
+
+[class*="SidebarHeading"] {
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  color: var(--v-blue);
+  font-weight: 700;
+}
+
+[class*="SidebarNavLink"] {
+  border-left: 4px solid transparent;
+  font-weight: 600;
+  color: var(--v-text);
+}
+
+[class*="SidebarNavLink"]:hover {
+  background: var(--v-blue-tint);
+  color: var(--v-blue);
+}
+
+[class*="SidebarNavLink"].sidebar-active {
+  background: var(--v-blue-tint);
+  color: var(--v-blue);
+  border-left-color: var(--v-orange);
+}
+
+/* ---------- Título e lista de uma coleção ---------- */
+[class*="CollectionTopContainer"],
+[class*="-ListCard-"] {
+  background: var(--v-surface);
+  border: 1px solid var(--v-border);
+  border-radius: var(--v-radius);
+  box-shadow: var(--v-shadow);
+}
+
+[class*="CollectionTopHeading"] {
+  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  color: var(--v-blue);
+  font-weight: 700;
+}
+
+[class*="ListCardLink"]:hover {
+  background: var(--v-blue-tint);
+}
+
+[class*="ListCardTitle"] {
+  color: var(--v-blue);
+  font-weight: 600;
+}
+
+/* ---------- Barra do editor ---------- */
+[class*="ToolbarContainer"] {
+  background: var(--v-surface);
+  border-bottom: 1px solid var(--v-border);
+  box-shadow: var(--v-shadow);
+}
+
+[class*="BackCollection"] {
+  color: var(--v-muted);
+}
+
+[class*="BackStatus"] {
+  color: var(--v-blue);
+}
+
+/* ---------- Formulário ---------- */
+[class*="ControlPaneContainer"] {
+  background: var(--v-bg);
+}
+
+/* !important: o Decap pinta o rótulo de cinza (e de azul ao focar) com a mesma especificidade. */
+[class*="FieldLabel"] {
+  background: transparent !important;
+  color: var(--v-blue) !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Linha de resumo de cada item de lista (ex.: "rh · Ana Lia — Gestora") */
+[class*="NestedObjectLabel"] {
+  background: var(--v-surface) !important;
+  color: var(--v-text);
+  font-weight: 600;
+  border-top: 1px solid var(--v-border);
+}
+
+[class*="ControlContainer"] input[type="text"],
+[class*="ControlContainer"] input:not([type]),
+[class*="ControlContainer"] input[type="number"],
+[class*="ControlContainer"] textarea {
+  border: 1px solid var(--v-border);
+  border-radius: 10px;
+  background: var(--v-surface);
+  box-shadow: none;
+}
+
+[class*="ControlContainer"] input[type="text"]:focus,
+[class*="ControlContainer"] input:not([type]):focus,
+[class*="ControlContainer"] input[type="number"]:focus,
+[class*="ControlContainer"] textarea:focus {
+  border-color: var(--v-blue-soft);
+  box-shadow: 0 0 0 3px rgba(67, 71, 168, 0.15);
+  outline: none;
+}
+
+[class*="ControlHint"] {
+  color: var(--v-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+/* Itens de listas (colaboradores, setores, projetos...) */
+[class*="ListItem"] {
+  background: var(--v-surface);
+  border: 1px solid var(--v-border);
+  border-radius: var(--v-radius);
+  box-shadow: var(--v-shadow);
+  overflow: hidden;
+}
+
+[class*="ListItem"] [class*="TopBar"] {
+  background: var(--v-blue-tint);
+  color: var(--v-blue);
+  font-weight: 600;
+}
+
+/* ---------- Botões ---------- */
+[class*="AddButton"],
+[class*="ButtonRound"] {
+  background: var(--v-blue);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+[class*="AddButton"]:hover,
+[class*="ButtonRound"]:hover {
+  background: var(--v-blue-soft);
+}
+
+[class*="FileWidgetButton"] {
+  border-radius: 999px;
+}
+
+/* ---------- Tela de login ---------- */
+[class*="AuthenticationPage"] {
+  background: var(--v-bg);
+}

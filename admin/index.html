@@ -6,11 +6,28 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>Viva+ · Painel de conteúdo</title>
   <link rel="icon" href="../assets/images/logo-v.png" />
+
+  <!-- Mesmas fontes do site (veja css/style.css). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Inter:wght@400;500;600;700&display=swap" />
+
+  <!-- Tema do painel com as cores da Viva+ (veja admin/tema.css). -->
+  <link rel="stylesheet" href="tema.css" />
 </head>
 <body>
   <!-- Decap CMS: lê e escreve config.yml e os arquivos em /data
        diretamente no repositório Git, via commits. Não há
-       servidor próprio nem banco de dados envolvidos. -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+       servidor próprio nem banco de dados envolvidos.
+
+       A versão é fixa (e não "^3.0.0") porque o tema depende da
+       estrutura interna do painel: uma atualização automática do
+       Decap poderia desalinhar o visual. Para atualizar, troque o
+       número abaixo, abra o /admin e confira o resultado. -->
+  <script src="https://unpkg.com/decap-cms@3.17.3/dist/decap-cms.js"></script>
+
+  <!-- Ícones dos setores, os mesmos do site (usados nas pré-visualizações). -->
+  <script src="../js/icones-setores.js"></script>
+  <script src="previews.js"></script>
 </body>
 </html>
