@@ -112,7 +112,25 @@
     },
     {
       "setor": "ti",
-      "percentual": 1
+      "percentual": 1,
+      "metas": [
+        {
+          "concluida": false,
+          "texto": "Garantir a disponibilidade, segurança e estabilidade dos sistemas e plataformas da empresa."
+        },
+        {
+          "concluida": false,
+          "texto": "Automatizar rotinas operacionais entre os setores para otimizar o tempo das equipes."
+        },
+        {
+          "concluida": false,
+          "texto": "Manter um atendimento rápido e eficiente de chamados internos de tecnologia para todos os colaboradores."
+        },
+        {
+          "concluida": false,
+          "texto": "Implementar novas ferramentas digitais para enriquecer a experiência dos usuários no site e nas unidades."
+        }
+      ]
     }
   ]
 }
