@@ -10,11 +10,10 @@
       "id": "diretoria",
       "numero": "01",
       "objetivo": [
-        "Alinhamento e supervisão da equipe de acordo com os valores e a missão da Viva+.",
-        "Gestão do cronograma e cumprimento das tarefas.",
-        "Filtragem das demandas.",
-        "Representação externa da empresa.",
-        "Gestão de pessoas, riscos e crises."
+        "Expansão física e territorial dos espaços da instituição.",
+        "Ampliação da rede de parceiros e clientes corporativos.",
+        "Consolidação da marca como referência nacional em bem-estar.",
+        "Alinhamento e governança entre gestão humana e inovação digital."
       ],
       "competencias": []
     },
@@ -31,10 +30,10 @@
       "id": "rh",
       "numero": "02",
       "objetivo": [
-        "Capacitar e desenvolver continuamente os colaboradores.",
-        "Promover um ambiente de trabalho saudável, seguro e motivador.",
-        "Fortalecer a cultura organizacional.",
-        "Garantir alinhamento com os valores da empresa."
+        "Estruturação e acolhimento no onboarding de novos colaboradores.",
+        "Definição, atualização e alinhamento claro das descrições de cargos.",
+        "Treinamentos imersivos sobre a cultura, missão e valores da empresa.",
+        "Acompanhamento contínuo do clima e implementação de melhorias internas."
       ],
       "competencias": []
     },
@@ -45,7 +44,13 @@
       "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
       "resumo": "Conectividade, inovação e suporte contínuo para o crescimento e eficiência da empresa.",
       "icone": "monitor",
-      "nomeCurto": "TI"
+      "nomeCurto": "TI",
+      "objetivo": [
+        "Garantia de estabilidade, disponibilidade e segurança dos sistemas.",
+        "Automação de processos manuais para otimização de tempo interdeparmental.",
+        "Suporte ágil e suporte contínuo para um ambiente de trabalho digital.",
+        "Implementação de soluções inovadoras para a jornada de colaboradores e clientes."
+      ]
     },
     {
       "atividades": [
@@ -60,7 +65,10 @@
       "id": "4sma",
       "numero": "04",
       "objetivo": [
-        "Cuidar de pessoas e promover um ambiente de trabalho seguro e sustentável por meio de palestras e iniciativas de conscientização, enfatizando prevenção e respeito ao meio ambiente como responsabilidades compartilhadas."
+        "Campanhas contínuas de conscientização e sustentabilidade ambiental.",
+        "Treinamento e conformidade de Normas Regulamentadoras (NR's).",
+        "Rodas de conversa periódicas focadas em saúde mental e inteligência emocional.",
+        "Gestão de calendário anual de saúde preventiva e apoio social comunitário."
       ],
       "competencias": []
     },
@@ -79,7 +87,10 @@
       "id": "comunicacao",
       "numero": "05",
       "objetivo": [
-        "Divulgar de forma clara e atrativa os serviços e benefícios oferecidos e incentivar os colaboradores a participarem das atividades e cuidarem da saúde física e mental."
+        "Atração e ampliação da audiência qualificada da instituição.",
+        "Crescimento e gestão estratégica e presença nas redes sociais oficiais.",
+        "Integração e colaboração criativa entre os setores das criação e comercial.",
+        "Produção de conteúdo com alto nível visual, relevância e criatividade."
       ],
       "competencias": []
     },
@@ -97,7 +108,10 @@
       "id": "comercial",
       "numero": "06",
       "objetivo": [
-        "Atuar como ponte entre cliente e empresa, orientando sobre a empresa, seus objetivos e os valores dos serviços prestados."
+        "Atendimento consultivo, flexível e personalizado para associados e parceiros.",
+        "Consolidação e oferta de pacotes de serviços sob medida para bem-estar.",
+        "Prospecção ativa e conquistas de novos parceiros e clientes corporativos.",
+        "Posicionamento estratégico da empresa como referência de valor no mercado."
       ],
       "competencias": []
     }
