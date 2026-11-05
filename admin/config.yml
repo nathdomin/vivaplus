@@ -108,6 +108,10 @@ collections:
                   - { label: "Laranja", value: "var(--color-orange)" }
                   - { label: "Gradiente azul → verde", value: "linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue) 55%, var(--color-green) 100%)" }
                   - { label: "Gradiente azul → laranja", value: "linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue) 55%, var(--color-orange) 100%)" }
+                  - { label: "Gradiente verde → azul", value: "linear-gradient(135deg, var(--color-green) 0%, var(--color-green) 65%, var(--color-blue) 100%)" }
+                  - { label: "Gradiente verde → laranja", value: "linear-gradient(135deg, var(--color-green) 0%, var(--color-green) 60%, var(--color-orange) 100%)" }
+                  - { label: "Gradiente laranja → azul", value: "linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange) 60%, var(--color-blue) 100%)" }
+                  - { label: "Gradiente laranja → verde", value: "linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange) 60%, var(--color-green) 100%)" }
 
               - label: "Resumo"
                 name: "resumo"
