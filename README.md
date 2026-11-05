@@ -117,10 +117,22 @@ Se preferir criar o arquivo à mão, cada projeto é **um arquivo** em `data/pro
   "categoria": "Saúde",
   "data": "Em breve",
   "imagem": "/assets/images/projetos/nome-do-arquivo.jpg",
+  "galeria": [
+    "/assets/images/projetos/foto-2.jpg",
+    "/assets/images/projetos/foto-3.jpg"
+  ],
   "descricao": "Descrição em breve.",
   "status": "Realizado"
 }
 ```
+
+**Galeria de fotos (opcional):** `imagem` é a capa do card e `galeria` é a lista de
+fotos extras. Quando o projeto tem mais de uma foto no total (capa + galeria, sem
+contar repetidas), o card ganha o botão **“Ver fotos”** e o visitante abre uma
+galeria em tela cheia, com setas, miniaturas, teclado (← → Esc) e deslizar o dedo
+no celular. Sem `galeria`, o card continua como antes. Se `imagem` estiver em branco,
+a primeira foto da galeria vira a capa. No painel `/admin`, use o campo **Fotos
+adicionais (galeria)** → “Adicionar foto”; a ordem pode ser alterada arrastando.
 
 `setorId` precisa ser um dos ids definidos em `data/setores.json` (usado para o
 filtro); `setor` é só o texto exibido no card, pode ser diferente (ex.: "Viva+"
@@ -340,7 +352,8 @@ ou `assets/images/projetos/`, e o caminho é preenchido sozinho no JSON.
 **Editando os arquivos direto:**
 1. Salve a imagem dentro de `assets/images/colaboradores/` ou `assets/images/projetos/`.
 2. Aponte o campo `foto` (colaborador, em `data/colaboradores/<nome>.json`) ou `imagem`
-   (projeto, em `data/projetos/<titulo>.json`) para o caminho do arquivo.
+   (projeto, em `data/projetos/<titulo>.json`) para o caminho do arquivo. Fotos extras de um
+   projeto vão na lista `galeria` do mesmo arquivo.
 3. Enquanto uma foto não existir, o site mostra automaticamente um fallback: iniciais do nome (colaboradores) ou o rótulo "Imagem em breve" (projetos) — nenhum link fica quebrado.
 
 ---

@@ -873,6 +873,149 @@ section { padding-block: 120px; position: relative; }
 .project-body h3 { font-size: 1.08rem; color: var(--color-blue); margin-bottom: 8px; }
 .project-meta { display: flex; justify-content: space-between; gap: 12px; font-size: 0.78rem; color: var(--color-muted); }
 
+/* Projetos com galeria: selo "Ver fotos" sobre a capa */
+.project-thumb.has-gallery { cursor: zoom-in; }
+.project-photos {
+  position: absolute;
+  right: 12px; bottom: 12px;
+  z-index: 3;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--color-blue-dark);
+  color: var(--color-white);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 7px 13px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-fast) var(--ease), transform var(--transition-fast) var(--ease);
+}
+.project-photos b {
+  background: var(--color-green);
+  color: var(--color-blue-dark);
+  border-radius: 999px;
+  min-width: 20px;
+  padding: 1px 6px;
+  font-size: 0.7rem;
+  text-align: center;
+}
+.project-photos:hover, .project-thumb.has-gallery:hover .project-photos { background: var(--color-orange); transform: translateY(-2px); }
+.project-photos:hover b, .project-thumb.has-gallery:hover .project-photos b { background: var(--color-white); color: var(--color-orange); }
+.project-photos:focus-visible { outline: 3px solid var(--color-green); outline-offset: 2px; }
+
+/* Galeria de fotos (lightbox): tela "grade" (todas as fotos) e tela "foto" (ampliada) */
+.lightbox {
+  position: fixed; inset: 0;
+  z-index: 900;
+  display: none;
+  background: rgba(27, 29, 42, 0.94);
+  backdrop-filter: blur(6px);
+}
+.lightbox.open { display: block; animation: lightboxIn 0.25s var(--ease); }
+@keyframes lightboxIn { from { opacity: 0; } to { opacity: 1; } }
+.lightbox-view { position: absolute; inset: 0; display: none; }
+.lightbox[data-modo="grade"] .lightbox-grid-view { display: flex; }
+.lightbox[data-modo="foto"] .lightbox-photo-view {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 72px 24px 24px;
+}
+
+/* Botões comuns */
+.lightbox-close, .lightbox-nav, .lightbox-back {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--color-white);
+  color: var(--color-blue);
+  transition: background var(--transition-fast) var(--ease), color var(--transition-fast) var(--ease), transform var(--transition-fast) var(--ease);
+}
+.lightbox-close, .lightbox-nav { width: 46px; height: 46px; border-radius: 50%; font-size: 1.5rem; line-height: 1; }
+.lightbox-close { position: absolute; top: 18px; right: 18px; z-index: 3; font-size: 1.15rem; }
+.lightbox-close:hover, .lightbox-nav:hover, .lightbox-back:hover { background: var(--color-orange); color: var(--color-white); }
+.lightbox-nav:hover { transform: scale(1.08); }
+.lightbox-close:focus-visible, .lightbox-nav:focus-visible, .lightbox-back:focus-visible, .lightbox-tile:focus-visible {
+  outline: 3px solid var(--color-green); outline-offset: 2px;
+}
+
+/* Tela "grade": todas as fotos do projeto */
+.lightbox-grid-view { justify-content: center; padding: 76px 24px 24px; }
+.lightbox-grid-wrap {
+  width: min(1100px, 100%);
+  max-height: 100%;
+  display: flex; flex-direction: column; gap: 18px;
+  min-height: 0;
+}
+.lightbox-grid-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; flex-shrink: 0; padding-right: 8px; }
+.lightbox-grid-title { color: var(--color-white); font-size: 1.5rem; }
+.lightbox-grid-count {
+  background: var(--color-green);
+  color: var(--color-blue-dark);
+  font-size: 0.74rem; font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+.lightbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  overflow-y: auto;
+  min-height: 0;
+  padding: 4px 6px 8px 4px; /* folga para o foco/hover não serem cortados */
+  align-content: start;
+  overscroll-behavior: contain;
+}
+.lightbox-tile {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-blue-dark);
+  border: 2px solid transparent;
+  cursor: zoom-in;
+  transition: transform var(--transition-fast) var(--ease), border-color var(--transition-fast) var(--ease), box-shadow var(--transition-fast) var(--ease);
+}
+.lightbox-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lightbox-tile:hover { transform: translateY(-3px); border-color: var(--color-green); box-shadow: var(--shadow-md); }
+
+/* Tela "foto": ampliada, com setas e botão para voltar à grade */
+.lightbox-back {
+  position: absolute; top: 18px; left: 18px; z-index: 3;
+  gap: 8px;
+  padding: 0 18px 0 14px;
+  height: 46px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.lightbox-prev { grid-column: 1; grid-row: 1; }
+.lightbox-next { grid-column: 3; grid-row: 1; }
+.lightbox-stage {
+  grid-column: 2; grid-row: 1;
+  margin: 0;
+  height: 100%; min-height: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: calc(100% - 44px);
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  background: var(--color-blue-dark);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.lightbox-img.is-loaded { opacity: 1; }
+.lightbox-caption {
+  color: var(--color-white);
+  font-size: 0.86rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px 16px;
+  border-radius: 999px;
+  text-align: center;
+}
+.lightbox.is-single .lightbox-nav, .lightbox.is-single .lightbox-back { display: none; }
+
 /* Timeline de projetos */
 .timeline { display: none; position: relative; padding-left: 28px; }
 .timeline.active { display: block; }

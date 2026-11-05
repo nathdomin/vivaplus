@@ -72,6 +72,19 @@ body {
   cursor: default;
 }
 
+/* Miniaturas da galeria do projeto, abaixo do card. */
+.prev-galeria { margin-top: 20px; }
+.prev-galeria-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px; }
+.prev-galeria-grid img {
+  width: 100%; aspect-ratio: 1; object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background: var(--color-blue-dark);
+}
+.prev-galeria-grid img.is-capa { border-color: var(--color-green); }
+.prev .project-photos { cursor: default; }
+.prev .project-thumb.has-gallery { cursor: default; }
+
 /* Card único (colaborador ou projeto), com a largura de um card do site. */
 .prev-uma {
   max-width: 280px;

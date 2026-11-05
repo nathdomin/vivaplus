@@ -249,7 +249,21 @@ collections:
         required: false
         media_folder: "/assets/images/projetos"
         public_folder: "/assets/images/projetos"
-        hint: "Enviada automaticamente para assets/images/projetos/. Se ficar em branco, o card mostra “Imagem em breve”."
+        hint: "Foto de capa do card. Enviada automaticamente para assets/images/projetos/. Se ficar em branco, o card usa a primeira foto da galeria (ou mostra “Imagem em breve”)."
+
+      - label: "Fotos adicionais (galeria)"
+        name: "galeria"
+        widget: "list"
+        required: false
+        minimize_collapsed: true
+        label_singular: "foto"
+        hint: "Opcional. Clique em “Adicionar foto” para cada foto extra. Quando há mais de uma foto (capa + galeria), o card ganha o botão “Ver fotos” e o visitante navega pela galeria. Arraste para mudar a ordem."
+        field:
+          label: "Foto"
+          name: "foto"
+          widget: "image"
+          media_folder: "/assets/images/projetos"
+          public_folder: "/assets/images/projetos"
 
       - label: "Descrição"
         name: "descricao"

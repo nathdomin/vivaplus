@@ -90,6 +90,10 @@
   /* ---------- Projeto (um arquivo por projeto) ---------- */
   function ProjetoPreview(props) {
     const p = props.entry.get("data").toJS();
+    // Mesma regra do site (js/projetos.js): capa + galeria, sem repetir.
+    const extras = Array.isArray(p.galeria) ? p.galeria : [];
+    const fotos = [...new Set([p.imagem, ...extras].filter((f) => typeof f === "string" && f.trim()))];
+    const capa = fotos[0];
     return moldura(
       "Pré-visualização do card deste projeto na seção “Projetos & atividades”.",
       h(
@@ -100,11 +104,14 @@
           { className: "project-card" },
           h(
             "div",
-            { className: "project-thumb" },
+            { className: "project-thumb" + (fotos.length > 1 ? " has-gallery" : "") },
             h("span", { className: "project-status" }, p.status || ""),
-            p.imagem
-              ? h("img", { className: "project-thumb-img is-loaded", src: urlImagem(props, p.imagem), alt: "" })
-              : h("span", { className: "project-thumb-placeholder" }, "Imagem em breve")
+            capa
+              ? h("img", { className: "project-thumb-img is-loaded", src: urlImagem(props, capa), alt: "" })
+              : h("span", { className: "project-thumb-placeholder" }, "Imagem em breve"),
+            fotos.length > 1
+              ? h("span", { className: "project-photos" }, "Ver fotos ", h("b", null, fotos.length))
+              : null
           ),
           h(
             "div",
@@ -114,7 +121,21 @@
             h("p", { className: "project-desc" }, p.descricao || ""),
             h("div", { className: "project-meta" }, h("span", null, p.setor || ""), h("span", null, p.data || ""))
           )
-        )
+        ),
+        fotos.length > 1
+          ? h(
+              "div",
+              { className: "prev-galeria" },
+              h("p", { className: "prev-aviso" }, `Galeria: ${fotos.length} fotos (capa + ${fotos.length - 1} extra${fotos.length > 2 ? "s" : ""}), nesta ordem.`),
+              h(
+                "div",
+                { className: "prev-galeria-grid" },
+                fotos.map((f, i) =>
+                  h("img", { key: i, src: urlImagem(props, f), alt: "", className: i === 0 ? "is-capa" : "" })
+                )
+              )
+            )
+          : null
       )
     );
   }
