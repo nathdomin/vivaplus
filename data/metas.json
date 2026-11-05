@@ -2,7 +2,7 @@
   "progresso": [
     {
       "setor": "diretoria",
-      "percentual": 48,
+      "percentual": 25,
       "metas": [
         {
           "texto": "Concluir o planejamento e viabilidade para a expansão dos espaços físicos da instituição em até 20%.",
@@ -24,7 +24,7 @@
     },
     {
       "setor": "rh",
-      "percentual": 55,
+      "percentual": 50,
       "metas": [
         {
           "texto": "Estruturar um programa de onboarding humano e acolhedor para a adaptação de novos colaboradores.",
@@ -46,7 +46,7 @@
     },
     {
       "setor": "4sma",
-      "percentual": 60,
+      "percentual": 75,
       "metas": [
         {
           "texto": "Realizar campanhas contínuas de conscientização e sustentabilidade para a comunidade.",
@@ -68,7 +68,7 @@
     },
     {
       "setor": "comunicacao",
-      "percentual": 40,
+      "percentual": 50,
       "metas": [
         {
           "texto": "Atrair mais clientes, parceiros e expandir a audiência qualificada da instituição.",
@@ -90,7 +90,7 @@
     },
     {
       "setor": "comercial",
-      "percentual": 50,
+      "percentual": 25,
       "metas": [
         {
           "texto": "Garantir flexibilidade e agilidade no atendimento de novos clientes e associados.",
@@ -112,7 +112,7 @@
     },
     {
       "setor": "ti",
-      "percentual": 1,
+      "percentual": 75,
       "metas": [
         {
           "concluida": false,
