@@ -2,9 +2,10 @@
   "setores": [
     {
       "atividades": [],
+      "icone": "estrela",
       "corAccent": "var(--color-blue)",
       "requisitos": [],
-      "resumo": "Direção estratégica, alinhamento de valores e representação da Viva+.",
+      "resumo": "Direção estratégica e alinhamento de metas para consolidar a nossa excelência e expansão nacional.",
       "nome": "Diretoria",
       "id": "diretoria",
       "numero": "01",
@@ -15,16 +16,17 @@
         "Representação externa da empresa.",
         "Gestão de pessoas, riscos e crises."
       ],
-      "competencias": [],
-      "icone": "estrela"
+      "competencias": []
     },
     {
+      "nomeCurto": "RH",
       "atividades": [
         "Inclusão de Pessoas no Trabalho"
       ],
+      "icone": "pessoas",
       "corAccent": "var(--color-green)",
       "requisitos": [],
-      "resumo": "Cuidado com as pessoas, cultura organizacional e ambiente de trabalho saudável.",
+      "resumo": "Gestão de pessoas, integração e desenvolvimento humano para fortalecer a nossa cultura interna.",
       "nome": "Recursos Humanos",
       "id": "rh",
       "numero": "02",
@@ -34,16 +36,14 @@
         "Fortalecer a cultura organizacional.",
         "Garantir alinhamento com os valores da empresa."
       ],
-      "competencias": [],
-      "icone": "pessoas",
-      "nomeCurto": "RH"
+      "competencias": []
     },
     {
       "id": "ti",
       "numero": "03",
       "nome": "Tecnologia da Informação",
       "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
-      "resumo": "Conectividade, inovação e suporte contínuo para o crescimento da empresa.",
+      "resumo": "Conectividade, inovação e suporte contínuo para o crescimento e eficiência da empresa.",
       "icone": "monitor",
       "nomeCurto": "TI"
     },
@@ -52,17 +52,17 @@
         "Fevereiro Roxo e Laranja",
         "Saúde no Trabalho"
       ],
+      "icone": "escudo",
       "corAccent": "var(--color-green)",
       "requisitos": [],
-      "resumo": "Segurança, saúde e sustentabilidade como responsabilidades compartilhadas.",
+      "resumo": "Segurança, saúde preventiva, meio ambiente e apoio social focados no cuidado integral da comunidade.",
       "nome": "4SMA",
       "id": "4sma",
       "numero": "04",
       "objetivo": [
         "Cuidar de pessoas e promover um ambiente de trabalho seguro e sustentável por meio de palestras e iniciativas de conscientização, enfatizando prevenção e respeito ao meio ambiente como responsabilidades compartilhadas."
       ],
-      "competencias": [],
-      "icone": "escudo"
+      "competencias": []
     },
     {
       "atividades": [
@@ -71,17 +71,17 @@
         "Registro das atividades",
         "Cronograma das aulas"
       ],
+      "icone": "balao",
       "corAccent": "var(--color-orange)",
       "requisitos": [],
-      "resumo": "A voz da Viva+ — clara, criativa e próxima das pessoas.",
+      "resumo": "A voz da marca: expandindo nossa audiência e fortalecendo a presença digital com criatividade.",
       "nome": "Comunicação",
       "id": "comunicacao",
       "numero": "05",
       "objetivo": [
         "Divulgar de forma clara e atrativa os serviços e benefícios oferecidos e incentivar os colaboradores a participarem das atividades e cuidarem da saúde física e mental."
       ],
-      "competencias": [],
-      "icone": "balao"
+      "competencias": []
     },
     {
       "atividades": [
@@ -89,17 +89,17 @@
         "Crachá do colaborador",
         "Carteirinha dos clientes"
       ],
+      "icone": "aperto",
       "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-orange))",
       "requisitos": [],
-      "resumo": "A ponte entre a Viva+ e cada cliente.",
+      "resumo": "Relacionamento estratégico, parcerias sólidas e atendimento flexível para promover o bem-estar.",
       "nome": "Comercial",
       "id": "comercial",
       "numero": "06",
       "objetivo": [
         "Atuar como ponte entre cliente e empresa, orientando sobre a empresa, seus objetivos e os valores dos serviços prestados."
       ],
-      "competencias": [],
-      "icone": "aperto"
+      "competencias": []
     }
   ]
 }
