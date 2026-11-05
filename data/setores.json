@@ -10,10 +10,10 @@
       "id": "diretoria",
       "numero": "01",
       "objetivo": [
-        "Expansão física e territorial dos espaços da instituição.",
-        "Ampliação da rede de parceiros e clientes corporativos.",
-        "Consolidação da marca como referência nacional em bem-estar.",
-        "Alinhamento e governança entre gestão humana e inovação digital."
+        "Liderança e governança estratégica das operações da instituição.",
+        "Planejamento e acompanhamento das diretrizes de gestão e inovação.",
+        "Supervisão do alinhamento entre as áreas humanas e tecnológicas.",
+        "Representação institucional tomada de decisões corporativas."
       ],
       "competencias": []
     },
@@ -30,10 +30,10 @@
       "id": "rh",
       "numero": "02",
       "objetivo": [
-        "Estruturação e acolhimento no onboarding de novos colaboradores.",
-        "Definição, atualização e alinhamento claro das descrições de cargos.",
-        "Treinamentos imersivos sobre a cultura, missão e valores da empresa.",
-        "Acompanhamento contínuo do clima e implementação de melhorias internas."
+        "Gestão de ciclo de vida dos colaboradores e suporte à equipe.",
+        "Organização do processo de recrutamento, seleção e acolhimento.",
+        "Acompanhamento contínuo do clima e relacionamento interno.",
+        "Mapeamento e atualização da descrição de cargos e rotinas."
       ],
       "competencias": []
     },
@@ -46,10 +46,10 @@
       "icone": "monitor",
       "nomeCurto": "TI",
       "objetivo": [
-        "Garantia de estabilidade, disponibilidade e segurança dos sistemas.",
-        "Automação de processos manuais para otimização de tempo interdeparmental.",
-        "Suporte ágil e suporte contínuo para um ambiente de trabalho digital.",
-        "Implementação de soluções inovadoras para a jornada de colaboradores e clientes."
+        "Manutenção e suporte técnico da infraestrutura e sistemas internos.",
+        "Gestão de acessos, conectividade e segurança das redes digitais.",
+        "Atendimento e resolução de chamados de equipe de trabalho.",
+        "Administração dos canais e ferramentas tecnológicas no site e unidades."
       ]
     },
     {
@@ -65,10 +65,10 @@
       "id": "4sma",
       "numero": "04",
       "objetivo": [
-        "Campanhas contínuas de conscientização e sustentabilidade ambiental.",
-        "Treinamento e conformidade de Normas Regulamentadoras (NR's).",
-        "Rodas de conversa periódicas focadas em saúde mental e inteligência emocional.",
-        "Gestão de calendário anual de saúde preventiva e apoio social comunitário."
+        "Fiscalização e orientação quanto as Normas Regulamentadoras (NR's).",
+        "Organização de ações comunitárias, apoio social e escuta ativa.",
+        "Monitoramento da saúde ocupacional e ergonomia no ambiente de trabalho.",
+        "Implementação de práticas de descarte e sustentabilidade nas instalações."
       ],
       "competencias": []
     },
@@ -87,10 +87,10 @@
       "id": "comunicacao",
       "numero": "05",
       "objetivo": [
-        "Atração e ampliação da audiência qualificada da instituição.",
-        "Crescimento e gestão estratégica e presença nas redes sociais oficiais.",
-        "Integração e colaboração criativa entre os setores da criação e comercial.",
-        "Produção de conteúdo com alto nível visual, relevância e criatividade."
+        "Criação e publicação de conteúdos para as redes sociais oficiais.",
+        "Gestão de identidade visual e comunicação institucional.",
+        "Produção de materiais informativos internos e externos.",
+        "Cobertura de eventos, campanhas de divulgação das ações de bem-estar."
       ],
       "competencias": []
     },
@@ -108,10 +108,10 @@
       "id": "comercial",
       "numero": "06",
       "objetivo": [
-        "Atendimento consultivo, flexível e personalizado para associados e parceiros.",
-        "Consolidação e oferta de pacotes de serviços sob medida para bem-estar.",
-        "Prospecção ativa e conquistas de novos parceiros e clientes corporativos.",
-        "Posicionamento estratégico da empresa como referência de valor no mercado."
+        "Atendimento inicial, apresentação e prospecção de associados e parceiros.",
+        "Elaboração de propostas e negociação de planos de bem-estar.",
+        "Gestão de relacionamento e fidelização com a carteira de clientes.",
+        "Mapeamento de oportunidades de novos serviços no mercado."
       ],
       "competencias": []
     }
