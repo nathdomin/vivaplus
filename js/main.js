@@ -189,7 +189,7 @@
         const dados = progresso[s.id];
         const percentual = dados !== undefined ? dados.percentual : PERCENTUAL_PADRAO;
         return `
-      <div class="goal-card reveal" style="--accent:${s.corAccent}">
+      <div class="goal-card reveal" style="--accent:${acentoDaBarra(s.corAccent)}">
         <h3>${s.nome}</h3>
         <p class="goal-objective">${s.resumo}</p>
         <div class="goal-progress" role="img" aria-label="Progresso da meta de ${s.nome}: ${percentual}%">

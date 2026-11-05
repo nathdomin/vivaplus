@@ -162,7 +162,7 @@
           const pct = Math.min(100, Math.max(0, Number(m.percentual) || 0));
           return h(
             "div",
-            { key: i, className: "goal-card", style: { "--accent": setor ? setor.corAccent : "var(--color-orange)" } },
+            { key: i, className: "goal-card", style: { "--accent": setor ? acentoDaBarra(setor.corAccent) : "var(--color-orange)" } },
             h("h3", null, setor ? setor.nome : "Escolha o setor"),
             h("p", { className: "goal-objective" }, setor ? setor.resumo : ""),
             h(

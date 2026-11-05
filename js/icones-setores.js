@@ -24,6 +24,15 @@ function iconeDoSetor(setor) {
   return ICONES_SETORES[setor.icone] || ICONES_SETORES.geral;
 }
 
+/* A barra lateral do card de metas é fina e comprida: com o gradiente do
+   selo (cor base até ~55%) quase só a cor base aparece. Aqui a transição
+   começa cedo (25%) e termina em 85%, na vertical, para a segunda cor
+   aparecer ao longo da barra. Valor que não for gradiente passa direto. */
+function acentoDaBarra(corAccent) {
+  const m = /^linear-gradient\(\s*[^,]+,\s*(var\([^)]+\))\s+0%,\s*(var\([^)]+\))\s+\d+%,\s*(var\([^)]+\))\s+100%\s*\)$/.exec(corAccent || "");
+  return m ? `linear-gradient(180deg, ${m[1]} 0%, ${m[2]} 25%, ${m[3]} 85%, ${m[3]} 100%)` : corAccent;
+}
+
 /* Fundo verde (#C0D21F) é claro: o ícone branco some nele. Nesse caso o
    selo usa a classe "is-light", que pinta o ícone de azul Viva+. */
 function classeDoSelo(setor) {
