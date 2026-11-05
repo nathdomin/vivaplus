@@ -39,7 +39,7 @@
       "id": "ti",
       "numero": "03",
       "nome": "Tecnologia da Informação",
-      "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-green))",
+      "corAccent": "linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue) 55%, var(--color-green) 100%)",
       "resumo": "Conectividade, inovação e suporte contínuo para o crescimento e eficiência da empresa.",
       "icone": "monitor",
       "nomeCurto": "TI",
@@ -99,7 +99,7 @@
         "Carteirinha dos clientes"
       ],
       "icone": "aperto",
-      "corAccent": "linear-gradient(135deg, var(--color-blue), var(--color-orange))",
+      "corAccent": "linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue) 55%, var(--color-orange) 100%)",
       "requisitos": [],
       "resumo": "Relacionamento estratégico, parcerias sólidas e atendimento flexível para promover o bem-estar.",
       "nome": "Comercial",

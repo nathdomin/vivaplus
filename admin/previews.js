@@ -135,7 +135,7 @@
               "div",
               { className: "sector-top" },
               h("div", {
-                className: "sector-badge",
+                className: classeDoSelo(s),
                 style: { background: s.corAccent || "var(--color-blue)" },
                 dangerouslySetInnerHTML: { __html: iconeDoSetor(s) }
               }),

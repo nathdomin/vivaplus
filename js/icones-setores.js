@@ -23,3 +23,9 @@ const ICONES_SETORES = {
 function iconeDoSetor(setor) {
   return ICONES_SETORES[setor.icone] || ICONES_SETORES.geral;
 }
+
+/* Fundo verde (#C0D21F) é claro: o ícone branco some nele. Nesse caso o
+   selo usa a classe "is-light", que pinta o ícone de azul Viva+. */
+function classeDoSelo(setor) {
+  return setor.corAccent === "var(--color-green)" ? "sector-badge is-light" : "sector-badge";
+}

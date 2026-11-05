@@ -38,7 +38,7 @@
       <article class="sector-card reveal" data-sector="${s.id}" tabindex="0" role="button"
         aria-label="Ver detalhes do setor ${s.nome}">
         <div class="sector-top">
-          <div class="sector-badge" style="background:${s.corAccent}">${iconeDoSetor(s)}</div>
+          <div class="${classeDoSelo(s)}" style="background:${s.corAccent}">${iconeDoSetor(s)}</div>
           <span class="sector-num">${s.numero}</span>
         </div>
         <h3>${s.nome}</h3>
@@ -77,7 +77,7 @@
 
     return `
       <div class="modal-header">
-        <div class="sector-badge" style="background:${setor.corAccent}">${iconeDoSetor(setor)}</div>
+        <div class="${classeDoSelo(setor)}" style="background:${setor.corAccent}">${iconeDoSetor(setor)}</div>
         <div>
           <span>Setor ${setor.numero}</span>
           <h3 id="sectorModalTitle">${setor.nome}</h3>
