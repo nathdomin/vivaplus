@@ -19,9 +19,7 @@
     },
     {
       "nomeCurto": "RH",
-      "atividades": [
-        "Inclusão de Pessoas no Trabalho"
-      ],
+      "atividades": [],
       "icone": "pessoas",
       "corAccent": "var(--color-green)",
       "requisitos": [],
