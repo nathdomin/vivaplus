@@ -1,10 +1,15 @@
 {
-  "titulo": "VivaCast+",
-  "setor": "Viva+",
   "setorId": "diretoria",
-  "categoria": "Direitos Humanos",
+  "setor": "Viva+",
+  "descricao": "A equipe da Viva+ esteve reunida ao lado do Promotor de Justiça Carlos Cabral Cabrera para mais um momento especial da entrevista sobre o Maio Laranja 💛\nAlém da conversa enriquecedora, os bastidores também renderam registros especiais, incluindo uma foto com toda a equipe envolvida nessa produção feita com muito cuidado, responsabilidade e dedicação.",
   "data": "21/05/2026",
   "imagem": "/assets/images/projetos/vivacsat.jpg",
-  "descricao": "A equipe da Viva+ esteve reunida ao lado do Promotor de Justiça Carlos Cabral Cabrera para mais um momento especial da entrevista sobre o Maio Laranja 💛\nAlém da conversa enriquecedora, os bastidores também renderam registros especiais, incluindo uma foto com toda a equipe envolvida nessa produção feita com muito cuidado, responsabilidade e dedicação.",
-  "status": "Realizado"
+  "status": "Realizado",
+  "categoria": "Direitos Humanos",
+  "galeria": [
+    "/assets/images/projetos/136749.jpg",
+    "/assets/images/projetos/68374.jpg",
+    "/assets/images/projetos/68473.jpg"
+  ],
+  "titulo": "VivaCast+"
 }
