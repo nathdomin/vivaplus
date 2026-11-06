@@ -1,12 +1,11 @@
 {
-  "data": "24/09/2026",
-  "descricao": "O Setembro Amarelo é uma campanha de conscientização sobre a prevenção do suicídio e a importância dos cuidados com a saúde mental. Seu objetivo é combater o preconceito, incentivar o diálogo e mostrar que pedir ajuda é um ato de coragem. Com essa campanha, aprendemos a importância da empatia, da escuta sem julgamentos e de oferecer apoio a quem enfrenta momentos difíceis, pois cuidar da saúde mental também é cuidar da vida.",
-  "titulo": "Setembro Amarelo",
-  "setoresIds": [
-    "diretoria"
-  ],
-  "categoria": "Saúde Mental",
+  "setoresIds": [],
   "setor": "Geral",
+  "descricao": "O Setembro Amarelo é uma campanha de conscientização sobre a prevenção do suicídio e a importância dos cuidados com a saúde mental. Seu objetivo é combater o preconceito, incentivar o diálogo e mostrar que pedir ajuda é um ato de coragem. Com essa campanha, aprendemos a importância da empatia, da escuta sem julgamentos e de oferecer apoio a quem enfrenta momentos difíceis, pois cuidar da saúde mental também é cuidar da vida.",
+  "data": "24/09/2026",
+  "imagem": "/assets/images/projetos/11.jpeg",
   "status": "Realizado",
-  "imagem": "/assets/images/projetos/11.jpeg"
+  "categoria": "Saúde Mental",
+  "titulo": "Setembro Amarelo",
+  "geral": true
 }
