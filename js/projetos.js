@@ -66,7 +66,7 @@ let projetos = [];
   function filtrarProjetos() {
     let base;
     if (filtroAtivo === "todos") base = projetos;
-    else if (filtroAtivo === FILTRO_PROJETOS_GERAIS) base = projetos.filter((p) => !setoresDoProjeto(p).length); // gerais: sem setor
+    else if (filtroAtivo === FILTRO_PROJETOS_GERAIS) base = projetos.filter(ehProjetoGeral); // gerais da Viva+
     else base = projetos.filter((p) => setoresDoProjeto(p).includes(filtroAtivo)); // vale qualquer um dos setores do projeto
     return ordenarPorData(base);
   }

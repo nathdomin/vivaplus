@@ -218,7 +218,7 @@ collections:
       - label: "Setor exibido no card"
         name: "setor"
         widget: "string"
-        hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “4SMA e Comercial”, “Viva+”. Para projetos gerais, use “Viva+” e deixe o campo “Setores (filtro)” abaixo em branco."
+        hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “4SMA e Comercial”, “Viva+”."
 
       - label: "Setores (filtro)"
         name: "setoresIds"
@@ -230,7 +230,14 @@ collections:
         display_fields: ["setores.*.nome"]
         multiple: true
         required: false
-        hint: "Escolha um ou mais setores: o projeto aparece no botão de filtro de CADA setor marcado (ex.: um projeto da 4SMA com o Comercial aparece nos dois). Deixe em branco para um projeto GERAL da Viva+: ele aparece no botão “Viva+” e em “Todos”."
+        hint: "Escolha um ou mais setores: o projeto aparece no botão de filtro de CADA setor marcado (ex.: um projeto da 4SMA com o Comercial aparece nos dois). Para projetos da empresa toda, use a opção “Projeto geral da Viva+” logo abaixo."
+
+      - label: "Projeto geral da Viva+"
+        name: "geral"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Marque para o projeto aparecer no botão de filtro “Viva+” (projetos da empresa toda, que não são de um setor específico). Pode marcar junto com setores, e o projeto aparece em todos os botões marcados. Um projeto sem nenhum setor também cai em “Viva+”."
 
       - label: "Categoria"
         name: "categoria"

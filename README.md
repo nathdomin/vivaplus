@@ -139,10 +139,13 @@ usada nos botões de filtro. Um projeto de mais de um setor aparece no filtro de
 um — ex.: `"setoresIds": ["4sma", "comercial"]` com `"setor": "4SMA e Comercial"`. No painel
 `/admin`, o campo **Setores (filtro)** aceita marcar vários setores. `setor` é só o texto
 exibido no card, pode ser diferente (ex.: "Viva+" para projetos que envolvem a empresa
-como um todo). **Projetos gerais da Viva+** (que não são de um setor específico): deixe
-`setoresIds` vazio (`[]`) e use `"setor": "Viva+"`. Eles aparecem no botão de filtro
-**Viva+**, logo depois de "Todos" — o botão só aparece quando existe ao menos um projeto
-geral. Projetos antigos com `"setorId": "rh"` (texto, um setor só) continuam funcionando.
+como um todo). **Projetos gerais da Viva+** (da empresa toda, sem setor específico):
+no painel, marque **Projeto geral da Viva+** (`"geral": true` no arquivo) e use
+`"setor": "Viva+"`. Eles aparecem no botão de filtro **Viva+**, logo depois de "Todos" —
+o botão só aparece quando existe ao menos um projeto geral. Dá para marcar "geral" junto
+com setores (o projeto aparece em todos os botões marcados). Um projeto sem nenhum setor
+(`"setoresIds": []`) também é tratado como geral. Projetos antigos com `"setorId": "rh"`
+(texto, um setor só) continuam funcionando.
 `status` aceita
 `"Realizado"` ou `"Em andamento"`. Se `imagem` ficar em branco ou o arquivo não
 existir, o card mostra automaticamente "Imagem em breve" no lugar.
