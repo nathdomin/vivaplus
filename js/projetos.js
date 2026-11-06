@@ -64,7 +64,10 @@ let projetos = [];
   const iconeFotos = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`;
 
   function filtrarProjetos() {
-    const base = filtroAtivo === "todos" ? projetos : projetos.filter((p) => p.setorId === filtroAtivo);
+    let base;
+    if (filtroAtivo === "todos") base = projetos;
+    else if (filtroAtivo === FILTRO_PROJETOS_GERAIS) base = projetos.filter((p) => !setoresDoProjeto(p).length); // gerais: sem setor
+    else base = projetos.filter((p) => setoresDoProjeto(p).includes(filtroAtivo)); // vale qualquer um dos setores do projeto
     return ordenarPorData(base);
   }
 

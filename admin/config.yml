@@ -207,9 +207,8 @@ collections:
     identifier_field: "titulo"
     slug: "{{titulo}}"
     summary: "{{titulo}} — {{status}}"
-    sortable_fields: ["titulo", "setorId", "status", "data"]
+    sortable_fields: ["titulo", "status", "data"]
     view_groups:
-      - { label: "Setor", field: "setorId" }
       - { label: "Status", field: "status" }
     fields:
       - label: "Título"
@@ -219,18 +218,19 @@ collections:
       - label: "Setor exibido no card"
         name: "setor"
         widget: "string"
-        hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “Viva+”, “Geral”."
+        hint: "Texto livre, mostrado no card. Ex.: “Comercial”, “4SMA e Comercial”, “Viva+”. Para projetos gerais, use “Viva+” e deixe o campo “Setores (filtro)” abaixo em branco."
 
-      - label: "Setor (filtro)"
-        name: "setorId"
+      - label: "Setores (filtro)"
+        name: "setoresIds"
         widget: "relation"
         collection: "setores"
         file: "setores"
         search_fields: ["setores.*.nome"]
         value_field: "setores.*.id"
         display_fields: ["setores.*.nome"]
+        multiple: true
         required: false
-        hint: "Usado para o botão de filtro. Deixe em branco para um projeto geral (sem setor): ele aparece só em “Todos”. A lista mostra os setores cadastrados na coleção “Setores”."
+        hint: "Escolha um ou mais setores: o projeto aparece no botão de filtro de CADA setor marcado (ex.: um projeto da 4SMA com o Comercial aparece nos dois). Deixe em branco para um projeto GERAL da Viva+: ele aparece no botão “Viva+” e em “Todos”."
 
       - label: "Categoria"
         name: "categoria"

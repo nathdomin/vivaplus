@@ -1,5 +1,7 @@
 {
-  "setorId": "diretoria",
+  "setoresIds": [
+    "diretoria"
+  ],
   "setor": "Geral",
   "descricao": "Evento gratuito de saúde, longevidade, bem-estar, negócios no setor e tecnologia no ambiente de trabalho com o objetivo de promover ideias inovadoras por meio de palestras, experiências práticas e debates aprofundados.",
   "data": "15/10/2026",

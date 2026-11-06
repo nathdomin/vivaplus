@@ -1,7 +1,9 @@
 {
   "titulo": "Dia das Mulheres",
   "setor": "Recursos Humanos",
-  "setorId": "rh",
+  "setoresIds": [
+    "rh"
+  ],
   "categoria": "Comunidade",
   "data": "12/03/2026",
   "imagem": "/assets/images/projetos/dias-da-mulhers.jpg",

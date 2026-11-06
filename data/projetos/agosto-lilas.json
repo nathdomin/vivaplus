@@ -1,5 +1,7 @@
 {
-  "setorId": "comercial",
+  "setoresIds": [
+    "comercial"
+  ],
   "setor": "Comercial",
   "descricao": "Informação que salva vidas. A violência contra a mulher vai além da física; inclui abusos psicológicos, sexuais, patrimoniais e morais, ocorrendo frequentemente dentro de casa. Identificar esses sinais é o primeiro passo para quebrar o ciclo do silêncio e oferecer apoio. Não se cale e ajude quem precisa",
   "data": "27/08/2026",

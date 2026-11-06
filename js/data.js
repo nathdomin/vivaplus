@@ -122,10 +122,25 @@ function filtrosColaboradores() {
    pelo painel /admin (Decap CMS). O filtro só lista setores
    que têm ao menos um projeto, para não abrir uma lista vazia.
    --------------------------------------------------------- */
+/* Projetos gerais da Viva+ (que não são de um setor específico): são os que
+   têm o campo "Setor (filtro)" em branco no painel /admin. Ganham o botão
+   "Viva+" (logo depois de "Todos"), que só aparece se houver ao menos um. */
+const FILTRO_PROJETOS_GERAIS = "geral";
+
+/* Setores de um projeto: a lista "setoresIds" (um projeto pode ser de mais de
+   um setor e aparece no filtro de cada um). Projetos antigos, com o campo
+   "setorId" (texto), continuam valendo. Lista vazia = projeto geral. */
+function setoresDoProjeto(p) {
+  if (Array.isArray(p.setoresIds)) return p.setoresIds.filter(Boolean);
+  return p.setorId ? [p.setorId] : [];
+}
+
 function filtrosProjetos(listaProjetos) {
-  const comProjeto = new Set(listaProjetos.map((p) => p.setorId));
+  const comProjeto = new Set(listaProjetos.flatMap(setoresDoProjeto));
+  const temGerais = listaProjetos.some((p) => !setoresDoProjeto(p).length);
   return [
     { id: "todos", label: "Todos" },
+    ...(temGerais ? [{ id: FILTRO_PROJETOS_GERAIS, label: "Viva+" }] : []),
     ...setores.filter((s) => comProjeto.has(s.id)).map((s) => ({ id: s.id, label: s.nomeCurto }))
   ];
 }

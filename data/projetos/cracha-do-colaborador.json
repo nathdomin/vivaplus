@@ -1,7 +1,9 @@
 {
   "titulo": "Crachá do Colaborador",
   "setor": "Comercial",
-  "setorId": "comercial",
+  "setoresIds": [
+    "comercial"
+  ],
   "categoria": "Institucional",
   "data": "17/09/2026",
   "imagem": "/assets/images/projetos/cracha-colaborador.jpeg",

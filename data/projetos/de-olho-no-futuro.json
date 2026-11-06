@@ -1,7 +1,9 @@
 {
   "titulo": "De olho no futuro",
   "setor": "Viva+",
-  "setorId": "diretoria",
+  "setoresIds": [
+    "diretoria"
+  ],
   "categoria": "Visão",
   "data": "18/06/2026",
   "imagem": "/assets/images/projetos/screenshot-2026-08-29-173620.png",

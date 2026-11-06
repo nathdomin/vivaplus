@@ -6,5 +6,7 @@
   "imagem": "/assets/images/projetos/screenshot-2026-08-29-173253.png",
   "descricao": "tivemos uma apresentação dinâmica sobre saúde individual no trabalho feito pelos setores de treinamento e desenvolvimento junto com o setor 4SMA, onde os alunos participaram de uma atividade interativa utilizando cards coloridos 🟥🟩🟨\nDurante a dinâmica, cada um levantava o card da cor correspondente quando se identificava com as situações apresentadas, promovendo reflexão, participação e diálogo sobre a importância do cuidado com a saúde individual do colaborador. Foi um momento de aprendizado leve, participativo e muito enriquecedor.",
   "status": "Realizado",
-  "setorId": "4sma"
+  "setoresIds": [
+    "4sma"
+  ]
 }

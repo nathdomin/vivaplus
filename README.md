@@ -113,7 +113,7 @@ Se preferir criar o arquivo à mão, cada projeto é **um arquivo** em `data/pro
 {
   "titulo": "Nome do projeto",
   "setor": "Nome do setor (texto livre, para exibição)",
-  "setorId": "rh",
+  "setoresIds": ["rh"],
   "categoria": "Saúde",
   "data": "Em breve",
   "imagem": "/assets/images/projetos/nome-do-arquivo.jpg",
@@ -134,9 +134,16 @@ no celular. Sem `galeria`, o card continua como antes. Se `imagem` estiver em br
 a primeira foto da galeria vira a capa. No painel `/admin`, use o campo **Fotos
 adicionais (galeria)** → “Adicionar foto”; a ordem pode ser alterada arrastando.
 
-`setorId` precisa ser um dos ids definidos em `data/setores.json` (usado para o
-filtro); `setor` é só o texto exibido no card, pode ser diferente (ex.: "Viva+"
-para projetos que envolvem a empresa como um todo). `status` aceita
+`setoresIds` é a **lista** de setores do projeto (ids definidos em `data/setores.json`),
+usada nos botões de filtro. Um projeto de mais de um setor aparece no filtro de **cada**
+um — ex.: `"setoresIds": ["4sma", "comercial"]` com `"setor": "4SMA e Comercial"`. No painel
+`/admin`, o campo **Setores (filtro)** aceita marcar vários setores. `setor` é só o texto
+exibido no card, pode ser diferente (ex.: "Viva+" para projetos que envolvem a empresa
+como um todo). **Projetos gerais da Viva+** (que não são de um setor específico): deixe
+`setoresIds` vazio (`[]`) e use `"setor": "Viva+"`. Eles aparecem no botão de filtro
+**Viva+**, logo depois de "Todos" — o botão só aparece quando existe ao menos um projeto
+geral. Projetos antigos com `"setorId": "rh"` (texto, um setor só) continuam funcionando.
+`status` aceita
 `"Realizado"` ou `"Em andamento"`. Se `imagem` ficar em branco ou o arquivo não
 existir, o card mostra automaticamente "Imagem em breve" no lugar.
 

@@ -1,7 +1,9 @@
 {
   "data": "11/10/2026",
   "descricao": "Site institucional da Viva+, empresa de bem-estar corporativo, com painel administrativo para atualizar o conteúdo sem programar.",
-  "setorId": "ti",
+  "setoresIds": [
+    "ti"
+  ],
   "setor": "Tecnologia da Informação ",
   "titulo": "Site Institucional - Viva+",
   "categoria": "Institucional ",

@@ -1,7 +1,9 @@
 {
   "titulo": "Espro que eu vejo",
   "setor": "Viva+",
-  "setorId": "diretoria",
+  "setoresIds": [
+    "diretoria"
+  ],
   "categoria": "Ambiente",
   "data": "26/03/2026",
   "imagem": "/assets/images/projetos/screenshot-2026-08-29-172829.png",
