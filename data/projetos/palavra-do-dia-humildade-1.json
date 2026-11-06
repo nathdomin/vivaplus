@@ -1,7 +1,5 @@
 {
-  "setoresIds": [
-    "diretoria"
-  ],
+  "setoresIds": [],
   "setor": "Diretoria",
   "descricao": "Foi realizada uma dinâmica sobre a importância da humildade no ambiente profissional e social. Por meio da distribuição de cartões com qualidades, os participantes tiveram a oportunidade de reconhecer e valorizar as virtudes dos colegas, promovendo a integração, a empatia e o respeito mútuo. A atividade também proporcionou uma reflexão sobre a importância de reconhecer as próprias qualidades, aceitar elogios e valorizar as conquistas dos outros, fortalecendo o trabalho em equipe e o desenvolvimento pessoal.",
   "data": "10/09/2026",
@@ -13,5 +11,6 @@
     "/assets/images/projetos/136630.jpg",
     "/assets/images/projetos/136636.jpg"
   ],
-  "titulo": "Palavra do dia - Humildade #1"
+  "titulo": "Palavra do dia - Humildade #1",
+  "geral": true
 }
