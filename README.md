@@ -34,6 +34,7 @@ viva-plus/
 │   ├── orientacoes.js    → carrega data/orientacoes.json e renderiza a seção Orientações
 │   ├── carreira.js       → seção Carreira: incorpora o agente de IA (iframe com carregamento sob demanda)
 │   ├── main.js           → navbar, menu mobile, reveal, pilares, valores, metas, contato
+│   ├── tema.js           → botão de modo claro/escuro (escolha salva + tema do sistema)
 │   └── tilt.js           → efeito 3D dos cards e paralaxe do hero (só desktop com mouse)
 └── assets/
     └── images/
@@ -59,6 +60,25 @@ Abra `css/style.css` e edite as variáveis no topo do arquivo (dentro de `:root`
 ```
 
 Todo o site usa essas variáveis — não há cores "soltas" no meio do CSS, então alterar aqui atualiza tudo.
+
+### Modo escuro
+
+O botão de lua/sol no cabeçalho alterna entre o modo claro e o escuro. A lógica está em
+`js/tema.js` e as cores do modo escuro no bloco **MODO ESCURO**, no fim de `css/style.css`.
+
+- **Como o tema é escolhido:** se o visitante já clicou no botão, vale a escolha dele (guardada
+  no navegador). Senão, o site segue o tema do sistema (claro/escuro) e acompanha se ele mudar.
+- **Paleta:** o modo escuro usa tons do próprio azul Viva+ como fundo (o mesmo `--color-blue-dark`
+  do rodapé, mais fundo), texto branco azulado, e verde/laranja continuam como destaques. As
+  seções que já eram azuis (hero, missão, frase final, rodapé) não mudam.
+- **Para ajustar as cores do escuro:** edite as variáveis dentro de `:root[data-theme="dark"]`
+  (`--color-background`, `--color-surface`, `--color-text`, `--color-muted`, `--color-border`,
+  `--color-heading`). No modo claro essas variáveis têm os valores de sempre.
+- **Ao criar um componente novo:** use `--color-surface` para fundos de cards/seções "brancas" e
+  `--color-heading` para títulos em azul. `--color-white` continua sendo o branco fixo (texto sobre
+  azul, laranja ou verde) e `--color-blue` o azul fixo da marca; esses dois não mudam no escuro.
+- **Limitação:** o agente de carreira (seção Carreira) é uma página externa dentro de um iframe e
+  continua claro nos dois modos; só a moldura ao redor dele muda.
 
 ---
 

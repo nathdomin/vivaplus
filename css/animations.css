@@ -161,6 +161,10 @@
     background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.4), transparent 65%);
     transition: opacity 0.4s ease;
   }
+  /* Modo escuro: brilho do cursor mais suave (branco a 40% ofuscaria o card escuro) */
+  :root[data-theme="dark"] :is(.pillar-card, .value-card, .sector-card, .team-card, .project-card, .goal-card, .guidance-card, .org-item)::after {
+    background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.09), transparent 65%);
+  }
 
   .tilt-active::after { opacity: 1; }
   .tilt-active {

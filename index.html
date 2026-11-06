@@ -14,6 +14,18 @@
   <meta property="og:locale" content="pt_BR" />
 
   <link rel="icon" href="assets/images/logoviva.png" type="image/png" />
+
+  <!-- Aplica o tema (claro/escuro) antes da página aparecer, para não piscar. A lógica do botão está em js/tema.js. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("vivaplus-tema");
+        if (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) t = "escuro";
+        if (t === "escuro") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
   <link rel="stylesheet" href="css/animations.css" />
@@ -43,6 +55,14 @@
 
       <div class="header-actions">
         <a href="#contato" class="btn btn-outline btn-sm">Fale conosco</a>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Ativar modo escuro" title="Ativar modo escuro">
+          <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+            <circle class="ring" cx="20" cy="20" r="19.25"/>
+            <!-- ícones de 24x24 reduzidos a 18x18 e centrados em (20,20); a lua tem um pequeno deslocamento para o peso visual do crescente ficar no centro -->
+            <g class="icon-moon" transform="translate(11 11) scale(0.75)" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path transform="translate(1 -1)" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></g>
+            <g class="icon-sun" transform="translate(11 11) scale(0.75)" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></g>
+          </svg>
+        </button>
         <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="navMobile">
           <span></span><span></span><span></span>
         </button>
@@ -430,6 +450,7 @@
   <script src="js/projetos.js"></script>
   <script src="js/orientacoes.js"></script>
   <script src="js/carreira.js"></script>
+  <script src="js/tema.js"></script>
   <script src="js/main.js"></script>
   <script src="js/tilt.js"></script>
 
