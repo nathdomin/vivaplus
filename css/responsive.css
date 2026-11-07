@@ -58,7 +58,24 @@
   .month-spotlight { grid-template-columns: 1fr; text-align: center; padding: 36px 28px; }
   .month-spotlight-badge { margin-inline: auto; }
 
-  .career-grid { grid-template-columns: 1fr; gap: 40px; }
+  /* Carreira: o agente vem logo depois do título e dos passos.
+     .career-copy "some" (display: contents) e seus filhos viram itens do
+     grid, que ordena: título/texto/passos → moldura → LGPD/nova aba. */
+  .career-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .career-copy { display: contents; }
+  .career-copy > * { order: 0; }
+  .career-frame { order: 1; margin-bottom: 28px; }
+  .career-copy > .career-privacy,
+  .career-copy > .career-open { order: 2; }
+  .career-copy .section-lead { margin-bottom: 24px; }
+
+  /* Passos compactos numa linha, sem a descrição (o destaque continua) */
+  .career-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
+  .career-steps li { align-items: center; gap: 12px; padding: 12px 14px; }
+  .career-steps li div > span { display: none; }
+  .career-steps strong { font-size: 0.9rem; margin-bottom: 0; line-height: 1.25; }
+  .career-steps li:hover,
+  .career-steps li.is-active { transform: none; }
 }
 
 /* ---------- ≤768px (tablet / mobile grande) ---------- */
@@ -140,6 +157,17 @@
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 
   .closing { padding-block: 100px; }
+
+  /* Carreira: passos em coluna (número em cima) e moldura mais larga,
+     para sobrar espaço útil para o formulário do agente */
+  .career-steps { gap: 8px; }
+  .career-steps li { flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 12px 6px; }
+  .career-step-num { width: 32px; height: 32px; border-radius: 10px; font-size: 0.78rem; }
+  .career-steps strong { font-size: 0.78rem; }
+  .career-frame { margin-inline: -8px; padding: 4px; border-radius: var(--radius-md); }
+  .career-frame-body { border-radius: calc(var(--radius-md) - 4px); }
+  .career-frame-bar { padding: 4px 8px 8px; }
+  .career-frame-title { font-size: 0.74rem; padding: 4px 12px; }
 }
 
 /* ---------- ≤375px ---------- */

@@ -1223,7 +1223,8 @@ section { padding-block: 120px; position: relative; }
 .guidance-card p { font-size: 0.92rem; color: var(--color-muted); }
 
 /* ---------- CARREIRA (AGENTE DE IA) ---------- */
-.career { background: var(--color-surface); overflow: hidden; }
+/* clip (e não hidden): corta o brilho decorativo sem impedir o sticky da coluna de texto */
+.career { background: var(--color-surface); overflow: clip; }
 .career::before {
   content: "";
   position: absolute;
@@ -1243,6 +1244,9 @@ section { padding-block: 120px; position: relative; }
   z-index: 1;
 }
 .career-copy .section-lead { margin-bottom: 36px; }
+/* No desktop o agente cresce bem mais que esta coluna: ela acompanha a
+   rolagem para os passos destacados continuarem à vista */
+.career-copy { position: sticky; top: calc(var(--header-height) + 24px); }
 
 .career-steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
 .career-steps li {
@@ -1327,7 +1331,8 @@ section { padding-block: 120px; position: relative; }
 .career-frame-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-green); }
 .career-frame-body {
   position: relative;
-  background: var(--color-white);
+  /* Mesma cor do fundo do agente (branco no claro, --color-surface no escuro) */
+  background: var(--color-surface);
   border-radius: calc(var(--radius-xl) - 10px);
   overflow: hidden;
   /* Altura inicial; depois o agente informa a altura do conteúdo

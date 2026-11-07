@@ -69,9 +69,12 @@
      - vivaplus:altura     → a moldura cresce/encolhe com o conteúdo
      - vivaplus:etapa      → destaca o passo 01/02/03 ao lado
      - vivaplus:rolar-topo → ao enviar um formulário, mostra o topo da moldura
-     (vivaplus:abrir-setor é tratado por js/setores.js) */
+     - vivaplus:pedir-tema → responde com o tema atual (claro/escuro)
+     (vivaplus:abrir-setor é tratado por js/setores.js)
+     E o site manda para o agente { type: "vivaplus:tema", tema }, para ele
+     acompanhar o botão de tema (js/tema.js). */
   const ALTURA_MIN = 560;
-  const ALTURA_MAX = 2400;
+  const ALTURA_MAX = 6000;
   const corpo = frame.querySelector(".career-frame-body");
   const passos = document.querySelectorAll("#careerSteps [data-step]");
   let origemAgente = null;
@@ -105,7 +108,25 @@
     }
 
     if (dados.type === "vivaplus:rolar-topo") mostrarTopoDaMoldura();
+    if (dados.type === "vivaplus:pedir-tema") enviarTema();
   });
+
+  /* Tema: o agente segue o claro/escuro do site */
+  function enviarTema() {
+    if (!origemAgente || !iframe.contentWindow) return;
+    const tema = document.documentElement.getAttribute("data-theme") === "dark" ? "escuro" : "claro";
+    try {
+      iframe.contentWindow.postMessage({ type: "vivaplus:tema", tema }, origemAgente);
+    } catch (e) { /* iframe ainda sem página */ }
+  }
+
+  iframe.addEventListener("load", enviarTema);
+  if ("MutationObserver" in window) {
+    new MutationObserver(enviarTema).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
+  }
 
   if (document.readyState === "complete") {
     acordarAgente();
