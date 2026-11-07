@@ -309,18 +309,20 @@
           <h2 class="section-title">Vamos encontrar o seu lugar na Viva+?</h2>
           <p class="section-lead">Envie seu currículo para o nosso agente de IA: ele analisa o seu perfil e sugere as áreas administrativas que mais combinam com você.</p>
 
-          <ol class="career-steps">
-            <li>
+          <!-- Os passos acompanham as telas do agente: js/carreira.js marca
+               o atual (.is-active) quando o agente avisa a etapa -->
+          <ol class="career-steps" id="careerSteps">
+            <li data-step="1">
               <span class="career-step-num">01</span>
-              <div><strong>Preencha seus dados</strong><span>Nome, e-mail e as áreas que despertam seu interesse.</span></div>
+              <div><strong>Envie dados e currículo</strong><span>Nome, e-mail, áreas de interesse e o currículo em PDF ou DOCX (até 5 MB).</span></div>
             </li>
-            <li>
+            <li data-step="2">
               <span class="career-step-num">02</span>
-              <div><strong>Anexe o currículo</strong><span>Arquivo em PDF ou DOCX, com até 5 MB.</span></div>
+              <div><strong>Revise o texto extraído</strong><span>Corrija ou complete o que o agente leu do seu arquivo antes da análise.</span></div>
             </li>
-            <li>
+            <li data-step="3">
               <span class="career-step-num">03</span>
-              <div><strong>Receba a análise</strong><span>O agente indica as áreas com maior afinidade ao seu perfil.</span></div>
+              <div><strong>Veja os setores indicados</strong><span>As áreas com maior aderência ao seu perfil, com o porquê de cada uma.</span></div>
             </li>
           </ol>
 

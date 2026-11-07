@@ -65,6 +65,48 @@
     }
   }
 
+  /* ---------- Mensagens do agente (static/embed.js lá) ----------
+     - vivaplus:altura     → a moldura cresce/encolhe com o conteúdo
+     - vivaplus:etapa      → destaca o passo 01/02/03 ao lado
+     - vivaplus:rolar-topo → ao enviar um formulário, mostra o topo da moldura
+     (vivaplus:abrir-setor é tratado por js/setores.js) */
+  const ALTURA_MIN = 560;
+  const ALTURA_MAX = 2400;
+  const corpo = frame.querySelector(".career-frame-body");
+  const passos = document.querySelectorAll("#careerSteps [data-step]");
+  let origemAgente = null;
+  let etapaAtual = 0;
+  try { origemAgente = new URL(url).origin; } catch (e) { /* URL inválida */ }
+
+  function mostrarTopoDaMoldura() {
+    const topo = frame.getBoundingClientRect().top;
+    const cabecalho = document.querySelector(".site-header");
+    const folga = (cabecalho ? cabecalho.offsetHeight : 0) + 16;
+    // Só rola se o topo da moldura estiver fora da tela
+    if (topo < folga || topo > window.innerHeight * 0.6) {
+      window.scrollTo({ top: window.scrollY + topo - folga, behavior: "smooth" });
+    }
+  }
+
+  window.addEventListener("message", (e) => {
+    if (!origemAgente || e.origin !== origemAgente || e.source !== iframe.contentWindow) return;
+    const dados = e.data || {};
+
+    if (dados.type === "vivaplus:altura" && Number.isFinite(dados.altura) && corpo) {
+      const altura = Math.min(ALTURA_MAX, Math.max(ALTURA_MIN, Math.ceil(dados.altura)));
+      corpo.style.height = altura + "px";
+    }
+
+    if (dados.type === "vivaplus:etapa" && [1, 2, 3].includes(dados.etapa)) {
+      passos.forEach((li) => li.classList.toggle("is-active", Number(li.dataset.step) === dados.etapa));
+      // Mudou de tela (ex.: foi da revisão ao resultado): mostra o começo dela
+      if (etapaAtual && dados.etapa !== etapaAtual) mostrarTopoDaMoldura();
+      etapaAtual = dados.etapa;
+    }
+
+    if (dados.type === "vivaplus:rolar-topo") mostrarTopoDaMoldura();
+  });
+
   if (document.readyState === "complete") {
     acordarAgente();
   } else {

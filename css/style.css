@@ -1253,9 +1253,17 @@ section { padding-block: 120px; position: relative; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 18px 20px;
-  transition: transform var(--transition-fast) var(--ease), box-shadow var(--transition-fast) var(--ease);
+  transition: transform var(--transition-fast) var(--ease), box-shadow var(--transition-fast) var(--ease), opacity var(--transition-fast) var(--ease), border-color var(--transition-fast) var(--ease);
 }
 .career-steps li:hover { transform: translateX(6px); box-shadow: var(--shadow-sm); }
+/* Passo em que o visitante está no agente (marcado por js/carreira.js) */
+.career-steps li.is-active {
+  background: var(--color-surface);
+  border-color: var(--color-orange);
+  box-shadow: var(--shadow-md);
+  transform: translateX(6px);
+}
+.career-steps:has(li.is-active) li:not(.is-active) { opacity: 0.6; }
 .career-step-num {
   font-family: var(--font-display);
   font-weight: 700;
@@ -1322,7 +1330,10 @@ section { padding-block: 120px; position: relative; }
   background: var(--color-white);
   border-radius: calc(var(--radius-xl) - 10px);
   overflow: hidden;
+  /* Altura inicial; depois o agente informa a altura do conteúdo
+     (js/carreira.js) e a moldura acompanha */
   height: 760px;
+  transition: height var(--transition-normal) var(--ease);
 }
 .career-frame-body iframe {
   width: 100%;
