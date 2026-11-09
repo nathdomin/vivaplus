@@ -39,16 +39,6 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
     { id: "outro", label: "Outros" }
   ];
 
-  const ICONES_CATEGORIA = {
-    hidratacao: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5s6 7.2 6 11.5a6 6 0 0 1-12 0c0-4.3 6-11.5 6-11.5z"/></svg>`,
-    alimentacao: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg>`,
-    "atividade-fisica": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5l11 11M21 21l-1.5-1.5M3 3l1.5 1.5M18.5 5.5l-13 13M5 18l-1.5 1.5M20 5.5l-1.5-1.5"/><circle cx="5.5" cy="5.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg>`,
-    sono: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
-    postura: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><path d="M12 6v7M12 13l-4 8M12 13l4 8M8 9h8"/></svg>`,
-    "saude-mental": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
-    outro: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>`
-  };
-
   function labelCategoria(id) {
     const c = CATEGORIAS.find((c) => c.id === id);
     return c ? c.label : "Outros";
@@ -75,13 +65,8 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
     const dataFormatada = FORMATADOR_DATA.format(agora);
 
     el.innerHTML = `
-      <div class="month-spotlight-glow" aria-hidden="true"></div>
-      <div class="month-spotlight-badge">
-        <span class="month-spotlight-number">${String(numeroMesAtual).padStart(2, "0")}</span>
-        <span class="month-spotlight-name">${(mesAtual && mesAtual.nome) || nomeFallback}</span>
-      </div>
       <div class="month-spotlight-body">
-        <span class="month-spotlight-eyebrow">O significado deste mês</span>
+        <span class="month-spotlight-label">O significado de ${((mesAtual && mesAtual.nome) || nomeFallback).toLowerCase()}</span>
         <h3>${(mesAtual && mesAtual.tema) || "Informações em breve"}</h3>
         <p>${(mesAtual && mesAtual.texto) || "Ainda não cadastramos o significado deste mês — em breve traremos essa informação por aqui."}</p>
         <span class="month-spotlight-date">${dataFormatada}</span>
@@ -130,8 +115,7 @@ const CAMINHO_DADOS_ORIENTACOES = "data/orientacoes.json";
     el.innerHTML = lista
       .map(
         (d) => `
-      <div class="guidance-card reveal">
-        <div class="guidance-icon">${ICONES_CATEGORIA[d.categoria] || ICONES_CATEGORIA.outro}</div>
+      <div class="guidance-card">
         <span class="guidance-tag">${labelCategoria(d.categoria)}</span>
         <h3>${d.titulo}</h3>
         <p>${d.texto}</p>

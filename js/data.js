@@ -17,39 +17,27 @@
    --------------------------------------------------------- */
 const valores = [
   {
-    numero: "01",
     nome: "Autenticidade",
-    icone: "autenticidade",
     descricao: "Somos verdadeiros com as pessoas e com o nosso propósito, dentro e fora da Viva+."
   },
   {
-    numero: "02",
     nome: "Inovação",
-    icone: "inovacao",
     descricao: "Buscamos novas formas de cuidar de pessoas e de reinventar o bem-estar no trabalho."
   },
   {
-    numero: "03",
     nome: "Comunidade",
-    icone: "comunidade",
     descricao: "Acreditamos que o bem-estar se constrói em coletivo, entre equipes e entre empresas."
   },
   {
-    numero: "04",
     nome: "Sustentabilidade",
-    icone: "sustentabilidade",
     descricao: "Cuidamos de pessoas e do ambiente ao redor delas como responsabilidades que caminham juntas."
   },
   {
-    numero: "05",
     nome: "Inclusão",
-    icone: "inclusao",
     descricao: "Construímos espaços de trabalho onde diferentes histórias e pessoas têm lugar."
   },
   {
-    numero: "06",
     nome: "Comunicação não violenta",
-    icone: "cnv",
     descricao: "Falamos e ouvimos com respeito, empatia e clareza em cada relação que construímos."
   }
 ];

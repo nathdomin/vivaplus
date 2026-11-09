@@ -91,13 +91,13 @@ function ordenarComGestorPrimeiro(lista) {
     el.innerHTML = lista
       .map(
         (c) => `
-      <article class="team-card reveal" tabindex="0" aria-label="${c.nome}, ${nomeSetor(c.setorId)}">
+      <article class="team-card" tabindex="0" aria-label="${c.nome}, ${nomeSetor(c.setorId)}">
         <div class="team-avatar">
           <span>${iniciais(c.nome)}</span>
           ${
             c.foto
-              ? `<img src="${urlImagem(c.foto, 176, 176)}" data-original="${c.foto}" alt="Foto de ${c.nome}"
-               width="88" height="88" loading="lazy"
+              ? `<img src="${urlImagem(c.foto, 288, 288)}" data-original="${c.foto}" alt="Foto de ${c.nome}"
+               width="144" height="144" loading="lazy"
                onerror="imagemComFallback(this, (img) => img.remove())" />`
               : ""
           }

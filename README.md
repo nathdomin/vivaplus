@@ -25,17 +25,17 @@ viva-plus/
 ├── css/
 │   ├── style.css        → design system e layout
 │   ├── responsive.css   → breakpoints (320px → 1920px)
-│   └── animations.css   → animações e reveal ao rolar
+│   └── animations.css   → animações de abertura e ao rolar a página
 ├── js/
 │   ├── data.js           → valores, filtros e carregamento de data/setores.json
 │   ├── colaboradores.js  → carrega data/gerado/colaboradores.json e renderiza o time
 │   ├── setores.js        → organograma, cards de setores e modal
-│   ├── projetos.js       → carrega data/gerado/projetos.json e renderiza grid/timeline
+│   ├── projetos.js       → carrega data/gerado/projetos.json e renderiza apresentação, cards e timeline
 │   ├── orientacoes.js    → carrega data/orientacoes.json e renderiza a seção Orientações
 │   ├── carreira.js       → seção Carreira: incorpora o agente de IA (iframe com carregamento sob demanda)
 │   ├── main.js           → navbar, menu mobile, reveal, pilares, valores, metas, contato
 │   ├── tema.js           → botão de modo claro/escuro (escolha salva + tema do sistema)
-│   └── tilt.js           → efeito 3D dos cards e paralaxe do hero (só desktop com mouse)
+│   └── animacoes.js      → animações ao rolar, contagem das metas e marcador do menu
 └── assets/
     └── images/
         ├── logoviva.png        → símbolo usado no header, no hero, no favicon e no Open Graph
@@ -70,7 +70,7 @@ O botão de lua/sol no cabeçalho alterna entre o modo claro e o escuro. A lógi
   no navegador). Senão, o site segue o tema do sistema (claro/escuro) e acompanha se ele mudar.
 - **Paleta:** o modo escuro usa tons do próprio azul Viva+ como fundo (o mesmo `--color-blue-dark`
   do rodapé, mais fundo), texto branco azulado, e verde/laranja continuam como destaques. As
-  seções que já eram azuis (hero, missão, frase final, rodapé) não mudam.
+  faixas de cor da marca (topo, missão, setores, mês em destaque, frase final, rodapé) não mudam.
 - **Para ajustar as cores do escuro:** edite as variáveis dentro de `:root[data-theme="dark"]`
   (`--color-background`, `--color-surface`, `--color-text`, `--color-muted`, `--color-border`,
   `--color-heading`). No modo claro essas variáveis têm os valores de sempre.
@@ -195,8 +195,7 @@ O site mostra automaticamente, em destaque na seção **Orientações**, o item 
 `meses` cujo campo `mes` (1 a 12) corresponder ao mês atual do calendário do
 visitante — mantenha só um item por número de mês. As `dicas` aparecem em
 grade, filtráveis por `categoria` (`hidratacao`, `alimentacao`,
-`atividade-fisica`, `sono`, `postura`, `saude-mental` ou `outro` — cada uma já
-tem um ícone definido em `js/orientacoes.js`, em `ICONES_CATEGORIA`).
+`atividade-fisica`, `sono`, `postura`, `saude-mental` ou `outro`).
 
 ## Seção Carreira (agente de IA)
 
@@ -256,14 +255,10 @@ Edite o array `valores` em `js/data.js`. Cada valor segue esta estrutura:
 
 ```javascript
 {
-  numero: "01",
   nome: "Nome do valor",
-  icone: "chave-do-icone", // veja os ícones existentes em js/main.js (valueIcons)
   descricao: "Descrição curta do valor."
 }
 ```
-
-Para adicionar um novo valor com um ícone próprio, crie uma nova entrada em `valueIcons` dentro de `js/main.js` com um SVG simples.
 
 ---
 

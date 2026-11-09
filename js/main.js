@@ -1,7 +1,7 @@
 /* =========================================================
    VIVA+ — main.js
-   Comportamento geral do site: navbar, menu mobile, reveal
-   ao rolar a página, valores, pilares "Sobre", metas por
+   Comportamento geral do site: navbar, menu mobile,
+   valores, pilares "Sobre", metas por
    setor e pequenos utilitários.
    ========================================================= */
 
@@ -48,52 +48,12 @@
     });
   }
 
-  /* ---------- SCROLL REVEAL (Intersection Observer) ----------
-     Observa .reveal / .reveal-stagger e adiciona .is-visible quando
-     o elemento entra na tela. Um MutationObserver cuida de "pegar"
-     automaticamente os cards que são inseridos depois (colaboradores,
-     projetos, setores etc. vêm de fetch() e renderizam de forma
-     assíncrona) — assim a animação nunca depende da ordem em que os
-     scripts terminam de rodar. */
-  function initReveal() {
-    const seletor = ".reveal:not(.is-visible), .reveal-stagger:not(.is-visible)";
-
-    if (!("IntersectionObserver" in window)) {
-      const mostrarTodos = () =>
-        document.querySelectorAll(seletor).forEach((el) => el.classList.add("is-visible"));
-      mostrarTodos();
-      new MutationObserver(mostrarTodos).observe(document.body, { childList: true, subtree: true });
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    // observe() no mesmo elemento mais de uma vez não tem efeito, então
-    // dá para reobservar todos os pendentes a cada mudança no DOM.
-    const observarPendentes = () =>
-      document.querySelectorAll(seletor).forEach((el) => observer.observe(el));
-    observarPendentes();
-
-    /* Sempre que algo novo é inserido no DOM (cards vindos de fetch
-       assíncrono), verifica se há .reveal ainda não observado. */
-    new MutationObserver(observarPendentes).observe(document.body, { childList: true, subtree: true });
-  }
-
   /* ---------- PILARES (Sobre a Viva+) ---------- */
   const pilares = [
-    { nome: "Saúde", desc: "Benefícios voltados ao cuidado físico e mental dos colaboradores.", icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>` },
-    { nome: "Lazer", desc: "Experiências que renovam energia e trazem leveza para o dia a dia.", icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>` },
-    { nome: "Cultura", desc: "Acesso a experiências culturais que ampliam o repertório de vida.", icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h20v14H2z"/><path d="M8 21h8M12 17v4"/></svg>` },
-    { nome: "Integração Social", desc: "Conexões reais entre pessoas dentro e fora do ambiente de trabalho.", icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M17 3.13a4 4 0 0 1 0 7.75M23 21v-2a4 4 0 0 0-3-3.87M1 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg>` }
+    { nome: "Saúde", desc: "Benefícios voltados ao cuidado físico e mental dos colaboradores." },
+    { nome: "Lazer", desc: "Experiências que renovam energia e trazem leveza para o dia a dia." },
+    { nome: "Cultura", desc: "Acesso a experiências culturais que ampliam o repertório de vida." },
+    { nome: "Integração Social", desc: "Conexões reais entre pessoas dentro e fora do ambiente de trabalho." }
   ];
 
   function renderPilares() {
@@ -102,8 +62,7 @@
     el.innerHTML = pilares
       .map(
         (p) => `
-      <div class="pillar-card reveal">
-        <div class="pillar-icon">${p.icon}</div>
+      <div class="pillar-card">
         <h3>${p.nome}</h3>
         <p>${p.desc}</p>
       </div>`
@@ -112,24 +71,13 @@
   }
 
   /* ---------- VALORES ---------- */
-  const valueIcons = {
-    autenticidade: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>`,
-    inovacao: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.6 1 1.4 1 2.5h6c0-1.1.4-1.9 1-2.5A6 6 0 0 0 12 2z"/></svg>`,
-    comunidade: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-    sustentabilidade: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13 11 11"/></svg>`,
-    inclusao: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>`,
-    cnv: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`
-  };
-
   function renderValores() {
     const el = document.getElementById("valuesGrid");
     if (!el || typeof valores === "undefined") return;
     el.innerHTML = valores
       .map(
         (v) => `
-      <div class="value-card reveal">
-        <span class="value-number">${v.numero}</span>
-        <div class="value-icon">${valueIcons[v.icone] || ""}</div>
+      <div class="value-card">
         <h3>${v.nome}</h3>
         <p>${v.descricao}</p>
       </div>`
@@ -189,39 +137,20 @@
         const dados = progresso[s.id];
         const percentual = dados !== undefined ? dados.percentual : PERCENTUAL_PADRAO;
         return `
-      <div class="goal-card reveal" style="--accent:${acentoDaBarra(s.corAccent)}">
-        <h3>${s.nome}</h3>
-        <p class="goal-objective">${s.resumo}</p>
-        <div class="goal-progress" role="img" aria-label="Progresso da meta de ${s.nome}: ${percentual}%">
-          <div class="goal-progress-bar" data-width="${percentual}"></div>
+      <div class="goal-card">
+        <div class="goal-head">
+          <h3>${s.nome}</h3>
+          <strong class="goal-percent">${percentual}%</strong>
         </div>
-        <span class="goal-progress-label">${percentual}% concluído</span>
+        <div class="goal-progress" role="img" aria-label="Progresso da meta de ${s.nome}: ${percentual}% concluído">
+          <div class="goal-progress-bar" style="width:${percentual}%"></div>
+        </div>
         <ul class="goal-list">
           ${s.metas.length ? s.metas.map((m) => `<li class="${m.concluida ? "is-done" : ""}">${m.texto}</li>`).join("") : `<li>Informações em breve.</li>`}
         </ul>
       </div>`;
       })
       .join("");
-
-    // Anima a barra de progresso quando entra na tela
-    const bars = el.querySelectorAll(".goal-progress-bar");
-    if ("IntersectionObserver" in window) {
-      const barObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const bar = entry.target;
-              bar.style.width = bar.getAttribute("data-width") + "%";
-              barObserver.unobserve(bar);
-            }
-          });
-        },
-        { threshold: 0.4 }
-      );
-      bars.forEach((b) => barObserver.observe(b));
-    } else {
-      bars.forEach((b) => (b.style.width = b.getAttribute("data-width") + "%"));
-    }
   }
 
   /* ---------- ANO ATUAL NO FOOTER ---------- */
@@ -283,7 +212,6 @@
     renderMetas();
     setYear();
     initContactForm();
-    initReveal();
   }
 
   if (document.readyState === "loading") {

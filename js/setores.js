@@ -12,8 +12,6 @@
    ========================================================= */
 
 (function () {
-  const arrowIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
-
   /* ---------- Organograma ---------- */
   function renderOrgChart() {
     const el = document.getElementById("orgLevel");
@@ -22,10 +20,12 @@
       .map(
         (s) => `
       <button class="org-item" data-sector="${s.id}" aria-haspopup="dialog">
-        <span class="org-num">${s.numero}</span>${s.nome}
+        <span class="${classeDoSelo(s)}" style="background:var(--color-${corDoSetor(s)})">${iconeDoSetor(s)}</span>
+        <span>${s.nome}</span>
       </button>`
       )
       .join("");
+    el.style.setProperty("--org-n", setores.length);
   }
 
   /* ---------- Cards de setores ---------- */
@@ -35,15 +35,11 @@
     el.innerHTML = setores
       .map(
         (s) => `
-      <article class="sector-card reveal" data-sector="${s.id}" tabindex="0" role="button"
+      <article class="sector-card is-${corDoSetor(s)}" data-sector="${s.id}" tabindex="0" role="button"
         aria-label="Ver detalhes do setor ${s.nome}">
-        <div class="sector-top">
-          <div class="${classeDoSelo(s)}" style="background:${s.corAccent}">${iconeDoSetor(s)}</div>
-          <span class="sector-num">${s.numero}</span>
-        </div>
         <h3>${s.nome}</h3>
         <p>${s.resumo}</p>
-        <span class="sector-cta">Ver detalhes ${arrowIcon}</span>
+        <span class="sector-cta">Ver detalhes</span>
       </article>`
       )
       .join("");
@@ -77,7 +73,7 @@
 
     return `
       <div class="modal-header">
-        <div class="${classeDoSelo(setor)}" style="background:${setor.corAccent}">${iconeDoSetor(setor)}</div>
+        <div class="${classeDoSelo(setor)}" style="background:var(--color-${corDoSetor(setor)})">${iconeDoSetor(setor)}</div>
         <div>
           <span>Setor ${setor.numero}</span>
           <h3 id="sectorModalTitle">${setor.nome}</h3>

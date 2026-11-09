@@ -72,6 +72,14 @@ body {
   cursor: default;
 }
 
+/* Número do mês nos cards de Orientações. */
+.prev .value-number {
+  display: block;
+  font-weight: 700;
+  color: var(--color-accent-text);
+  margin-bottom: 6px;
+}
+
 /* Miniaturas da galeria do projeto, abaixo do card. */
 .prev-galeria { margin-top: 20px; }
 .prev-galeria-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px; }
