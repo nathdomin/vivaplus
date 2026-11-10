@@ -1,12 +1,13 @@
 {
-  "data": "01/10/2026",
-  "descricao": "Nossas escolhas são constantemente influenciadas pelos sentidos e pela razão. Cabe a nós encontrar o equilíbrio entre aquilo que sentimos e aquilo que pensamos antes de decidir. Platão defendia a importância da razão na busca pelo conhecimento e pela verdade, valorizando o pensamento racional em detrimento das percepções sensoriais. Assim, escolher vai além de seguir impulsos: é também refletir, questionar e compreender as consequências de nossas decisões. Afinal, toda escolha carrega uma dimensão filosófica e intuitiva.",
-  "titulo": "Palavra do dia - Escolhas #2",
-  "setor": "Comercial",
   "setoresIds": [
     "comercial"
   ],
-  "categoria": "Educação",
+  "setor": "Comercial",
+  "descricao": "Nossas escolhas são constantemente influenciadas pelos sentidos e pela razão. Cabe a nós encontrar o equilíbrio entre aquilo que sentimos e aquilo que pensamos antes de decidir. Platão defendia a importância da razão na busca pelo conhecimento e pela verdade, valorizando o pensamento racional em detrimento das percepções sensoriais. Assim, escolher vai além de seguir impulsos: é também refletir, questionar e compreender as consequências de nossas decisões. Afinal, toda escolha carrega uma dimensão filosófica e intuitiva.",
+  "data": "01/10/2026",
   "imagem": "/assets/images/projetos/136627.jpg",
-  "status": "Realizado"
+  "status": "Realizado",
+  "categoria": "Educação",
+  "titulo": "Palavra do dia - Escolhas #2",
+  "geral": true
 }
