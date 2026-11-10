@@ -113,7 +113,8 @@
   .showcase-stage, .showcase.is-presenting .showcase-stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto; height: auto; border-radius: 56px 20px 20px 20px; }
   .showcase-photo { aspect-ratio: 4/3; }
   .showcase-info { padding: 20px 20px 18px; }
-  .showcase-desc { overflow: visible; }
+  /* Texto longo rola dentro da própria caixa; no fim dele, a página continua rolando */
+  .showcase-desc { overflow-y: auto; max-height: clamp(120px, 30vh, 240px); max-height: clamp(120px, 30svh, 240px); }
   .showcase-thumb { flex-basis: 128px; }
   .showcase.is-presenting { overflow-y: auto; padding: 14px 14px 8px; }
   .showcase.is-presenting .showcase-stage { flex: none; }
@@ -200,6 +201,28 @@
   .hero-title { font-size: 1.9rem; }
   .section-title { font-size: 1.6rem; }
   .team-avatar { width: 92px; height: 92px; }
+}
+
+/* ---------- Apresentação em celular e tablet: a faixa de projetos nunca é espremida ---------- */
+@media (max-width: 1024px) {
+  .showcase.is-presenting .showcase-strip { flex: none; }
+}
+
+/* ---------- Apresentação em pé: foto em cima e texto embaixo, tudo em uma tela só ---------- */
+@media (max-width: 1024px) and (orientation: portrait) {
+  .showcase.is-presenting { overflow: hidden; }
+  .showcase.is-presenting .showcase-stage {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+  .showcase.is-presenting .showcase-photo { aspect-ratio: auto; min-height: 0; }
+  .showcase.is-presenting .showcase-info { padding: 20px 20px 18px; }
+  .showcase.is-presenting .showcase-text { overflow-x: hidden; overflow-y: auto; }
+  .showcase.is-presenting .showcase-desc { flex: none; max-height: none; overflow: visible; }
+  .showcase.is-presenting .showcase-controls { flex: none; }
 }
 
 /* ---------- Celular deitado: pouca altura, então texto e imagem ficam lado a lado ---------- */

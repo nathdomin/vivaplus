@@ -41,7 +41,26 @@
       isOpen ? closeMenu() : openMenu();
     });
 
-    nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+    // A rolagem só começa depois que a página sai do bloqueio feito pelo menu aberto:
+    // feitas ao mesmo tempo, a URL mudava mas a página não saía do lugar no Android.
+    function irParaSecao(e) {
+      closeMenu();
+      const link = e.currentTarget;
+      const alvo = link.hash && document.getElementById(link.hash.slice(1));
+      if (!alvo) return;
+      e.preventDefault();
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const inicio = window.scrollY;
+        history.pushState(null, "", link.hash);
+        alvo.scrollIntoView({ block: "start" });
+        // Se a rolagem suave não tiver começado, vai direto até a seção.
+        setTimeout(() => {
+          if (window.scrollY === inicio) alvo.scrollIntoView({ block: "start", behavior: "instant" });
+        }, 400);
+      }));
+    }
+
+    nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", irParaSecao));
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeMenu();
