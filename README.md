@@ -132,7 +132,6 @@ Se preferir criar o arquivo à mão, cada projeto é **um arquivo** em `data/pro
 ```json
 {
   "titulo": "Nome do projeto",
-  "setor": "Nome do setor (texto livre, para exibição)",
   "setoresIds": ["rh"],
   "categoria": "Saúde",
   "data": "Em breve",
@@ -154,19 +153,20 @@ no celular. Sem `galeria`, o card continua como antes. Se `imagem` estiver em br
 a primeira foto da galeria vira a capa. No painel `/admin`, use o campo **Fotos
 adicionais (galeria)** → “Adicionar foto”; a ordem pode ser alterada arrastando.
 
-`setoresIds` é a **lista** de setores do projeto (ids definidos em `data/setores.json`),
-usada nos botões de filtro. Um projeto de mais de um setor aparece no filtro de **cada**
-um — ex.: `"setoresIds": ["4sma", "comercial"]` com `"setor": "4SMA e Comercial"`. No painel
-`/admin`, o campo **Setores (filtro)** aceita marcar vários setores. `setor` é só o texto
-exibido no card, pode ser diferente (ex.: "Viva+" para projetos que envolvem a empresa
-como um todo). **Projetos gerais da Viva+** (da empresa toda, sem setor específico):
-no painel, marque **Projeto geral da Viva+** (`"geral": true` no arquivo) e use
-`"setor": "Viva+"`. Eles aparecem no botão de filtro **Viva+**, logo depois de "Todos" —
+`setoresIds` é a **lista** de setores do projeto (ids definidos em `data/setores.json`).
+Ela define os botões de filtro e o texto do card, gerado a partir dos nomes dos setores:
+`"setoresIds": ["4sma", "comercial"]` aparece no filtro de **cada** setor e mostra
+"4SMA e Comercial" no card. Sem setor, o card mostra "Viva+". No painel `/admin`, o campo
+**Setores** aceita marcar vários. **Projetos gerais da Viva+** (da empresa toda, sem setor
+específico): no painel, marque **Projeto geral da Viva+** (`"geral": true` no arquivo).
+Eles aparecem no botão de filtro **Viva+**, logo depois de "Todos" —
 o botão só aparece quando existe ao menos um projeto geral. Dá para marcar "geral" junto
 com setores (o projeto aparece em todos os botões marcados). Um projeto sem nenhum setor
 (`"setoresIds": []`) também é tratado como geral. Projetos antigos com `"setorId": "rh"`
 (texto, um setor só) continuam funcionando.
-`status` aceita
+`data` usa o formato `DD/MM/AAAA` e, em branco, o site mostra "Em breve". No painel,
+`categoria` é uma lista de seleção: para criar uma nova, adicione a opção no campo
+"Categoria" em `admin/config.yml`. `status` aceita
 `"Realizado"` ou `"Em andamento"`. Se `imagem` ficar em branco ou o arquivo não
 existir, o card mostra automaticamente "Imagem em breve" no lugar.
 
@@ -174,8 +174,8 @@ existir, o card mostra automaticamente "Imagem em breve" no lugar.
 
 ## Como adicionar, editar ou remover uma orientação (dica de bem-estar / significado do mês)
 
-A forma recomendada também é pelo **painel `/admin`** — a coleção **Orientações**
-tem duas listas: "Significado de cada mês" e "Dicas rápidas". Veja
+A forma recomendada também é pelo **painel `/admin`** — em **Conteúdo do site**, o
+item **Orientações** tem duas listas: "Significado de cada mês" e "Dicas rápidas". Veja
 ["Painel de administração"](#painel-de-administração-decap-cms).
 
 Se preferir editar direto, tudo fica em `data/orientacoes.json`:
@@ -183,7 +183,7 @@ Se preferir editar direto, tudo fica em `data/orientacoes.json`:
 ```json
 {
   "meses": [
-    { "mes": 1, "nome": "Janeiro", "tema": "Janeiro Branco", "texto": "Texto explicando o mês..." }
+    { "mes": 1, "tema": "Janeiro Branco", "texto": "Texto explicando o mês..." }
   ],
   "dicas": [
     { "titulo": "Beba água ao longo do dia", "categoria": "hidratacao", "texto": "Texto da dica..." }
@@ -214,8 +214,8 @@ dentro de uma moldura no estilo do site.
   o loader avisa e, após 25 s, oferece abrir em nova aba.
 - **Setores compartilhados:** o agente lê `data/setores.json` deste site
   (variável `SITE_URL` no agente). Os campos `competencias` e `requisitos`
-  de cada setor não aparecem no site — servem só para a IA comparar com o
-  currículo. Quanto mais preenchidos (pelo `/admin`), melhor a recomendação.
+  de cada setor não aparecem no site nem no painel — servem só para a IA
+  comparar com o currículo. Para preenchê-los, edite `data/setores.json`.
 - **Link de volta:** o resultado do agente traz um botão "Conhecer o setor".
   Dentro do iframe, ele envia `{ type: "vivaplus:abrir-setor", setorId }`
   via `postMessage` e o site abre o modal do setor (só aceita mensagens da
@@ -349,13 +349,13 @@ de configurar o Netlify.
 ### Se você criar ou apagar um setor
 
 Nada precisa ser editado à mão: o campo "Setor" das coleções "Colaboradores",
-"Projetos" e "Metas" lê a lista da coleção **Setores**, e os botões de filtro do
+"Projetos" e "Metas" lê a lista de **Conteúdo do site > Setores**, e os botões de filtro do
 site também são montados a partir de `data/setores.json`. Ao apagar um setor,
 reatribua as pessoas dele em **Colaboradores** (até lá o card mostra "Sem setor").
 
 ## Como alterar as metas
 
-Pelo painel `/admin`, coleção **Metas** (arquivo `data/metas.json`): cada setor tem
+Pelo painel `/admin`, em **Conteúdo do site > Metas por setor** (arquivo `data/metas.json`): cada setor tem
 um percentual de progresso e uma lista de metas, cada uma com a opção "Concluída"
 (aparece riscada no site). A seção "Onde queremos chegar" e o modal do setor no
 organograma usam essa mesma lista. Setor sem percentual cadastrado mostra 30%.
@@ -379,7 +379,7 @@ ou `assets/images/projetos/`, e o caminho é preenchido sozinho no JSON.
 
 ## Como criar um novo setor
 
-1. Pelo painel `/admin` (coleção **Setores**) ou direto em `data/setores.json`, adicione um novo setor seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`, `atividades`, `competencias`, `requisitos`). O agente de carreira passa a considerá-lo automaticamente. Campos opcionais: `nomeCurto` (rótulo dos filtros, ex.: "RH") e `icone` (`geral`, `estrela`, `pessoas`, `capelo`, `escudo`, `balao`, `monitor` ou `aperto`; sem ele vale o genérico). Para criar um ícone novo, adicione o SVG em `js/icones-setores.js` e a opção em `admin/config.yml`.
+1. Pelo painel `/admin` (**Conteúdo do site > Setores**) ou direto em `data/setores.json`, adicione um novo setor seguindo a mesma estrutura dos existentes (`id`, `numero`, `nome`, `corAccent`, `resumo`, `objetivo`). O agente de carreira passa a considerá-lo automaticamente. Campos opcionais: `nomeCurto` (rótulo dos filtros, ex.: "RH") e `icone` (`geral`, `estrela`, `pessoas`, `capelo`, `escudo`, `balao`, `monitor` ou `aperto`; sem ele vale o genérico). Para criar um ícone novo, adicione o SVG em `js/icones-setores.js` e a opção em `admin/config.yml`.
 2. Em **Colaboradores**, **Projetos** e **Metas**, escolha o novo setor no campo "Setor". Os botões de filtro aparecem sozinhos (em Projetos, só para setores que têm ao menos um projeto).
 
 O organograma, os cards de setores, os filtros e os modais são gerados automaticamente — não é necessário tocar no HTML nem em `admin/config.yml`.

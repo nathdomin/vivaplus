@@ -82,7 +82,6 @@ const setoresProntos = fetch(CAMINHO_DADOS_SETORES, { cache: "no-store" })
           corAccent: s.corAccent || "var(--color-blue)",
           resumo: s.resumo || "Informações em breve.",
           objetivo: Array.isArray(s.objetivo) ? s.objetivo : [],
-          atividades: Array.isArray(s.atividades) ? s.atividades : [],
           metas: [] // preenchido em runtime a partir de data/metas.json (editável em /admin)
         });
       });
@@ -128,6 +127,19 @@ function setoresDoProjeto(p) {
    tem nenhum setor. Pode ser geral e de setores ao mesmo tempo. */
 function ehProjetoGeral(p) {
   return p.geral === true || setoresDoProjeto(p).length === 0;
+}
+
+/* Texto de setor mostrado no card: os nomes dos setores do projeto (ex.:
+   "4SMA e Comercial") ou "Viva+", se não tiver setor. A mesma regra está
+   em admin/previews.js. */
+const FORMATO_LISTA_SETORES = new Intl.ListFormat("pt-BR", { style: "long", type: "conjunction" });
+
+function rotuloSetorDoProjeto(p) {
+  const nomes = setoresDoProjeto(p)
+    .map((id) => setores.find((s) => s.id === id))
+    .filter(Boolean)
+    .map((s) => s.nome);
+  return nomes.length ? FORMATO_LISTA_SETORES.format(nomes) : "Viva+";
 }
 
 function filtrosProjetos(listaProjetos) {

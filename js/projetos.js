@@ -122,8 +122,8 @@ let projetos = [];
           <p class="project-desc">${p.descricao}</p>
           <button type="button" class="project-more" aria-expanded="false" hidden>Ler mais</button>
           <div class="project-meta">
-            <span>${p.setor}</span>
-            <span>${p.data}</span>
+            <span>${rotuloSetorDoProjeto(p)}</span>
+            <span>${p.data || "Em breve"}</span>
           </div>
         </div>
       </article>`;
@@ -311,10 +311,10 @@ let projetos = [];
       .map(
         (p) => `
       <div class="timeline-item">
-        <span class="t-date">${p.data}</span>
+        <span class="t-date">${p.data || "Em breve"}</span>
         <div>
           <h4>${p.titulo}</h4>
-          <div class="t-meta">${p.setor}, ${p.categoria}</div>
+          <div class="t-meta">${rotuloSetorDoProjeto(p)}, ${p.categoria}</div>
         </div>
         <span class="t-status">${p.status}</span>
       </div>`
@@ -439,7 +439,7 @@ let projetos = [];
       <div class="showcase-cat">${p.categoria}</div>
       <h3>${p.titulo}</h3>
       <p class="showcase-desc">${p.descricao}</p>
-      <div class="showcase-meta">${p.setor}, ${p.data}</div>`;
+      <div class="showcase-meta">${rotuloSetorDoProjeto(p)}, ${p.data || "Em breve"}</div>`;
 
     const contador = el.querySelector(".showcase-count");
     if (contador) contador.textContent = `${vitrine.indice + 1} de ${lista.length}`;

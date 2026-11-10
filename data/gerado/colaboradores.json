@@ -21,7 +21,8 @@
     {
       "nome": "Catharina de Jesus",
       "setorId": "rh",
-      "cargo": "Co-Gestora"
+      "cargo": "Co-Gestora",
+      "foto": "/assets/images/colaboradores/c.jpeg"
     },
     {
       "nome": "Aleph Patrick",
@@ -38,7 +39,8 @@
     {
       "nome": "Iago",
       "setorId": "rh",
-      "cargo": "Colaborador"
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/137246.jpg"
     },
     {
       "nome": "Kaio Henrique",
@@ -49,7 +51,8 @@
     {
       "nome": "Ygor",
       "setorId": "rh",
-      "cargo": "Colaborador"
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/139033.jpg"
     },
     {
       "nome": "Nathan Domingues",
@@ -66,13 +69,14 @@
     {
       "nome": "Gabrielly",
       "setorId": "ti",
-      "cargo": "Colaboradora"
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/139327.jpg"
     },
     {
       "nome": "Sofia",
       "setorId": "ti",
       "cargo": "Colaboradora",
-      "foto": "/assets/images/colaboradores/sofia.png"
+      "foto": "/assets/images/colaboradores/134096.jpg"
     },
     {
       "nome": "Juliana Mendes",
@@ -84,18 +88,19 @@
       "nome": "Mariana Briano",
       "setorId": "4sma",
       "cargo": "Co-Gestora",
-      "foto": "/assets/images/colaboradores/mariana.png"
+      "foto": "/assets/images/colaboradores/134097.jpg"
     },
     {
       "nome": "Ana B.",
       "setorId": "4sma",
       "cargo": "Colaboradora",
-      "foto": "/assets/images/colaboradores/ana.png"
+      "foto": "/assets/images/colaboradores/134099.jpg"
     },
     {
       "nome": "Felipe Rodrigues",
       "setorId": "4sma",
-      "cargo": "Colaborador"
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/whatsapp-image-2026-11-05-at-14.47.56.jpeg"
     },
     {
       "nome": "Nayara Santos",
@@ -106,12 +111,14 @@
     {
       "nome": "Sophia Gabrielly",
       "setorId": "4sma",
-      "cargo": "Colaboradora"
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/whatsapp-image-2026-11-05-at-14.48.04.jpeg"
     },
     {
       "nome": "Vitória Renata",
       "setorId": "4sma",
-      "cargo": "Colaboradora"
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/whatsapp-image-2026-11-05-at-14.58.07.jpeg"
     },
     {
       "nome": "Caroline Lima",
@@ -126,12 +133,6 @@
       "foto": "/assets/images/colaboradores/screenshot_20260825_172047_whatsapp.jpg"
     },
     {
-      "nome": "Arthur Ribeiro",
-      "setorId": "comunicacao",
-      "cargo": "Colaborador",
-      "foto": "/assets/images/colaboradores/screenshot_20260825_172039_whatsapp.jpg"
-    },
-    {
       "nome": "Camilli Victoria",
       "setorId": "comunicacao",
       "cargo": "Colaboradora",
@@ -140,7 +141,8 @@
     {
       "nome": "Larissa",
       "setorId": "comunicacao",
-      "cargo": "Colaboradora"
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/l.jpeg"
     },
     {
       "nome": "Maria Freire",
@@ -151,7 +153,8 @@
     {
       "nome": "Stella",
       "setorId": "comunicacao",
-      "cargo": "Colaboradora"
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/s.jpeg"
     },
     {
       "nome": "Thayná Brandão",
@@ -169,7 +172,13 @@
       "nome": "Kamylla Fernandes",
       "setorId": "comercial",
       "cargo": "Co-Gestora",
-      "foto": "/assets/images/colaboradores/whatsapp-image-2026-10-29-at-11.59.37-1-.jpeg"
+      "foto": "/assets/images/colaboradores/134100.jpg"
+    },
+    {
+      "nome": "Arthur Ribeiro",
+      "setorId": "comercial",
+      "cargo": "Colaborador",
+      "foto": "/assets/images/colaboradores/screenshot_20260825_172039_whatsapp.jpg"
     },
     {
       "nome": "Isabella",
@@ -181,7 +190,7 @@
       "nome": "Julia Santana",
       "setorId": "comercial",
       "cargo": "Colaboradora",
-      "foto": "/assets/images/colaboradores/whatsapp-image-2026-10-29-at-11.59.38.jpeg"
+      "foto": "/assets/images/colaboradores/134098.jpg"
     },
     {
       "nome": "Mattheus Gabriel",
@@ -190,9 +199,10 @@
       "foto": "/assets/images/colaboradores/screenshot_20260825_172021_whatsapp.jpg"
     },
     {
-      "nome": "Sophia M.",
+      "nome": "Sophia Mizra",
       "setorId": "comercial",
-      "cargo": "Colaboradora"
+      "cargo": "Colaboradora",
+      "foto": "/assets/images/colaboradores/3.jpeg"
     }
   ]
 }

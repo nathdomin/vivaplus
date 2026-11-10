@@ -3,7 +3,7 @@
     {
       "atividades": [],
       "icone": "estrela",
-      "corAccent": "linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue) 55%, var(--color-orange) 100%)",
+      "corAccent": "var(--color-blue)",
       "requisitos": [],
       "resumo": "Direção estratégica e alinhamento de metas para consolidar a nossa excelência e expansão nacional.",
       "nome": "Diretoria",
@@ -21,7 +21,7 @@
       "nomeCurto": "RH",
       "atividades": [],
       "icone": "pessoas",
-      "corAccent": "linear-gradient(135deg, var(--color-green) 0%, var(--color-green) 65%, var(--color-blue) 100%)",
+      "corAccent": "var(--color-green)",
       "requisitos": [],
       "resumo": "Gestão de pessoas, integração e desenvolvimento humano para fortalecer a nossa cultura interna.",
       "nome": "Recursos Humanos",
@@ -39,7 +39,7 @@
       "id": "ti",
       "numero": "03",
       "nome": "Tecnologia da Informação",
-      "corAccent": "linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue) 55%, var(--color-green) 100%)",
+      "corAccent": "var(--color-blue)",
       "resumo": "Conectividade, inovação e suporte contínuo para o crescimento e eficiência da empresa.",
       "icone": "monitor",
       "nomeCurto": "TI",
@@ -56,7 +56,7 @@
         "Saúde no Trabalho"
       ],
       "icone": "escudo",
-      "corAccent": "linear-gradient(135deg, var(--color-green) 0%, var(--color-green) 60%, var(--color-orange) 100%)",
+      "corAccent": "var(--color-green)",
       "requisitos": [],
       "resumo": "Segurança, saúde preventiva, meio ambiente e apoio social focados no cuidado integral da comunidade.",
       "nome": "4SMA",
@@ -78,7 +78,7 @@
         "Cronograma das aulas"
       ],
       "icone": "balao",
-      "corAccent": "linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange) 60%, var(--color-blue) 100%)",
+      "corAccent": "var(--color-orange)",
       "requisitos": [],
       "resumo": "A voz da marca: expandindo nossa audiência e fortalecendo a presença digital com criatividade.",
       "nome": "Comunicação",
@@ -99,7 +99,7 @@
         "Carteirinha dos clientes"
       ],
       "icone": "aperto",
-      "corAccent": "linear-gradient(135deg, var(--color-orange) 0%, var(--color-orange) 60%, var(--color-green) 100%)",
+      "corAccent": "var(--color-orange)",
       "requisitos": [],
       "resumo": "Relacionamento estratégico, parcerias sólidas e atendimento flexível para promover o bem-estar.",
       "nome": "Comercial",

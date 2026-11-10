@@ -26,6 +26,15 @@
   const setorPorId = (id) => setores.find((s) => s.id === id);
   const nomeSetor = (id) => (setorPorId(id) ? setorPorId(id).nome : "Sem setor");
 
+  /* Mesma regra de js/data.js (rotuloSetorDoProjeto). */
+  function rotuloSetor(p) {
+    const ids = Array.isArray(p.setoresIds) ? p.setoresIds : p.setorId ? [p.setorId] : [];
+    const nomes = ids.map(setorPorId).filter(Boolean).map((s) => s.nome);
+    return nomes.length
+      ? new Intl.ListFormat("pt-BR", { style: "long", type: "conjunction" }).format(nomes)
+      : "Viva+";
+  }
+
   function lista(entry, campo) {
     const valor = entry.getIn(["data", campo]);
     return valor && valor.toJS ? valor.toJS() : [];
@@ -119,7 +128,7 @@
             h("div", { className: "project-cat" }, p.categoria || ""),
             h("h3", null, p.titulo || "Novo projeto"),
             h("p", { className: "project-desc" }, p.descricao || ""),
-            h("div", { className: "project-meta" }, h("span", null, p.setor || ""), h("span", null, p.data || ""))
+            h("div", { className: "project-meta" }, h("span", null, rotuloSetor(p)), h("span", null, p.data || "Em breve"))
           )
         ),
         fotos.length > 1
