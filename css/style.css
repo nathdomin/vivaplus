@@ -621,6 +621,23 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
   transition: transform var(--transition-normal) var(--ease);
 }
 .modal-overlay.open .modal-panel { transform: translateY(0) scale(1); }
+/* Barra de rolagem do modal: pílula fina nas cores da marca, que para antes dos cantos arredondados.
+   No Chrome, scrollbar-color anularia estas regras, por isso ele fica restrito ao Firefox. */
+.modal-panel { --scroll-thumb: var(--color-blue); }
+.showcase-desc, .showcase-text { --scroll-thumb: var(--color-green); } /* fundo azul-escuro nos dois temas */
+.modal-panel::-webkit-scrollbar, .showcase-desc::-webkit-scrollbar, .showcase-text::-webkit-scrollbar { width: 12px; }
+.showcase-desc::-webkit-scrollbar-track, .showcase-text::-webkit-scrollbar-track { background: transparent; }
+.modal-panel::-webkit-scrollbar-track { background: transparent; margin-block: 36px; }
+.modal-panel::-webkit-scrollbar-thumb, .showcase-desc::-webkit-scrollbar-thumb, .showcase-text::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-radius: 999px;
+}
+.modal-panel::-webkit-scrollbar-thumb:hover, .showcase-desc::-webkit-scrollbar-thumb:hover, .showcase-text::-webkit-scrollbar-thumb:hover { background: var(--color-orange); background-clip: padding-box; }
+@supports not selector(::-webkit-scrollbar) {
+  .modal-panel, .showcase-desc, .showcase-text { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent; }
+}
 .modal-close {
   position: absolute;
   top: 20px; right: 20px;
@@ -1404,6 +1421,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 }
 
 :root[data-theme="dark"] .org-chart { --org-line: var(--color-green); }
+:root[data-theme="dark"] .modal-panel { --scroll-thumb: var(--color-green); }
 /* Sobre fundo escuro, a mistura "multiply" escureceria os círculos: eles se sobrepõem sem misturar */
 :root[data-theme="dark"] .pillar-card::before { mix-blend-mode: normal; }
 :root[data-theme="dark"] .pillar-card:nth-child(3) { --pillar-color: var(--color-blue-soft); }
