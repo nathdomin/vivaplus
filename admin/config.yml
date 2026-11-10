@@ -126,14 +126,6 @@ collections:
                 label_singular: "Item"
                 field: { label: "Item", name: "item", widget: "string" }
 
-              - label: "Atividades"
-                name: "atividades"
-                widget: "list"
-                required: false
-                minimize_collapsed: true
-                label_singular: "Atividade"
-                field: { label: "Atividade", name: "atividade", widget: "string" }
-
               - label: "Competências desejáveis (só para o agente)"
                 name: "competencias"
                 widget: "list"
