@@ -151,17 +151,7 @@
         itens.map((s, i) =>
           h(
             "article",
-            { key: i, className: "sector-card" },
-            h(
-              "div",
-              { className: "sector-top" },
-              h("div", {
-                className: classeDoSelo(s),
-                style: { background: s.corAccent || "var(--color-blue)" },
-                dangerouslySetInnerHTML: { __html: iconeDoSetor(s) }
-              }),
-              h("span", { className: "sector-num" }, s.numero || "")
-            ),
+            { key: i, className: "sector-card is-" + corDoSetor(s) },
             h("h3", null, s.nome || "Novo setor"),
             h("p", null, s.resumo || "Informações em breve.")
           )
@@ -183,15 +173,18 @@
           const pct = Math.min(100, Math.max(0, Number(m.percentual) || 0));
           return h(
             "div",
-            { key: i, className: "goal-card", style: { "--accent": setor ? acentoDaBarra(setor.corAccent) : "var(--color-orange)" } },
-            h("h3", null, setor ? setor.nome : "Escolha o setor"),
-            h("p", { className: "goal-objective" }, setor ? setor.resumo : ""),
+            { key: i, className: "goal-card" },
+            h(
+              "div",
+              { className: "goal-head" },
+              h("h3", null, setor ? setor.nome : "Escolha o setor"),
+              h("strong", { className: "goal-percent" }, pct + "%")
+            ),
             h(
               "div",
               { className: "goal-progress" },
               h("div", { className: "goal-progress-bar", style: { width: pct + "%" } })
             ),
-            h("span", { className: "goal-progress-label" }, pct + "% concluído"),
             h(
               "ul",
               { className: "goal-list" },

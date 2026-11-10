@@ -1,7 +1,7 @@
 /* =========================================================
    VIVA+ — projetos.js
-   Renderiza cards de projetos, filtros por setor e a
-   visualização em timeline. Os projetos vivem em data/projetos/
+   Renderiza a apresentação de projetos, os cards, os filtros
+   por setor e a visualização em timeline. Os projetos vivem em data/projetos/
    (um arquivo por projeto, editado pelo painel /admin — Decap
    CMS) e são juntados em data/gerado/projetos.json por
    scripts/gerar-dados.js — veja o README. Os botões de filtro
@@ -15,7 +15,7 @@ let projetos = [];
 
 (function () {
   let filtroAtivo = "todos";
-  let visualizacao = "grid"; // "grid" | "timeline"
+  let visualizacao = "apresentacao"; // "apresentacao" | "grid" | "timeline"
   let erroAoCarregar = false;
 
   /* ---------- Ordenação por data de realização ----------
@@ -98,7 +98,7 @@ let projetos = [];
         const capa = fotos[0];
         const temGaleria = fotos.length > 1;
         return `
-      <article class="project-card reveal" tabindex="0" data-projeto="${projetos.indexOf(p)}">
+      <article class="project-card" tabindex="0" data-projeto="${projetos.indexOf(p)}">
         <div class="project-thumb${temGaleria ? " has-gallery" : ""}">
           <span class="project-status">${p.status}</span>
           ${
@@ -311,20 +311,260 @@ let projetos = [];
       .map(
         (p) => `
       <div class="timeline-item">
-        <h4>${p.titulo}</h4>
-        <div class="t-meta">${p.setor} · ${p.categoria} · ${p.data} · ${p.status}</div>
+        <span class="t-date">${p.data}</span>
+        <div>
+          <h4>${p.titulo}</h4>
+          <div class="t-meta">${p.setor}, ${p.categoria}</div>
+        </div>
+        <span class="t-status">${p.status}</span>
       </div>`
       )
       .join("");
   }
 
+  /* ---------- Apresentação ----------
+     Uma foto grande por vez, com o texto ao lado e uma faixa com todos os
+     projetos. A foto aparece inteira (sem corte), sobre uma versão desfocada
+     dela mesma, porque há imagens verticais, horizontais e pequenas. "Apresentar"
+     abre em tela cheia e avança sozinho; Esc sai. */
+  const TEMPO_POR_PROJETO = 7000;
+  const vitrine = { el: null, lista: [], indice: 0, apresentando: false, pausado: false, timer: null, toqueX: null, gatilho: null };
+  const iconeSeta = (d) => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+  const ICONE_PAUSAR = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
+  const ICONE_CONTINUAR = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l11-6.5a1 1 0 0 0 0-1.72l-11-6.5A1 1 0 0 0 8 5.5z"/></svg>`;
+
+  // Abre com fotos de atividades; peças institucionais (crachás etc.) e projetos sem foto ficam no fim
+  function ordemDaApresentacao(lista) {
+    const peso = (p) => (!fotosDoProjeto(p).length ? 2 : p.categoria === "Institucional" ? 1 : 0);
+    return lista.map((p, i) => [p, i]).sort((a, b) => peso(a[0]) - peso(b[0]) || a[1] - b[1]).map(([p]) => p);
+  }
+
+  function renderVitrine(lista) {
+    const el = document.getElementById("projectsShowcase");
+    if (!el) return;
+    vitrine.el = el;
+    vitrine.lista = ordemDaApresentacao(lista);
+    vitrine.indice = 0;
+    if (erroAoCarregar || !lista.length) {
+      el.innerHTML = `<p class="team-empty">${erroAoCarregar ? "Não foi possível carregar os projetos agora. Tente recarregar a página." : "Nenhum projeto encontrado para este filtro."}</p>`;
+      return;
+    }
+    const varios = vitrine.lista.length > 1;
+    el.innerHTML = `
+      <div class="showcase-progress" aria-hidden="true"><i></i></div>
+      <button type="button" class="showcase-exit" data-acao="sair" aria-label="Sair da apresentação">✕</button>
+      <div class="showcase-stage">
+        <div class="showcase-photo">
+          <span class="project-status"></span>
+          <button type="button" class="showcase-photos" data-acao="fotos" hidden>${iconeFotos} Ver fotos</button>
+        </div>
+        <div class="showcase-info">
+          <div class="showcase-text" aria-live="polite"></div>
+          <div class="showcase-controls">
+            ${varios ? `<button type="button" class="showcase-nav" data-acao="anterior" aria-label="Projeto anterior">${iconeSeta("M15 5l-7 7 7 7")}</button>
+            <span class="showcase-count"></span>
+            <button type="button" class="showcase-nav" data-acao="proximo" aria-label="Próximo projeto">${iconeSeta("M9 5l7 7-7 7")}</button>
+            <button type="button" class="showcase-nav showcase-pause" data-acao="pausar" aria-label="Pausar apresentação">${ICONE_PAUSAR}</button>` : ""}
+            <button type="button" class="btn btn-primary btn-sm showcase-present" data-acao="apresentar">Apresentar</button>
+          </div>
+        </div>
+      </div>
+      <div class="showcase-strip">
+        ${vitrine.lista
+          .map((p, i) => {
+            const capa = fotosDoProjeto(p)[0];
+            return `<button type="button" class="showcase-thumb" data-indice="${i}" aria-label="Ver ${p.titulo}">
+              <span class="showcase-thumb-img">${capa ? `<img src="${urlImagem(capa, 320, 200)}" data-original="${capa}" alt="" loading="lazy" onerror="imagemComFallback(this, (img) => img.remove())" />` : ""}</span>
+              <span class="showcase-thumb-title">${p.titulo}</span>
+            </button>`;
+          })
+          .join("")}
+      </div>`;
+    mostrarNaVitrine(0, 1);
+  }
+
+  // A foto reduzida a poucos pixels e ampliada pelo navegador já fica desfocada.
+  // Um filtro blur em CSS seria refeito a cada quadro enquanto a página rola.
+  function desenharFundoDesfocado(camada, foto) {
+    const tela = camada.querySelector(".showcase-backdrop");
+    if (!tela || !foto.naturalWidth) return;
+    tela.width = 48;
+    tela.height = Math.max(1, Math.round((48 * foto.naturalHeight) / foto.naturalWidth));
+    const g = tela.getContext("2d");
+    g.imageSmoothingQuality = "high";
+    g.filter = "blur(1.5px) saturate(1.15)"; // o Safari ignora, e o resultado continua desfocado
+    g.drawImage(foto, -4, -4, tela.width + 8, tela.height + 8);
+    g.filter = "none";
+    g.fillStyle = "rgba(0, 0, 0, 0.45)";
+    g.fillRect(0, 0, tela.width, tela.height);
+  }
+
+  function mostrarNaVitrine(i, direcao) {
+    const { el, lista } = vitrine;
+    if (!el || !lista.length) return;
+    vitrine.indice = (i + lista.length) % lista.length;
+    const p = lista[vitrine.indice];
+    const fotos = fotosDoProjeto(p);
+    const capa = fotos[0];
+
+    // Foto: a nova entra por cima da anterior, que é removida depois da transição
+    const palco = el.querySelector(".showcase-photo");
+    const anteriores = [...palco.querySelectorAll(".showcase-layer")];
+    const camada = document.createElement("div");
+    camada.className = "showcase-layer";
+    const entrar = () => {
+      if (!camada.isConnected) return;
+      camada.classList.add("is-in");
+      anteriores.forEach((a) => setTimeout(() => a.remove(), 650));
+    };
+    if (capa) {
+      camada.innerHTML = `<canvas class="showcase-backdrop" aria-hidden="true"></canvas>
+        <img class="showcase-image" src="${urlImagem(capa, 1600)}" data-original="${capa}" alt="Imagem do projeto ${p.titulo}" />`;
+      const foto = camada.querySelector(".showcase-image");
+      foto.addEventListener("load", () => { desenharFundoDesfocado(camada, foto); entrar(); }, { once: true });
+      foto.addEventListener("error", () => imagemComFallback(foto, () => { foto.remove(); entrar(); }));
+    } else {
+      camada.innerHTML = `<div class="showcase-empty">Imagem em breve</div>`;
+      requestAnimationFrame(entrar);
+    }
+    palco.prepend(camada);
+
+    palco.querySelector(".project-status").textContent = p.status || "";
+    const botaoFotos = palco.querySelector(".showcase-photos");
+    botaoFotos.hidden = fotos.length < 2;
+
+    const texto = el.querySelector(".showcase-text");
+    texto.style.setProperty("--dir", (direcao < 0 ? -28 : 28) + "px");
+    texto.innerHTML = `
+      <div class="showcase-cat">${p.categoria}</div>
+      <h3>${p.titulo}</h3>
+      <p class="showcase-desc">${p.descricao}</p>
+      <div class="showcase-meta">${p.setor}, ${p.data}</div>`;
+
+    const contador = el.querySelector(".showcase-count");
+    if (contador) contador.textContent = `${vitrine.indice + 1} de ${lista.length}`;
+
+    const faixa = el.querySelector(".showcase-strip");
+    faixa.querySelectorAll(".showcase-thumb").forEach((b, n) => {
+      if (n === vitrine.indice) {
+        b.setAttribute("aria-current", "true");
+        faixa.scrollTo({ left: b.offsetLeft - faixa.offsetLeft - (faixa.clientWidth - b.offsetWidth) / 2, behavior: "smooth" });
+      } else {
+        b.removeAttribute("aria-current");
+      }
+    });
+
+    // Já deixa a próxima foto baixando para a troca ser rápida
+    const proxima = fotosDoProjeto(lista[(vitrine.indice + 1) % lista.length])[0];
+    if (proxima) new Image().src = urlImagem(proxima, 1600);
+    agendarAvanco();
+  }
+
+  function agendarAvanco() {
+    clearTimeout(vitrine.timer);
+    const barra = vitrine.el && vitrine.el.querySelector(".showcase-progress i");
+    if (!barra) return;
+    barra.getAnimations().forEach((a) => a.cancel());
+    if (!vitrine.apresentando || vitrine.pausado || vitrine.lista.length < 2) return;
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      barra.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: TEMPO_POR_PROJETO, easing: "linear" });
+    }
+    vitrine.timer = setTimeout(() => mostrarNaVitrine(vitrine.indice + 1, 1), TEMPO_POR_PROJETO);
+  }
+
+  function definirPausa(pausado) {
+    vitrine.pausado = pausado;
+    const botao = vitrine.el.querySelector(".showcase-pause");
+    if (botao) {
+      botao.innerHTML = pausado ? ICONE_CONTINUAR : ICONE_PAUSAR;
+      botao.setAttribute("aria-label", pausado ? "Continuar apresentação" : "Pausar apresentação");
+    }
+    agendarAvanco();
+  }
+
+  function iniciarApresentacao(gatilho) {
+    const { el } = vitrine;
+    vitrine.gatilho = gatilho;
+    vitrine.apresentando = true;
+    el.classList.add("is-presenting");
+    document.body.style.overflow = "hidden";
+    // Onde o navegador não oferece tela cheia, a apresentação ocupa toda a janela
+    if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+    // Quem pede menos movimento começa com a troca automática pausada
+    definirPausa(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    el.querySelector(".showcase-exit").focus();
+    mostrarNaVitrine(vitrine.indice, 1);
+  }
+
+  function sairDaApresentacao() {
+    if (!vitrine.apresentando) return;
+    vitrine.apresentando = false;
+    vitrine.pausado = false;
+    vitrine.el.classList.remove("is-presenting");
+    document.body.style.overflow = "";
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    agendarAvanco();
+    const pausa = vitrine.el.querySelector(".showcase-pause");
+    if (pausa) { pausa.innerHTML = ICONE_PAUSAR; pausa.setAttribute("aria-label", "Pausar apresentação"); }
+    if (vitrine.gatilho && document.contains(vitrine.gatilho)) vitrine.gatilho.focus();
+  }
+
+  function ligarVitrine() {
+    const el = document.getElementById("projectsShowcase");
+    if (!el) return;
+    el.addEventListener("click", (e) => {
+      const miniatura = e.target.closest("[data-indice]");
+      if (miniatura) {
+        const novo = Number(miniatura.getAttribute("data-indice"));
+        return mostrarNaVitrine(novo, novo < vitrine.indice ? -1 : 1);
+      }
+      const botao = e.target.closest("[data-acao]");
+      if (!botao) return;
+      const acao = botao.getAttribute("data-acao");
+      if (acao === "anterior") mostrarNaVitrine(vitrine.indice - 1, -1);
+      else if (acao === "proximo") mostrarNaVitrine(vitrine.indice + 1, 1);
+      else if (acao === "apresentar") iniciarApresentacao(botao);
+      else if (acao === "sair") sairDaApresentacao();
+      else if (acao === "pausar") definirPausa(!vitrine.pausado);
+      else if (acao === "fotos") {
+        const projeto = vitrine.lista[vitrine.indice];
+        sairDaApresentacao();
+        abrirGaleria(projetos.indexOf(projeto), botao);
+      }
+    });
+    el.addEventListener("keydown", (e) => {
+      if (vitrine.apresentando || !["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+      mostrarNaVitrine(vitrine.indice + (e.key === "ArrowRight" ? 1 : -1), e.key === "ArrowRight" ? 1 : -1);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (!vitrine.apresentando) return;
+      if (e.key === "Escape") sairDaApresentacao();
+      else if (e.key === "ArrowRight") mostrarNaVitrine(vitrine.indice + 1, 1);
+      else if (e.key === "ArrowLeft") mostrarNaVitrine(vitrine.indice - 1, -1);
+      else if (e.key === " " && !e.target.closest("button")) { e.preventDefault(); definirPausa(!vitrine.pausado); }
+    });
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement) sairDaApresentacao();
+    });
+    el.addEventListener("touchstart", (e) => { vitrine.toqueX = e.changedTouches[0].clientX; }, { passive: true });
+    el.addEventListener("touchend", (e) => {
+      if (vitrine.toqueX === null || !e.target.closest(".showcase-stage")) return;
+      const dx = e.changedTouches[0].clientX - vitrine.toqueX;
+      vitrine.toqueX = null;
+      if (Math.abs(dx) > 50) mostrarNaVitrine(vitrine.indice + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+    }, { passive: true });
+  }
+
   function renderAll() {
     const lista = filtrarProjetos();
+    renderVitrine(lista);
     renderGrid(lista);
     renderTimeline(lista);
 
     const grid = document.getElementById("projectsGrid");
     const timeline = document.getElementById("projectsTimeline");
+    const apresentacao = document.getElementById("projectsShowcase");
+    if (apresentacao) apresentacao.classList.toggle("hidden-view", visualizacao !== "apresentacao");
     if (grid && timeline) {
       grid.classList.toggle("hidden-view", visualizacao !== "grid");
       timeline.classList.toggle("active", visualizacao === "timeline");
@@ -351,6 +591,7 @@ let projetos = [];
   }
 
   function bindEvents() {
+    ligarVitrine();
     const filtersEl = document.getElementById("projectFilters");
     if (filtersEl) {
       filtersEl.addEventListener("click", (e) => {
@@ -389,11 +630,30 @@ let projetos = [];
 
     const toggleEl = document.getElementById("projectViewToggle");
     if (toggleEl) {
+      // O marcador laranja acompanha a largura real do botão ativo, em qualquer tela
+      const posicionarMarcador = () => {
+        const ativo = toggleEl.querySelector("button.active");
+        if (!ativo) return;
+        const grupo = toggleEl.getBoundingClientRect();
+        const botao = ativo.getBoundingClientRect();
+        toggleEl.style.setProperty("--marca-x", `${botao.left - grupo.left}px`);
+        toggleEl.style.setProperty("--marca-largura", `${botao.width}px`);
+      };
+      posicionarMarcador();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(posicionarMarcador);
+      if ("ResizeObserver" in window) {
+        // Observa também os botões: a fonte pode chegar depois e mudar a largura de cada um
+        const observador = new ResizeObserver(posicionarMarcador);
+        [toggleEl, ...toggleEl.querySelectorAll("button")].forEach((el) => observador.observe(el));
+      }
+      else window.addEventListener("resize", posicionarMarcador);
+
       toggleEl.addEventListener("click", (e) => {
         const btn = e.target.closest("[data-view]");
         if (!btn) return;
         visualizacao = btn.getAttribute("data-view");
         toggleEl.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b === btn));
+        posicionarMarcador();
         renderAll();
       });
     }

@@ -29,7 +29,7 @@ body button,
 body input,
 body textarea,
 body select {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 body {
@@ -81,9 +81,9 @@ body header svg {
 }
 
 [class*="SidebarHeading"] {
-  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  font-family: "Caprasimo", Georgia, serif;
   color: var(--v-blue);
-  font-weight: 700;
+  font-weight: 400;
 }
 
 [class*="SidebarNavLink"] {
@@ -113,9 +113,9 @@ body header svg {
 }
 
 [class*="CollectionTopHeading"] {
-  font-family: "Bricolage Grotesque", "Inter", sans-serif;
+  font-family: "Caprasimo", Georgia, serif;
   color: var(--v-blue);
-  font-weight: 700;
+  font-weight: 400;
 }
 
 [class*="ListCardLink"]:hover {

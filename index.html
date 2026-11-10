@@ -24,6 +24,15 @@
         if (t === "escuro") document.documentElement.setAttribute("data-theme", "dark");
       } catch (e) {}
     })();
+
+    // A abertura espera a página terminar de carregar, para não começar engasgando
+    (function () {
+      var raiz = document.documentElement;
+      function soltar() { raiz.classList.remove("abertura-espera"); }
+      raiz.classList.add("abertura-espera");
+      window.addEventListener("load", soltar, { once: true });
+      setTimeout(soltar, 900);
+    })();
   </script>
 
   <link rel="stylesheet" href="css/style.css" />
@@ -40,8 +49,8 @@
         <img src="assets/images/logoviva.png" alt="Viva+" />
       </a>
 
-      <nav class="nav-desktop" aria-label="Navegação principal">
-        <a href="#inicio">Início</a>
+      <nav class="nav-desktop" id="navDesktop" aria-label="Navegação principal">
+        <span class="nav-indicator" id="navIndicator" aria-hidden="true"></span>
         <a href="#sobre">Sobre</a>
         <a href="#missao-valores">Missão &amp; Valores</a>
         <a href="#setores">Setores</a>
@@ -50,11 +59,10 @@
         <a href="#metas">Metas</a>
         <a href="#orientacoes">Orientações</a>
         <a href="#carreira">Carreira</a>
-        <a href="#contato">Contato</a>
       </nav>
 
       <div class="header-actions">
-        <a href="#contato" class="btn btn-outline btn-sm">Fale conosco</a>
+        <a href="#contato" class="btn btn-primary btn-sm">Fale conosco</a>
         <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Ativar modo escuro" title="Ativar modo escuro">
           <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
             <circle class="ring" cx="20" cy="20" r="19.25"/>
@@ -88,55 +96,47 @@
   <main id="main">
     <!-- ============ HERO ============ -->
     <section class="hero" id="inicio">
-      <div class="hero-bg" aria-hidden="true">
-        <span class="hero-blob-green"></span>
-        <span class="hero-blob-orange"></span>
-        <span class="hero-ring hero-ring-1"></span>
-        <span class="hero-ring hero-ring-2"></span>
-      </div>
-
       <div class="container hero-content">
         <div class="hero-copy">
-          <div class="hero-eyebrow"><span class="dot"></span> Bem-estar corporativo</div>
-          <h1 class="hero-title">Bem-estar que conecta <span class="accent">pessoas</span>, propósito e vida.</h1>
+          <h1 class="hero-title">Bem-estar que conecta pessoas, propósito e vida.</h1>
           <p class="hero-sub">A Viva+ é uma empresa de benefícios corporativos que cuida de saúde, lazer, cultura e integração social — reconectando colaboradores aos seus propósitos de vida.</p>
           <div class="hero-ctas">
             <a href="#sobre" class="btn btn-primary">Conheça a Viva+</a>
-            <a href="#projetos" class="btn btn-ghost">Ver nossos projetos</a>
-            <a href="#setores" class="btn btn-ghost">Conheça nossos setores</a>
-            <a href="#orientacoes" class="btn btn-ghost">Orientações</a>
-          </div>
-          <div class="hero-stats">
-            <div class="hero-stat"><strong>6</strong><span>Setores integrados</span></div>
-            <div class="hero-stat"><strong>4</strong><span>Pilares de bem-estar</span></div>
-            <div class="hero-stat"><strong>6</strong><span>Valores que nos guiam</span></div>
+            <a href="#projetos" class="hero-link">Ver nossos projetos</a>
           </div>
         </div>
 
-        <div class="hero-visual" aria-hidden="true">
-          <div class="hero-visual-core">
-            <img src="assets/images/logoviva.png" alt="" />
-          </div>
-          <div class="hero-float hero-float-1"><span class="tag-dot"></span> Saúde &amp; Lazer</div>
-          <div class="hero-float hero-float-2"><span class="tag-dot"></span> Cultura &amp; Comunidade</div>
+        <!-- O símbolo da Viva+, com o contorno do logo oficial. São camadas separadas para o
+             navegador mover cada peça sem redesenhar as outras (animations.css) -->
+        <div class="hero-symbol" aria-hidden="true">
+          <svg class="hero-layer hero-v" viewBox="30 29 225 227" focusable="false">
+            <defs>
+              <mask id="heroBracos" maskUnits="userSpaceOnUse" x="0" y="0" width="274" height="278">
+                <path class="hero-arm" pathLength="1" d="M116 275 C 112 195, 88 120, 18 62"/>
+                <path class="hero-arm hero-arm-2" pathLength="1" d="M116 275 C 122 190, 150 100, 250 18"/>
+              </mask>
+            </defs>
+            <path mask="url(#heroBracos)" d="M148.3 186.8C151.5 176.9 155.6 165.6 159.5 156.1C163.5 146.6 167.7 137.7 172.1 129.7C176.6 121.6 181.5 113.9 186.1 107.6C190.6 101.3 194.7 96.7 199.5 92C204.3 87.3 209.9 82.9 215 79.5C220.2 76.1 225.2 74.2 230.3 71.7Q233.2 70.3 232.3 67.2C229.6 57.4 227 47.6 224.3 37.8Q223.4 34.8 220.5 36C215.1 38.3 209.5 40.4 204.5 43C199.4 45.6 194.6 48.6 190.2 51.7C185.8 54.8 182.2 57.7 178 61.5C173.9 65.4 169.1 70.2 165.2 74.7C161.3 79.1 158.2 83.1 154.6 88.2C151.1 93.2 147.3 98.8 143.7 105.2C140 111.5 136 119.1 132.6 126.1C123 144.2 122.4 151 118.8 151C115.2 151 115 140 97.9 116.6C92.9 108.4 89.4 103.8 83.9 97.6C78.4 91.5 71.5 84.8 64.8 79.6C58.2 74.5 51 70.9 43.9 66.8Q41.1 65.2 40.2 68.3C37.3 77.9 34.5 87.6 31.7 97.2Q30.8 100.3 33.3 102.2C38.5 106.1 44.2 110.1 48.5 114C52.8 117.9 55.7 121.3 59 125.5C62.3 129.7 65.3 134.1 68.3 139.2C71.3 144.4 74.5 150.6 77.1 156.5C79.7 162.4 81.7 167.8 83.9 174.6C86 181.5 88.1 189.6 89.8 197.6C91.4 205.6 92.7 213.9 93.7 222.6C94.7 231.2 95.2 240.5 95.8 249.5Q96 252.7 99.2 252.8C109.3 253.3 119.3 253.8 129.3 254.3Q132.5 254.5 133.1 251.3C135.3 239.4 137.7 226.4 140.3 215.7C142.8 204.9 145.1 196.7 148.3 186.8Z"/>
+          </svg>
+          <div class="hero-par hero-par-head"><svg class="hero-layer hero-head" viewBox="30 29 225 227" focusable="false"><circle cx="116.9" cy="62.3" r="31.5"/></svg></div>
+          <div class="hero-par hero-par-plus"><svg class="hero-layer hero-plus" viewBox="30 29 225 227" focusable="false"><rect x="177" y="153" width="76" height="28" rx="7"/><rect x="201" y="129" width="28" height="76" rx="7"/></svg></div>
         </div>
       </div>
-
-      <div class="hero-scroll" aria-hidden="true"><span class="line"></span>Role</div>
     </section>
 
     <!-- ============ SOBRE ============ -->
     <section class="about" id="sobre">
-      <div class="container about-grid">
-        <div class="about-text reveal">
-          <div class="section-eyebrow">Sobre a Viva+</div>
+      <div class="container">
+        <div class="about-grid about-intro">
           <h2 class="section-title">Uma plataforma de benefícios para uma vida mais completa</h2>
-          <p>A <strong>Viva+</strong> é uma empresa prestadora de serviços que oferece benefícios para colaboradores de empresas, com foco em <strong>Saúde</strong>, <strong>Lazer</strong>, <strong>Cultura</strong> e <strong>Integração Social</strong>.</p>
-          <p>Cada um desses pilares foi pensado para que o bem-estar deixe de ser um conceito distante e passe a fazer parte da rotina real de trabalho — de forma humana, próxima e presente.</p>
-          <a href="#setores" class="btn btn-outline">Como somos organizados</a>
+          <div class="about-text">
+            <p>A <strong>Viva+</strong> é uma empresa prestadora de serviços que oferece benefícios para colaboradores de empresas, com foco em <strong>Saúde</strong>, <strong>Lazer</strong>, <strong>Cultura</strong> e <strong>Integração Social</strong>.</p>
+            <p>Cada um desses pilares foi pensado para que o bem-estar deixe de ser um conceito distante e passe a fazer parte da rotina real de trabalho — de forma humana, próxima e presente.</p>
+            <a href="#setores" class="btn btn-outline">Como somos organizados</a>
+          </div>
         </div>
 
-        <div class="pillars reveal-stagger" id="pillarsGrid" aria-label="Pilares da Viva+">
+        <div class="pillars" id="pillarsGrid" aria-label="Pilares da Viva+">
           <!-- gerado via main.js -->
         </div>
       </div>
@@ -145,12 +145,9 @@
     <!-- ============ MISSÃO & VISÃO ============ -->
     <section class="mission" id="missao-valores">
       <div class="container">
-        <div class="section-head reveal">
-          <div class="section-eyebrow">Propósito</div>
-          <h2 class="section-title">Missão e visão</h2>
-        </div>
+        <h2 class="sr-only">Missão e visão</h2>
 
-        <div class="mission-grid reveal">
+        <div class="mission-grid">
           <div class="mission-card vision">
             <span class="mv-label">Nossa visão</span>
             <h3>Liderar a revolução do bem-estar corporativo</h3>
@@ -168,8 +165,7 @@
     <!-- ============ VALORES ============ -->
     <section class="values" id="valores">
       <div class="container">
-        <div class="section-head center reveal">
-          <div class="section-eyebrow">Personalidade</div>
+        <div class="section-head">
           <h2 class="section-title">Nossos valores</h2>
           <p class="section-lead">Os princípios que orientam como a Viva+ cuida de pessoas todos os dias.</p>
         </div>
@@ -183,13 +179,12 @@
     <!-- ============ NOSSA ESTRUTURA ============ -->
     <section class="structure" id="estrutura">
       <div class="container">
-        <div class="section-head center reveal">
-          <div class="section-eyebrow">Organização</div>
+        <div class="section-head">
           <h2 class="section-title">Como somos organizados</h2>
           <p class="section-lead">Um organograma vivo — clique em qualquer setor para conhecer integrantes, objetivos, atividades e metas.</p>
         </div>
 
-        <div class="org-chart reveal">
+        <div class="org-chart">
           <div class="org-node">Espro</div>
           <div class="org-connector"></div>
           <div class="org-node org-node-accent">Viva+</div>
@@ -204,8 +199,7 @@
     <!-- ============ SETORES ============ -->
     <section class="sectors" id="setores">
       <div class="container">
-        <div class="section-head reveal">
-          <div class="section-eyebrow">Nossos setores</div>
+        <div class="section-head">
           <h2 class="section-title">Seis setores, um único propósito</h2>
           <p class="section-lead">Cada setor tem sua identidade dentro da Viva+. Clique em um card para abrir os detalhes completos.</p>
         </div>
@@ -219,8 +213,7 @@
     <!-- ============ COLABORADORES ============ -->
     <section class="team" id="colaboradores">
       <div class="container">
-        <div class="section-head reveal">
-          <div class="section-eyebrow">Pessoas</div>
+        <div class="section-head">
           <h2 class="section-title">Quem faz a Viva+ acontecer</h2>
           <p class="section-lead">Fotos e descrições breves para cada colaborador.</p>
         </div>
@@ -238,8 +231,7 @@
     <!-- ============ PROJETOS & ATIVIDADES ============ -->
     <section class="projects" id="projetos">
       <div class="container">
-        <div class="section-head reveal">
-          <div class="section-eyebrow">Nossa história</div>
+        <div class="section-head">
           <h2 class="section-title">Projetos &amp; atividades</h2>
           <p class="section-lead">Um portfólio vivo das ações da Viva+ — em constante crescimento.</p>
         </div>
@@ -249,12 +241,16 @@
             <!-- gerado via projetos.js -->
           </div>
           <div class="view-toggle" id="projectViewToggle" role="group" aria-label="Alternar visualização de projetos">
-            <button data-view="grid" class="active">Cards</button>
+            <button data-view="apresentacao" class="active">Apresentação</button>
+            <button data-view="grid">Cards</button>
             <button data-view="timeline">Timeline</button>
           </div>
         </div>
 
-        <div class="projects-grid" id="projectsGrid" aria-live="polite">
+        <div class="showcase" id="projectsShowcase" aria-roledescription="apresentação" aria-label="Apresentação dos projetos">
+          <!-- gerado via projetos.js -->
+        </div>
+        <div class="projects-grid hidden-view" id="projectsGrid" aria-live="polite">
           <!-- gerado via projetos.js -->
         </div>
         <div class="timeline" id="projectsTimeline" aria-live="polite">
@@ -266,8 +262,7 @@
     <!-- ============ METAS FUTURAS ============ -->
     <section class="goals" id="metas">
       <div class="container">
-        <div class="section-head reveal">
-          <div class="section-eyebrow">O futuro</div>
+        <div class="section-head">
           <h2 class="section-title">Onde queremos chegar</h2>
           <p class="section-lead">As metas de cada setor, organizadas individualmente.</p>
         </div>
@@ -279,16 +274,19 @@
     </section>
 
     <!-- ============ ORIENTAÇÕES ============ -->
-    <section class="guidance" id="orientacoes">
+    <section class="month-band" id="orientacoes" aria-label="Tema do mês">
       <div class="container">
-        <div class="section-head reveal">
-          <div class="section-eyebrow">Cuide-se</div>
+        <div class="month-spotlight" id="monthSpotlight" aria-live="polite">
+          <!-- gerado via orientacoes.js -->
+        </div>
+      </div>
+    </section>
+
+    <section class="guidance">
+      <div class="container">
+        <div class="section-head">
           <h2 class="section-title">Orientações para o seu bem-estar</h2>
           <p class="section-lead">Dicas rápidas de saúde e o significado de cada mês — conteúdo vivo, atualizado periodicamente.</p>
-        </div>
-
-        <div class="month-spotlight reveal" id="monthSpotlight" aria-live="polite">
-          <!-- gerado via orientacoes.js -->
         </div>
 
         <div class="filter-bar" id="guidanceFilters" role="group" aria-label="Filtrar orientações por categoria">
@@ -304,8 +302,7 @@
     <!-- ============ CARREIRA (AGENTE DE IA) ============ -->
     <section class="career" id="carreira">
       <div class="container career-grid">
-        <div class="career-copy reveal">
-          <div class="section-eyebrow">Orientação de carreira</div>
+        <div class="career-copy">
           <h2 class="section-title">Vamos encontrar o seu lugar na Viva+?</h2>
           <p class="section-lead">Envie seu currículo para o nosso agente de IA: ele analisa o seu perfil e sugere as áreas administrativas que mais combinam com você.</p>
 
@@ -337,7 +334,7 @@
           </a>
         </div>
 
-        <div class="career-frame reveal" id="careerFrame" data-agent-url="https://agenteia-vivaplus.onrender.com">
+        <div class="career-frame" id="careerFrame" data-agent-url="https://agenteia-vivaplus.onrender.com">
           <div class="career-frame-bar" aria-hidden="true">
             <span class="career-frame-dots"><i></i><i></i><i></i></span>
             <span class="career-frame-title"><span class="dot"></span> Agente de carreira Viva+</span>
@@ -358,17 +355,16 @@
     <!-- ============ CITAÇÃO / ENCERRAMENTO ============ -->
     <section class="closing" aria-label="Citação de encerramento">
       <div class="container">
-        <p class="closing-quote reveal">"O que vale na vida não é o ponto de partida e sim a caminhada. Caminhando e semeando, no fim, terás o que colher."</p>
-        <p class="closing-author reveal">Cora Coralina</p>
+        <p class="closing-quote">“O que vale na vida não é o ponto de partida e sim a caminhada. Caminhando e semeando, no fim, terás o que colher.”</p>
+        <p class="closing-author">Cora Coralina</p>
       </div>
     </section>
 
     <!-- ============ CONTATO ============ -->
     <section class="about contact" id="contato">
       <div class="container about-grid">
-        <div class="about-text reveal">
-          <div class="section-eyebrow">Contato</div>
-          <h2 class="section-title">Vamos conversar sobre bem-estar?</h2>
+        <div class="about-text">
+          <h2 class="section-title">Vamos conversar sobre <span class="nowrap">bem-estar?</span></h2>
           <p>Preencha o formulário e nossa equipe entrará em contato para apresentar a Viva+.</p>
           <p class="contact-info">
             <strong>Site:</strong> vivaplus.netlify.app<br />
@@ -376,7 +372,7 @@
           </p>
         </div>
 
-        <form class="contact-form reveal" id="contactForm">
+        <form class="contact-form" id="contactForm">
           <div>
             <label for="contactName">Nome</label>
             <input id="contactName" name="nome" type="text" required />
@@ -398,7 +394,7 @@
   <!-- ============ FOOTER ============ -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-grid reveal">
+      <div class="footer-grid">
         <div class="footer-brand">
           <img src="assets/images/logo.png" alt="Viva+" />
           <p>Bem-estar corporativo que conecta pessoas, propósito e vida — através de saúde, lazer, cultura e integração social.</p>
@@ -454,23 +450,29 @@
   <script src="js/carreira.js"></script>
   <script src="js/tema.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/tilt.js"></script>
+  <script src="js/animacoes.js"></script>
 
   <!-- Necessário apenas se o painel /admin usar o backend "git-gateway"
        (Netlify Identity). Convites/recuperação de senha chegam por e-mail
        apontando para a home do site — este trecho redireciona quem loga
-       direto para /admin/. Veja o README, seção "Painel de administração". -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+       direto para /admin/. Veja o README, seção "Painel de administração".
+       Carrega com async para o site não ficar esperando por este script. -->
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", (user) => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
+    function ligarLoginDoPainel() {
+      var identidade = window.netlifyIdentity;
+      if (!identidade) return;
+      function aoIniciar(usuario) {
+        if (usuario) return;
+        identidade.on("login", function () {
+          document.location.href = "/admin/";
+        });
+      }
+      // Com a página já pronta, o script inicia assim que carrega, antes deste
+      // trecho rodar: o aviso "init" já passou e é preciso perguntar direto.
+      if (document.readyState === "loading") identidade.on("init", aoIniciar);
+      else aoIniciar(identidade.currentUser());
     }
   </script>
+  <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js" onload="ligarLoginDoPainel()"></script>
 </body>
 </html>
