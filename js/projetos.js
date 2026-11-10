@@ -328,7 +328,7 @@ let projetos = [];
      dela mesma, porque há imagens verticais, horizontais e pequenas. "Apresentar"
      abre em tela cheia e avança sozinho; Esc sai. */
   const TEMPO_POR_PROJETO = 7000;
-  const vitrine = { el: null, lista: [], indice: 0, apresentando: false, pausado: false, timer: null, toqueX: null, gatilho: null };
+  const vitrine = { el: null, lista: [], indice: 0, apresentando: false, pausado: false, timer: null, toqueX: null, gatilho: null, espaco: null, rolagem: 0, saida: null };
   const iconeSeta = (d) => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
   const ICONE_PAUSAR = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
   const ICONE_CONTINUAR = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l11-6.5a1 1 0 0 0 0-1.72l-11-6.5A1 1 0 0 0 8 5.5z"/></svg>`;
@@ -478,8 +478,16 @@ let projetos = [];
 
   function iniciarApresentacao(gatilho) {
     const { el } = vitrine;
+    if (vitrine.saida) concluirSaida(false);
     vitrine.gatilho = gatilho;
     vitrine.apresentando = true;
+    // Em tela cheia a vitrine sai do fluxo da página: sem guardar o lugar dela, a
+    // página encolhe e, ao sair, o navegador a deixa na seção seguinte (Metas).
+    vitrine.rolagem = window.scrollY;
+    vitrine.espaco = document.createElement("div");
+    vitrine.espaco.style.height = `${el.offsetHeight}px`;
+    vitrine.espaco.setAttribute("aria-hidden", "true");
+    el.before(vitrine.espaco);
     el.classList.add("is-presenting");
     document.body.style.overflow = "hidden";
     // Onde o navegador não oferece tela cheia, a apresentação ocupa toda a janela
@@ -490,17 +498,33 @@ let projetos = [];
     mostrarNaVitrine(vitrine.indice, 1);
   }
 
-  function sairDaApresentacao() {
+  function restaurarRolagem() {
+    window.scrollTo({ top: vitrine.rolagem, behavior: "instant" });
+  }
+
+  // Devolve a vitrine à página, no lugar exato de onde a apresentação começou.
+  function concluirSaida(suave) {
+    const { el } = vitrine;
+    if (vitrine.saida) { vitrine.saida.cancel(); vitrine.saida = null; }
+    el.classList.remove("is-presenting");
+    if (vitrine.espaco) { vitrine.espaco.remove(); vitrine.espaco = null; }
+    document.body.style.overflow = "";
+    restaurarRolagem();
+    if (suave) el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 260, easing: "ease" });
+    if (vitrine.gatilho && document.contains(vitrine.gatilho)) vitrine.gatilho.focus({ preventScroll: true });
+  }
+
+  function sairDaApresentacao(imediato) {
     if (!vitrine.apresentando) return;
     vitrine.apresentando = false;
     vitrine.pausado = false;
-    vitrine.el.classList.remove("is-presenting");
-    document.body.style.overflow = "";
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     agendarAvanco();
     const pausa = vitrine.el.querySelector(".showcase-pause");
     if (pausa) { pausa.innerHTML = ICONE_PAUSAR; pausa.setAttribute("aria-label", "Pausar apresentação"); }
-    if (vitrine.gatilho && document.contains(vitrine.gatilho)) vitrine.gatilho.focus();
+    if (imediato || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return concluirSaida(false);
+    vitrine.saida = vitrine.el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: "ease", fill: "forwards" });
+    vitrine.saida.onfinish = () => concluirSaida(true);
   }
 
   function ligarVitrine() {
@@ -522,7 +546,7 @@ let projetos = [];
       else if (acao === "pausar") definirPausa(!vitrine.pausado);
       else if (acao === "fotos") {
         const projeto = vitrine.lista[vitrine.indice];
-        sairDaApresentacao();
+        sairDaApresentacao(true);
         abrirGaleria(projetos.indexOf(projeto), botao);
       }
     });
@@ -538,7 +562,9 @@ let projetos = [];
       else if (e.key === " " && !e.target.closest("button")) { e.preventDefault(); definirPausa(!vitrine.pausado); }
     });
     document.addEventListener("fullscreenchange", () => {
-      if (!document.fullscreenElement) sairDaApresentacao();
+      if (document.fullscreenElement) return;
+      if (vitrine.apresentando) sairDaApresentacao();
+      else if (!vitrine.saida) restaurarRolagem(); // a tela cheia pode terminar depois da saída
     });
     el.addEventListener("touchstart", (e) => { vitrine.toqueX = e.changedTouches[0].clientX; }, { passive: true });
     el.addEventListener("touchend", (e) => {
