@@ -333,17 +333,11 @@ let projetos = [];
   const ICONE_PAUSAR = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`;
   const ICONE_CONTINUAR = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l11-6.5a1 1 0 0 0 0-1.72l-11-6.5A1 1 0 0 0 8 5.5z"/></svg>`;
 
-  // Abre com fotos de atividades; peças institucionais (crachás etc.) e projetos sem foto ficam no fim
-  function ordemDaApresentacao(lista) {
-    const peso = (p) => (!fotosDoProjeto(p).length ? 2 : p.categoria === "Institucional" ? 1 : 0);
-    return lista.map((p, i) => [p, i]).sort((a, b) => peso(a[0]) - peso(b[0]) || a[1] - b[1]).map(([p]) => p);
-  }
-
   function renderVitrine(lista) {
     const el = document.getElementById("projectsShowcase");
     if (!el) return;
     vitrine.el = el;
-    vitrine.lista = ordemDaApresentacao(lista);
+    vitrine.lista = lista; // já vem do mais recente para o mais antigo
     vitrine.indice = 0;
     if (erroAoCarregar || !lista.length) {
       el.innerHTML = `<p class="team-empty">${erroAoCarregar ? "Não foi possível carregar os projetos agora. Tente recarregar a página." : "Nenhum projeto encontrado para este filtro."}</p>`;
