@@ -1,12 +1,13 @@
 {
-  "data": "11/10/2026",
-  "descricao": "Site institucional da Viva+, empresa de bem-estar corporativo, com painel administrativo para atualizar o conteúdo sem programar.",
   "setoresIds": [
     "ti"
   ],
   "setor": "Tecnologia da Informação ",
-  "titulo": "Site Institucional - Viva+",
+  "descricao": "Site institucional da Viva+, empresa de bem-estar corporativo, com painel administrativo para atualizar o conteúdo sem programar.",
+  "data": "11/10/2026",
+  "imagem": "/assets/images/projetos/captura-de-tela-2026-11-10-094757.png",
+  "status": "Realizado",
   "categoria": "Institucional",
-  "imagem": "/assets/images/projetos/captura-de-tela-2026-11-05-194559.png",
-  "status": "Realizado"
+  "titulo": "Site Institucional - Viva+",
+  "geral": false
 }
