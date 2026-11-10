@@ -624,19 +624,21 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 /* Barra de rolagem do modal: pílula fina nas cores da marca, que para antes dos cantos arredondados.
    No Chrome, scrollbar-color anularia estas regras, por isso ele fica restrito ao Firefox. */
 .modal-panel { --scroll-thumb: var(--color-blue); }
-.showcase-desc, .showcase-text { --scroll-thumb: var(--color-green); } /* fundo azul-escuro nos dois temas */
+.showcase-desc, .showcase-text, .showcase-strip { --scroll-thumb: var(--color-green); } /* fundo azul-escuro nos dois temas */
+.showcase-strip::-webkit-scrollbar { height: 12px; }
+.modal-panel:focus-visible { border-radius: var(--radius-xl); } /* a regra global de foco deixaria o painel quase reto */
 .modal-panel::-webkit-scrollbar, .showcase-desc::-webkit-scrollbar, .showcase-text::-webkit-scrollbar { width: 12px; }
-.showcase-desc::-webkit-scrollbar-track, .showcase-text::-webkit-scrollbar-track { background: transparent; }
+.showcase-desc::-webkit-scrollbar-track, .showcase-text::-webkit-scrollbar-track, .showcase-strip::-webkit-scrollbar-track { background: transparent; }
 .modal-panel::-webkit-scrollbar-track { background: transparent; margin-block: 36px; }
-.modal-panel::-webkit-scrollbar-thumb, .showcase-desc::-webkit-scrollbar-thumb, .showcase-text::-webkit-scrollbar-thumb {
+.modal-panel::-webkit-scrollbar-thumb, .showcase-desc::-webkit-scrollbar-thumb, .showcase-text::-webkit-scrollbar-thumb, .showcase-strip::-webkit-scrollbar-thumb {
   background: var(--scroll-thumb);
   background-clip: padding-box;
   border: 3px solid transparent;
   border-radius: 999px;
 }
-.modal-panel::-webkit-scrollbar-thumb:hover, .showcase-desc::-webkit-scrollbar-thumb:hover, .showcase-text::-webkit-scrollbar-thumb:hover { background: var(--color-orange); background-clip: padding-box; }
+.modal-panel::-webkit-scrollbar-thumb:hover, .showcase-desc::-webkit-scrollbar-thumb:hover, .showcase-text::-webkit-scrollbar-thumb:hover, .showcase-strip::-webkit-scrollbar-thumb:hover { background: var(--color-orange); background-clip: padding-box; }
 @supports not selector(::-webkit-scrollbar) {
-  .modal-panel, .showcase-desc, .showcase-text { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent; }
+  .modal-panel, .showcase-desc, .showcase-text, .showcase-strip { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent; }
 }
 .modal-close {
   position: absolute;
@@ -919,7 +921,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 .showcase-nav:focus-visible { border-radius: 50%; }
 .showcase-present { margin-left: auto; }
 
-.showcase-strip { display: flex; align-items: flex-start; gap: 12px; margin-top: 16px; padding: 5px 4px 12px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent; }
+.showcase-strip { display: flex; align-items: flex-start; gap: 12px; margin-top: 16px; padding: 5px 4px 12px; overflow-x: auto; overflow-y: hidden; }
 .showcase-thumb { flex: 0 0 156px; text-align: left; color: var(--color-heading); opacity: 0.62; transition: opacity 0.3s var(--ease); }
 .showcase-thumb:hover, .showcase-thumb[aria-current="true"] { opacity: 1; }
 .showcase-thumb-img { display: block; aspect-ratio: 16/10; border-radius: 12px; overflow: hidden; background: var(--color-blue); outline: 3px solid transparent; outline-offset: 2px; transition: outline-color 0.3s var(--ease); }
