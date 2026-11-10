@@ -8,43 +8,46 @@
 :root { --ease-saltita: cubic-bezier(0.3, 1.45, 0.5, 1); }
 
 /* ---------- Abertura ---------- */
+.abertura-espera :is(.site-header, .hero-title, .hero-sub, .hero-ctas, .hero-arm, .hero-head, .hero-plus) { animation-play-state: paused; }
 .site-header { animation: cabecalhoDesce 0.8s var(--ease) 0.1s backwards; }
 .hero-title { animation: sobe 0.9s var(--ease) 0.15s backwards; }
 .hero-sub { animation: sobe 0.9s var(--ease) 0.3s backwards; }
 .hero-ctas { animation: sobe 0.9s var(--ease) 0.45s backwards; }
 
-.hero-arm { animation: heroErguer 1.15s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both; }
+/* Os braços do V são desenhados da base até as pontas. Cabeça e cruz só animam transform e opacidade */
+.hero-arm { animation: heroErguer 1.35s cubic-bezier(0.45, 0.05, 0.25, 1) 0.2s backwards; }
 .hero-arm-2 { animation-delay: 0.35s; }
 .hero-head {
   animation:
-    heroNascer 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s both,
+    heroNascer 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s backwards,
     heroFlutua 5.5s ease-in-out 2s infinite;
 }
 .hero-plus {
-  transform-box: fill-box;
-  transform-origin: center;
   animation:
-    heroSurgir 0.55s var(--ease-saltita) 1.5s both,
+    heroSurgir 0.55s var(--ease-saltita) 1.5s backwards,
     heroPulsa 3.6s ease-in-out 2.4s infinite;
 }
+/* Fora da tela, nada fica girando à toa */
+.hero.is-fora :is(.hero-head, .hero-plus),
+.career-frame.is-fora .career-spinner { animation-play-state: paused; }
 
 @keyframes cabecalhoDesce { from { transform: translateY(-120%); } }
-@keyframes heroErguer { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-@keyframes heroNascer { from { transform: translateY(300px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes heroErguer { from { stroke-dashoffset: 1.01; } to { stroke-dashoffset: 0; } }
+@keyframes heroNascer { from { transform: translateY(46%); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes heroSurgir { from { transform: scale(0) rotate(-180deg); } to { transform: none; } }
-@keyframes heroFlutua { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+@keyframes heroFlutua { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.6%); } }
 @keyframes heroPulsa { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1) rotate(8deg); } }
 
 /* ---------- Ao rolar: base ---------- */
 @keyframes sobe { from { opacity: 0; transform: translateY(30px); } }
-@keyframes tituloSobe { from { opacity: 0; transform: translateY(0.5em); clip-path: inset(0 0 100% 0); } to { clip-path: inset(-0.2em 0 -0.3em 0); } }
+@keyframes tituloSobe { from { opacity: 0; transform: translateY(0.5em); } }
 @keyframes saltaRosto { from { opacity: 0; transform: scale(0.6); } }
-@keyframes folhaAbre { from { opacity: 0; transform: translateY(46px) scale(0.92); border-radius: 50%; } }
+@keyframes folhaAbre { from { opacity: 0; transform: translateY(46px) scale(0.92); } }
 @keyframes vemDaEsquerda { from { opacity: 0; transform: translateX(-48px); } }
 @keyframes linhaDesce { from { transform: scaleY(0); } }
 @keyframes linhaAbre { from { transform: scaleX(0); } }
 @keyframes aparece { from { opacity: 0; } }
-@keyframes barraCresce { from { width: 0; } }
+@keyframes barraCresce { from { transform: scaleX(0); } }
 @keyframes pilarRola { from { opacity: 0; transform: translateX(var(--sx, 0)) scale(0.55); } }
 
 /* Estado inicial, antes de entrar na tela */

@@ -42,7 +42,8 @@
       linkAtual = link;
     }
 
-    function atualizar() {
+    function atualizar(forcar) {
+      const anterior = linkAtual;
       // Durante a rolagem do clique, as seções do caminho não contam
       if (!linkClicado) {
         const limite = window.innerHeight * 0.4;
@@ -52,14 +53,15 @@
         });
         definirAtual(atual ? links.find((a) => a.hash === "#" + atual.id) || null : null);
       }
-      mostrar();
+      // Ao rolar, só mexe no menu quando a seção muda
+      if (forcar || linkAtual !== anterior) mostrar();
     }
 
     function soltarCliqueDepois(ms) {
       clearTimeout(timerClique);
       timerClique = setTimeout(() => {
         linkClicado = null;
-        atualizar();
+        atualizar(true);
       }, ms);
     }
 
@@ -70,8 +72,8 @@
       pendente = true;
       requestAnimationFrame(() => { pendente = false; atualizar(); });
     }, { passive: true });
-    window.addEventListener("resize", atualizar);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(atualizar);
+    window.addEventListener("resize", () => atualizar(true));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => atualizar(true));
 
     links.forEach((a) => {
       a.addEventListener("mouseenter", () => { linkHover = a; mostrar(); });
@@ -94,7 +96,7 @@
       });
     });
     nav.addEventListener("mouseleave", () => { linkHover = null; mostrar(); });
-    atualizar();
+    atualizar(true);
   }
 
   /* ---------- Links do menu do celular entram um a um ---------- */
@@ -110,9 +112,11 @@
     const texto = alvo.firstChild;
     const inicio = performance.now();
     const duracao = 1100;
+    let exibido = -1;
     (function passo(agora) {
       const t = Math.min(1, (agora - inicio) / duracao);
-      texto.nodeValue = Math.round(final * (1 - Math.pow(1 - t, 3))) + "%";
+      const valor = Math.round(final * (1 - Math.pow(1 - t, 3)));
+      if (valor !== exibido) texto.nodeValue = (exibido = valor) + "%";
       if (t < 1) requestAnimationFrame(passo);
     })(inicio);
   }
@@ -178,11 +182,17 @@
     const cabeca = hero && hero.querySelector(".hero-par-head");
     const mais = hero && hero.querySelector(".hero-par-plus");
     if (!cabeca || !mais) return;
+    let x = 0, y = 0, agendado = false;
     hero.addEventListener("pointermove", (e) => {
-      const x = e.clientX / window.innerWidth - 0.5;
-      const y = e.clientY / window.innerHeight - 0.5;
-      cabeca.style.transform = `translate(${x * 34}px, ${y * 22}px)`;
-      mais.style.transform = `translate(${x * -52}px, ${y * -34}px)`;
+      x = e.clientX / window.innerWidth - 0.5;
+      y = e.clientY / window.innerHeight - 0.5;
+      if (agendado) return;
+      agendado = true;
+      requestAnimationFrame(() => {
+        agendado = false;
+        cabeca.style.transform = `translate(${x * 5.3}%, ${y * 3.5}%)`;
+        mais.style.transform = `translate(${x * -8}%, ${y * -5.3}%)`;
+      });
     });
     hero.addEventListener("pointerleave", () => {
       cabeca.style.transform = "";
@@ -190,7 +200,28 @@
     });
   }
 
+  /* ---------- O que se repete sem parar só roda enquanto está na tela ---------- */
+  function pausarForaDaTela() {
+    if (!("IntersectionObserver" in window)) return;
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => e.target.classList.toggle("is-fora", !e.isIntersecting));
+    });
+    document.querySelectorAll(".hero, .career-frame").forEach((el) => observador.observe(el));
+  }
+
+  /* ---------- Com os braços desenhados, o V fica como imagem simples ---------- */
+  function soltarMascaraDoSimbolo() {
+    const braco = document.querySelector(".hero-arm-2");
+    const v = document.querySelector(".hero-v path[mask]");
+    if (!braco || !v) return;
+    const soltar = () => v.removeAttribute("mask");
+    braco.addEventListener("animationend", soltar, { once: true });
+    setTimeout(soltar, 3000); // garante o V inteiro mesmo se a animação não terminar
+  }
+
   function iniciar() {
+    soltarMascaraDoSimbolo();
+    pausarForaDaTela();
     iniciarMenu();
     escalonarMenuCelular();
     iniciarRevelacao();

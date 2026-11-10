@@ -383,6 +383,22 @@ let projetos = [];
     mostrarNaVitrine(0, 1);
   }
 
+  // A foto reduzida a poucos pixels e ampliada pelo navegador já fica desfocada.
+  // Um filtro blur em CSS seria refeito a cada quadro enquanto a página rola.
+  function desenharFundoDesfocado(camada, foto) {
+    const tela = camada.querySelector(".showcase-backdrop");
+    if (!tela || !foto.naturalWidth) return;
+    tela.width = 48;
+    tela.height = Math.max(1, Math.round((48 * foto.naturalHeight) / foto.naturalWidth));
+    const g = tela.getContext("2d");
+    g.imageSmoothingQuality = "high";
+    g.filter = "blur(1.5px) saturate(1.15)"; // o Safari ignora, e o resultado continua desfocado
+    g.drawImage(foto, -4, -4, tela.width + 8, tela.height + 8);
+    g.filter = "none";
+    g.fillStyle = "rgba(0, 0, 0, 0.45)";
+    g.fillRect(0, 0, tela.width, tela.height);
+  }
+
   function mostrarNaVitrine(i, direcao) {
     const { el, lista } = vitrine;
     if (!el || !lista.length) return;
@@ -402,10 +418,10 @@ let projetos = [];
       anteriores.forEach((a) => setTimeout(() => a.remove(), 650));
     };
     if (capa) {
-      camada.innerHTML = `<img class="showcase-backdrop" src="${urlImagem(capa, 640)}" data-original="${capa}" alt="" onerror="imagemComFallback(this, (img) => img.remove())" />
+      camada.innerHTML = `<canvas class="showcase-backdrop" aria-hidden="true"></canvas>
         <img class="showcase-image" src="${urlImagem(capa, 1600)}" data-original="${capa}" alt="Imagem do projeto ${p.titulo}" />`;
       const foto = camada.querySelector(".showcase-image");
-      foto.addEventListener("load", entrar, { once: true });
+      foto.addEventListener("load", () => { desenharFundoDesfocado(camada, foto); entrar(); }, { once: true });
       foto.addEventListener("error", () => imagemComFallback(foto, () => { foto.remove(); entrar(); }));
     } else {
       camada.innerHTML = `<div class="showcase-empty">Imagem em breve</div>`;
@@ -614,11 +630,30 @@ let projetos = [];
 
     const toggleEl = document.getElementById("projectViewToggle");
     if (toggleEl) {
+      // O marcador laranja acompanha a largura real do botão ativo, em qualquer tela
+      const posicionarMarcador = () => {
+        const ativo = toggleEl.querySelector("button.active");
+        if (!ativo) return;
+        const grupo = toggleEl.getBoundingClientRect();
+        const botao = ativo.getBoundingClientRect();
+        toggleEl.style.setProperty("--marca-x", `${botao.left - grupo.left}px`);
+        toggleEl.style.setProperty("--marca-largura", `${botao.width}px`);
+      };
+      posicionarMarcador();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(posicionarMarcador);
+      if ("ResizeObserver" in window) {
+        // Observa também os botões: a fonte pode chegar depois e mudar a largura de cada um
+        const observador = new ResizeObserver(posicionarMarcador);
+        [toggleEl, ...toggleEl.querySelectorAll("button")].forEach((el) => observador.observe(el));
+      }
+      else window.addEventListener("resize", posicionarMarcador);
+
       toggleEl.addEventListener("click", (e) => {
         const btn = e.target.closest("[data-view]");
         if (!btn) return;
         visualizacao = btn.getAttribute("data-view");
         toggleEl.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b === btn));
+        posicionarMarcador();
         renderAll();
       });
     }

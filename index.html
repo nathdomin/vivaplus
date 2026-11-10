@@ -24,6 +24,15 @@
         if (t === "escuro") document.documentElement.setAttribute("data-theme", "dark");
       } catch (e) {}
     })();
+
+    // A abertura espera a página terminar de carregar, para não começar engasgando
+    (function () {
+      var raiz = document.documentElement;
+      function soltar() { raiz.classList.remove("abertura-espera"); }
+      raiz.classList.add("abertura-espera");
+      window.addEventListener("load", soltar, { once: true });
+      setTimeout(soltar, 900);
+    })();
   </script>
 
   <link rel="stylesheet" href="css/style.css" />
@@ -97,13 +106,21 @@
           </div>
         </div>
 
-        <!-- O gesto do logo: os braços se erguem ao abrir a página (animations.css) -->
-        <svg class="hero-gesture" id="heroGesture" viewBox="0 0 640 860" aria-hidden="true" focusable="false">
-          <path class="hero-arm" pathLength="1" d="M318 800 C 306 590, 210 370, 72 262"/>
-          <path class="hero-arm hero-arm-2" pathLength="1" d="M318 800 C 330 580, 418 340, 566 196"/>
-          <g class="hero-par hero-par-head"><circle class="hero-head" cx="312" cy="172" r="112"/></g>
-          <g class="hero-par hero-par-plus"><g class="hero-plus"><rect x="486" y="520" width="150" height="50" rx="10"/><rect x="536" y="470" width="50" height="150" rx="10"/></g></g>
-        </svg>
+        <!-- O símbolo da Viva+, com o contorno do logo oficial. São camadas separadas para o
+             navegador mover cada peça sem redesenhar as outras (animations.css) -->
+        <div class="hero-symbol" aria-hidden="true">
+          <svg class="hero-layer hero-v" viewBox="30 29 225 227" focusable="false">
+            <defs>
+              <mask id="heroBracos" maskUnits="userSpaceOnUse" x="0" y="0" width="274" height="278">
+                <path class="hero-arm" pathLength="1" d="M116 275 C 112 195, 88 120, 18 62"/>
+                <path class="hero-arm hero-arm-2" pathLength="1" d="M116 275 C 122 190, 150 100, 250 18"/>
+              </mask>
+            </defs>
+            <path mask="url(#heroBracos)" d="M148.3 186.8C151.5 176.9 155.6 165.6 159.5 156.1C163.5 146.6 167.7 137.7 172.1 129.7C176.6 121.6 181.5 113.9 186.1 107.6C190.6 101.3 194.7 96.7 199.5 92C204.3 87.3 209.9 82.9 215 79.5C220.2 76.1 225.2 74.2 230.3 71.7Q233.2 70.3 232.3 67.2C229.6 57.4 227 47.6 224.3 37.8Q223.4 34.8 220.5 36C215.1 38.3 209.5 40.4 204.5 43C199.4 45.6 194.6 48.6 190.2 51.7C185.8 54.8 182.2 57.7 178 61.5C173.9 65.4 169.1 70.2 165.2 74.7C161.3 79.1 158.2 83.1 154.6 88.2C151.1 93.2 147.3 98.8 143.7 105.2C140 111.5 136 119.1 132.6 126.1C123 144.2 122.4 151 118.8 151C115.2 151 115 140 97.9 116.6C92.9 108.4 89.4 103.8 83.9 97.6C78.4 91.5 71.5 84.8 64.8 79.6C58.2 74.5 51 70.9 43.9 66.8Q41.1 65.2 40.2 68.3C37.3 77.9 34.5 87.6 31.7 97.2Q30.8 100.3 33.3 102.2C38.5 106.1 44.2 110.1 48.5 114C52.8 117.9 55.7 121.3 59 125.5C62.3 129.7 65.3 134.1 68.3 139.2C71.3 144.4 74.5 150.6 77.1 156.5C79.7 162.4 81.7 167.8 83.9 174.6C86 181.5 88.1 189.6 89.8 197.6C91.4 205.6 92.7 213.9 93.7 222.6C94.7 231.2 95.2 240.5 95.8 249.5Q96 252.7 99.2 252.8C109.3 253.3 119.3 253.8 129.3 254.3Q132.5 254.5 133.1 251.3C135.3 239.4 137.7 226.4 140.3 215.7C142.8 204.9 145.1 196.7 148.3 186.8Z"/>
+          </svg>
+          <div class="hero-par hero-par-head"><svg class="hero-layer hero-head" viewBox="30 29 225 227" focusable="false"><circle cx="116.9" cy="62.3" r="31.5"/></svg></div>
+          <div class="hero-par hero-par-plus"><svg class="hero-layer hero-plus" viewBox="30 29 225 227" focusable="false"><rect x="177" y="153" width="76" height="28" rx="7"/><rect x="201" y="129" width="28" height="76" rx="7"/></svg></div>
+        </div>
       </div>
     </section>
 
@@ -438,18 +455,24 @@
   <!-- Necessário apenas se o painel /admin usar o backend "git-gateway"
        (Netlify Identity). Convites/recuperação de senha chegam por e-mail
        apontando para a home do site — este trecho redireciona quem loga
-       direto para /admin/. Veja o README, seção "Painel de administração". -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+       direto para /admin/. Veja o README, seção "Painel de administração".
+       Carrega com async para o site não ficar esperando por este script. -->
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", (user) => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
+    function ligarLoginDoPainel() {
+      var identidade = window.netlifyIdentity;
+      if (!identidade) return;
+      function aoIniciar(usuario) {
+        if (usuario) return;
+        identidade.on("login", function () {
+          document.location.href = "/admin/";
+        });
+      }
+      // Com a página já pronta, o script inicia assim que carrega, antes deste
+      // trecho rodar: o aviso "init" já passou e é preciso perguntar direto.
+      if (document.readyState === "loading") identidade.on("init", aoIniciar);
+      else aoIniciar(identidade.currentUser());
     }
   </script>
+  <script async src="https://identity.netlify.com/v1/netlify-identity-widget.js" onload="ligarLoginDoPainel()"></script>
 </body>
 </html>

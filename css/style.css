@@ -32,7 +32,7 @@
      --color-surface: fundo de cards e seções "brancas"
      --color-heading: títulos e textos em azul sobre superfícies claras */
   --color-heading: var(--color-blue);
-  --header-bg: rgba(255, 255, 255, 0.98);
+  --header-bg: #FFFFFF;
   --color-accent-text: #A8440F; /* laranja escurecido: legível em texto pequeno */
   --color-orange-light: #F58F60; /* laranja clareado: títulos sobre azul-escuro */
   --nav-hover: rgba(47, 50, 131, 0.08);
@@ -241,8 +241,6 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
   height: 64px;
   padding: 0 12px 0 20px;
   background: var(--header-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   border-radius: 999px;
   box-shadow: 0 6px 24px rgba(33, 36, 79, 0.16);
   transition: height var(--transition-normal) var(--ease), box-shadow var(--transition-normal) var(--ease);
@@ -251,7 +249,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 
 .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; transition: transform var(--transition-fast) var(--ease); }
 .brand:hover { transform: rotate(-6deg) scale(1.06); }
-.brand img { height: 40px; width: auto; }
+.brand img { height: 44px; width: auto; }
 
 .nav-desktop { position: relative; display: flex; align-items: center; }
 .nav-desktop a {
@@ -401,10 +399,21 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
   transition: background-size 0.35s var(--ease), color 0.3s var(--ease);
 }
 .hero-link:hover { background-size: 100% 100%; color: var(--color-blue-dark); }
-.hero-gesture { justify-self: center; height: min(66vh, 580px); width: auto; max-width: 100%; overflow: visible; }
-.hero-arm { fill: none; stroke: var(--color-green); stroke-width: 112; stroke-linecap: round; stroke-dasharray: 1; }
-.hero-head, .hero-plus { fill: var(--color-orange); }
-.hero-par { transition: transform 0.5s ease-out; }
+/* O símbolo é o protagonista do topo */
+.hero-symbol {
+  position: relative;
+  justify-self: start;
+  width: min(72vh, 39vw, 640px);
+  width: min(72svh, 39vw, 640px);
+  aspect-ratio: 225 / 227;
+}
+.hero-layer, .hero-par { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-layer { display: block; overflow: visible; }
+.hero-v { fill: var(--color-green); will-change: transform; } /* camada própria: desenhar os braços não redesenha o resto */
+.hero-arm { fill: none; stroke: #fff; stroke-width: 96; stroke-linecap: round; stroke-dasharray: 1 2; }
+.hero-head, .hero-plus { fill: var(--color-orange); will-change: transform; }
+.hero-plus { transform-origin: 82.2% 60.8%; } /* centro da cruz */
+.hero-par { transition: transform 0.5s ease-out; will-change: transform; }
 
 /* ---------- SOBRE ---------- */
 .about { background: var(--color-surface); }
@@ -728,11 +737,11 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 }
 .projects-toolbar .filter-bar { margin-bottom: 0; }
 
-/* Alternador Cards/Timeline: o fundo laranja desliza até a opção escolhida */
+/* Alternador de visualização: o fundo laranja desliza até a opção escolhida.
+   js/projetos.js mede o botão ativo, porque os nomes têm larguras diferentes. */
 .view-toggle {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   padding: 4px;
   border-radius: 999px;
   background: var(--nav-hover);
@@ -740,16 +749,18 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 .view-toggle::before {
   content: "";
   position: absolute;
-  top: 4px; bottom: 4px; left: 4px;
-  width: calc((100% - 8px) / 3);
+  top: 4px; bottom: 4px; left: 0;
+  width: var(--marca-largura, 0);
   border-radius: 999px;
   background: var(--color-orange);
-  transition: transform 0.45s var(--ease);
+  transform: translateX(var(--marca-x, 0));
+  transition: transform 0.45s var(--ease), width 0.45s var(--ease);
 }
-.view-toggle:has([data-view="grid"].active)::before { transform: translateX(100%); }
-.view-toggle:has([data-view="timeline"].active)::before { transform: translateX(200%); }
 .view-toggle button {
   position: relative;
+  flex: 1 1 auto;
+  border-radius: 999px;
+  white-space: nowrap;
   padding: 6px 18px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -757,6 +768,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
   transition: color 0.3s var(--ease);
 }
 .view-toggle button.active { color: var(--color-blue-dark); }
+.view-toggle button:focus-visible { outline-color: var(--color-white); outline-offset: -3px; }
 
 /* Grade uniforme: todos os cards têm o mesmo formato, com ou sem filtro */
 .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
@@ -849,8 +861,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
   position: absolute;
   inset: -8%;
   width: 116%; height: 116%; max-width: none;
-  object-fit: cover;
-  filter: blur(30px) brightness(0.55) saturate(1.15);
+  object-fit: cover; /* desenhado uma vez em tamanho mínimo (js/projetos.js): desfocado sem custo ao rolar */
 }
 .showcase-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .showcase-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--color-muted); }
@@ -1114,7 +1125,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 .goal-card h3 { font-size: 1.3rem; color: var(--color-heading); }
 .goal-percent { font-family: var(--font-display); font-weight: 400; font-size: 2.1rem; line-height: 1; color: var(--color-heading); }
 .goal-progress { height: 12px; border-radius: 999px; background: var(--color-background); margin: 12px 0 20px; overflow: hidden; }
-.goal-progress-bar { height: 100%; border-radius: 999px; background: var(--color-green); }
+.goal-progress-bar { height: 100%; border-radius: 999px; background: var(--color-green); transform-origin: left; }
 .goal-list li { position: relative; padding-left: 26px; font-size: 0.9375rem; line-height: 1.45; margin-bottom: 10px; }
 .goal-list li:last-child { margin-bottom: 0; }
 .goal-list li::before { content: "+"; position: absolute; left: 2px; top: -4px; font-family: var(--font-display); font-size: 1.3rem; color: var(--color-accent-text); }
@@ -1383,7 +1394,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
   --color-muted: #A6A9C6;
   --color-border: #2E3263;
   --color-heading: #F4F5FD;     /* títulos (no claro, azul Viva+) */
-  --header-bg: rgba(18, 20, 44, 0.86);
+  --header-bg: #12142C;
   --nav-hover: rgba(255, 255, 255, 0.08);
   --color-accent-text: #F58F60;
 
