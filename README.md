@@ -229,12 +229,6 @@ dentro de uma moldura no estilo do site.
 - Dentro do iframe, o agente usa um layout compacto e esconde a própria
   introdução (o site já mostra esse texto ao lado da moldura).
 
-## Como adicionar uma atividade a um setor
-
-Pelo painel `/admin`, coleção **Setores**: abra o setor e adicione um item em
-"Atividades". Editando direto, inclua o texto no array `atividades` do setor
-em `data/setores.json`.
-
 ---
 
 ## Como alterar a missão

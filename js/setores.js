@@ -61,10 +61,6 @@
       ? `<ul class="modal-list">${setor.objetivo.map((o) => `<li>${o}</li>`).join("")}</ul>`
       : `<p class="modal-empty">Informações em breve.</p>`;
 
-    const atividadesHtml = setor.atividades.length
-      ? `<ul class="modal-list">${setor.atividades.map((a) => `<li>${a}</li>`).join("")}</ul>`
-      : `<p class="modal-empty">Informações em breve.</p>`;
-
     const metasHtml = setor.metas.length
       ? `<ul class="modal-list">${setor.metas
           .map((m) => `<li class="${m.concluida ? "is-done" : ""}">${m.texto}</li>`)
@@ -86,10 +82,6 @@
       <div class="modal-block">
         <h4>Função / Objetivo</h4>
         ${objetivoHtml}
-      </div>
-      <div class="modal-block">
-        <h4>Atividades</h4>
-        ${atividadesHtml}
       </div>
       <div class="modal-block">
         <h4>Metas futuras</h4>
