@@ -123,6 +123,7 @@
   .footer-brand { grid-column: 1 / -1; }
 
   .modal-panel { padding: 32px 24px; }
+  .modal-close { top: -18px; margin: -18px -12px -40px auto; }
 
   /* Galeria de fotos: grade com tiles menores; foto ocupa a largura toda, setas por cima dela */
   .lightbox-grid-view { padding: 70px 14px 14px; }
@@ -247,4 +248,48 @@
   .showcase.is-presenting .showcase-cat, .showcase.is-presenting .showcase-text h3 { padding-right: 52px; }
   .showcase.is-presenting .showcase-text { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
   .showcase.is-presenting .showcase-controls { flex: none; flex-wrap: nowrap; gap: 6px; margin-top: 0; padding-top: 8px; }
+}
+
+/* ---------- Telas de toque: o hover não "gruda" depois do toque ----------
+   No celular, o navegador mantém o :hover no último elemento tocado. Sem isto,
+   um botão tocado ficava com a cor de hover (ex.: "Enviar mensagem" escuro),
+   o botão de tema parecia "pressionado" e cards ficavam levantados. Aqui os
+   efeitos de hover voltam ao estado normal; o :active continua dando retorno. */
+@media (hover: none) {
+  .btn-primary:hover { background-color: var(--color-orange); color: var(--color-blue-dark); }
+  .btn-outline:hover { background-color: transparent; color: var(--color-heading); }
+  .btn:hover::before, .btn:hover::after, .btn:hover svg { transform: none; }
+
+  .brand:hover { transform: none; }
+  .theme-toggle:hover { --tt-fill: transparent; --tt-ring: var(--color-heading); color: var(--color-heading); transform: none; }
+  .theme-toggle:hover svg { rotate: none; }
+  .hero-link:hover { background-size: 100% 2px; color: inherit; }
+
+  .org-item:hover { --org-line: inherit; color: var(--color-heading); }
+  .org-item:hover .sector-badge { transform: none; box-shadow: none; }
+  .sector-card:hover { border-radius: 24px 24px 88px 24px; }
+  .sector-card:hover .sector-cta::after { transform: none; }
+  .modal-close:hover { background: var(--color-background); transform: none; }
+
+  .filter-btn:not(.active):hover { background: var(--nav-hover); color: var(--color-heading); }
+  .filter-btn:hover { transform: none; }
+  .team-card:hover .team-avatar { transform: none; box-shadow: none; }
+  .project-card:hover { transform: none; box-shadow: none; }
+  .project-card:hover .project-thumb-img { transform: none; }
+  .project-photos:hover, .project-thumb.has-gallery:hover .project-photos { background: var(--color-blue-dark); transform: none; }
+  .project-photos:hover b, .project-thumb.has-gallery:hover .project-photos b { background: var(--color-green); color: var(--color-blue-dark); }
+  .timeline-item:hover { transform: none; }
+
+  .showcase-nav:hover { background: var(--nav-hover); color: var(--color-heading); transform: none; }
+  .showcase-nav:active { background: var(--color-orange); color: var(--color-blue-dark); }
+  .showcase-thumb:not([aria-current="true"]):hover { opacity: 0.62; }
+  .showcase-thumb:hover .showcase-thumb-img img { transform: none; }
+  .showcase.is-presenting .showcase-exit:hover { background: var(--color-white); transform: none; }
+
+  .lightbox-close:hover, .lightbox-nav:hover, .lightbox-back:hover { background: var(--color-white); color: var(--color-blue); transform: none; }
+  .lightbox-tile:hover { transform: none; border-color: transparent; box-shadow: none; }
+
+  .footer-col a:hover { color: inherit; }
+  .footer-social a:hover { background: rgba(255, 255, 255, 0.08); transform: none; }
+  .contact-link:hover { color: var(--color-heading); }
 }

@@ -63,8 +63,17 @@
     nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", irParaSecao));
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
+      if (e.key !== "Escape" || !nav.classList.contains("open")) return;
+      closeMenu();
+      toggle.focus(); // quem usa teclado volta ao botão que abriu o menu
     });
+
+    // Tablet girado (ou janela alargada) com o menu aberto: acima de 1024px o
+    // botão do menu some, e a página ficava coberta e travada. Fecha sozinho.
+    const telaLarga = window.matchMedia("(min-width: 1025px)");
+    const aoAlargar = (e) => { if (e.matches) closeMenu(); };
+    if (telaLarga.addEventListener) telaLarga.addEventListener("change", aoAlargar);
+    else if (telaLarga.addListener) telaLarga.addListener(aoAlargar);
   }
 
   /* ---------- PILARES (Sobre a Viva+) ---------- */
@@ -184,6 +193,15 @@
     const toast = document.getElementById("toast");
     if (!form) return;
 
+    let timerToast;
+    function avisar(texto) {
+      if (!toast) return;
+      clearTimeout(timerToast);
+      toast.textContent = texto;
+      toast.classList.add("show");
+      timerToast = setTimeout(() => toast.classList.remove("show"), 5000);
+    }
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -199,22 +217,22 @@
         headers: { "Accept": "application/json" },
         body: formData
       })
-        .then((response) => response.json())
-        .then(() => {
-          if (toast) {
-            toast.textContent = "Mensagem recebida! Em breve nossa equipe entrará em contato.";
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 4000);
+        // Só confirma (e limpa o formulário) se o envio deu certo de verdade.
+        // Antes, uma resposta de erro do serviço também mostrava "Mensagem
+        // recebida" e apagava o texto que a pessoa tinha escrito.
+        .then(async (response) => {
+          const dados = await response.json().catch(() => ({}));
+          if (!response.ok || String(dados.success) === "false") {
+            throw new Error(dados.message || `HTTP ${response.status}`);
           }
+        })
+        .then(() => {
+          avisar("Mensagem recebida! Em breve nossa equipe entrará em contato.");
           form.reset();
         })
         .catch((err) => {
           console.error("Erro ao enviar:", err);
-          if (toast) {
-            toast.textContent = "Não foi possível enviar. Tente novamente em instantes.";
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 4000);
-          }
+          avisar("Não foi possível enviar agora. Sua mensagem continua no formulário — tente de novo em instantes.");
         })
         .finally(() => {
           submitBtn.disabled = false;

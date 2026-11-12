@@ -640,9 +640,15 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 @supports not selector(::-webkit-scrollbar) {
   .modal-panel, .showcase-desc, .showcase-text, .showcase-strip { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent; }
 }
+/* Fica preso ao topo do painel enquanto o conteúdo rola: em textos longos (celular)
+   o botão de fechar continua à vista. As margens negativas o levam para o canto
+   sem ocupar espaço no fluxo. */
 .modal-close {
-  position: absolute;
-  top: 20px; right: 20px;
+  position: sticky;
+  top: -28px; /* mesmo valor da margem: preso a 20px do topo do painel */
+  z-index: 2;
+  margin: -28px -28px -40px auto;
+  box-shadow: 0 0 0 4px var(--color-surface);
   width: 40px; height: 40px;
   border-radius: 50%;
   background: var(--color-background);
@@ -652,7 +658,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 }
 .modal-close { transition: transform 0.4s var(--ease), background var(--transition-fast) var(--ease); }
 .modal-close:hover { background: var(--color-border); transform: rotate(90deg); }
-.modal-header { display: flex; align-items: center; gap: 18px; margin-bottom: 24px; }
+.modal-header { display: flex; align-items: center; gap: 18px; margin-bottom: 24px; padding-right: 32px; }
 .modal-header .sector-badge { width: 60px; height: 60px; }
 .modal-header h3 { font-size: 1.6rem; color: var(--color-heading); }
 .modal-header span { font-size: 0.9375rem; color: var(--color-muted); font-weight: 600; }
@@ -796,7 +802,7 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
   display: flex;
   flex-direction: column;
   min-width: 0;
-  cursor: pointer;
+  /* Sem cursor de clique no card inteiro: só a foto (quando há galeria) e os botões fazem algo */
   background: var(--color-surface);
   border-radius: 20px;
   overflow: hidden;
@@ -1323,6 +1329,8 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 /* ---------- CONTATO ---------- */
 .contact { padding-block: 100px; }
 .contact-info { margin-top: 28px; }
+.contact-link { color: var(--color-heading); text-decoration: underline; text-underline-offset: 3px; padding-block: 8px; }
+.contact-link:hover { color: var(--color-accent-text); }
 .contact-form {
   background: var(--color-background);
   border-radius: var(--radius-lg);
@@ -1364,7 +1372,9 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 .footer-brand img { height: 56px; width: auto; margin-bottom: 18px; }
 .footer-brand p { font-size: 0.9rem; max-width: 280px; }
 .footer-col h4 { color: var(--color-white); font-size: 1.0625rem; margin-bottom: 18px; }
-.footer-col a, .footer-col span { display: block; font-size: 0.9rem; margin-bottom: 12px; transition: color var(--transition-fast) var(--ease); }
+/* Altura de toque confortável no celular (antes ~23px) sem mudar o espaçamento visual */
+.footer-col a, .footer-col span { display: block; width: fit-content; font-size: 0.9rem; padding-block: 6px; margin-bottom: 0; transition: color var(--transition-fast) var(--ease); }
+.footer-col h4 + * { margin-top: -6px; }
 .footer-col a:hover { color: var(--color-green); }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; font-size: 0.82rem; flex-wrap: wrap; gap: 12px; }
 .footer-social { display: flex; gap: 12px; }
@@ -1394,6 +1404,14 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
   transition: all var(--transition-normal) var(--ease);
 }
 .toast.show { transform: translateY(0); opacity: 1; }
+@media (max-width: 480px) {
+  .toast { left: 16px; right: 16px; bottom: 16px; }
+}
+
+/* Menu do celular nunca aparece em tela larga (ex.: tablet girado com o menu aberto) */
+@media (min-width: 1025px) {
+  .nav-mobile { display: none; }
+}
 
 /* =========================================================
    MODO ESCURO
