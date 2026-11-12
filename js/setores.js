@@ -90,12 +90,19 @@
     `;
   }
 
+  // Elemento que abriu o modal: o foco volta para ele ao fechar
+  let gatilhoDoModal = null;
+
   function openSectorModal(sectorId) {
     const setor = setores.find((s) => s.id === sectorId);
     if (!setor) return;
     const overlay = document.getElementById("sectorModal");
     const panel = document.getElementById("sectorModalPanel");
     if (!overlay || !panel) return;
+    if (!overlay.classList.contains("open")) {
+      const ativo = document.activeElement;
+      gatilhoDoModal = ativo && ativo !== document.body ? ativo : null;
+    }
     panel.innerHTML = `
       <button class="modal-close" id="sectorModalClose" aria-label="Fechar detalhes do setor">✕</button>
       ${buildModalContent(setor)}
@@ -109,10 +116,33 @@
 
   function closeSectorModal() {
     const overlay = document.getElementById("sectorModal");
-    if (!overlay) return;
+    if (!overlay || !overlay.classList.contains("open")) return;
     overlay.classList.remove("open");
     overlay.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    if (gatilhoDoModal && document.contains(gatilhoDoModal)) gatilhoDoModal.focus({ preventScroll: true });
+    gatilhoDoModal = null;
+  }
+
+  // Com o modal aberto, o Tab circula só dentro dele
+  function prenderFoco(e) {
+    const overlay = document.getElementById("sectorModal");
+    if (e.key !== "Tab" || !overlay || !overlay.classList.contains("open")) return;
+    const panel = document.getElementById("sectorModalPanel");
+    const focaveis = [...panel.querySelectorAll("button, a[href], [tabindex]:not([tabindex='-1'])")];
+    if (!focaveis.length) { e.preventDefault(); panel.focus(); return; }
+    const primeiro = focaveis[0];
+    const ultimo = focaveis[focaveis.length - 1];
+    if (e.shiftKey && (document.activeElement === primeiro || document.activeElement === panel)) {
+      e.preventDefault();
+      ultimo.focus();
+    } else if (!e.shiftKey && document.activeElement === ultimo) {
+      e.preventDefault();
+      primeiro.focus();
+    } else if (!panel.contains(document.activeElement)) {
+      e.preventDefault();
+      primeiro.focus();
+    }
   }
 
   function bindSectorInteractions() {
@@ -133,6 +163,7 @@
       }
       if (e.key === "Escape") closeSectorModal();
     });
+    document.addEventListener("keydown", prenderFoco);
   }
 
   /* ---------- Abertura vinda do agente de carreira ---------- */

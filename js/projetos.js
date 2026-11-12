@@ -98,7 +98,7 @@ let projetos = [];
         const capa = fotos[0];
         const temGaleria = fotos.length > 1;
         return `
-      <article class="project-card" tabindex="0" data-projeto="${projetos.indexOf(p)}">
+      <article class="project-card" data-projeto="${projetos.indexOf(p)}">
         <div class="project-thumb${temGaleria ? " has-gallery" : ""}">
           <span class="project-status">${p.status}</span>
           ${
