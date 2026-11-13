@@ -113,6 +113,28 @@ collections:
         name: "descricao"
         widget: "text"
         default: "Descrição em breve."
+        hint: "Endereços (https://… ou www.…) viram links clicáveis sozinhos. Para um texto clicável, escreva [texto do link](https://endereco.com)."
+
+      - label: "Links"
+        name: "links"
+        widget: "list"
+        required: false
+        minimize_collapsed: true
+        label_singular: "link"
+        summary: "{{fields.texto}} — {{fields.url}}"
+        hint: "Botões clicáveis exibidos no card, abaixo da descrição (ex.: o jogo, o site ou o formulário do projeto). Abrem em uma nova aba."
+        fields:
+          - label: "Texto do botão"
+            name: "texto"
+            widget: "string"
+            required: false
+            hint: "Ex.: “Jogar agora”. Em branco, o botão mostra o próprio endereço."
+
+          - label: "Endereço (URL)"
+            name: "url"
+            widget: "string"
+            pattern: ["^(https?://|www\\.|mailto:).+", "Comece com https:// (ou www.)."]
+            hint: "Ex.: https://meusite.com"
 
       - label: "Status"
         name: "status"

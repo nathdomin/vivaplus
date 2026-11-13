@@ -153,6 +153,12 @@ no celular. Sem `galeria`, o card continua como antes. Se `imagem` estiver em br
 a primeira foto da galeria vira a capa. No painel `/admin`, use o campo **Fotos
 adicionais (galeria)** → “Adicionar foto”; a ordem pode ser alterada arrastando.
 
+**Links clicáveis (opcional):** na `descricao`, endereços como `https://…` ou `www.…`
+viram links sozinhos, e `[texto do link](https://endereco.com)` mostra um texto
+clicável. Também há a lista `links` (`{ "texto": "Jogar agora", "url": "https://…" }`),
+que aparece como botões no card e na apresentação. No `/admin`, use o campo **Links**
+→ “Adicionar link”. Todos abrem em nova aba; só `http(s)` e `mailto:` são aceitos.
+
 `setoresIds` é a **lista** de setores do projeto (ids definidos em `data/setores.json`).
 Ela define os botões de filtro e o texto do card, gerado a partir dos nomes dos setores:
 `"setoresIds": ["4sma", "comercial"]` aparece no filtro de **cada** setor e mostra

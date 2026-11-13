@@ -96,6 +96,53 @@
     );
   }
 
+  /* ---------- Links nos projetos ----------
+     Mesma regra de js/projetos.js: endereços soltos e [texto](url) na
+     descrição viram links, e a lista "links" vira botões no card. */
+  function urlSegura(url) {
+    let u = String(url || "").trim();
+    if (!u) return null;
+    if (/^www\./i.test(u)) u = "https://" + u;
+    return /^(https?:\/\/|mailto:)\S+$/i.test(u) ? u : null;
+  }
+
+  function descricaoComLinks(texto) {
+    const padrao = /\[([^\]]+)\]\(([^)\s]+)\)|((?:https?:\/\/|www\.)\S+)/gi;
+    const partes = [];
+    let ultimo = 0;
+    String(texto || "").replace(padrao, (trecho, rotulo, destino, solto, indice) => {
+      let alvo = destino || solto;
+      let resto = "";
+      if (solto) {
+        const fim = alvo.match(/[.,;:!?)\]]+$/);
+        if (fim) { resto = fim[0]; alvo = alvo.slice(0, -resto.length); }
+      }
+      const href = urlSegura(alvo);
+      if (!href) return trecho;
+      partes.push(texto.slice(ultimo, indice));
+      partes.push(h("a", { key: indice, className: "inline-link", href, target: "_blank", rel: "noopener noreferrer" }, rotulo || alvo));
+      if (resto) partes.push(resto);
+      ultimo = indice + trecho.length;
+      return trecho;
+    });
+    partes.push(String(texto || "").slice(ultimo));
+    return partes;
+  }
+
+  function botoesDeLinks(p) {
+    const itens = (Array.isArray(p.links) ? p.links : [])
+      .map((l) => ({ href: urlSegura(l && l.url), texto: l && l.texto && l.texto.trim() }))
+      .filter((l) => l.href);
+    if (!itens.length) return null;
+    return h(
+      "div",
+      { className: "project-links" },
+      itens.map((l, i) =>
+        h("a", { key: i, className: "project-link", href: l.href, target: "_blank", rel: "noopener noreferrer" }, (l.texto || l.href.replace(/^https?:\/\/(www\.)?/i, "")) + " ↗")
+      )
+    );
+  }
+
   /* ---------- Projeto (um arquivo por projeto) ---------- */
   function ProjetoPreview(props) {
     const p = props.entry.get("data").toJS();
@@ -127,7 +174,8 @@
             { className: "project-body" },
             h("div", { className: "project-cat" }, p.categoria || ""),
             h("h3", null, p.titulo || "Novo projeto"),
-            h("p", { className: "project-desc" }, p.descricao || ""),
+            h("p", { className: "project-desc" }, descricaoComLinks(p.descricao)),
+            botoesDeLinks(p),
             h("div", { className: "project-meta" }, h("span", null, rotuloSetor(p)), h("span", null, p.data || "Em breve"))
           )
         ),

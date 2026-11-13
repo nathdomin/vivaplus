@@ -63,6 +63,55 @@ let projetos = [];
 
   const iconeFotos = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>`;
 
+  /* ---------- Links nos projetos ----------
+     A descrição é texto digitado no /admin: aqui ela é escapada e os
+     endereços viram links clicáveis — tanto os soltos (https://… ou
+     www.…) quanto os no formato [texto](https://…). Além disso, cada
+     projeto pode ter uma lista "links" (botões com texto + endereço). */
+  function escaparHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  // Só http(s) e mailto: — nunca javascript: ou similares.
+  function urlSegura(url) {
+    let u = String(url || "").trim();
+    if (!u) return null;
+    if (/^www\./i.test(u)) u = "https://" + u;
+    return /^(https?:\/\/|mailto:)\S+$/i.test(u) ? u : null;
+  }
+
+  const abreEmNovaAba = (href) => (/^mailto:/i.test(href) ? "" : ' target="_blank" rel="noopener noreferrer"');
+
+  function textoComLinks(texto) {
+    const padrao = /\[([^\]]+)\]\(([^)\s]+)\)|((?:https?:\/\/|www\.)[^\s<]+)/gi;
+    return escaparHtml(texto || "").replace(padrao, (trecho, rotulo, destino, solto) => {
+      let alvo = destino || solto;
+      let resto = "";
+      if (solto) {
+        // Pontuação colada no fim do endereço ("...com.") não faz parte dele.
+        const fim = alvo.match(/[.,;:!?)\]]+$/);
+        if (fim) { resto = fim[0]; alvo = alvo.slice(0, -resto.length); }
+      }
+      // O texto já foi escapado: desfaz só para validar o endereço, e re-escapa no href.
+      const href = urlSegura(alvo.replace(/&amp;/g, "&"));
+      if (!href) return trecho;
+      return `<a class="inline-link" href="${escaparHtml(href)}"${abreEmNovaAba(href)}>${rotulo || alvo}</a>${resto}`;
+    });
+  }
+
+  const iconeLink = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>`;
+
+  function linksDoProjeto(p) {
+    const lista = Array.isArray(p.links) ? p.links : [];
+    const itens = lista
+      .map((l) => ({ href: urlSegura(l && l.url), texto: l && l.texto && l.texto.trim() }))
+      .filter((l) => l.href);
+    if (!itens.length) return "";
+    return `<div class="project-links">${itens
+      .map((l) => `<a class="project-link" href="${escaparHtml(l.href)}"${abreEmNovaAba(l.href)}>${escaparHtml(l.texto || l.href.replace(/^https?:\/\/(www\.)?/i, ""))} ${iconeLink}</a>`)
+      .join("")}</div>`;
+  }
+
   function filtrarProjetos() {
     let base;
     if (filtroAtivo === "todos") base = projetos;
@@ -119,8 +168,9 @@ let projetos = [];
         <div class="project-body">
           <div class="project-cat">${p.categoria}</div>
           <h3>${p.titulo}</h3>
-          <p class="project-desc">${p.descricao}</p>
+          <p class="project-desc">${textoComLinks(p.descricao)}</p>
           <button type="button" class="project-more" aria-expanded="false" hidden>Ler mais</button>
+          ${linksDoProjeto(p)}
           <div class="project-meta">
             <span>${rotuloSetorDoProjeto(p)}</span>
             <span>${p.data || "Em breve"}</span>
@@ -432,7 +482,8 @@ let projetos = [];
     texto.innerHTML = `
       <div class="showcase-cat">${p.categoria}</div>
       <h3>${p.titulo}</h3>
-      <p class="showcase-desc">${p.descricao}</p>
+      <p class="showcase-desc">${textoComLinks(p.descricao)}</p>
+      ${linksDoProjeto(p)}
       <div class="showcase-meta">${rotuloSetorDoProjeto(p)}, ${p.data || "Em breve"}</div>`;
 
     const contador = el.querySelector(".showcase-count");

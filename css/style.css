@@ -867,6 +867,32 @@ section { padding-block: clamp(64px, 8vw, 104px); position: relative; }
 .project-card.is-expanded .project-desc { display: block; -webkit-line-clamp: unset; line-clamp: unset; }
 .project-more { align-self: flex-start; margin-top: 6px; font-size: 0.875rem; font-weight: 700; color: var(--color-accent-text); text-decoration: underline; text-underline-offset: 4px; }
 .project-more[hidden] { display: none; }
+/* Links nos projetos: no meio da descrição e botões da lista "links" */
+.project-desc a, .showcase-desc a, .inline-link {
+  color: var(--color-accent-text);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.project-desc a:hover, .showcase-desc a:hover, .inline-link:hover { text-decoration-thickness: 2px; }
+.project-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.project-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  max-width: 100%;
+  padding: 7px 14px;
+  border: 1.5px solid var(--color-accent-text);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-accent-text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+.project-link:hover, .project-link:focus-visible { background: var(--color-accent-text); color: var(--color-white); }
+.project-link svg { flex: none; }
+.showcase-text .project-links { margin-top: 14px; }
 .project-meta { display: flex; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 12px; font-size: 0.8125rem; color: var(--color-muted); }
 
 /* Apresentação: uma foto grande por vez, texto ao lado e faixa com todos os projetos */

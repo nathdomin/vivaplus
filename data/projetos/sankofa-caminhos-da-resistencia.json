@@ -9,5 +9,11 @@
   "status": "Realizado",
   "categoria": "Institucional",
   "titulo": "Sankofa - Caminhos da Resistência ",
-  "geral": false
+  "geral": false,
+  "links": [
+    {
+      "texto": "Jogar agora",
+      "url": "https://nathdomin.itch.io/sankofa"
+    }
+  ]
 }

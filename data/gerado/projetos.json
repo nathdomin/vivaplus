@@ -162,13 +162,19 @@
         "ti"
       ],
       "setor": "Tecnologia da Informação",
-      "descricao": "Sankofa: Caminhos da Resistência — jogo de plataforma 2D no navegador para o Novembro Negro / Dia da Consciência Negra",
+      "descricao": "Sankofa: Caminhos da Resistência — jogo de plataforma 2D no navegador para o Novembro Negro / Dia da Consciência Negra\n\nLink do Jogo: https://nathdomin.itch.io/sankofa",
       "data": "06/11/2026",
       "imagem": "/assets/images/projetos/captura-de-tela-2026-11-06-091625.png",
       "status": "Realizado",
       "categoria": "Institucional",
       "titulo": "Sankofa - Caminhos da Resistência ",
-      "geral": false
+      "geral": false,
+      "links": [
+        {
+          "texto": "Jogar agora",
+          "url": "https://nathdomin.itch.io/sankofa"
+        }
+      ]
     },
     {
       "titulo": "Saúde e Qualidade de Vida no Trabalho",
